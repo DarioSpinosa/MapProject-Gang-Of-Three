@@ -46,10 +46,19 @@ public class AdventureGUI extends javax.swing.JFrame {
         prepositions.add("in");
         prepositions.add("da");
         prepositions.add("con");
-        ArrayList<Name> articles = new ArrayList<>();
-        articles.add(new Name("la", WordType.ARTICOLO_FEMMINILE));
-        articles.add(new Name("l", WordType.ARTICOLO_APOSTROFO));
-        articles.add(new Name("il", WordType.ARTICOLO_MASCHILE));
+        prepositions.add("dal");
+        prepositions.add("dalla");
+        prepositions.add("nel");
+        prepositions.add("e");
+        prepositions.add("all");
+        prepositions.add("a");
+        prepositions.add("ad");
+        ArrayList<String> articles = new ArrayList<>();
+        articles.add("la");
+        articles.add("l");
+        articles.add("il");
+        articles.add("un");
+        articles.add("una");
         parser = new ParserIta(articles, prepositions);
     }
     

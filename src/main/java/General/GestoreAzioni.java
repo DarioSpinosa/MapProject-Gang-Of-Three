@@ -8,6 +8,8 @@ import Entità.Partita;
 import Parser.ParserOutput;
 import Entità.Characters.Protagonista;
 import Entità.Characters.Npc;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,8 +17,25 @@ import Entità.Characters.Npc;
  */
 public class GestoreAzioni extends GestoreAzioniEssentials{
     
+    private final Set<String> preposizioniPrendi = new HashSet<>();
+    private final Set<String> preposizioniLascia = new HashSet<>();
+    private final Set<String> preposizioniCombina = new HashSet<>();
+    private final Set<String> preposizioniParla = new HashSet<>();
+    
     public GestoreAzioni(Partita partita, GestoreMessaggiEssentials stampa){
         super(partita, stampa);
+        preposizioniPrendi.add("dal");
+        preposizioniPrendi.add("da");
+        preposizioniPrendi.add("dalla");
+        preposizioniLascia.add("nel");
+        preposizioniLascia.add("in");
+        preposizioniLascia.add("nella");
+        preposizioniCombina.add("con");
+        preposizioniCombina.add("e");
+        preposizioniParla.add("con");
+        preposizioniParla.add("all");
+        preposizioniParla.add("a");
+        preposizioniParla.add("ad");
     }
     
     @Override
@@ -61,7 +80,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                         stampa.messaggioOggettoNonPresenteStanza();
                     }
                 } else if (action.getPrimoOggetto() != null && action.getSecondoOggetto() != null
-                        && action.getSecondoOggetto() instanceof GenericObjectContainer && action.getPreposizione().equals("da")){
+                        && action.getSecondoOggetto() instanceof GenericObjectContainer && preposizioniPrendi.contains(action.getPreposizione())){
                             lasciaOPrendiOggetto(action.getPrimoOggetto(), action.getSecondoOggetto(), protagonista, false);
                 } else {
                     stampa.messaggioNonCompreso();
@@ -77,7 +96,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                         stampa.messaggioOggettoNonPresenteInventario();
                     }
                 }  else if (action.getPrimoOggetto() != null && action.getSecondoOggetto() != null
-                            && action.getSecondoOggetto() instanceof GenericObjectContainer && action.getPreposizione().equals("in")){
+                            && action.getSecondoOggetto() instanceof GenericObjectContainer && preposizioniLascia.contains(action.getPreposizione())){
                             if(protagonista.isInInventario(action.getPrimoOggetto())){
                                 lasciaOPrendiOggetto(action.getPrimoOggetto(), action.getSecondoOggetto(), protagonista, true);
                             } else {
@@ -106,7 +125,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                 }
                 break;
             case COMBINA:
-                if(action.getPrimoOggetto() != null && action.getSecondoOggetto() != null && (action.getPreposizione() == null || action.getPreposizione().equals("con"))){
+                if(action.getPrimoOggetto() != null && action.getSecondoOggetto() != null && (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))){
                     if(protagonista.isInInventario(action.getPrimoOggetto()) && protagonista.isInInventario(action.getSecondoOggetto())){
                         GenericObject oggettoCombinato = Combinations.testCombination(action.getPrimoOggetto(), action.getSecondoOggetto());
                         if(oggettoCombinato != null){
@@ -130,7 +149,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                 }
                 break;
             case PARLA:
-                if(action.getPersonaggio() != null && (action.getPreposizione() == null || action.getPreposizione().equals("con")) && action.getPersonaggio() instanceof Npc){
+                if(action.getPersonaggio() != null && (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione())) && action.getPersonaggio() instanceof Npc){
                     Npc npc = (Npc)partita.getStanzaCorrente().getPersonaggio(action.getPersonaggio());
                     if(!npc.getPresentato()){
                         stampa.stampaMessaggio(npc.getPresentazione());
@@ -246,26 +265,41 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                     if(oggetto1 instanceof GenericObjectContainer){
                             if(partita.getStanzaCorrente().getOggetti().getContainer().contains(oggetto1)){
                                 if(aprire){
-                                    ((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).open();
+                                    if(!((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).isOpened()) {
+                                        ((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).open();
+                                        stampa.stampaAperto(oggetto1);
+                                    } else {
+                                        stampa.messaggioOggettoGiaAperto(oggetto1);
+                                    }
                                 } else {
-                                    ((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).close();
+                                    if(((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).isOpened()) {
+                                        ((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).close();
+                                        stampa.stampaChiuso(oggetto1);
+                                    } else {
+                                        stampa.messaggioOggettoGiaChiuso(oggetto1);
+                                    }
                                 }
                             } else if(protagonista.isInInventario(oggetto1)){
                                 if(aprire){
-                                    ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).open();
+                                    if(!((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
+                                        ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).open();
+                                        stampa.stampaAperto(oggetto1);
+                                    } else {
+                                        stampa.messaggioOggettoGiaAperto(oggetto1);
+                                    }
                                 } else {
-                                    ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).close();
+                                    if(((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
+                                        ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).close();
+                                        stampa.stampaChiuso(oggetto1);
+                                    } else {
+                                        stampa.messaggioOggettoGiaChiuso(oggetto1);
+                                    }
                                 }
                             } else {
                                 stampa.messaggioOggettoNonPresente();
                             }
                             for(GenericObject oggetto : ((GenericObjectContainer)oggetto1).getContainer()){ //TODO da rimuovere
                                 stampa.stampaInventario(oggetto.getNome());
-                            }
-                            if(aprire){
-                                stampa.stampaAperto(oggetto1);
-                            } else {
-                                stampa.stampaChiuso(oggetto1);
                             }
                     }  else {
                         if(aprire){

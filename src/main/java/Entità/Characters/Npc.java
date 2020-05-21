@@ -11,21 +11,12 @@ public class Npc extends Personaggio{
     private String presentazione;
     private boolean presentato  = false;
     
-    public Npc(String nome) {
+    public Npc(Name nome) {
         super(nome, 1);
     }
     
-    public Npc(String nome, Name alias){
-        super(nome, alias, 1);
-    }
-    
-    public Npc(String nome, String presentazione){
+    public Npc(Name nome, String presentazione){
         super(nome, 1);
-        this.presentazione = presentazione;
-    }
-    
-    public Npc(String nome, Name alias, String presentazione){
-        super(nome, alias, 1);
         this.presentazione = presentazione;
     }
     

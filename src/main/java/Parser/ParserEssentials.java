@@ -13,7 +13,9 @@ import Entità.Characters.Personaggio;
 public abstract class ParserEssentials {
     protected boolean accepted = false;
     protected WordType lastWordType;
-    protected ArrayList<Name> articles;
+    protected String lastArticle;
+    protected String lastPreposition;
+    protected ArrayList<String> articles;
     protected ArrayList<String> prepositions;
     protected ArrayList<String> adjectives = new ArrayList<>();
     protected int numberOfObjects = 0;

@@ -140,4 +140,14 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     public void messaggioOggettiNonPresenti(){
         interfaccia.stampaMessaggio("Oggetti non presenti nel tuo inventario");
     }
+    
+    @Override
+    public void messaggioOggettoGiaAperto(GenericObject oggetto){
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già aperto");
+    }
+    
+    @Override
+    public void messaggioOggettoGiaChiuso(GenericObject oggetto){
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già chiuso");
+    }
 }

@@ -45,4 +45,6 @@ public abstract class GestoreMessaggiEssentials {
     public abstract void messaggioCombinazioneRiuscita(GenericObject oggetto1, GenericObject oggetto2, GenericObject oggetto3);
     public abstract void messaggioOggettoSpecificoNonInInventario(GenericObject oggetto);
     public abstract void messaggioOggettiNonPresenti();
+    public abstract void messaggioOggettoGiaAperto(GenericObject oggetto);
+    public abstract void messaggioOggettoGiaChiuso(GenericObject oggetto);
 }

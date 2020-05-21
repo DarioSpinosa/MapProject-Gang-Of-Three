@@ -29,7 +29,7 @@ public class Stanza {
     private Stanza destra = null;
     private Stanza sinistra = null;
     private ArrayList<String> eventi = new ArrayList<>();
-    private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME_MASCHILE), "");
+    private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "");
     private ArrayList<Personaggio> characters = new ArrayList<>();
     
     // costruttore

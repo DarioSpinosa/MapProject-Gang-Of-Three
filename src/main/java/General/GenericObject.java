@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class GenericObject {
     private Name nome;
     private String descrizione = "";
-    private Set<String> alias;
+    private Set<Name> alias;
     private Set<String> aggettivi;
     private boolean consumabile = false;
     
@@ -21,16 +21,9 @@ public class GenericObject {
         this.descrizione = descrizione;
     }
     
-    public GenericObject(Name nome, String descrizione, Set<String> alias) {
+    public GenericObject(Name nome, String descrizione, Set<String> aggettivi) {
         this.nome = nome;
         this.descrizione = descrizione;
-        this.alias = alias;
-    }
-    
-    public GenericObject(Name nome, String descrizione, Set<String> alias, Set<String> aggettivi) {
-        this.nome = nome;
-        this.descrizione = descrizione;
-        this.alias = alias;
         this.aggettivi = aggettivi;
     }
     
@@ -62,15 +55,15 @@ public class GenericObject {
         this.consumabile = consumabile;
     }
     
-    public Set<String> getAlias() {
+    public Set<Name> getAlias() {
         return alias;
     }
     
-    public void setAlias(Set<String> alias) {
+    public void setAlias(Set<Name> alias) {
         this.alias = alias;
     }
     
-    public void setAlias(String[] alias) {
+    public void setAlias(Name[] alias) {
         this.alias = new HashSet<>(Arrays.asList(alias));
     }
     
@@ -86,9 +79,35 @@ public class GenericObject {
         this.aggettivi = new HashSet<>(Arrays.asList(aggettivi));
     }
     
+    public boolean articoloUsabile(String articolo){
+        return nome.getArticoli().contains(articolo);
+    }
+    
+    public boolean preposizioneUsabile(String preposizione){
+        return nome.getPreposizioni().contains(preposizione);
+    }
+    
+    public boolean ricercaAlias(String nome){
+        for(Name name : alias){
+            if(name.getName().equals(nome)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Name restituisciAlias(String nome){
+        for(Name name : alias){
+            if(name.getName().equals(nome)){
+                return name;
+            }
+        }
+        return null;
+    }
+    
     public boolean confrontaAlias(String nome){
         boolean controllo = false;
-        if(alias != null && alias.contains(nome)){
+        if(alias != null && ricercaAlias(nome)){
             controllo = true;
         }
         return controllo;

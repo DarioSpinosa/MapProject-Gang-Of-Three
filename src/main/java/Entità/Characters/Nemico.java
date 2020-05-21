@@ -4,10 +4,11 @@
 * and open the template in the editor.
 */
 package Entità.Characters;
+import General.Name;
 
 public class Nemico extends Personaggio{
     
-    public Nemico(String nome) {
+    public Nemico(Name nome) {
         super(nome, (int)(Math.random() * 4) + 2);
     }
     

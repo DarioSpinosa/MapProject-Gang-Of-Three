@@ -34,7 +34,7 @@ public class Partita {
     }
     
     public Partita() {
-        protagonista = new Protagonista("Pippo");
+        protagonista = new Protagonista(new Name("Pippo", WordType.NOME_PROPRIO));
         Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "Nord"});
         comandi.add(nord);
@@ -116,16 +116,32 @@ public class Partita {
         informatica1.setSinistra(strada8).setDestra(informatica2);
         informatica2.setSinistra(informatica1);
         
-        strada1.addPersonaggio(new Npc("autistaa", new Name("autista", WordType.NOME_MASCHILE), "Sono l'autista!"));
-        pizzeria.addPersonaggio(new Npc("cameriere"));
+        Name nomeAutista = new Name("mimmo", WordType.NOME_PROPRIO);
+        nomeAutista.setPreposizioni(new String[]{"a", "con"});
+        Name aliasAutista = new Name("autista", WordType.NOME);
+        aliasAutista.setArticoli(new String[]{"l"});
+        aliasAutista.setPreposizioni(new String[]{"con", "a", "all", "ad"});
+        Personaggio autista = new Npc(nomeAutista, "Sono l'autista");
+        autista.setAlias(new Name[]{aliasAutista});
+        strada1.addPersonaggio(autista);
+        /*pizzeria.addPersonaggio(new Npc("cameriere"));
         fisica3.addPersonaggio(new Npc("giacomo volpe"));
         chimica1.addPersonaggio(new Npc("bruno"));
-        informatica1.addPersonaggio(new Npc("antonino"));
+        informatica1.addPersonaggio(new Npc("antonino"));*/
         
-        GenericObject torta = new GenericObject(new Name("torta", WordType.NOME_FEMMINILE), "una deliziosa torta");
-        torta.setAlias(new String[]{"tortina"});
-        GenericObject baule = new GenericObjectContainer(new Name("baule", WordType.NOME_FEMMINILE), "un baule");
-        GenericObject spada = new GenericObject(new Name("spada", WordType.NOME_FEMMINILE), "una spada");
+        Name nomeTorta = new Name("torta", WordType.NOME);
+        nomeTorta.setArticoli(new String[]{"la", "una"});
+        nomeTorta.setPreposizioni(new String[]{"quella"});
+        GenericObject torta = new GenericObject(nomeTorta, "una deliziosa torta");
+        Name nomeBaule = new Name("baule", WordType.NOME);
+        nomeBaule.setArticoli(new String[]{"il", "un"});
+        nomeBaule.setPreposizioni(new String[]{"nel", "in", "da", "dal"});
+        GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule");
+        Name nomeCassa = new Name("cassa", WordType.NOME);
+        nomeCassa.setArticoli(new String[]{"la","una"});
+        nomeCassa.setPreposizioni(new String[]{"nella", "dalla"});
+        baule.setAlias(new Name[]{nomeCassa});
+        GenericObject spada = new GenericObject(new Name("spada", WordType.NOME), "una spada");
         oggetti.add(spada);
         strada1.addOggetto(spada);
         oggetti.add(baule);
@@ -137,12 +153,12 @@ public class Partita {
         stanzaCorrente = strada1;
     }
     
-    public void creaProtagonista(String nome) {
+    public void creaProtagonista(Name nome) {
         protagonista = new Protagonista(nome);
     }
     
     public String getNomeProtagonista() {
-        return protagonista.getNome();
+        return protagonista.getNome().getName();
     }
     
     public int getVitaProtagonista() {

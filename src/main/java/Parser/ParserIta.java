@@ -13,7 +13,7 @@ import General.CommandType;
 
 public class ParserIta extends ParserEssentials {
     
-    public ParserIta(ArrayList<Name> articles, ArrayList<String> prepositions) {
+    public ParserIta(ArrayList<String> articles, ArrayList<String> prepositions) {
         this.articles = articles;
         this.prepositions = prepositions;
     }
@@ -45,16 +45,18 @@ public class ParserIta extends ParserEssentials {
             } else {
                 setLastWordType(WordType.PREPOSIZIONE);
             }
+            lastPreposition = token;
         }
         return confirmed;
     }
     
     private boolean isArticle(String token) {
         boolean confirmed = false;
-        for(Name article : articles) {
-            if(article.getName().equals(token)) {
+        for(String article : articles) {
+            if(article.equals(token)) {
                 confirmed = true;
-                setLastWordType(article.getType());
+                setLastWordType(WordType.ARTICOLO);
+                lastArticle = token;
                 break;
             }
         }
@@ -64,16 +66,33 @@ public class ParserIta extends ParserEssentials {
     private boolean isObject(String token, ParserOutput output, ArrayList<GenericObject> oggetti) {
         boolean confirmed = false;
         for(GenericObject oggetto : oggetti) {
-            if(oggetto.getNome().equals(token) || oggetto.confrontaAlias(token)) {
-                if((lastWordType == WordType.ARTICOLO_FEMMINILE && oggetto.getTipo() == WordType.NOME_FEMMINILE) ||
-                        (lastWordType == WordType.ARTICOLO_MASCHILE && oggetto.getTipo() == WordType.NOME_MASCHILE) ||
-                        (lastWordType == WordType.ARTICOLO_APOSTROFO && oggetto.getNome().matches("[aeiou][a-z]+")) ||
-                        (lastWordType == WordType.COMANDO) || (lastWordType == WordType.PREPOSIZIONE) || (lastWordType == WordType.NOME_MASCHILE)
-                        || (lastWordType == WordType.NOME_FEMMINILE)){
+            if(oggetto.getNome().equals(token)) {
+                if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
                     confirmed = true;
-                    output.setOggetto(oggetto);
-                    setObjectQualities(oggetto);
-                    setLastWordType(oggetto.getTipo());
+                    setOggetto(output, oggetto);
+                    break;
+                } else if ((lastWordType == WordType.ARTICOLO) && oggetto.articoloUsabile(lastArticle)){
+                    confirmed = true;
+                    setOggetto(output, oggetto);
+                    break;
+                } else if ((lastWordType == WordType.PREPOSIZIONE) && oggetto.preposizioneUsabile(lastPreposition)){
+                    confirmed = true;
+                    setOggetto(output, oggetto);
+                    break;
+                }
+            } else if (oggetto.confrontaAlias(token)) {
+                Name tmp = oggetto.restituisciAlias(token);
+                if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
+                    confirmed = true;
+                    setOggetto(output, oggetto);
+                    break;
+                } else if ((lastWordType == WordType.ARTICOLO) && tmp.getArticoli().contains(lastArticle)){
+                    confirmed = true;
+                    setOggetto(output, oggetto);
+                    break;
+                } else if ((lastWordType == WordType.PREPOSIZIONE) && tmp.getPreposizioni().contains(lastPreposition)){
+                    confirmed = true;
+                    setOggetto(output, oggetto);
                     break;
                 }
             }
@@ -81,23 +100,40 @@ public class ParserIta extends ParserEssentials {
         return confirmed;
     }
     
+    private void setOggetto(ParserOutput output, GenericObject oggetto){
+        output.setOggetto(oggetto);
+        setObjectQualities(oggetto);
+        setLastWordType(WordType.NOME);
+    }
+    
     private boolean isCharacter(String token, ParserOutput output, ArrayList<Personaggio> personaggi){
         boolean confirmed = false;
         for(Personaggio personaggio : personaggi){
-            if(personaggio.getAlias() != null && personaggio.getAlias().getName().equals(token)){
-                if((lastWordType == WordType.ARTICOLO_FEMMINILE && personaggio.getAlias().getType() == WordType.NOME_FEMMINILE) ||
-                        (lastWordType == WordType.ARTICOLO_MASCHILE && personaggio.getAlias().getType() == WordType.NOME_MASCHILE) ||
-                        (lastWordType == WordType.ARTICOLO_APOSTROFO && personaggio.getAlias().getName().matches("[aeiou][a-z]+")) ||
-                        (lastWordType == WordType.COMANDO) || (lastWordType == WordType.PREPOSIZIONE)
-                        || (lastWordType == WordType.COMANDO_PARLA) || (lastWordType == WordType.PREPOSIZIONE_PARLA)){
+            if(personaggio.getAlias() != null && personaggio.confrontaAlias(token)){
+                Name tmp = personaggio.restituisciAlias(token);
+                if((lastWordType == WordType.COMANDO) || (lastWordType == WordType.COMANDO_PARLA)){
                     confirmed = true;
                     output.setPersonaggio(personaggio);
-                    setLastWordType(WordType.NOME_PROPRIO);
+                    setLastWordType(WordType.NOME);
+                    break;
+                } else if ((lastWordType == WordType.PREPOSIZIONE || lastWordType == WordType.PREPOSIZIONE_PARLA) && tmp.getPreposizioni().contains(lastPreposition)){
+                    confirmed = true;
+                    output.setPersonaggio(personaggio);
+                    setLastWordType(WordType.NOME);
+                    break;
+                } else if ((lastWordType == WordType.ARTICOLO) && tmp.getArticoli().contains(lastArticle)){
+                    confirmed = true;
+                    output.setPersonaggio(personaggio);
+                    setLastWordType(WordType.NOME);
                     break;
                 }
-                } else if (personaggio.getNome().equals(token)){
-                    if(lastWordType == WordType.COMANDO || lastWordType == WordType.PREPOSIZIONE
-                            || lastWordType == WordType.COMANDO_PARLA || lastWordType == WordType.PREPOSIZIONE_PARLA){
+                } else if (personaggio.getNome().getName().equals(token)){
+                    if(lastWordType == WordType.COMANDO || lastWordType == WordType.COMANDO_PARLA){
+                        confirmed = true;
+                        output.setPersonaggio(personaggio);
+                        setLastWordType(WordType.NOME_PROPRIO);
+                        break;
+                } else if ((lastWordType == WordType.PREPOSIZIONE || lastWordType == WordType.PREPOSIZIONE_PARLA) && personaggio.preposizioneUsabile(lastPreposition)){
                         confirmed = true;
                         output.setPersonaggio(personaggio);
                         setLastWordType(WordType.NOME_PROPRIO);
@@ -133,7 +169,7 @@ public class ParserIta extends ParserEssentials {
             if(!isArticle(token) && !isObject(token, output, oggetti)) {
                 accepted = false;
             }
-        } else if(lastWordType == WordType.ARTICOLO_FEMMINILE || lastWordType == WordType.ARTICOLO_MASCHILE || lastWordType == WordType.ARTICOLO_APOSTROFO) {
+        } else if(lastWordType == WordType.ARTICOLO) {
             if(!isObject(token, output, oggetti) && !isCharacter(token, output, personaggi)) {
                 accepted = false;
             }
@@ -141,7 +177,7 @@ public class ParserIta extends ParserEssentials {
             if(!isObject(token, output, oggetti) && !isArticle(token)) {
                 accepted = false;
             }
-        } else if(lastWordType == WordType.NOME_MASCHILE || lastWordType == WordType.NOME_FEMMINILE) {
+        } else if(lastWordType == WordType.NOME) {
             if(!isPreposition(token, output) && !isAdjective(token) && !isObject(token, output, oggetti)) {
                 accepted = false;
             }
@@ -180,7 +216,7 @@ public class ParserIta extends ParserEssentials {
                 }
             }
         }
-        if(lastWordType == WordType.ARTICOLO_FEMMINILE || lastWordType == WordType.ARTICOLO_MASCHILE || lastWordType == WordType.ARTICOLO_APOSTROFO || lastWordType == WordType.PREPOSIZIONE) {
+        if(lastWordType == WordType.ARTICOLO || lastWordType == WordType.PREPOSIZIONE) {
             accepted = false;
         }
         if(!accepted) {

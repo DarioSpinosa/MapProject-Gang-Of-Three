@@ -11,9 +11,9 @@ import Parser.WordType;
 
 public class Protagonista extends Personaggio{
     
-    private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME_MASCHILE), "i tuoi oggetti", 6);
+    private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME), "i tuoi oggetti", 6);
     
-    public Protagonista(String nome) {
+    public Protagonista(Name nome) {
         super(nome, 3);
     }
     
