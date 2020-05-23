@@ -102,6 +102,10 @@ public class Partita {
                 nomePizza.setArticoli(new String[] { "la", "una" });
 		nomePizza.setPreposizioni(new String[] { "quella" });
                 GenericObject pizza = new GenericObject(nomePizza, "una squisita pizza", 1 , new GestoreAlias(new Name[]{}));
+                Name nomeBirra = new Name("birra", WordType.NOME);
+                nomeBirra.setArticoli(new String[]{"la","una"});
+                nomeBirra.setPreposizioni(new String[] {"quella"});
+                GenericObject birra = new GenericObject(nomeBirra, "una pregiata birra peroni", 2, new GestoreAlias(new Name[]{}));
 
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
@@ -121,6 +125,8 @@ public class Partita {
 		GenericObject acqua = new GenericObject(nomeAcqua, "un bicchiere d'acqua", 1);
 		GenericObject caffe = new GenericObject(NomeCaffe, "caffe in polvere", 1);
 
+                oggetti.add(birra);
+                strada1.addOggetto(birra);
                 oggetti.add(pizza);
                 strada1.addOggetto(pizza);
 		oggetti.add(spada);

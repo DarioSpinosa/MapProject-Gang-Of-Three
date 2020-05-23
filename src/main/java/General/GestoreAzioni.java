@@ -74,6 +74,10 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		comandi.add(combina);
 		Command parla = new Command(CommandType.PARLA, "parla");
 		comandi.add(parla);
+                Command mangia = new Command(CommandType.MANGIA, "mangia");
+                comandi.add(mangia);
+                Command bevi = new Command(CommandType.BEVI, "bevi");
+                comandi.add(bevi);
 	}
 
 	@Override
@@ -220,6 +224,28 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			}
 			break;
+                case MANGIA:
+                    if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
+                        if(protagonista.isInInventario(action.getPrimoOggetto())){
+                            mangiaOggettoCura(action.getPrimoOggetto());
+                        } else {
+                            stampa.messaggioOggettoNonPresenteInventario();
+                        }
+                    } else {
+                        stampa.messaggioNonCompreso();
+                    }
+                    break;
+                case BEVI:
+                    if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
+                        if(protagonista.isInInventario(action.getPrimoOggetto())){
+                            beviOggettoCura(action.getPrimoOggetto());
+                        } else {
+                            stampa.messaggioOggettoNonPresenteInventario();
+                        }
+                    } else {
+                        stampa.messaggioNonCompreso();
+                    }
+                    break;
 		}
 	}
 
@@ -374,12 +400,15 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
     private void usaOggetto(GenericObject oggetto){
         switch(oggetto.getCategory()){
             case 1:
-                usaOggettoCura(oggetto);
+                mangiaOggettoCura(oggetto);
+                break;
+            case 2:
+                beviOggettoCura(oggetto);
                 break;
         }
     }
     
-    private void usaOggettoCura(GenericObject oggetto){
+    private void mangiaOggettoCura(GenericObject oggetto){
         int healthPoints = partita.getProtagonista().getHealthPoints();
         switch(oggetto.getNome()){
             case "torta":
@@ -388,6 +417,19 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
             case "pizza":
                 cura(oggetto, healthPoints, 2);
                 break;
+            default:
+                stampa.messaggioNonCompreso();
+        }
+    }
+    
+    private void beviOggettoCura(GenericObject oggetto){
+        int healthPoints = partita.getProtagonista().getHealthPoints();
+        switch(oggetto.getNome()){
+            case "birra":
+                cura(oggetto, healthPoints, 1);
+                break;
+            default:
+                stampa.messaggioNonCompreso();
         }
     }
     

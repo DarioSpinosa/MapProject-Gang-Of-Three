@@ -14,7 +14,7 @@ public class Protagonista extends Personaggio{
     private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME), "i tuoi oggetti", 6);
     
     public Protagonista(Name nome) {
-        super(nome, 1);
+        super(nome, 3);
     }
     
     @Override
