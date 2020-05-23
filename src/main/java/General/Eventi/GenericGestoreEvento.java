@@ -6,7 +6,6 @@ import Entita.Stanza;
 import General.GenericObject;
 import General.GestoreMessaggiEssentials;
 
-
 public abstract class GenericGestoreEvento {
 
 	protected Evento missione;
@@ -15,7 +14,8 @@ public abstract class GenericGestoreEvento {
 	protected boolean presentazione = false;
 	protected GestoreMessaggiEssentials stampante;
 
-	public GenericGestoreEvento() {}
+	public GenericGestoreEvento() {
+	}
 
 	public GenericGestoreEvento(Evento m, Stanza stanza) {
 		missione = m;
@@ -30,38 +30,35 @@ public abstract class GenericGestoreEvento {
 		return completato;
 	}
 
-
-	public Evento getEvento() {
-		return missione;
-	}
-
-
 	public String iniziaEvento(ArrayList<GenericObject> objs) {
 
-		String temp;
+		String temp = "";
 
-		if(presentazione == false) {
+		if (presentazione == false) {
+			temp = missione.getDescrizione();
 			presentazione = true;
 		}
 
 		ArrayList<GenericObject> oggetti = missione.getOggettiEvento();
 
-		if(oggetti.size() != 0) {
+		if (oggetti.size() != 0) {
 
 			int i = 0;
 
-			do{
+			do {
 				stanza.addOggetto(oggetti.get(i));
 				objs.add(oggetti.get(i));
 
 				i++;
 
-			}while(i < oggetti.size() );
+			} while (i < oggetti.size());
 		}
 
-		temp = missione.getDescrizione();
-
 		return temp;
+	}
+
+	public Evento getEvento() {
+		return missione;
 	}
 
 	public abstract void terminaEvento();
