@@ -3,76 +3,50 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package Entità.Characters;
-import General.Name;
-import java.util.Arrays;
-import java.util.HashSet;
+package Entita.Characters;
 import java.util.Set;
 
+import General.GestoreAlias;
+import General.Name;
+
 public abstract class Personaggio {
-    
+
     protected Name nome;
-    protected Set<Name> alias;
+    protected GestoreAlias alias;
     protected int healthPoints;
-    
+
     public Personaggio(Name nome, int healthPoints) {
         this.nome = nome;
         this.healthPoints = healthPoints;
     }
-    
+
     public Name getNome() {
         return nome;
     }
-    
-    public Set<Name> getAlias(){
+
+    public GestoreAlias getGestoreAlias(){
         return alias;
     }
-    
+
     public void setAlias(Set<Name> alias) {
-        this.alias = alias;
+        this.alias = new GestoreAlias(alias);
     }
-    
+
     public void setAlias(Name[] alias) {
-        this.alias = new HashSet<>(Arrays.asList(alias));
+        this.alias = new GestoreAlias(alias);
     }
-    
+
     public int getHealtPoints() {
         return healthPoints;
     }
-    
+
     public boolean articoloUsabile(String articolo){
         return nome.getArticoli().contains(articolo);
     }
-    
+
     public boolean preposizioneUsabile(String preposizione){
         return nome.getPreposizioni().contains(preposizione);
     }
-    
-    public boolean ricercaAlias(String nome){
-        for(Name name : alias){
-            if(name.getName().equals(nome)){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public Name restituisciAlias(String nome){
-        for(Name name : alias){
-            if(name.getName().equals(nome)){
-                return name;
-            }
-        }
-        return null;
-    }
-    
-    public boolean confrontaAlias(String nome){
-        boolean controllo = false;
-        if(alias != null && ricercaAlias(nome)){
-            controllo = true;
-        }
-        return controllo;
-    }
-    
+
     public abstract void getDamage(int danno);
 }

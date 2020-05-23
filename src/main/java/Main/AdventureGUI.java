@@ -1,34 +1,26 @@
 package Main;
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-import Entità.Partita;
 import java.util.ArrayList;
-import General.Command;
-import General.GestoreMessaggiEssentials;
-import General.GestoreMessaggi;
+
+import com.sun.glass.events.KeyEvent;
+
+import Entita.Partita;
 import General.GestoreAzioni;
 import General.GestoreAzioniEssentials;
-import General.CommandType;
-import com.sun.glass.events.KeyEvent;
+import General.GestoreMessaggi;
+import General.GestoreMessaggiEssentials;
 import Parser.ParserEssentials;
 import Parser.ParserIta;
-import General.Name;
-import General.GenericObject;
 import Parser.ParserOutput;
-import Parser.WordType;
 /**
  *
  * @author RESTA
  */
 public class AdventureGUI extends javax.swing.JFrame {
-    
+
     private GestoreAzioniEssentials azioni;
     private final GestoreMessaggiEssentials stampante = new GestoreMessaggi(this);
     private ParserEssentials parser;
-    
+
     /**
      * Creates new form AdventureGUI
      */
@@ -36,11 +28,10 @@ public class AdventureGUI extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
+
     private void init(){
         Partita partita = new Partita();
         azioni = new GestoreAzioni(partita, stampante);
-        azioni.setListaComandi(partita.getComandi());
         azioni.setListaOggetti(partita.getOggetti());
         ArrayList<String> prepositions = new ArrayList<>();
         prepositions.add("in");
@@ -61,9 +52,9 @@ public class AdventureGUI extends javax.swing.JFrame {
         articles.add("una");
         parser = new ParserIta(articles, prepositions);
     }
-    
+
     public void stampaMessaggio(String messaggio){
-        jtConsole.append(messaggio + "\n\r");
+        jtConsole.append(messaggio + "\n");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,7 +89,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbOvest.setText("OVEST");
         jbOvest.setPreferredSize(new java.awt.Dimension(70, 20));
         jbOvest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbOvestActionPerformed(evt);
             }
         });
@@ -106,7 +98,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbNord.setText("NORD");
         jbNord.setPreferredSize(new java.awt.Dimension(70, 20));
         jbNord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNordActionPerformed(evt);
             }
         });
@@ -114,7 +107,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbSud.setText("SUD");
         jbSud.setPreferredSize(new java.awt.Dimension(70, 20));
         jbSud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSudActionPerformed(evt);
             }
         });
@@ -122,13 +116,15 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbEst.setText("EST");
         jbEst.setPreferredSize(new java.awt.Dimension(70, 20));
         jbEst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEstActionPerformed(evt);
             }
         });
 
         jtComandi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            @Override
+			public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtComandiKeyPressed(evt);
             }
         });
@@ -221,7 +217,7 @@ public class AdventureGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jtComandiKeyPressed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -248,10 +244,11 @@ public class AdventureGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdventureGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 new AdventureGUI().setVisible(true);
             }
         });

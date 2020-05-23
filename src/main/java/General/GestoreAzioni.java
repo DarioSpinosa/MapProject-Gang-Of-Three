@@ -4,24 +4,26 @@
  * and open the template in the editor.
  */
 package General;
-import Entità.Partita;
-import Parser.ParserOutput;
-import Entità.Characters.Protagonista;
-import Entità.Characters.Npc;
 import java.util.HashSet;
 import java.util.Set;
+
+import Entita.Partita;
+import Entita.Characters.Npc;
+import Entita.Characters.Protagonista;
+import General.Eventi.Enigmi.Caffe;
+import Parser.ParserOutput;
 
 /**
  *
  * @author Elio
  */
 public class GestoreAzioni extends GestoreAzioniEssentials{
-    
+
     private final Set<String> preposizioniPrendi = new HashSet<>();
     private final Set<String> preposizioniLascia = new HashSet<>();
     private final Set<String> preposizioniCombina = new HashSet<>();
     private final Set<String> preposizioniParla = new HashSet<>();
-    
+
     public GestoreAzioni(Partita partita, GestoreMessaggiEssentials stampa){
         super(partita, stampa);
         preposizioniPrendi.add("dal");
@@ -36,23 +38,62 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         preposizioniParla.add("all");
         preposizioniParla.add("a");
         preposizioniParla.add("ad");
+        Command nord = new Command(CommandType.NORD, "nord");
+        nord.setAlias(new String[]{"n", "Nord"});
+        comandi.add(nord);
+        Command ovest = new Command(CommandType.OVEST, "ovest");
+        ovest.setAlias(new String[]{"o", "Ovest"});
+        comandi.add(ovest);
+        Command sud = new Command(CommandType.SUD, "sud");
+        sud.setAlias(new String[]{"s", "Sud"});
+        comandi.add(sud);
+        Command est = new Command(CommandType.EST, "est");
+        est.setAlias(new String[]{"e","Est"});
+        comandi.add(est);
+        Command inventario = new Command(CommandType.INVENTARIO, "inventario");
+        comandi.add(inventario);
+        Command guarda = new Command(CommandType.GUARDA, "guarda");
+        guarda.setAlias(new String[]{"osserva", "analizza", "ispeziona"});
+        comandi.add(guarda);
+        Command prendi = new Command(CommandType.PRENDI, "prendi");
+        prendi.setAlias(new String[]{"afferra"});
+        comandi.add(prendi);
+        Command usa = new Command(CommandType.USA, "usa");
+        usa.setAlias(new String[]{"utilizza"});
+        comandi.add(usa);
+        Command lascia = new Command(CommandType.LASCIA, "lascia");
+        lascia.setAlias(new String[]{"poggia", "posa"});
+        comandi.add(lascia);
+        Command apri = new Command(CommandType.APRI, "apri");
+        apri.setAlias(new String[]{"alza"});
+        comandi.add(apri);
+        Command chiudi = new Command(CommandType.CHIUDI, "chiudi");
+        comandi.add(chiudi);
+        Command combina = new Command(CommandType.COMBINA, "combina");
+        comandi.add(combina);
+        Command parla = new Command(CommandType.PARLA, "parla");
+        comandi.add(parla);
     }
-    
+
     @Override
     public void elaboraAzione(ParserOutput action){
         Protagonista protagonista = (Protagonista)partita.getProtagonista();
         switch(action.getComando().getCommandType()){
             case NORD:
                 movimentoNord();
+                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);;
                 break;
             case SUD:
                 movimentoSud();
+                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case EST:
                 movimentoEst();
+                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case OVEST:
                 movimentoOvest();
+                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case INVENTARIO:
                 int i = 0;
@@ -87,7 +128,12 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                 }
                 break;
             case LASCIA:
-                if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
+            	if(action.getPrimoOggetto().getNome().equals("caffe") && action.getSecondoOggetto().getNome().equals("macchinetta")) {
+            		((Caffe)(action.getSecondoOggetto())).addCoffee();
+            	}else if(action.getPrimoOggetto().getNome().equals("acqua") && action.getSecondoOggetto().getNome().equals("macchinetta")) {
+            		((Caffe)(action.getSecondoOggetto())).addWater();
+            	}
+            	else if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
                     if(protagonista.getInventario().getContainer().contains(action.getPrimoOggetto())){
                         partita.getStanzaCorrente().addOggetto(action.getPrimoOggetto());
                         protagonista.removeOggetto(action.getPrimoOggetto());
@@ -175,7 +221,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                 break;
         }
     }
-    
+
     @Override
     public void movimentoNord(){
         if(partita.getStanzaCorrente().getSopra() != null){
@@ -185,7 +231,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                     stampa.messaggioStanzaIrraggiungibile();
                 }
     }
-    
+
     @Override
     public void movimentoSud(){
         if(partita.getStanzaCorrente().getSotto() != null){
@@ -195,7 +241,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                     stampa.messaggioStanzaIrraggiungibile();
                 }
     }
-    
+
     @Override
     public void movimentoEst(){
         if(partita.getStanzaCorrente().getDestra() != null){
@@ -205,7 +251,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                     stampa.messaggioStanzaIrraggiungibile();
                 }
     }
-    
+
     @Override
     public void movimentoOvest(){
         if(partita.getStanzaCorrente().getSinistra() != null){
@@ -215,7 +261,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                     stampa.messaggioStanzaIrraggiungibile();
                 }
     }
-    
+
     private void lasciaOPrendiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista, boolean lasciare){
             if( partita.getStanzaCorrente().getOggetti().getContainer().contains(oggetto2) ){
                 GenericObjectContainer oggettoConStanza = (GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto2);
@@ -259,7 +305,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                 stampa.messaggioOggettoNonPresente();
             }
     }
-    
+
     private void apriOChiudiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista, boolean aprire){
         if(oggetto1 != null && oggetto2 == null){
                     if(oggetto1 instanceof GenericObjectContainer){
@@ -276,40 +322,42 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
                                         ((GenericObjectContainer)partita.getStanzaCorrente().getOggetto(oggetto1)).close();
                                         stampa.stampaChiuso(oggetto1);
                                     } else {
-                                        stampa.messaggioOggettoGiaChiuso(oggetto1);
+                                    	stampa.messaggioOggettoGiaChiuso(oggetto1);
                                     }
                                 }
                             } else if(protagonista.isInInventario(oggetto1)){
-                                if(aprire){
-                                    if(!((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
-                                        ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).open();
-                                        stampa.stampaAperto(oggetto1);
-                                    } else {
-                                        stampa.messaggioOggettoGiaAperto(oggetto1);
-                                    }
-                                } else {
-                                    if(((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
-                                        ((GenericObjectContainer)protagonista.getOggetto(oggetto1)).close();
-                                        stampa.stampaChiuso(oggetto1);
-                                    } else {
-                                        stampa.messaggioOggettoGiaChiuso(oggetto1);
-                                    }
-                                }
+                            	if(aprire){
+                            		if(!((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
+                            			((GenericObjectContainer)protagonista.getOggetto(oggetto1)).open();
+                            			stampa.stampaAperto(oggetto1);
+                            		} else {
+                            			stampa.messaggioOggettoGiaAperto(oggetto1);
+                            		}
+                            	} else {
+                            		if(((GenericObjectContainer)protagonista.getOggetto(oggetto1)).isOpened()) {
+                            			((GenericObjectContainer)protagonista.getOggetto(oggetto1)).close();
+                            			stampa.stampaChiuso(oggetto1);
+                            		} else {
+                            			stampa.messaggioOggettoGiaChiuso(oggetto1);
+                            		}
+                            	}
                             } else {
-                                stampa.messaggioOggettoNonPresente();
+                            	stampa.messaggioOggettoNonPresente();
                             }
                             for(GenericObject oggetto : ((GenericObjectContainer)oggetto1).getContainer()){ //TODO da rimuovere
-                                stampa.stampaInventario(oggetto.getNome());
+                            	stampa.stampaInventario(oggetto.getNome());
                             }
                     }  else {
-                        if(aprire){
-                            stampa.messaggioOggettoNonApribile();
-                        } else {
-                            stampa.messaggioOggettoNonChiudibile();
-                        }
+                    	if(aprire){
+                    		stampa.messaggioOggettoNonApribile();
+                    	} else {
+                    		stampa.messaggioOggettoNonChiudibile();
+                    	}
                     }
-                } else {
-                    stampa.messaggioNonCompreso();
-                }
+        } else {
+        	stampa.messaggioNonCompreso();
+        }
     }
+
+
 }

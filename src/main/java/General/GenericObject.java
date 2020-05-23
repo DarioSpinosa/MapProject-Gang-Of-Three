@@ -4,115 +4,101 @@
 * and open the template in the editor.
 */
 package General;
-import Parser.WordType;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+
+import Parser.WordType;
 
 public class GenericObject {
     private Name nome;
     private String descrizione = "";
-    private Set<Name> alias;
+    private GestoreAlias alias = new GestoreAlias(new Name[] {});
     private Set<String> aggettivi;
     private boolean consumabile = false;
-    
+
     public GenericObject(Name nome, String descrizione) {
+    	this.nome = nome;
+    	this.descrizione = descrizione;
+    }
+
+    public GenericObject(Name nome, String descrizione, GestoreAlias alias) {
         this.nome = nome;
         this.descrizione = descrizione;
+        this.alias = alias;
     }
-    
+
     public GenericObject(Name nome, String descrizione, Set<String> aggettivi) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.aggettivi = aggettivi;
     }
-    
+
     public String getNome() {
         return nome.getName();
     }
-    
+
     public WordType getTipo() {
         return nome.getType();
     }
-    
+
     public void setNome(Name nome) {
         this.nome = nome;
     }
-    
+
+    public Name getName() {
+    	return nome;
+    }
+
     public String getDescrizione() {
         return descrizione;
     }
-    
+
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    
+
     public boolean isConsumabile() {
         return consumabile;
     }
-    
+
     public void setConsumabile(boolean consumabile) {
         this.consumabile = consumabile;
     }
-    
-    public Set<Name> getAlias() {
+
+    public GestoreAlias getGestoreAlias(){
         return alias;
     }
-    
-    public void setAlias(Set<Name> alias) {
-        this.alias = alias;
+
+
+    public void setGestoreAlias(Set<Name> alias) {
+        this.alias = new GestoreAlias(alias);
     }
-    
-    public void setAlias(Name[] alias) {
-        this.alias = new HashSet<>(Arrays.asList(alias));
+
+    public void setGestoreAlias(Name[] alias) {
+        this.alias = new GestoreAlias(alias);
     }
-    
+
     public Set<String> getAggettivi() {
         return aggettivi;
     }
-    
+
     public void setAggettivi(Set<String> aggettivi) {
         this.aggettivi = aggettivi;
     }
-    
+
     public void setAggettivi(String[] aggettivi) {
         this.aggettivi = new HashSet<>(Arrays.asList(aggettivi));
     }
-    
+
     public boolean articoloUsabile(String articolo){
         return nome.getArticoli().contains(articolo);
     }
-    
+
     public boolean preposizioneUsabile(String preposizione){
         return nome.getPreposizioni().contains(preposizione);
     }
-    
-    public boolean ricercaAlias(String nome){
-        for(Name name : alias){
-            if(name.getName().equals(nome)){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public Name restituisciAlias(String nome){
-        for(Name name : alias){
-            if(name.getName().equals(nome)){
-                return name;
-            }
-        }
-        return null;
-    }
-    
-    public boolean confrontaAlias(String nome){
-        boolean controllo = false;
-        if(alias != null && ricercaAlias(nome)){
-            controllo = true;
-        }
-        return controllo;
-    }
-    
+
     @Override
     public boolean equals(Object obj){
         if(obj instanceof GenericObject){
@@ -122,7 +108,7 @@ public class GenericObject {
         }
         return false;
     }
-    
+
     @Override
     public String toString(){
         return this.getNome();

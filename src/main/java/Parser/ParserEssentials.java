@@ -7,8 +7,9 @@ package Parser;
 import General.Command;
 import General.Name;
 import java.util.ArrayList;
+
+import Entita.Characters.Personaggio;
 import General.GenericObject;
-import Entità.Characters.Personaggio;
 
 public abstract class ParserEssentials {
     protected boolean accepted = false;

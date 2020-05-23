@@ -5,8 +5,8 @@
 */
 package Parser;
 import General.GenericObject;
+import Entita.Characters.Personaggio;
 import General.Command;
-import Entità.Characters.Personaggio;
 
 public class ParserOutput {
     

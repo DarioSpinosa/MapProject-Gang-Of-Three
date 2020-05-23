@@ -4,20 +4,21 @@
 * and open the template in the editor.
 */
 package Parser;
-import General.Command;
-import General.Name;
 import java.util.ArrayList;
-import General.GenericObject;
-import Entità.Characters.Personaggio;
+
+import Entita.Characters.Personaggio;
+import General.Command;
 import General.CommandType;
+import General.GenericObject;
+import General.Name;
 
 public class ParserIta extends ParserEssentials {
-    
+
     public ParserIta(ArrayList<String> articles, ArrayList<String> prepositions) {
         this.articles = articles;
         this.prepositions = prepositions;
     }
-    
+
     private boolean isCommand(String token, ParserOutput output, ArrayList<Command> commands) {
         boolean confirmed = false;
         for(Command comando : commands) {
@@ -34,7 +35,7 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private boolean isPreposition(String token, ParserOutput output) {
         boolean confirmed = false;
         if(prepositions.contains(token)) {
@@ -49,7 +50,7 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private boolean isArticle(String token) {
         boolean confirmed = false;
         for(String article : articles) {
@@ -62,7 +63,7 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private boolean isObject(String token, ParserOutput output, ArrayList<GenericObject> oggetti) {
         boolean confirmed = false;
         for(GenericObject oggetto : oggetti) {
@@ -80,8 +81,8 @@ public class ParserIta extends ParserEssentials {
                     setOggetto(output, oggetto);
                     break;
                 }
-            } else if (oggetto.confrontaAlias(token)) {
-                Name tmp = oggetto.restituisciAlias(token);
+            } else if (oggetto.getGestoreAlias().confrontaAlias(token)) {
+                Name tmp = oggetto.getGestoreAlias().restituisciAlias(token);
                 if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
                     confirmed = true;
                     setOggetto(output, oggetto);
@@ -99,18 +100,18 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private void setOggetto(ParserOutput output, GenericObject oggetto){
         output.setOggetto(oggetto);
         setObjectQualities(oggetto);
         setLastWordType(WordType.NOME);
     }
-    
+
     private boolean isCharacter(String token, ParserOutput output, ArrayList<Personaggio> personaggi){
         boolean confirmed = false;
         for(Personaggio personaggio : personaggi){
-            if(personaggio.getAlias() != null && personaggio.confrontaAlias(token)){
-                Name tmp = personaggio.restituisciAlias(token);
+            if(personaggio.getGestoreAlias().getAlias() != null && personaggio.getGestoreAlias().confrontaAlias(token)){
+                Name tmp = personaggio.getGestoreAlias().restituisciAlias(token);
                 if((lastWordType == WordType.COMANDO) || (lastWordType == WordType.COMANDO_PARLA)){
                     confirmed = true;
                     output.setPersonaggio(personaggio);
@@ -143,7 +144,7 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private void setObjectQualities(GenericObject oggetto) {
         numberOfObjects++;
         if(oggetto.getAggettivi()!=null && !oggetto.getAggettivi().isEmpty()) {
@@ -151,7 +152,7 @@ public class ParserIta extends ParserEssentials {
             adjectives.addAll(oggetto.getAggettivi());
         }
     }
-    
+
     private boolean isAdjective(String token) {
         boolean confirmed = false;
         if(adjectives.contains(token)) {
@@ -159,11 +160,11 @@ public class ParserIta extends ParserEssentials {
         }
         return confirmed;
     }
-    
+
     private void setLastWordType(WordType lastWordType) {
         this.lastWordType = lastWordType;
     }
-    
+
     private void analyzer(String token, ParserOutput output, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Personaggio> personaggi) {
         if(lastWordType == WordType.COMANDO) {
             if(!isArticle(token) && !isObject(token, output, oggetti)) {
@@ -195,7 +196,7 @@ public class ParserIta extends ParserEssentials {
             }
         }
     }
-    
+
     @Override
     public ParserOutput parse(String input, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Personaggio> personaggi) {
         accepted = false;
