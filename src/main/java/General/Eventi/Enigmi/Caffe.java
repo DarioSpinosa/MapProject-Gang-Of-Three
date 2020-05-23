@@ -14,7 +14,7 @@ public class Caffe extends GenericObject implements Enigma {
 	 * caffe' e acqua, poi premere il tasto di accesione"
 	 */
 	public Caffe(Name n, String s) {
-		super(n, s);
+		super(n, s, 4);
 	}
 
 	private boolean coffee = false;

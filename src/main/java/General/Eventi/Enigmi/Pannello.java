@@ -16,7 +16,7 @@ public class Pannello extends GenericObject implements Enigma {
 	 * rosso."
 	 */
 	public Pannello(Name n, String s) {
-		super(n, s);
+		super(n, s, 4);
 	}
 
 	private boolean firstToggle = false;

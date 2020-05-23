@@ -97,25 +97,25 @@ public class Partita {
 		Name nomeTorta = new Name("torta", WordType.NOME);
 		nomeTorta.setArticoli(new String[] { "la", "una" });
 		nomeTorta.setPreposizioni(new String[] { "quella" });
-		GenericObject torta = new GenericObject(nomeTorta, "una deliziosa torta", new GestoreAlias(new Name[] {}));
+		GenericObject torta = new GenericObject(nomeTorta, "una deliziosa torta", 1, new GestoreAlias(new Name[] {}));
 
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
 		nomeBaule.setPreposizioni(new String[] { "nel", "in", "da", "dal" });
-		GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule");
+		GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule", 0);
 		Name nomeCassa = new Name("cassa", WordType.NOME);
 		nomeCassa.setArticoli(new String[] { "la", "una" });
 		nomeCassa.setPreposizioni(new String[] { "nella", "dalla" });
 		baule.setGestoreAlias((new Name[] { nomeCassa }));
-		GenericObject spada = new GenericObject(new Name("spada", WordType.NOME), "una spada");
+		GenericObject spada = new GenericObject(new Name("spada", WordType.NOME), "una spada", 2);
 		Name nomeAcqua = new Name("acqua", WordType.NOME);
 		nomeAcqua.setArticoli(new String[] { "l'" });
 		nomeAcqua.setPreposizioni(new String[] { "quella" });
 		Name NomeCaffe = new Name("caffe", WordType.NOME);
 		NomeCaffe.setArticoli(new String[] { "un" });
 		NomeCaffe.setPreposizioni(new String[] { "quello" });
-		GenericObject acqua = new GenericObject(nomeAcqua, "un bicchiere d'acqua");
-		GenericObject caffe = new GenericObject(NomeCaffe, "caffe in polvere");
+		GenericObject acqua = new GenericObject(nomeAcqua, "un bicchiere d'acqua", 1);
+		GenericObject caffe = new GenericObject(NomeCaffe, "caffe in polvere", 1);
 
 		oggetti.add(spada);
 		strada1.addOggetto(spada);

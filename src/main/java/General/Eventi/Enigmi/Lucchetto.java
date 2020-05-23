@@ -16,7 +16,7 @@ public class Lucchetto extends GenericObject implements Enigma {
 	 */
 
 	public Lucchetto(Name n, String s) {
-		super(n, s);
+		super(n, s, 4);
 	}
 
 	private int picked = 0;
