@@ -81,19 +81,15 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         switch(action.getComando().getCommandType()){
             case NORD:
                 movimentoNord();
-                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);;
                 break;
             case SUD:
                 movimentoSud();
-                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case EST:
                 movimentoEst();
-                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case OVEST:
                 movimentoOvest();
-                partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti);
                 break;
             case INVENTARIO:
                 int i = 0;
@@ -227,6 +223,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         if(partita.getStanzaCorrente().getSopra() != null){
                     partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
                     stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+                    if(partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
+                    	stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
                 } else {
                     stampa.messaggioStanzaIrraggiungibile();
                 }
@@ -237,6 +235,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         if(partita.getStanzaCorrente().getSotto() != null){
                     partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
                     stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+                    if(partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
+                    	stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
                 } else {
                     stampa.messaggioStanzaIrraggiungibile();
                 }
@@ -247,6 +247,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         if(partita.getStanzaCorrente().getDestra() != null){
                     partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
                     stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+                    if(partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
+                    	stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
                 } else {
                     stampa.messaggioStanzaIrraggiungibile();
                 }
@@ -257,6 +259,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials{
         if(partita.getStanzaCorrente().getSinistra() != null){
                     partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
                     stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+                    if(partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
+                    	stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
                 } else {
                     stampa.messaggioStanzaIrraggiungibile();
                 }

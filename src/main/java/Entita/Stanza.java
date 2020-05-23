@@ -132,7 +132,7 @@ public class Stanza {
     public GenericGestoreEvento getGestoreEvento() {
 
     	GenericGestoreEvento returned = new GestoreEventoProva();
-    	if(evento.getCompletato() == false)
+    	if(evento != null && evento.getCompletato() == false)
     		returned = evento;
 
     	  return returned;

@@ -30,10 +30,17 @@ public abstract class GenericGestoreEvento {
 		return completato;
 	}
 
-	public void iniziaEvento(ArrayList<GenericObject> objs) {
+
+	public Evento getEvento() {
+		return missione;
+	}
+
+
+	public String iniziaEvento(ArrayList<GenericObject> objs) {
+
+		String temp;
 
 		if(presentazione == false) {
-			stampante.stampaMessaggio(missione.getDescrizione());
 			presentazione = true;
 		}
 
@@ -52,7 +59,9 @@ public abstract class GenericGestoreEvento {
 			}while(i < oggetti.size() );
 		}
 
+		temp = missione.getDescrizione();
 
+		return temp;
 	}
 
 	public abstract void terminaEvento();
