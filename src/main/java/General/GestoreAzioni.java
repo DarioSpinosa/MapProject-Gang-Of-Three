@@ -212,10 +212,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		case USA:
 			if (action.getPrimoOggetto() != null && action.getSecondoOggetto() == null) {
 				if (protagonista.isInInventario(action.getPrimoOggetto())) {
-					// applica effetto oggetto
-					if (action.getPrimoOggetto().isConsumabile()) {
-						protagonista.removeOggetto(action.getPrimoOggetto());
-					}
+					usaOggetto(action.getPrimoOggetto());
 				} else {
 					stampa.messaggioOggettoNonPresenteInventario();
 				}
@@ -373,5 +370,47 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			stampa.messaggioNonCompreso();
 		}
 	}
+        
+    private void usaOggetto(GenericObject oggetto){
+        switch(oggetto.getCategory()){
+            case 1:
+                usaOggettoCura(oggetto);
+                break;
+        }
+    }
+    
+    private void usaOggettoCura(GenericObject oggetto){
+        int healthPoints = partita.getProtagonista().getHealthPoints();
+        switch(oggetto.getNome()){
+            case "torta":
+                cura(oggetto, healthPoints, 1);
+                break;
+            case "pizza":
+                cura(oggetto, healthPoints, 2);
+                break;
+        }
+    }
+    
+    private void cura(GenericObject oggetto, int healthPoints, int heal){
+        if(healthPoints == 3){
+            stampa.messaggioVitaMassima();
+        } else if((healthPoints + heal) >= 3) {
+            partita.getProtagonista().setHealth(3);
+            healthPoints = 3;
+            stampa.stampaVita(healthPoints);
+            stampa.messaggioVitaCurataMassimo(oggetto);
+            if(oggetto.isConsumabile()){
+                ((Protagonista)partita.getProtagonista()).removeOggetto(oggetto);
+            }
+        } else {
+            ((Protagonista)partita.getProtagonista()).heal(heal);
+            healthPoints = healthPoints + heal;
+            stampa.stampaVita(healthPoints);
+            stampa.messaggioVitaCurataDi(oggetto, heal);
+            if(oggetto.isConsumabile()){
+                ((Protagonista)partita.getProtagonista()).removeOggetto(oggetto);
+            }
+        }
+    }
 
 }

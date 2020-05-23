@@ -16,7 +16,7 @@ public class GenericObject {
 	private String descrizione = "";
 	private GestoreAlias alias = new GestoreAlias(new Name[] {});
 	private Set<String> aggettivi;
-	private boolean consumabile = false;
+	private boolean consumabile = true;
 	private final int category;
 
 	public GenericObject(Name nome, String descrizione, int id) {

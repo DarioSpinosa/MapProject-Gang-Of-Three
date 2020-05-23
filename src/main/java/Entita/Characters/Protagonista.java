@@ -14,7 +14,7 @@ public class Protagonista extends Personaggio{
     private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME), "i tuoi oggetti", 6);
     
     public Protagonista(Name nome) {
-        super(nome, 3);
+        super(nome, 1);
     }
     
     @Override
@@ -25,13 +25,8 @@ public class Protagonista extends Personaggio{
             healthPoints -= danno;
     }
     
-    public void getHeal(int cura) {
-        if(healthPoints == 3)
-            System.out.println("Sei gia al massimo della salute");
-        else if((healthPoints + cura) >= 3)
-            healthPoints = 3;
-        else
-            healthPoints += cura;
+    public void heal(int cura) {
+        healthPoints = healthPoints + cura;
     }
     
     public void addOggetto(GenericObject o) {

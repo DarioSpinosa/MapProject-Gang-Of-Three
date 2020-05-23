@@ -45,7 +45,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtComandi" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jlComandi" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jlComandi" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="healthLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="healthValueLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -59,33 +66,41 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jlConsole" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="250" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jlComandi" min="-2" pref="18" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbOvest" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jbEst" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="jtComandi" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jlConsole" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="250" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jlComandi" min="-2" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jbOvest" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jbEst" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jtComandi" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="healthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="healthValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
+                              <Component id="jbNord" min="-2" pref="38" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbNord" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jbSud" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jbSud" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -169,6 +184,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Comandi"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="healthLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vita: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="healthValueLabel">
     </Component>
   </SubComponents>
 </Form>

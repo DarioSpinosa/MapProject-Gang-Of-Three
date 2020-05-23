@@ -98,6 +98,10 @@ public class Partita {
 		nomeTorta.setArticoli(new String[] { "la", "una" });
 		nomeTorta.setPreposizioni(new String[] { "quella" });
 		GenericObject torta = new GenericObject(nomeTorta, "una deliziosa torta", 1, new GestoreAlias(new Name[] {}));
+                Name nomePizza = new Name("pizza", WordType.NOME);
+                nomePizza.setArticoli(new String[] { "la", "una" });
+		nomePizza.setPreposizioni(new String[] { "quella" });
+                GenericObject pizza = new GenericObject(nomePizza, "una squisita pizza", 1 , new GestoreAlias(new Name[]{}));
 
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
@@ -117,6 +121,8 @@ public class Partita {
 		GenericObject acqua = new GenericObject(nomeAcqua, "un bicchiere d'acqua", 1);
 		GenericObject caffe = new GenericObject(NomeCaffe, "caffe in polvere", 1);
 
+                oggetti.add(pizza);
+                strada1.addOggetto(pizza);
 		oggetti.add(spada);
 		strada1.addOggetto(spada);
 		oggetti.add(baule);
@@ -141,7 +147,7 @@ public class Partita {
 	}
 
 	public int getVitaProtagonista() {
-		return protagonista.getHealtPoints();
+		return protagonista.getHealthPoints();
 	}
 
 	public Stanza getStanzaCorrente() {

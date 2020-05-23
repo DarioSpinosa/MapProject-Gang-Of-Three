@@ -161,4 +161,19 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     public void messaggioOggettoGiaChiuso(GenericObject oggetto){
         interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già chiuso");
     }
+    
+    @Override
+    public void messaggioVitaMassima(){
+        interfaccia.stampaMessaggio("Sei già al massimo della vita, conserva le tue cure, nabbo!");
+    }
+    
+    @Override
+    public void messaggioVitaCurataDi(GenericObject oggetto, int heal){
+        interfaccia.stampaMessaggio("Hai usato l'oggetto " + oggetto + " e ti sei curato di " + heal + "!");
+    }
+    
+    @Override
+    public void messaggioVitaCurataMassimo(GenericObject oggetto){
+        interfaccia.stampaMessaggio("Hai usato l'oggetto " + oggetto + " e sei tornato al massimo della vita!");
+    }
 }

@@ -36,7 +36,7 @@ public abstract class Personaggio {
         this.alias = new GestoreAlias(alias);
     }
 
-    public int getHealtPoints() {
+    public int getHealthPoints() {
         return healthPoints;
     }
 
@@ -46,6 +46,10 @@ public abstract class Personaggio {
 
     public boolean preposizioneUsabile(String preposizione){
         return nome.getPreposizioni().contains(preposizione);
+    }
+    
+    public void setHealth(int healthPoints){
+        this.healthPoints = healthPoints;
     }
 
     public abstract void getDamage(int danno);

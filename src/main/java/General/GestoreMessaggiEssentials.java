@@ -20,6 +20,10 @@ public abstract class GestoreMessaggiEssentials {
         interfaccia.stampaMessaggio("-----------------------------------------------");
     }
     
+    public void stampaVita(int healPoints){
+        interfaccia.setHealthLabel(healPoints);
+    }
+    
     public abstract void stampaMessaggio(String messaggio);
     public abstract void messaggioStanzaIrraggiungibile();
     public abstract void messaggioComandoNonRiconosciuto();
@@ -47,4 +51,7 @@ public abstract class GestoreMessaggiEssentials {
     public abstract void messaggioOggettiNonPresenti();
     public abstract void messaggioOggettoGiaAperto(GenericObject oggetto);
     public abstract void messaggioOggettoGiaChiuso(GenericObject oggetto);
+    public abstract void messaggioVitaMassima();
+    public abstract void messaggioVitaCurataDi(GenericObject oggetto, int heal);
+    public abstract void messaggioVitaCurataMassimo(GenericObject oggetto);
 }
