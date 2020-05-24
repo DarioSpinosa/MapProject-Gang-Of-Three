@@ -80,7 +80,6 @@ public class Pannello extends GenericObject implements Enigma {
 		voltage += voltageValue;
 	}
 
-	@Override
 	public boolean switchOn() {
 		if (voltage != 110) {
 			System.out.println("Target = 110V. Corrente: " + voltage + "V");
@@ -89,5 +88,10 @@ public class Pannello extends GenericObject implements Enigma {
 		System.out.println("BEEEEEEP!");
 		System.out.println("Una lucina verde si e' accesa!");
 		return true;
+	}
+
+	@Override
+	public boolean getCompletato() {
+		return false;
 	}
 }

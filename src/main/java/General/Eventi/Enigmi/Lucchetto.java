@@ -33,7 +33,6 @@ public class Lucchetto extends GenericObject implements Enigma {
 		picked += tension;
 	}
 
-	@Override
 	public boolean switchOn() {
 		if (picked > 5) {
 			picked = 0;
@@ -48,5 +47,10 @@ public class Lucchetto extends GenericObject implements Enigma {
 		System.out.println("CLACK");
 		System.out.println("Il lucchetto si e' aperto.");
 		return true;
+	}
+
+	@Override
+	public boolean getCompletato() {
+		return false;
 	}
 }

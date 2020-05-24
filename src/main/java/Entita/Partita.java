@@ -16,7 +16,7 @@ import General.GenericObjectContainer;
 import General.GestoreAlias;
 import General.Name;
 import General.Eventi.Evento;
-import General.Eventi.GestoreEventoProva;
+import General.Eventi.GestoreEventoCaffe;
 import General.Eventi.Enigmi.Caffe;
 import Parser.WordType;
 
@@ -42,7 +42,7 @@ public class Partita {
 				"Sono le 8 di mattina, dovresti preparati un bel caffe per iniziare questa giornata di merda");
 		macchinaCaffe.addOggettoEvento(
 				new Caffe(new Name("macchinetta", WordType.NOME), "E' una macchina per fare il cazzo di caffe"));
-		strada2.setGestoreEvento(new GestoreEventoProva(macchinaCaffe, strada2));
+		strada2.setGestoreEvento(new GestoreEventoCaffe(macchinaCaffe, strada2));
 		Stanza strada3 = new Stanza("Strada Sud 3", "MO E C'IE TUTT STU TRAFFC ");
 		Stanza strada4 = new Stanza("Strada Est", "");
 		Stanza strada5 = new Stanza("Strada Ovest", "");
@@ -97,41 +97,37 @@ public class Partita {
 		 * informatica1.addPersonaggio(new Npc("antonino"));
 		 */
 
+
 		Name nomeTorta = new Name("torta", WordType.NOME);
 		nomeTorta.setArticoli(new String[] { "la", "una" });
 		nomeTorta.setPreposizioni(new String[] { "quella" });
-		GenericObject torta = new GenericObject(nomeTorta, "Una torta. Che ci fa qui? ", 1,
-				new GestoreAlias(new Name[] {}));
+		GenericObject torta = new GenericObject(nomeTorta, "una deliziosa torta", 1, new GestoreAlias(new Name[] {}));
 		Name nomePizza = new Name("pizza", WordType.NOME);
 		nomePizza.setArticoli(new String[] { "la", "una" });
 		nomePizza.setPreposizioni(new String[] { "quella" });
-		GenericObject pizza = new GenericObject(nomePizza, "Una pizza napoletana, con la crosta alta", 1,
-				new GestoreAlias(new Name[] {}));
+		GenericObject pizza = new GenericObject(nomePizza, "una squisita pizza", 1 , new GestoreAlias(new Name[]{}));
 		Name nomeBirra = new Name("birra", WordType.NOME);
-		nomeBirra.setArticoli(new String[] { "la", "una" });
-		nomeBirra.setPreposizioni(new String[] { "quella" });
-		GenericObject birra = new GenericObject(nomeBirra, "Una birra Peroni, ancora ghiacciata ", 2,
-				new GestoreAlias(new Name[] {}));
-
+		nomeBirra.setArticoli(new String[]{"la","una"});
+		nomeBirra.setPreposizioni(new String[] {"quella"});
+		GenericObject birra = new GenericObject(nomeBirra, "una pregiata birra peroni", 2, new GestoreAlias(new Name[]{}));
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
 		nomeBaule.setPreposizioni(new String[] { "nel", "in", "da", "dal" });
-		GenericObject baule = new GenericObjectContainer(nomeBaule, "Un vecchio baule marcio, in mezzo alla strada ",
-				0);
+		GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule", 0);
+		((GenericObjectContainer)(baule)).addToContainer(torta);
 		Name nomeCassa = new Name("cassa", WordType.NOME);
 		nomeCassa.setArticoli(new String[] { "la", "una" });
 		nomeCassa.setPreposizioni(new String[] { "nella", "dalla" });
 		baule.setGestoreAlias((new Name[] { nomeCassa }));
-		GenericObject spada = new GenericObject(new Name("spada", WordType.NOME), "Una spada di grosse dimensioni", 2);
+		GenericObject spada = new GenericObject(new Name("spada", WordType.NOME), "una spada", 2);
 		Name nomeAcqua = new Name("acqua", WordType.NOME);
 		nomeAcqua.setArticoli(new String[] { "l'" });
 		nomeAcqua.setPreposizioni(new String[] { "quella" });
 		Name NomeCaffe = new Name("caffe", WordType.NOME);
 		NomeCaffe.setArticoli(new String[] { "un" });
 		NomeCaffe.setPreposizioni(new String[] { "quello" });
-		GenericObject acqua = new GenericObject(nomeAcqua, "un bicchiere d'acqua", 1);
-		GenericObject caffe = new GenericObject(NomeCaffe, "caffe in polvere", 1);
-
+		GenericObject acqua = new GenericObject(nomeAcqua, "Un bicchiere d'acqua", 1);
+		GenericObject caffe = new GenericObject(NomeCaffe, "E' del caffe in polvere, magari se lo sniffi muori", 1);
 		oggetti.add(birra);
 		strada1.addOggetto(birra);
 		oggetti.add(pizza);
@@ -141,13 +137,13 @@ public class Partita {
 		oggetti.add(baule);
 		strada1.addOggetto(baule);
 		oggetti.add(torta);
-		strada1.addOggetto(torta);
 		Combinations.addCombination(torta, baule, spada);
 		oggetti.add(acqua);
 		oggetti.add(caffe);
 		strada2.addOggetto(acqua);
 		strada2.addOggetto(caffe);
 
+		stanzaCorrente = strada1;
 		stanzaCorrente = strada1;
 	}
 

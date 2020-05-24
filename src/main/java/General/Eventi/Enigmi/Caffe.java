@@ -7,8 +7,9 @@ package General.Eventi.Enigmi;
 
 import General.GenericObject;
 import General.Name;
+import Parser.WordType;
 
-public class Caffe extends GenericObject implements Enigma {
+public class Caffe extends GenericObject implements Enigma{
 	/*
 	 * E' una macchina per il caffe' usata in tantissimi bar. Devo solo riempirla di
 	 * caffe' e acqua, poi premere il tasto di accesione"
@@ -21,48 +22,52 @@ public class Caffe extends GenericObject implements Enigma {
 	private boolean water = false;
 	private boolean powerSwitch = false;
 
-	public void addCoffee() {
+	public String addCoffee() {
 		if (coffee == false) {
 			coffee = true;
-			System.out.println("Hai aggiunto il caffe'.");
+		return("Hai aggiunto il caffe'.");
 		} else {
-			System.out.println("Il caffe' e' pieno");
+			return("Il caffe' e' pieno");
 		}
 	}
 
-	public void addWater() {
+	public String addWater() {
 		if (water == false) {
 			water = true;
-			System.out.println("Hai aggiunto l'acqua.");
+			return("Hai aggiunto l'acqua.");
 		} else {
-			System.out.println("L'acqua e' piena");
+			return("L'acqua e' piena");
+		}
+	}
+
+	public String switchOn() {
+
+		if (powerSwitch == true)
+			return("Hai gia' fatto un caffe'. Adesso basta.");
+
+		else if (coffee == false && water == false)
+			return("Manca l'acqua e il caffe'!");
+
+		else if (coffee == false)
+			return("Manca il caffe'!");
+
+		else if (water == false)
+			return("Manca l'acqua");
+		else {
+			powerSwitch = true;
+			return("Vrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!");
 		}
 	}
 
 	@Override
-	public boolean switchOn() {
-		if (powerSwitch == true) {
-			System.out.println("Hai gia' fatto un caffe'. Adesso basta.");
-			return false;
-		}
-		if (coffee == false && water == false) {
-			System.out.println("Manca l'acqua e il caffe'!");
-			return false;
-		}
-		if (coffee == false) {
-			System.out.println("Manca il caffe'!");
-			return false;
-		}
-		if (water == false) {
-			System.out.println("Manca l'acqua");
-			return false;
-		}
-
-		powerSwitch = true;
-		System.out.println("Vrrrrrrrrrr...");
-		System.out.println("VRRRRRRRRRRRRRRRRRRRRR");
-		System.out.println("Il caffe' e' pronto!");
-		return true;
+	public boolean getCompletato() {
+		return powerSwitch;
 	}
 
+	public GenericObject getCoffee() {
+		Name NomeCaffeCaldo = new Name("TazzaDiCaffe", WordType.NOME);
+		NomeCaffeCaldo.setArticoli(new String[] { "un" });
+		NomeCaffeCaldo.setPreposizioni(new String[] { "quello" });
+		return (new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", 1));
+	}
 }

@@ -12,7 +12,6 @@ import General.GenericObject;
 import General.GenericObjectContainer;
 import General.Name;
 import General.Eventi.GenericGestoreEvento;
-import General.Eventi.GestoreEventoProva;
 import Parser.WordType;
 
 /**
@@ -129,14 +128,14 @@ public class Stanza {
 		return oggetti.getContainer().indexOf(oggetto);
 	}
 
-	public GenericGestoreEvento getGestoreEvento() {
+    public GenericGestoreEvento getGestoreEvento() {
 
-		GenericGestoreEvento returned = new GestoreEventoProva();
-		if (evento != null && evento.getCompletato() == false)
-			returned = evento;
+    	GenericGestoreEvento returned = null;
+    	if(evento != null && evento.getCompletato() == false)
+    		returned = evento;
 
-		return returned;
-	}
+    	  return returned;
+    }
 
 	public GenericObject getOggetto(GenericObject oggetto) {
 		for (GenericObject obj : oggetti.getContainer()) {
