@@ -5,6 +5,7 @@
  */
 package General;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -74,10 +75,10 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		comandi.add(combina);
 		Command parla = new Command(CommandType.PARLA, "parla");
 		comandi.add(parla);
-                Command mangia = new Command(CommandType.MANGIA, "mangia");
-                comandi.add(mangia);
-                Command bevi = new Command(CommandType.BEVI, "bevi");
-                comandi.add(bevi);
+		Command mangia = new Command(CommandType.MANGIA, "mangia");
+		comandi.add(mangia);
+		Command bevi = new Command(CommandType.BEVI, "bevi");
+		comandi.add(bevi);
 	}
 
 	@Override
@@ -170,6 +171,15 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				} else {
 					stampa.messaggioOggettoNonPresente();
 				}
+			} else if (action.getPrimoOggetto() == null && action.getSecondoOggetto() == null) {
+				stampa.stampaMessaggio(partita.getStanzaCorrente().getDescrizione());
+				ArrayList<GenericObject> loot = partita.getStanzaCorrente().getOggetti().getContainer();
+				if (loot.size() != 0) {
+					stampa.stampaMessaggio("Intorno a te vedi: ");
+					for (GenericObject a : loot) {
+						stampa.stampaDescrizioneOggetto(a);
+					}
+				}
 			} else {
 				stampa.messaggioNonCompreso();
 			}
@@ -224,28 +234,28 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			}
 			break;
-                case MANGIA:
-                    if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
-                        if(protagonista.isInInventario(action.getPrimoOggetto())){
-                            mangiaOggettoCura(action.getPrimoOggetto());
-                        } else {
-                            stampa.messaggioOggettoNonPresenteInventario();
-                        }
-                    } else {
-                        stampa.messaggioNonCompreso();
-                    }
-                    break;
-                case BEVI:
-                    if(action.getPrimoOggetto() != null && action.getSecondoOggetto() == null){
-                        if(protagonista.isInInventario(action.getPrimoOggetto())){
-                            beviOggettoCura(action.getPrimoOggetto());
-                        } else {
-                            stampa.messaggioOggettoNonPresenteInventario();
-                        }
-                    } else {
-                        stampa.messaggioNonCompreso();
-                    }
-                    break;
+		case MANGIA:
+			if (action.getPrimoOggetto() != null && action.getSecondoOggetto() == null) {
+				if (protagonista.isInInventario(action.getPrimoOggetto())) {
+					mangiaOggettoCura(action.getPrimoOggetto());
+				} else {
+					stampa.messaggioOggettoNonPresenteInventario();
+				}
+			} else {
+				stampa.messaggioNonCompreso();
+			}
+			break;
+		case BEVI:
+			if (action.getPrimoOggetto() != null && action.getSecondoOggetto() == null) {
+				if (protagonista.isInInventario(action.getPrimoOggetto())) {
+					beviOggettoCura(action.getPrimoOggetto());
+				} else {
+					stampa.messaggioOggettoNonPresenteInventario();
+				}
+			} else {
+				stampa.messaggioNonCompreso();
+			}
+			break;
 		}
 	}
 
@@ -253,7 +263,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoNord() {
 		if (partita.getStanzaCorrente().getSopra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
-			stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -265,7 +275,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoSud() {
 		if (partita.getStanzaCorrente().getSotto() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
-			stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -277,7 +287,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoEst() {
 		if (partita.getStanzaCorrente().getDestra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
-			stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -289,7 +299,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoOvest() {
 		if (partita.getStanzaCorrente().getSinistra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
-			stampa.stampaStanza(partita.getStanzaCorrente().getNome(), partita.getStanzaCorrente().getDescrizione());
+			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento().getEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -396,63 +406,63 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			stampa.messaggioNonCompreso();
 		}
 	}
-        
-    private void usaOggetto(GenericObject oggetto){
-        switch(oggetto.getCategory()){
-            case 1:
-                mangiaOggettoCura(oggetto);
-                break;
-            case 2:
-                beviOggettoCura(oggetto);
-                break;
-        }
-    }
-    
-    private void mangiaOggettoCura(GenericObject oggetto){
-        int healthPoints = partita.getProtagonista().getHealthPoints();
-        switch(oggetto.getNome()){
-            case "torta":
-                cura(oggetto, healthPoints, 1);
-                break;
-            case "pizza":
-                cura(oggetto, healthPoints, 2);
-                break;
-            default:
-                stampa.messaggioNonCompreso();
-        }
-    }
-    
-    private void beviOggettoCura(GenericObject oggetto){
-        int healthPoints = partita.getProtagonista().getHealthPoints();
-        switch(oggetto.getNome()){
-            case "birra":
-                cura(oggetto, healthPoints, 1);
-                break;
-            default:
-                stampa.messaggioNonCompreso();
-        }
-    }
-    
-    private void cura(GenericObject oggetto, int healthPoints, int heal){
-        if(healthPoints == 3){
-            stampa.messaggioVitaMassima();
-        } else if((healthPoints + heal) >= 3) {
-            partita.getProtagonista().setHealth(3);
-            healthPoints = 3;
-            stampa.stampaVita(healthPoints);
-            stampa.messaggioVitaCurataMassimo(oggetto);
-            if(oggetto.isConsumabile()){
-                ((Protagonista)partita.getProtagonista()).removeOggetto(oggetto);
-            }
-        } else {
-            ((Protagonista)partita.getProtagonista()).heal(heal);
-            healthPoints = healthPoints + heal;
-            stampa.stampaVita(healthPoints);
-            stampa.messaggioVitaCurataDi(oggetto, heal);
-            if(oggetto.isConsumabile()){
-                ((Protagonista)partita.getProtagonista()).removeOggetto(oggetto);
-            }
-        }
-    }
+
+	private void usaOggetto(GenericObject oggetto) {
+		switch (oggetto.getCategory()) {
+		case 1:
+			mangiaOggettoCura(oggetto);
+			break;
+		case 2:
+			beviOggettoCura(oggetto);
+			break;
+		}
+	}
+
+	private void mangiaOggettoCura(GenericObject oggetto) {
+		int healthPoints = partita.getProtagonista().getHealthPoints();
+		switch (oggetto.getNome()) {
+		case "torta":
+			cura(oggetto, healthPoints, 1);
+			break;
+		case "pizza":
+			cura(oggetto, healthPoints, 2);
+			break;
+		default:
+			stampa.messaggioNonCompreso();
+		}
+	}
+
+	private void beviOggettoCura(GenericObject oggetto) {
+		int healthPoints = partita.getProtagonista().getHealthPoints();
+		switch (oggetto.getNome()) {
+		case "birra":
+			cura(oggetto, healthPoints, 1);
+			break;
+		default:
+			stampa.messaggioNonCompreso();
+		}
+	}
+
+	private void cura(GenericObject oggetto, int healthPoints, int heal) {
+		if (healthPoints == 3) {
+			stampa.messaggioVitaMassima();
+		} else if ((healthPoints + heal) >= 3) {
+			partita.getProtagonista().setHealth(3);
+			healthPoints = 3;
+			stampa.stampaVita(healthPoints);
+			stampa.messaggioVitaCurataMassimo(oggetto);
+			if (oggetto.isConsumabile()) {
+				((Protagonista) partita.getProtagonista()).removeOggetto(oggetto);
+			}
+		} else {
+			((Protagonista) partita.getProtagonista()).heal(heal);
+			healthPoints = healthPoints + heal;
+			stampa.stampaVita(healthPoints);
+			stampa.messaggioVitaCurataDi(oggetto, heal);
+			if (oggetto.isConsumabile()) {
+				((Protagonista) partita.getProtagonista()).removeOggetto(oggetto);
+			}
+		}
+	}
 
 }
