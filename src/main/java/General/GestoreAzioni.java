@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Entita.Partita;
+import Entita.Stanza;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonista;
-import Entita.Stanza;
 import General.Eventi.GestoreEventoCaffe;
 import General.Eventi.Enigmi.Caffe;
 import Parser.ParserOutput;
@@ -81,6 +81,9 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		comandi.add(mangia);
 		Command bevi = new Command(CommandType.BEVI, "bevi");
 		comandi.add(bevi);
+		Command muovi = new Command(CommandType.METTI, "metti");
+		muovi.setAlias(new String[] {"Versa", "versa", "Metti" });
+		comandi.add(muovi);
 	}
 
 	@Override
@@ -118,23 +121,22 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		case PRENDI:
 			boolean trovato = false;
 			if (primo != null && secondo == null) {
-                            GenericObject oggettoRicercato = stanzaCorrente.getOggetti().getOggetto(primo, action.getPrimoAggettivo());
-				if (oggettoRicercato != null) {
+				if (oggetti.contains(primo)) {
 					if (protagonista.getInventario().getContainer().size() < 6) {
-						protagonista.addOggetto(oggettoRicercato);
-						partita.getStanzaCorrente().getOggetti().removeOggetto(oggettoRicercato);
+						partita.getStanzaCorrente().removeOggetto(primo);
+						protagonista.addOggetto(primo);
 						stampa.stampaPresa(primo);
 						trovato = true;
 					} else {
 						stampa.messaggioInventarioPieno();
 					}
-                                
+
 				}else{
-					for(i = 0; i < oggettiStanza.size(); i++) {
-						if(oggettiStanza.get(i) instanceof GenericObjectContainer) {
-							if(((GenericObjectContainer)(oggettiStanza.get(i))).contains(primo) && ((GenericObjectContainer)(oggettiStanza.get(i))).isOpened()) {
+					for(i = 0; i < oggetti.size(); i++) {
+						if(oggetti.get(i) instanceof GenericObjectContainer) {
+							if(((GenericObjectContainer)(oggetti.get(i))).contains(primo) && ((GenericObjectContainer)(oggetti.get(i))).isOpened()) {
 								if (protagonista.getInventario().getContainer().size() < 6) {
-									((GenericObjectContainer)(oggettiStanza.get(i))).removeFromContainer(primo);
+									((GenericObjectContainer)(oggetti.get(i))).removeFromContainer(primo);
 									protagonista.addOggetto(primo);
 									stampa.stampaPresa(primo);
 									trovato = true;
@@ -306,6 +308,16 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			}
 			break;
+
+		case METTI:
+			if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")) {
+				stampa.stampaMessaggio(((Caffe)(secondo)).addCoffee());
+				protagonista.getInventario().removeFromContainer(primo);
+			} else if (primo.getNome().equals("acqua") && secondo.getNome().equals("macchinetta")) {
+				stampa.stampaMessaggio(((Caffe)(secondo)).addWater());
+				protagonista.getInventario().removeFromContainer(primo);
+			}else
+				stampa.messaggioOggettoNonPresenteInventario();
 		}
 	}
 

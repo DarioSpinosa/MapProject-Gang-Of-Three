@@ -33,15 +33,19 @@ public class Partita {
 	public Partita() {
 		protagonista = new Protagonista(new Name("Pippo", WordType.NOME_PROPRIO));
 
+
 		Stanza strada1 = new Stanza("Strada Sud 1",
 				"Scendi dal bus. L'atmosfera e' strana, sembra che il tempo si sia fermato. \n"
 						+ "Non vedi nessuno in giro, ne' in macchina ne' a piedi. \n"
 						+ "Il bus ha preso una buca, forse e' meglio andare a vedere cosa e' successo ");
 		Stanza strada2 = new Stanza("Strada Sud 2", "MO E C'IE TUTT STU TRAFFC ");
 		Evento macchinaCaffe = new Evento(
-				"Sono le 8 di mattina, dovresti preparati un bel caffe per iniziare questa giornata di merda");
-		macchinaCaffe.addOggettoEvento(
-				new Caffe(new Name("macchinetta", WordType.NOME), "E' una macchina per fare il cazzo di caffe"));
+				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
+				+ "\nGuarda, sul tavolo vi è una macchina per il caffe");
+		Name NameCaffe = new Name("macchinetta", WordType.NOME);
+		NameCaffe.setArticoli(new String[] { "la", "una" });
+		NameCaffe.setPreposizioni(new String[] { "nella"});
+		macchinaCaffe.addEnigma(new Caffe(NameCaffe, "E' una macchina per fare il cazzo di caffe"));
 		strada2.setGestoreEvento(new GestoreEventoCaffe(macchinaCaffe, strada2));
 		Stanza strada3 = new Stanza("Strada Sud 3", "MO E C'IE TUTT STU TRAFFC ");
 		Stanza strada4 = new Stanza("Strada Est", "");
@@ -124,27 +128,27 @@ public class Partita {
 		nomeAcqua.setArticoli(new String[] { "l'" });
 		nomeAcqua.setPreposizioni(new String[] { "quella" });
 		Name NomeCaffe = new Name("caffe", WordType.NOME);
-		NomeCaffe.setArticoli(new String[] { "un" });
+		NomeCaffe.setArticoli(new String[] { "il" });
 		NomeCaffe.setPreposizioni(new String[] { "quello" });
 		GenericObject acqua = new GenericObject(nomeAcqua, "Un bicchiere d'acqua", 1);
 		GenericObject caffe = new GenericObject(NomeCaffe, "E' del caffe in polvere, magari se lo sniffi muori", 1);
-                
-                Name nomeBottoneRosso = new Name("bottone", WordType.NOME);
-                GenericObject bottoneRosso = new GenericObject(nomeBottoneRosso, "un bottone rosso!", 3);
-                bottoneRosso.setAggettivi(new String[]{"rosso"});
-                Name nomeBottoneBlu = new Name("bottone", WordType.NOME);
-                GenericObject bottoneBlu = new GenericObject(nomeBottoneBlu, "un bottone blu!", 3);
-                bottoneBlu.setAggettivi(new String[]{"blu"});
-                Name nomeBottoneVerde = new Name("bottone", WordType.NOME);
-                GenericObject bottoneVerde = new GenericObject(nomeBottoneVerde, "un bottone verde!", 3);
-                bottoneVerde.setAggettivi(new String[]{"verde"});
-                
-                oggetti.add(bottoneVerde);
-                strada1.addOggetto(bottoneVerde);
-                oggetti.add(bottoneRosso);
-                strada1.addOggetto(bottoneRosso);
-                oggetti.add(bottoneBlu);
-                strada1.addOggetto(bottoneBlu);
+
+		Name nomeBottoneRosso = new Name("bottone", WordType.NOME);
+		GenericObject bottoneRosso = new GenericObject(nomeBottoneRosso, "un bottone rosso!", 3);
+		bottoneRosso.setAggettivi(new String[]{"rosso"});
+		Name nomeBottoneBlu = new Name("bottone", WordType.NOME);
+		GenericObject bottoneBlu = new GenericObject(nomeBottoneBlu, "un bottone blu!", 3);
+		bottoneBlu.setAggettivi(new String[]{"blu"});
+		Name nomeBottoneVerde = new Name("bottone", WordType.NOME);
+		GenericObject bottoneVerde = new GenericObject(nomeBottoneVerde, "un bottone verde!", 3);
+		bottoneVerde.setAggettivi(new String[]{"verde"});
+
+		oggetti.add(bottoneVerde);
+		strada1.addOggetto(bottoneVerde);
+		oggetti.add(bottoneRosso);
+		strada1.addOggetto(bottoneRosso);
+		oggetti.add(bottoneBlu);
+		strada1.addOggetto(bottoneBlu);
 		oggetti.add(birra);
 		strada1.addOggetto(birra);
 		oggetti.add(pizza);

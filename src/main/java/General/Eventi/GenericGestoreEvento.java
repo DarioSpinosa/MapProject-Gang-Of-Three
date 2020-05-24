@@ -38,20 +38,11 @@ public abstract class GenericGestoreEvento {
 			temp = missione.getDescrizione();
 			presentazione = true;
 
-			ArrayList<GenericObject> oggetti = missione.getOggettiEvento();
+			GenericObject enigma = missione.getEnigma();
 
-			if (oggetti.size() != 0) {
 
-				int i = 0;
-
-				do {
-					stanza.addOggetto(oggetti.get(i));
-					objs.add(oggetti.get(i));
-
-					i++;
-
-				} while (i < oggetti.size());
-			}
+			stanza.addOggetto(enigma);
+			objs.add(enigma);
 
 		}
 

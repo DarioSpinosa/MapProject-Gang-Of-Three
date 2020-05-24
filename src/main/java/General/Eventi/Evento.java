@@ -1,13 +1,11 @@
 package General.Eventi;
 
-import java.util.ArrayList;
-
 import General.GenericObject;
 
 public class Evento {
 
 	private String descrizione;
-	private ArrayList<GenericObject> oggettiEvento = new ArrayList<GenericObject>();
+	private GenericObject enigma;
 
 	public Evento(String descrizione) {
 		this.descrizione = descrizione;
@@ -17,12 +15,12 @@ public class Evento {
 		return descrizione;
 	}
 
-	public void addOggettoEvento(GenericObject o) {
-		oggettiEvento.add(o);
+	public void addEnigma(GenericObject g) {
+		enigma = g;
 
 	}
 
-	public  ArrayList<GenericObject> getOggettiEvento(){
-		return oggettiEvento;
+	public GenericObject getEnigma(){
+		return enigma;
 	}
 }

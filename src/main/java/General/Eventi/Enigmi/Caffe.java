@@ -55,7 +55,7 @@ public class Caffe extends GenericObject implements Enigma{
 			return("Manca l'acqua");
 		else {
 			powerSwitch = true;
-			return("Vrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!");
+			return("Vrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nHai ottenuto un ottimo caffe caldo");
 		}
 	}
 

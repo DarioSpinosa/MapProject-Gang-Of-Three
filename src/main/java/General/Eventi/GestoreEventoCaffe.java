@@ -16,7 +16,7 @@ public class GestoreEventoCaffe extends GenericGestoreEvento{
 	@Override
 	public void terminaEvento() {
 
-		if(((Caffe)(missione.getOggettiEvento().get(0))).getCompletato()){
+		if(((Caffe)(missione.getEnigma())).getCompletato()){
 			setCompletato();
 		}
 	}
