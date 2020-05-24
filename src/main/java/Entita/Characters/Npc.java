@@ -46,7 +46,7 @@ public class Npc extends Personaggio {
 			break;
 		case 3:
 			scelta = dialoghi[3];
-			dialogoCorrente++;
+			dialogoCorrente = 1;
 			break;
 		}
 		return scelta;

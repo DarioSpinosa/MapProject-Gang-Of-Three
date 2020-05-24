@@ -16,6 +16,7 @@ public abstract class ParserEssentials {
     protected WordType lastWordType;
     protected String lastArticle;
     protected String lastPreposition;
+    protected GenericObject lastObject;
     protected ArrayList<String> articles;
     protected ArrayList<String> prepositions;
     protected ArrayList<String> adjectives = new ArrayList<>();

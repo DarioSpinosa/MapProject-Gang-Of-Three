@@ -12,6 +12,7 @@ import java.util.Set;
 import Entita.Partita;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonista;
+import Entita.Stanza;
 import General.Eventi.GestoreEventoCaffe;
 import General.Eventi.Enigmi.Caffe;
 import Parser.ParserOutput;
@@ -85,7 +86,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	@Override
 	public void elaboraAzione(ParserOutput action) {
 		Protagonista protagonista = (Protagonista) partita.getProtagonista();
-		ArrayList<GenericObject> oggetti = partita.getStanzaCorrente().getOggetti().getContainer();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
+                ArrayList<GenericObject> oggettiStanza = stanzaCorrente.getOggetti().getContainer();
 		GenericObject primo = action.getPrimoOggetto();
 		GenericObject secondo = action.getSecondoOggetto();
 		switch (action.getComando().getCommandType()) {
@@ -116,22 +118,23 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		case PRENDI:
 			boolean trovato = false;
 			if (primo != null && secondo == null) {
-				if (oggetti.contains(primo)) {
+                            GenericObject oggettoRicercato = stanzaCorrente.getOggetti().getOggetto(primo, action.getPrimoAggettivo());
+				if (oggettoRicercato != null) {
 					if (protagonista.getInventario().getContainer().size() < 6) {
-						partita.getStanzaCorrente().removeOggetto(primo);
-						protagonista.addOggetto(primo);
+						protagonista.addOggetto(oggettoRicercato);
+						partita.getStanzaCorrente().getOggetti().removeOggetto(oggettoRicercato);
 						stampa.stampaPresa(primo);
 						trovato = true;
 					} else {
 						stampa.messaggioInventarioPieno();
 					}
-
+                                
 				}else{
-					for(i = 0; i < oggetti.size(); i++) {
-						if(oggetti.get(i) instanceof GenericObjectContainer) {
-							if(((GenericObjectContainer)(oggetti.get(i))).contains(primo) && ((GenericObjectContainer)(oggetti.get(i))).isOpened()) {
+					for(i = 0; i < oggettiStanza.size(); i++) {
+						if(oggettiStanza.get(i) instanceof GenericObjectContainer) {
+							if(((GenericObjectContainer)(oggettiStanza.get(i))).contains(primo) && ((GenericObjectContainer)(oggettiStanza.get(i))).isOpened()) {
 								if (protagonista.getInventario().getContainer().size() < 6) {
-									((GenericObjectContainer)(oggetti.get(i))).removeFromContainer(primo);
+									((GenericObjectContainer)(oggettiStanza.get(i))).removeFromContainer(primo);
 									protagonista.addOggetto(primo);
 									stampa.stampaPresa(primo);
 									trovato = true;
@@ -159,6 +162,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 			break;
 		case LASCIA:
+                        GenericObject oggettoRicercato = protagonista.getInventario().getOggetto(primo, action.getPrimoAggettivo());
 			if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")) {
 				stampa.stampaMessaggio(((Caffe)(secondo)).addCoffee());
 				protagonista.getInventario().removeFromContainer(primo);
@@ -194,14 +198,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			boolean trovato2 = false;
 
 			if (primo != null && secondo == null) {
-				if (oggetti.contains(primo) || protagonista.getInventario().getContainer().contains(primo)) {
+				if (oggettiStanza.contains(primo) || protagonista.getInventario().getContainer().contains(primo)) {
 					stampa.stampaDescrizioneOggetto(primo);
 					trovato2 = true;
 				}else {
-					for(i = 0; i < oggetti.size(); i++) {
-						if(oggetti.get(i) instanceof GenericObjectContainer) {
-							if(((GenericObjectContainer)(oggetti.get(i))).contains(primo)
-									&& ((GenericObjectContainer)(oggetti.get(i))).isOpened()) {
+					for(i = 0; i < oggettiStanza.size(); i++) {
+						if(oggettiStanza.get(i) instanceof GenericObjectContainer) {
+							if(((GenericObjectContainer)(oggettiStanza.get(i))).contains(primo)
+									&& ((GenericObjectContainer)(oggettiStanza.get(i))).isOpened()) {
 								stampa.stampaDescrizioneOggetto(action.getPrimoOggetto());
 								trovato2 = true;
 							}

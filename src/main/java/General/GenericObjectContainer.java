@@ -64,4 +64,45 @@ public class GenericObjectContainer extends GenericObject {
 	public void close() {
 		opened = false;
 	}
+        
+        public GenericObject getOggetto(GenericObject oggetto, String token) {
+        GenericObject lastObject = null;
+        if(token == null){
+            int numberOfObjects = 0;
+            for(GenericObject obj : container){
+                if(obj.equals(oggetto)){
+                    numberOfObjects++;
+                    if(numberOfObjects == 0){
+                        lastObject = oggetto;
+                    } else {
+                        lastObject = null;
+                    }
+                }
+            }
+        } else {
+            for(GenericObject obj : container){
+                if(obj.equals(oggetto)){
+                    return obj;
+                }
+            }
+        }
+        return lastObject;
+    }
+        
+        public void removeOggetto(GenericObject oggetto, String token){
+            if(token == null){
+                container.remove(oggetto);
+            } else {
+                for(GenericObject obj : container){
+                    if(obj.equals(oggetto) && obj.getAggettivi().contains(token)){
+                        container.remove(obj);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        public void removeOggetto(GenericObject oggetto){
+            container.remove(oggetto);
+        }
 }

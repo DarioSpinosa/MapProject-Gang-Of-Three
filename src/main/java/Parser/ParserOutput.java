@@ -15,6 +15,8 @@ public class ParserOutput {
     private GenericObject primoOggetto;
     private GenericObject secondoOggetto;
     private Personaggio personaggio;
+    private String primoAggettivo;
+    private String secondoAggettivo;
     
     public ParserOutput() {}
     
@@ -78,6 +80,22 @@ public class ParserOutput {
             primoOggetto = oggetto;
         } else if (secondoOggetto == null) {
             secondoOggetto = oggetto;
+        }
+    }
+    
+    public String getPrimoAggettivo(){
+        return primoAggettivo;
+    }
+    
+    public String getSecondoAggettivo(){
+        return secondoAggettivo;
+    }
+    
+    public void setAggettivo(String aggettivo){
+        if(primoAggettivo == null){
+            primoAggettivo = aggettivo;
+        } else if (secondoAggettivo == null){
+            secondoAggettivo = aggettivo;
         }
     }
 }

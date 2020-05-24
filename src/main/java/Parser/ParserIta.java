@@ -70,30 +70,30 @@ public class ParserIta extends ParserEssentials {
             if(oggetto.getNome().equals(token)) {
                 if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 } else if ((lastWordType == WordType.ARTICOLO) && oggetto.articoloUsabile(lastArticle)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 } else if ((lastWordType == WordType.PREPOSIZIONE) && oggetto.preposizioneUsabile(lastPreposition)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 }
             } else if (oggetto.getGestoreAlias().confrontaAlias(token)) {
                 Name tmp = oggetto.getGestoreAlias().restituisciAlias(token);
                 if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 } else if ((lastWordType == WordType.ARTICOLO) && tmp.getArticoli().contains(lastArticle)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 } else if ((lastWordType == WordType.PREPOSIZIONE) && tmp.getPreposizioni().contains(lastPreposition)){
                     confirmed = true;
-                    setOggetto(output, oggetto);
+                    setOggetto(output, oggetto, oggetti);
                     break;
                 }
             }
@@ -101,9 +101,10 @@ public class ParserIta extends ParserEssentials {
         return confirmed;
     }
 
-    private void setOggetto(ParserOutput output, GenericObject oggetto){
+    private void setOggetto(ParserOutput output, GenericObject oggetto, ArrayList<GenericObject> oggetti){
         output.setOggetto(oggetto);
-        setObjectQualities(oggetto);
+        setObjectQualities(oggetto, oggetti);
+        lastObject = oggetto;
         setLastWordType(WordType.NOME);
     }
 
@@ -145,18 +146,40 @@ public class ParserIta extends ParserEssentials {
         return confirmed;
     }
 
-    private void setObjectQualities(GenericObject oggetto) {
+    private void setObjectQualities(GenericObject oggetto, ArrayList<GenericObject> oggetti) {
         numberOfObjects++;
-        if(oggetto.getAggettivi()!=null && !oggetto.getAggettivi().isEmpty()) {
-            adjectives.clear();
-            adjectives.addAll(oggetto.getAggettivi());
+        adjectives.clear();
+        for(GenericObject obj : oggetti){
+            if(obj.getNome().equals(oggetto.getNome()) && obj.getAggettivi()!=null && !obj.getAggettivi().isEmpty()) {
+                adjectives.addAll(obj.getAggettivi());
+            }
         }
     }
+    
+    private GenericObject cercaOggettoDaAggettivo(String token, ArrayList<GenericObject> oggetti){
+        for(GenericObject oggetto : oggetti){
+            if(oggetto.getNome().equals(lastObject.getNome()) && oggetto.getAggettivi().contains(token)){
+                return oggetto;
+            }
+        }
+        return null;
+    }
 
-    private boolean isAdjective(String token) {
+    private boolean isAdjective(ParserOutput output, String token, ArrayList<GenericObject> oggetti) {
         boolean confirmed = false;
         if(adjectives.contains(token)) {
-            confirmed = true;
+            if(!lastObject.getAggettivi().contains(token)){
+                lastObject = cercaOggettoDaAggettivo(token, oggetti);
+            }
+            if(lastObject != null){
+                if(output.getSecondoOggetto() == null){
+                    output.setPrimoOggetto(lastObject);
+                } else {
+                    output.setSecondoOggetto(lastObject);
+                }
+                output.setAggettivo(token);
+                confirmed = true;
+            }
         }
         return confirmed;
     }
@@ -179,7 +202,7 @@ public class ParserIta extends ParserEssentials {
                 accepted = false;
             }
         } else if(lastWordType == WordType.NOME) {
-            if(!isPreposition(token, output) && !isAdjective(token) && !isObject(token, output, oggetti)) {
+            if(!isPreposition(token, output) && !isAdjective(output, token, oggetti) && !isObject(token, output, oggetti)) {
                 accepted = false;
             }
         } else if(lastWordType == WordType.AGGETTIVO) {
@@ -200,6 +223,9 @@ public class ParserIta extends ParserEssentials {
     @Override
     public ParserOutput parse(String input, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Personaggio> personaggi) {
         accepted = false;
+        lastArticle = null;
+        lastPreposition = null;
+        lastObject = null;
         String cmd = input.toLowerCase().trim();
         String[] tokens = cmd.split("\\s+|'(\\s+)?");
         ParserOutput p = new ParserOutput();

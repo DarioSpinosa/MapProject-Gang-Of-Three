@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Parser.WordType;
+import java.util.Objects;
 
 public class GenericObject {
 	private Name nome;
@@ -107,15 +108,38 @@ public class GenericObject {
 		return nome.getPreposizioni().contains(preposizione);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof GenericObject) {
-			if (((GenericObject) obj).getNome().equals(this.getNome())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.nome.getName());
+        hash = 59 * hash + Objects.hashCode(this.aggettivi);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GenericObject other = (GenericObject) obj;
+        if (!Objects.equals(this.nome.getName(), other.nome.getName())) {
+            return false;
+        }
+        if (!Objects.equals(this.aggettivi, other.aggettivi)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+	
 
 	@Override
 	public String toString() {

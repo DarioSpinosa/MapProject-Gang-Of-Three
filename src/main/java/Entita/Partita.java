@@ -88,7 +88,7 @@ public class Partita {
 		Name aliasAutista = new Name("autista", WordType.NOME);
 		aliasAutista.setArticoli(new String[] { "l" });
 		aliasAutista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
-		Personaggio autista = new Npc(nomeAutista, new String[] { "Sono l'autista", "Questo piato", "é una MERDA" });
+		Personaggio autista = new Npc(nomeAutista, new String[] { "Sono l'autista", "Questo piato", "é una MERDA", "Dario Spinosa" });
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addPersonaggio(autista);
 		/*
@@ -128,6 +128,23 @@ public class Partita {
 		NomeCaffe.setPreposizioni(new String[] { "quello" });
 		GenericObject acqua = new GenericObject(nomeAcqua, "Un bicchiere d'acqua", 1);
 		GenericObject caffe = new GenericObject(NomeCaffe, "E' del caffe in polvere, magari se lo sniffi muori", 1);
+                
+                Name nomeBottoneRosso = new Name("bottone", WordType.NOME);
+                GenericObject bottoneRosso = new GenericObject(nomeBottoneRosso, "un bottone rosso!", 3);
+                bottoneRosso.setAggettivi(new String[]{"rosso"});
+                Name nomeBottoneBlu = new Name("bottone", WordType.NOME);
+                GenericObject bottoneBlu = new GenericObject(nomeBottoneBlu, "un bottone blu!", 3);
+                bottoneBlu.setAggettivi(new String[]{"blu"});
+                Name nomeBottoneVerde = new Name("bottone", WordType.NOME);
+                GenericObject bottoneVerde = new GenericObject(nomeBottoneVerde, "un bottone verde!", 3);
+                bottoneVerde.setAggettivi(new String[]{"verde"});
+                
+                oggetti.add(bottoneVerde);
+                strada1.addOggetto(bottoneVerde);
+                oggetti.add(bottoneRosso);
+                strada1.addOggetto(bottoneRosso);
+                oggetti.add(bottoneBlu);
+                strada1.addOggetto(bottoneBlu);
 		oggetti.add(birra);
 		strada1.addOggetto(birra);
 		oggetti.add(pizza);
