@@ -120,40 +120,46 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case PRENDI:
 			boolean trovato = false;
-			if (primo != null && secondo == null) {
-				if (primo.isPrendibile() && partita.getStanzaCorrente().getOggetti().contains(primo)) {
-					if (protagonista.getInventario().getContainer().size() < 6) {
-						partita.getStanzaCorrente().removeOggetto(primo);
-						protagonista.addOggetto(primo);
-						stampa.stampaPresa(primo);
-						trovato = true;
-					} else {
-						stampa.messaggioInventarioPieno();
-					}
+			if (protagonista.getInventario().getContainer().size() > 6) {
+				stampa.messaggioInventarioPieno();
+				break;
+			}
 
+			if (primo != null && secondo == null) {
+				if (!primo.isPrendibile()) {
+					stampa.messaggioOggettoNonPresenteStanza();
+					break;
+				}
+
+				if (partita.getStanzaCorrente().getOggetti().contains(primo)) {
+					partita.getStanzaCorrente().removeOggetto(primo);
+					protagonista.addOggetto(primo);
+					stampa.stampaPresa(primo);
+					trovato = true;
 				} else {
 					for (i = 0; i < oggetti.size(); i++) {
 						if (oggetti.get(i) instanceof GenericObjectContainer) {
-							if (primo.isPrendibile() && ((GenericObjectContainer) (oggetti.get(i))).contains(primo)
+							if (((GenericObjectContainer) (oggetti.get(i))).contains(primo)
 									&& ((GenericObjectContainer) (oggetti.get(i))).isOpened()) {
-								if (protagonista.getInventario().getContainer().size() < 6) {
-									((GenericObjectContainer) (oggetti.get(i))).removeFromContainer(primo);
-									protagonista.addOggetto(primo);
-									stampa.stampaPresa(primo);
-									trovato = true;
-								} else {
-									stampa.messaggioInventarioPieno();
-								}
+								((GenericObjectContainer) (oggetti.get(i))).removeFromContainer(primo);
+								protagonista.addOggetto(primo);
+								stampa.stampaPresa(primo);
+								trovato = true;
 							}
 						}
 					}
 				}
 
-				if (trovato == false) 
+				if (trovato == false) {
 					stampa.messaggioOggettoNonPresenteStanza();
+				}
 
 			} else if (primo != null && secondo != null) {
-				if (primo.isPrendibile() && secondo instanceof GenericObjectContainer
+				if (!primo.isPrendibile()) {
+					stampa.messaggioOggettoNonPresenteStanza();
+					break;
+				}
+				if (secondo instanceof GenericObjectContainer
 						&& preposizioniPrendi.contains(action.getPreposizione())) {
 					lasciaOPrendiOggetto(primo, secondo, protagonista, false);
 				} else {
