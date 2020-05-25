@@ -7,6 +7,7 @@ package General.Eventi.Enigmi;
 
 import General.GenericObject;
 import General.Name;
+import General.ObjectType;
 import Parser.WordType;
 
 public class Caffe extends GenericObject implements Enigma{
@@ -15,7 +16,7 @@ public class Caffe extends GenericObject implements Enigma{
 	 * caffe' e acqua, poi premere il tasto di accesione"
 	 */
 	public Caffe(Name n, String s) {
-		super(n, s, 4);
+		super(n, s, ObjectType.EVENT);
 	}
 
 	private boolean coffee = false;
@@ -68,7 +69,7 @@ public class Caffe extends GenericObject implements Enigma{
 		Name NomeCaffeCaldo = new Name("tazza_di_caffe", WordType.NOME);
 		NomeCaffeCaldo.setArticoli(new String[] { "un" });
 		NomeCaffeCaldo.setPreposizioni(new String[] { "quello" });
-		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", 1);
-		return (new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", 1));
+		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", ObjectType.EVENT);
+		return TazzaDiCaffe;
 	}
 }

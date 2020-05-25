@@ -7,6 +7,7 @@ package General.Eventi.Enigmi;
 
 import General.GenericObject;
 import General.Name;
+import General.ObjectType;
 
 public class Lucchetto extends GenericObject implements Enigma {
 	/*
@@ -16,7 +17,7 @@ public class Lucchetto extends GenericObject implements Enigma {
 	 */
 
 	public Lucchetto(Name n, String s) {
-		super(n, s, 4);
+		super(n, s, ObjectType.EVENT);
 	}
 
 	private int picked = 0;

@@ -13,15 +13,15 @@ public class GenericObjectContainer extends GenericObject {
 	private int maxSize;
 	private boolean opened = false;
 
-	public GenericObjectContainer(Name nome, String descrizione, int id) {
+	public GenericObjectContainer(Name nome, String descrizione, ObjectType id) {
 		super(nome, descrizione, id);
 	}
 
-	public GenericObjectContainer(Name nome, String descrizione, int id, GestoreAlias alias) {
+	public GenericObjectContainer(Name nome, String descrizione, ObjectType id, GestoreAlias alias) {
 		super(nome, descrizione, id, alias);
 	}
 
-	public GenericObjectContainer(Name nome, String descrizione, int id, int maxSize) {
+	public GenericObjectContainer(Name nome, String descrizione, ObjectType id, int maxSize) {
 		super(nome, descrizione, id);
 		this.maxSize = maxSize;
 	}
@@ -65,42 +65,14 @@ public class GenericObjectContainer extends GenericObject {
 		opened = false;
 	}
         
-        public GenericObject getOggetto(GenericObject oggetto, String token) {
-        GenericObject lastObject = null;
-        if(token == null){
-            int numberOfObjects = 0;
-            for(GenericObject obj : container){
-                if(obj.equals(oggetto)){
-                    numberOfObjects++;
-                    if(numberOfObjects == 0){
-                        lastObject = oggetto;
-                    } else {
-                        lastObject = null;
-                    }
-                }
-            }
-        } else {
-            for(GenericObject obj : container){
-                if(obj.equals(oggetto)){
-                    return obj;
-                }
-            }
-        }
-        return lastObject;
+    public GenericObject getOggetto(GenericObject oggetto) {
+    	for(GenericObject obj : container) {
+    		if(obj.equals(oggetto)) {
+    			return obj;
+    		}
+    	}
+    	return null;
     }
-        
-        public void removeOggetto(GenericObject oggetto, String token){
-            if(token == null){
-                container.remove(oggetto);
-            } else {
-                for(GenericObject obj : container){
-                    if(obj.equals(oggetto) && obj.getAggettivi().contains(token)){
-                        container.remove(obj);
-                        break;
-                    }
-                }
-            }
-        }
         
         public void removeOggetto(GenericObject oggetto){
             container.remove(oggetto);
