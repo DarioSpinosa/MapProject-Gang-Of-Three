@@ -164,14 +164,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 			break;
 		case LASCIA:
-                        GenericObject oggettoRicercato = protagonista.getInventario().getOggetto(primo, action.getPrimoAggettivo());
-			if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")) {
-				stampa.stampaMessaggio(((Caffe)(secondo)).addCoffee());
-				protagonista.getInventario().removeFromContainer(primo);
-			} else if (primo.getNome().equals("acqua") && secondo.getNome().equals("macchinetta")) {
-				stampa.stampaMessaggio(((Caffe)(secondo)).addWater());
-				protagonista.getInventario().removeFromContainer(primo);
-			} else if (primo != null && secondo == null) {
+			if (primo != null && secondo == null) {
 				if (protagonista.getInventario().getContainer().contains(primo)) {
 					partita.getStanzaCorrente().addOggetto(primo);
 					protagonista.removeOggetto(primo);
@@ -273,7 +266,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				if(partita.getStanzaCorrente().getGestoreEvento() != null && ((Caffe)primo).getCompletato()) {
 					protagonista.getInventario().addToContainer(((Caffe)(primo)).getCoffee());
 					partita.getOggetti().add(((Caffe)(primo)).getCoffee());
-					((GestoreEventoCaffe)partita.getStanzaCorrente().getGestoreEvento()).terminaEvento();
+					((GestoreEventoCaffe)partita.getStanzaCorrente().getGestoreEvento()).terminaEvento(oggetti);
 				}
 			}
 			else if (primo != null && secondo == null) {
@@ -325,7 +318,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoNord() {
 		if (partita.getStanzaCorrente().getSopra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
-			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
+			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -337,7 +330,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoSud() {
 		if (partita.getStanzaCorrente().getSotto() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
-			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
+			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -349,7 +342,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoEst() {
 		if (partita.getStanzaCorrente().getDestra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
-			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
+			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {
@@ -361,7 +354,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void movimentoOvest() {
 		if (partita.getStanzaCorrente().getSinistra() != null) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
-			stampa.stampaMessaggio(partita.getStanzaCorrente().getNome());
+			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
 			if (partita.getStanzaCorrente().getGestoreEvento() != null)
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
 		} else {

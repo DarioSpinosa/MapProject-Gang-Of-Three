@@ -41,7 +41,7 @@ public class Partita {
 		Stanza strada2 = new Stanza("Strada Sud 2", "MO E C'IE TUTT STU TRAFFC ");
 		Evento macchinaCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
-				+ "\nGuarda, sul tavolo vi è una macchina per il caffe");
+				+ "\nGuarda, sul tavolo vi è una macchina per il caffe\n");
 		Name NameCaffe = new Name("macchinetta", WordType.NOME);
 		NameCaffe.setArticoli(new String[] { "la", "una" });
 		NameCaffe.setPreposizioni(new String[] { "nella"});

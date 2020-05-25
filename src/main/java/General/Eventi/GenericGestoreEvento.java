@@ -40,7 +40,6 @@ public abstract class GenericGestoreEvento {
 
 			GenericObject enigma = missione.getEnigma();
 
-
 			stanza.addOggetto(enigma);
 			objs.add(enigma);
 
@@ -53,6 +52,6 @@ public abstract class GenericGestoreEvento {
 		return missione;
 	}
 
-	public abstract void terminaEvento();
+	public abstract void terminaEvento(ArrayList<GenericObject> objs);
 
 }

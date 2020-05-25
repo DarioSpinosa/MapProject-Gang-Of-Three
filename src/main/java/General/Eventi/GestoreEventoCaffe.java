@@ -1,6 +1,9 @@
 package General.Eventi;
 
+import java.util.ArrayList;
+
 import Entita.Stanza;
+import General.GenericObject;
 import General.Eventi.Enigmi.Caffe;
 
 public class GestoreEventoCaffe extends GenericGestoreEvento{
@@ -14,10 +17,11 @@ public class GestoreEventoCaffe extends GenericGestoreEvento{
 	}
 
 	@Override
-	public void terminaEvento() {
+	public void terminaEvento(ArrayList<GenericObject> objs) {
 
 		if(((Caffe)(missione.getEnigma())).getCompletato()){
 			setCompletato();
+			objs.add(((Caffe)missione.getEnigma()).getCoffee());
 		}
 	}
 

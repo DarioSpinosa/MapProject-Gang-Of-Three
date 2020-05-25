@@ -55,7 +55,7 @@ public class Caffe extends GenericObject implements Enigma{
 			return("Manca l'acqua");
 		else {
 			powerSwitch = true;
-			return("Vrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nHai ottenuto un ottimo caffe caldo");
+			return("\nVrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nHai ottenuto un ottimo caffe caldo");
 		}
 	}
 
@@ -65,9 +65,10 @@ public class Caffe extends GenericObject implements Enigma{
 	}
 
 	public GenericObject getCoffee() {
-		Name NomeCaffeCaldo = new Name("TazzaDiCaffe", WordType.NOME);
+		Name NomeCaffeCaldo = new Name("tazza_di_caffe", WordType.NOME);
 		NomeCaffeCaldo.setArticoli(new String[] { "un" });
 		NomeCaffeCaldo.setPreposizioni(new String[] { "quello" });
+		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", 1);
 		return (new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", 1));
 	}
 }
