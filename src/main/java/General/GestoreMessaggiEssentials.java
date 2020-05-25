@@ -24,12 +24,20 @@ public abstract class GestoreMessaggiEssentials {
         interfaccia.setHealthLabel(healPoints);
     }
     
+    public void stampaInventario(GenericObject oggetto){
+    	if(oggetto.getAggettivi() == null) {
+    		interfaccia.stampaMessaggio("- " + oggetto);
+    	} else {
+    		interfaccia.stampaMessaggio("- " + oggetto + " " + oggetto.getAggettivi().toArray()[0]);
+    	}
+    }
+    
+    public abstract void messaggioIntornoATe();
     public abstract void stampaMessaggio(String messaggio);
     public abstract void messaggioStanzaIrraggiungibile();
     public abstract void messaggioComandoNonRiconosciuto();
     public abstract void stampaStanza(String nome, String descrizione);
     public abstract void messaggioOggettoNonPresenteInventario();
-    public abstract void stampaInventario(String oggetto);
     public abstract void messaggioInventarioPieno();
     public abstract void messaggioOggettoNonPresenteStanza();
     public abstract void messaggioOggettoNonApribile();

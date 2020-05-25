@@ -82,7 +82,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		Command bevi = new Command(CommandType.BEVI, "bevi");
 		comandi.add(bevi);
 		Command muovi = new Command(CommandType.METTI, "metti");
-		muovi.setAlias(new String[] {"Versa", "versa", "Metti" });
+		muovi.setAlias(new String[] { "Versa", "versa", "Metti" });
 		comandi.add(muovi);
 	}
 
@@ -90,7 +90,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	public void elaboraAzione(ParserOutput action) {
 		Protagonista protagonista = (Protagonista) partita.getProtagonista();
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
-                ArrayList<GenericObject> oggettiStanza = stanzaCorrente.getOggetti().getContainer();
+		ArrayList<GenericObject> oggettiStanza = stanzaCorrente.getOggetti().getContainer();
 		GenericObject primo = action.getPrimoOggetto();
 		GenericObject secondo = action.getSecondoOggetto();
 		switch (action.getComando().getCommandType()) {
@@ -110,18 +110,18 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			int i = 0;
 			stampa.stampaLinea();
 			for (GenericObject oggetto : protagonista.getInventario().getContainer()) {
-				stampa.stampaInventario(oggetto.getNome());
+				stampa.stampaInventario(oggetto);
 				i++;
 			}
 			for (int j = i; j < protagonista.getInventario().getMaxSize(); j++) {
-				stampa.stampaInventario("");
+				stampa.stampaMessaggio("- ");
 			}
 			stampa.stampaLinea();
 			break;
 		case PRENDI:
 			boolean trovato = false;
 			if (primo != null && secondo == null) {
-				if (oggetti.contains(primo)) {
+				if (primo.isPrendibile() && partita.getStanzaCorrente().getOggetti().contains(primo)) {
 					if (protagonista.getInventario().getContainer().size() < 6) {
 						partita.getStanzaCorrente().removeOggetto(primo);
 						protagonista.addOggetto(primo);
@@ -131,12 +131,13 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 						stampa.messaggioInventarioPieno();
 					}
 
-				}else{
-					for(i = 0; i < oggetti.size(); i++) {
-						if(oggetti.get(i) instanceof GenericObjectContainer) {
-							if(((GenericObjectContainer)(oggetti.get(i))).contains(primo) && ((GenericObjectContainer)(oggetti.get(i))).isOpened()) {
+				} else {
+					for (i = 0; i < oggetti.size(); i++) {
+						if (oggetti.get(i) instanceof GenericObjectContainer) {
+							if (primo.isPrendibile() && ((GenericObjectContainer) (oggetti.get(i))).contains(primo)
+									&& ((GenericObjectContainer) (oggetti.get(i))).isOpened()) {
 								if (protagonista.getInventario().getContainer().size() < 6) {
-									((GenericObjectContainer)(oggetti.get(i))).removeFromContainer(primo);
+									((GenericObjectContainer) (oggetti.get(i))).removeFromContainer(primo);
 									protagonista.addOggetto(primo);
 									stampa.stampaPresa(primo);
 									trovato = true;
@@ -148,17 +149,17 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					}
 				}
 
-				if(trovato == false)
+				if (trovato == false) 
 					stampa.messaggioOggettoNonPresenteStanza();
 
-			}else if (primo != null && secondo != null) {
-				if(action.getSecondoOggetto() instanceof GenericObjectContainer
+			} else if (primo != null && secondo != null) {
+				if (primo.isPrendibile() && secondo instanceof GenericObjectContainer
 						&& preposizioniPrendi.contains(action.getPreposizione())) {
 					lasciaOPrendiOggetto(primo, secondo, protagonista, false);
-				}else {
+				} else {
 					stampa.messaggioOggettoNonPresenteStanza();
 				}
-			}else {
+			} else {
 				stampa.messaggioNonCompreso();
 			}
 
@@ -196,27 +197,27 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				if (oggettiStanza.contains(primo) || protagonista.getInventario().getContainer().contains(primo)) {
 					stampa.stampaDescrizioneOggetto(primo);
 					trovato2 = true;
-				}else {
-					for(i = 0; i < oggettiStanza.size(); i++) {
-						if(oggettiStanza.get(i) instanceof GenericObjectContainer) {
-							if(((GenericObjectContainer)(oggettiStanza.get(i))).contains(primo)
-									&& ((GenericObjectContainer)(oggettiStanza.get(i))).isOpened()) {
-								stampa.stampaDescrizioneOggetto(action.getPrimoOggetto());
+				} else {
+					for (i = 0; i < oggettiStanza.size(); i++) {
+						if (oggettiStanza.get(i) instanceof GenericObjectContainer) {
+							if (((GenericObjectContainer) (oggettiStanza.get(i))).contains(primo)
+									&& ((GenericObjectContainer) (oggettiStanza.get(i))).isOpened()) {
+								stampa.stampaDescrizioneOggetto(primo);
 								trovato2 = true;
 							}
 						}
 					}
 				}
 
-				if(trovato2 == false){
+				if (trovato2 == false) {
 					stampa.messaggioOggettoNonPresente();
 				}
 
-			} else if (action.getPrimoOggetto() == null && action.getSecondoOggetto() == null) {
+			} else if (primo == null && secondo == null) {
 				stampa.stampaMessaggio(partita.getStanzaCorrente().getDescrizione());
 				ArrayList<GenericObject> loot = partita.getStanzaCorrente().getOggetti().getContainer();
 				if (loot.size() != 0) {
-					stampa.stampaMessaggio("Intorno a te vedi: ");
+					stampa.messaggioIntornoATe();
 					for (GenericObject a : loot) {
 						stampa.stampaDescrizioneOggetto(a);
 					}
@@ -226,8 +227,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case COMBINA:
-			if (primo != null && secondo != null && (action.getPreposizione() == null
-			|| preposizioniCombina.contains(action.getPreposizione()))) {
+			if (primo != null && secondo != null
+					&& (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))) {
 				if (protagonista.isInInventario(primo) && protagonista.isInInventario(secondo)) {
 					GenericObject oggettoCombinato = Combinations.testCombination(primo, secondo);
 					if (oggettoCombinato != null) {
@@ -252,8 +253,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case PARLA:
 			if (action.getPersonaggio() != null
-			&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
-			&& action.getPersonaggio() instanceof Npc) {
+					&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
+					&& action.getPersonaggio() instanceof Npc) {
 				Npc npc = (Npc) partita.getStanzaCorrente().getPersonaggio(action.getPersonaggio());
 				stampa.stampaMessaggio(npc.getDialogo());
 			} else {
@@ -261,15 +262,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case USA:
-			if(primo.getNome().equals("macchinetta")) {
-				stampa.stampaMessaggio(((Caffe)(primo)).switchOn());
-				if(partita.getStanzaCorrente().getGestoreEvento() != null && ((Caffe)primo).getCompletato()) {
-					protagonista.getInventario().addToContainer(((Caffe)(primo)).getCoffee());
-					partita.getOggetti().add(((Caffe)(primo)).getCoffee());
-					((GestoreEventoCaffe)partita.getStanzaCorrente().getGestoreEvento()).terminaEvento(oggetti);
+			if (primo.getNome().equals("macchinetta")) {
+				stampa.stampaMessaggio(((Caffe) (primo)).switchOn());
+				if (partita.getStanzaCorrente().getGestoreEvento() != null && ((Caffe) primo).getCompletato()) {
+					protagonista.getInventario().addToContainer(((Caffe) (primo)).getCoffee());
+					partita.getOggetti().add(((Caffe) (primo)).getCoffee());
+					((GestoreEventoCaffe) partita.getStanzaCorrente().getGestoreEvento()).terminaEvento(oggetti);
 				}
-			}
-			else if (primo != null && secondo == null) {
+			} else if (primo != null && secondo == null) {
 				if (protagonista.isInInventario(primo)) {
 					usaOggetto(primo);
 				} else {
@@ -280,8 +280,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case MANGIA:
-			if(primo != null && secondo == null){
-				if(protagonista.isInInventario(primo)){
+			if (primo != null && secondo == null) {
+				if (protagonista.isInInventario(primo)) {
 					mangiaOggettoCura(primo);
 				} else {
 					stampa.messaggioOggettoNonPresenteInventario();
@@ -291,8 +291,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case BEVI:
-			if(primo != null && secondo == null){
-				if(protagonista.isInInventario(primo)){
+			if (primo != null && secondo == null) {
+				if (protagonista.isInInventario(primo)) {
 					beviOggettoCura(primo);
 				} else {
 					stampa.messaggioOggettoNonPresenteInventario();
@@ -304,12 +304,12 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 		case METTI:
 			if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")) {
-				stampa.stampaMessaggio(((Caffe)(secondo)).addCoffee());
+				stampa.stampaMessaggio(((Caffe) (secondo)).addCoffee());
 				protagonista.getInventario().removeFromContainer(primo);
 			} else if (primo.getNome().equals("acqua") && secondo.getNome().equals("macchinetta")) {
-				stampa.stampaMessaggio(((Caffe)(secondo)).addWater());
+				stampa.stampaMessaggio(((Caffe) (secondo)).addWater());
 				protagonista.getInventario().removeFromContainer(primo);
-			}else
+			} else
 				stampa.messaggioOggettoNonPresenteInventario();
 		}
 	}
@@ -448,7 +448,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					stampa.messaggioOggettoNonPresente();
 				}
 				for (GenericObject oggetto : ((GenericObjectContainer) oggetto1).getContainer()) { // TODO da rimuovere
-					stampa.stampaInventario(oggetto.getNome());
+					stampa.stampaInventario(oggetto);
 				}
 			} else {
 				if (aprire) {
@@ -464,11 +464,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 	private void usaOggetto(GenericObject oggetto) {
 		switch (oggetto.getCategory()) {
-		case 1:
+		case EATABLE:
 			mangiaOggettoCura(oggetto);
 			break;
-		case 2:
+		case DRINKABLE:
 			beviOggettoCura(oggetto);
+			break;
+		default:
+			stampa.messaggioNonCompreso();
 			break;
 		}
 	}
@@ -484,6 +487,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		default:
 			stampa.messaggioNonCompreso();
+			break;
 		}
 	}
 

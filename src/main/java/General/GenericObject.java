@@ -18,22 +18,23 @@ public class GenericObject {
 	private GestoreAlias alias = new GestoreAlias(new Name[] {});
 	private Set<String> aggettivi;
 	private boolean consumabile = true;
-	private final int category;
+	private boolean prendibile = true;
+	private final ObjectType category;
 
-	public GenericObject(Name nome, String descrizione, int id) {
+	public GenericObject(Name nome, String descrizione, ObjectType id) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.category = id;
 	}
 
-	public GenericObject(Name nome, String descrizione, int id, GestoreAlias alias) {
+	public GenericObject(Name nome, String descrizione, ObjectType id, GestoreAlias alias) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.category = id;
 		this.alias = alias;
 	}
 
-	public GenericObject(Name nome, String descrizione, int id, Set<String> aggettivi) {
+	public GenericObject(Name nome, String descrizione, ObjectType id, Set<String> aggettivi) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.category = id;
@@ -48,7 +49,7 @@ public class GenericObject {
 		return nome.getType();
 	}
 
-	public int getCategory() {
+	public ObjectType getCategory() {
 		return this.category;
 	}
 
@@ -71,9 +72,17 @@ public class GenericObject {
 	public boolean isConsumabile() {
 		return consumabile;
 	}
+	
+	public boolean isPrendibile() {
+		return prendibile;
+	}
 
 	public void setConsumabile(boolean consumabile) {
 		this.consumabile = consumabile;
+	}
+	
+	public void setPrendibile(boolean prendibile) {
+		this.prendibile = prendibile;
 	}
 
 	public GestoreAlias getGestoreAlias() {

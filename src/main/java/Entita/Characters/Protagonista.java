@@ -7,11 +7,12 @@ package Entita.Characters;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.Name;
+import General.ObjectType;
 import Parser.WordType;
 
 public class Protagonista extends Personaggio{
     
-    private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME), "i tuoi oggetti", 6);
+    private final GenericObjectContainer inventario = new GenericObjectContainer(new Name("Inventario", WordType.NOME), "i tuoi oggetti", ObjectType.CONTAINER);
     
     public Protagonista(Name nome) {
         super(nome, 3);

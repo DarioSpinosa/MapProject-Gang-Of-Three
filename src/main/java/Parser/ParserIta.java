@@ -223,6 +223,7 @@ public class ParserIta extends ParserEssentials {
     @Override
     public ParserOutput parse(String input, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Personaggio> personaggi) {
         accepted = false;
+        adjectives.clear();
         lastArticle = null;
         lastPreposition = null;
         lastObject = null;
@@ -243,7 +244,31 @@ public class ParserIta extends ParserEssentials {
                 }
             }
         }
-        if(lastWordType == WordType.ARTICOLO || lastWordType == WordType.PREPOSIZIONE) {
+        if(accepted && p.getPrimoOggetto() != null && p.getPrimoAggettivo() == null && p.getPrimoOggetto().getAggettivi() != null) {
+        	int numberOfObjects = 0;
+        	for(GenericObject oggetto : oggetti) {
+        		if(oggetto.getNome().equals(p.getPrimoOggetto().getNome())) {
+        			numberOfObjects++;
+        			if(numberOfObjects > 1) {
+        				accepted = false;
+        				break;
+        			}
+        		}
+        	}
+        }
+        if(accepted && p.getSecondoOggetto() != null && p.getSecondoAggettivo() == null && p.getSecondoOggetto().getAggettivi() != null) {
+        	int numberOfObjects = 0;
+        	for(GenericObject oggetto : oggetti) {
+        		if(oggetto.getNome().equals(p.getSecondoOggetto().getNome())){
+        			numberOfObjects++;
+        			if(numberOfObjects > 1) {
+        				accepted = false;
+        				break;
+        			}
+        		}
+        	}
+        }
+        if(accepted && lastWordType == WordType.ARTICOLO || lastWordType == WordType.PREPOSIZIONE) {
             accepted = false;
         }
         if(!accepted) {

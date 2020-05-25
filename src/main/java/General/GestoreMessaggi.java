@@ -53,11 +53,6 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     }
 
     @Override
-    public void stampaInventario(String oggetto){
-        interfaccia.stampaMessaggio("- " + oggetto);
-    }
-
-    @Override
     public void messaggioInventarioPieno(){
         interfaccia.stampaMessaggio("Il tuo invetario e' pieno");
     }
@@ -175,5 +170,10 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     @Override
     public void messaggioVitaCurataMassimo(GenericObject oggetto){
         interfaccia.stampaMessaggio("Hai usato l'oggetto " + oggetto + " e sei tornato al massimo della vita!");
+    }
+    
+    @Override
+    public void messaggioIntornoATe() {
+    	interfaccia.stampaMessaggio("Intorno a te vedi: ");
     }
 }

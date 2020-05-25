@@ -11,6 +11,7 @@ import Entita.Characters.Personaggio;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.Name;
+import General.ObjectType;
 import General.Eventi.GenericGestoreEvento;
 import Parser.WordType;
 
@@ -29,7 +30,7 @@ public class Stanza {
 	private Stanza destra = null;
 	private Stanza sinistra = null;
 	private GenericGestoreEvento evento;
-	private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "", 0);
+	private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "", ObjectType.CONTAINER);
 	private ArrayList<Personaggio> characters = new ArrayList<>();
 
 	// costruttore
