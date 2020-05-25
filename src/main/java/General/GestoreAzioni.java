@@ -81,9 +81,9 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		comandi.add(mangia);
 		Command bevi = new Command(CommandType.BEVI, "bevi");
 		comandi.add(bevi);
-		Command muovi = new Command(CommandType.METTI, "metti");
-		muovi.setAlias(new String[] { "Versa", "versa", "Metti" });
-		comandi.add(muovi);
+		Command metti = new Command(CommandType.METTI, "metti");
+		metti.setAlias(new String[] { "versa" });
+		comandi.add(metti);
 	}
 
 	@Override
