@@ -21,7 +21,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     }
 
     @Override
-    public void messaggioStanzaIrraggiungibile(){
+    public void messaggioStanzaInesistente(){
         int rand = (int)(Math.random() * 3);
         switch(rand) {
         case 0 :
@@ -35,6 +35,18 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
         }
     }
+
+    @Override
+	public void messaggioStanzaChiusa() {
+    	int rand = (int)(Math.random() * 2);
+        switch(rand) {
+        case 0 :
+        	 interfaccia.stampaMessaggio("La porta non si apre, non posso proseguire");
+        	 break;
+        case 1:
+        	 interfaccia.stampaMessaggio("Questa porta e' chiusa, forse dovrei fare altro prima di andare avanti");
+        }
+	}
 
     @Override
     public void messaggioComandoNonRiconosciuto(){
@@ -156,22 +168,22 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     public void messaggioOggettoGiaChiuso(GenericObject oggetto){
         interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già chiuso");
     }
-    
+
     @Override
     public void messaggioVitaMassima(){
         interfaccia.stampaMessaggio("Sei già al massimo della vita, conserva le tue cure, nabbo!");
     }
-    
+
     @Override
     public void messaggioVitaCurataDi(GenericObject oggetto, int heal){
         interfaccia.stampaMessaggio("Hai usato l'oggetto " + oggetto + " e ti sei curato di " + heal + "!");
     }
-    
+
     @Override
     public void messaggioVitaCurataMassimo(GenericObject oggetto){
         interfaccia.stampaMessaggio("Hai usato l'oggetto " + oggetto + " e sei tornato al massimo della vita!");
     }
-    
+
     @Override
     public void messaggioIntornoATe() {
     	interfaccia.stampaMessaggio("Intorno a te vedi: ");

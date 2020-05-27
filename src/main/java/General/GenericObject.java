@@ -7,10 +7,10 @@ package General;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import Parser.WordType;
-import java.util.Objects;
 
 public class GenericObject {
 	private Name nome;
@@ -72,7 +72,7 @@ public class GenericObject {
 	public boolean isConsumabile() {
 		return consumabile;
 	}
-	
+
 	public boolean isPrendibile() {
 		return prendibile;
 	}
@@ -80,7 +80,7 @@ public class GenericObject {
 	public void setConsumabile(boolean consumabile) {
 		this.consumabile = consumabile;
 	}
-	
+
 	public void setPrendibile(boolean prendibile) {
 		this.prendibile = prendibile;
 	}
@@ -146,9 +146,9 @@ public class GenericObject {
         return true;
     }
 
-    
 
-	
+
+
 
 	@Override
 	public String toString() {

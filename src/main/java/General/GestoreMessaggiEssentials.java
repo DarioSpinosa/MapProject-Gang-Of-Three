@@ -11,19 +11,19 @@ import Main.AdventureGUI;
  */
 public abstract class GestoreMessaggiEssentials {
     protected AdventureGUI interfaccia;
-    
+
     public GestoreMessaggiEssentials(AdventureGUI interfaccia){
         this.interfaccia = interfaccia;
     }
-    
+
     public void stampaLinea(){
         interfaccia.stampaMessaggio("-----------------------------------------------");
     }
-    
+
     public void stampaVita(int healPoints){
         interfaccia.setHealthLabel(healPoints);
     }
-    
+
     public void stampaInventario(GenericObject oggetto){
     	if(oggetto.getAggettivi() == null) {
     		interfaccia.stampaMessaggio("- " + oggetto);
@@ -31,10 +31,11 @@ public abstract class GestoreMessaggiEssentials {
     		interfaccia.stampaMessaggio("- " + oggetto + " " + oggetto.getAggettivi().toArray()[0]);
     	}
     }
-    
+
     public abstract void messaggioIntornoATe();
     public abstract void stampaMessaggio(String messaggio);
-    public abstract void messaggioStanzaIrraggiungibile();
+    public abstract void messaggioStanzaInesistente();
+    public abstract void messaggioStanzaChiusa();
     public abstract void messaggioComandoNonRiconosciuto();
     public abstract void stampaStanza(String nome, String descrizione);
     public abstract void messaggioOggettoNonPresenteInventario();

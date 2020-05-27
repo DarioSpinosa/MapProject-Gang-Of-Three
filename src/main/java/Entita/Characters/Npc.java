@@ -52,6 +52,10 @@ public class Npc extends Personaggio {
 		return scelta;
 	}
 
+	public void setDialogo(String dialogo, int i) {
+		dialoghi[i] = dialogo;
+	}
+
 	@Override
 	public void getDamage(int danno) {
 	}

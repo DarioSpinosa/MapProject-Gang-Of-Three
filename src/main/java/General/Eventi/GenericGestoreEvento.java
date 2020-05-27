@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Entita.Stanza;
 import General.GenericObject;
-import General.GestoreMessaggiEssentials;
 
 public abstract class GenericGestoreEvento {
 
@@ -12,7 +11,6 @@ public abstract class GenericGestoreEvento {
 	protected Stanza stanza;
 	protected boolean completato = false;
 	protected boolean presentazione = false;
-	protected GestoreMessaggiEssentials stampante;
 
 	public GenericGestoreEvento() {
 	}
@@ -43,6 +41,14 @@ public abstract class GenericGestoreEvento {
 			stanza.addOggetto(enigma);
 			objs.add(enigma);
 
+			if(stanza.getSopra() != null)
+				stanza.getSopra().setAccessibile(false);
+			if(stanza.getSotto() != null)
+				stanza.getSotto() .setAccessibile(false);
+			if(stanza.getSinistra() != null)
+				stanza.getSinistra().setAccessibile(false);
+			if(stanza.getDestra() != null)
+				stanza.getDestra().setAccessibile(false);
 		}
 
 		return temp;

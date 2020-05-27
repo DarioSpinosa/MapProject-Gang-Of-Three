@@ -220,7 +220,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				}
 
 			} else if (primo == null && secondo == null) {
-				stampa.stampaMessaggio(partita.getStanzaCorrente().getDescrizione());
+				stampa.stampaMessaggio("\n" + partita.getStanzaCorrente().getDescrizione());
 				ArrayList<GenericObject> loot = partita.getStanzaCorrente().getOggetti().getContainer();
 				if (loot.size() != 0) {
 					stampa.messaggioIntornoATe();
@@ -320,52 +320,65 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		}
 	}
 
+
 	@Override
 	public void movimentoNord() {
 		if (partita.getStanzaCorrente().getSopra() != null) {
-			partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
-			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
-			if (partita.getStanzaCorrente().getGestoreEvento() != null)
-				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
-		} else {
-			stampa.messaggioStanzaIrraggiungibile();
-		}
+			if(partita.getStanzaCorrente().getSopra().getAccessibile()) {
+				partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
+				stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
+				if (partita.getStanzaCorrente().getGestoreEvento() != null)
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+			}else
+				stampa.messaggioStanzaChiusa();
+		} else
+			stampa.messaggioStanzaInesistente();
+
 	}
 
 	@Override
 	public void movimentoSud() {
 		if (partita.getStanzaCorrente().getSotto() != null) {
-			partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
-			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
-			if (partita.getStanzaCorrente().getGestoreEvento() != null)
-				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
-		} else {
-			stampa.messaggioStanzaIrraggiungibile();
-		}
+			if(partita.getStanzaCorrente().getSotto().getAccessibile()) {
+				partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
+				stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
+				if (partita.getStanzaCorrente().getGestoreEvento() != null)
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+			}else
+				stampa.messaggioStanzaChiusa();
+		} else
+			stampa.messaggioStanzaInesistente();
+
 	}
 
 	@Override
 	public void movimentoEst() {
 		if (partita.getStanzaCorrente().getDestra() != null) {
-			partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
-			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
-			if (partita.getStanzaCorrente().getGestoreEvento() != null)
-				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
-		} else {
-			stampa.messaggioStanzaIrraggiungibile();
-		}
+			if(partita.getStanzaCorrente().getDestra().getAccessibile()) {
+				partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
+				stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
+				if (partita.getStanzaCorrente().getGestoreEvento() != null)
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+			}else
+				stampa.messaggioStanzaChiusa();
+		} else
+			stampa.messaggioStanzaInesistente();
+
 	}
 
 	@Override
 	public void movimentoOvest() {
 		if (partita.getStanzaCorrente().getSinistra() != null) {
-			partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
-			stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
-			if (partita.getStanzaCorrente().getGestoreEvento() != null)
-				stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
-		} else {
-			stampa.messaggioStanzaIrraggiungibile();
-		}
+			if(partita.getStanzaCorrente().getSinistra().getAccessibile()) {
+				partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
+				stampa.stampaMessaggio("Luogo: " + partita.getStanzaCorrente().getNome());
+				if (partita.getStanzaCorrente().getGestoreEvento() != null)
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+			}else
+				stampa.messaggioStanzaChiusa();
+		} else
+			stampa.messaggioStanzaInesistente();
+
 	}
 
 	private void lasciaOPrendiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista,

@@ -29,6 +29,7 @@ public class Stanza {
 	private Stanza sotto = null;
 	private Stanza destra = null;
 	private Stanza sinistra = null;
+	private boolean accessibile = true;
 	private GenericGestoreEvento evento;
 	private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "", ObjectType.CONTAINER);
 	private ArrayList<Personaggio> characters = new ArrayList<>();
@@ -60,6 +61,14 @@ public class Stanza {
 		return this;
 	}
 
+	public void setAccessibile(boolean b) {
+		accessibile = b;
+	}
+
+	public void setGestoreEvento(GenericGestoreEvento e) {
+		evento = e;
+	}
+
 	// METODI GETTER
 	public String getNome() {
 		return nome;
@@ -85,48 +94,28 @@ public class Stanza {
 		return sinistra;
 	}
 
-	public GenericObjectContainer getOggetti() {
-		return oggetti;
-	}
-
-	public void addPersonaggio(Personaggio p) {
-		characters.add(p);
-	}
-
-	public void removePersonaggio(Personaggio p) {
-		characters.remove(p);
-	}
-
-	public void addOggetto(GenericObject o) {
-		oggetti.addToContainer(o);
-	}
-
-	public void removeOggetto(GenericObject o) {
-		oggetti.removeFromContainer(o);
-	}
-
-	public void setGestoreEvento(GenericGestoreEvento e) {
-		evento = e;
+	public boolean getAccessibile() {
+		return accessibile;
 	}
 
 	public Personaggio getPersonaggio(int i) {
 		return characters.get(i);
 	}
 
-	public Personaggio getPersonaggio(Personaggio personaggio) {
-		return characters.get(characters.indexOf(personaggio));
-	}
-
 	public ArrayList<Personaggio> getPersonaggi() {
 		return characters;
+	}
+
+	public Personaggio getPersonaggio(Personaggio personaggio) {
+		return characters.get(characters.indexOf(personaggio));
 	}
 
 	public GenericObject getOggetti(int i) {
 		return oggetti.get(i);
 	}
 
-	public int trovaIndice(GenericObject oggetto) {
-		return oggetti.getContainer().indexOf(oggetto);
+	public GenericObjectContainer getOggetti() {
+		return oggetti;
 	}
 
     public GenericGestoreEvento getGestoreEvento() {
@@ -146,4 +135,25 @@ public class Stanza {
 		}
 		return null;
 	}
+
+	public void addPersonaggio(Personaggio p) {
+		characters.add(p);
+	}
+
+	public void removePersonaggio(Personaggio p) {
+		characters.remove(p);
+	}
+
+	public void addOggetto(GenericObject o) {
+		oggetti.addToContainer(o);
+	}
+
+	public void removeOggetto(GenericObject o) {
+		oggetti.removeFromContainer(o);
+	}
+
+	public int trovaIndice(GenericObject oggetto) {
+		return oggetti.getContainer().indexOf(oggetto);
+	}
+
 }

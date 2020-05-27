@@ -40,14 +40,6 @@ public class Partita {
 						+ "Il bus ha preso una buca, forse e' meglio andare a vedere cosa e' successo ");
 		Stanza strada2 = new Stanza("Via Amendola, secondo settore", "Prosegui su via Amendola. \n "
 				+ "Alla tua destra c'e' l'Executive Center, dietro di te il bus ancora fumante. ");
-		Evento macchinaCaffe = new Evento(
-				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
-						+ "\nGuarda, sul tavolo vi è una macchina per il caffe\n");
-		Name NameCaffe = new Name("macchinetta", WordType.NOME);
-		NameCaffe.setArticoli(new String[] { "la", "una" });
-		NameCaffe.setPreposizioni(new String[] { "nella" });
-		macchinaCaffe.addEnigma(new Caffe(NameCaffe, "E' una macchina per fare il cazzo di caffe"));
-		strada2.setGestoreEvento(new GestoreEventoCaffe(macchinaCaffe, strada2));
 		Stanza strada3 = new Stanza("Via Amendola, terzo settore", "Sei a meta' di via Amendola. \n"
 				+ "Alla tua sinistra c'e' un cartellone pubblicitario, a destra una pizzeria ");
 		Stanza strada4 = new Stanza("Strada Est", "");
@@ -65,7 +57,7 @@ public class Partita {
 		Stanza fisica1 = new Stanza("Atrio di Fisica", "");
 		Stanza fisica2 = new Stanza("Sala raggi cosmici", "");
 		Stanza fisica3 = new Stanza("Ufficio", "Sala del trono di Volpe");
-		Stanza chimica1 = new Stanza("Bar di Chimica", "Un caffe al glicerolo grazie");
+		Stanza chimica1 = new Stanza("Bar di Chimica", "Il buon vecchio bar della facoltà di chimica");
 		Stanza chimica2 = new Stanza("Sala Pozioni", "Insegnante Severus Piton");
 		Stanza informatica1 = new Stanza("Atrio DIB", "GUARDA! C'E' PASQUALE LOPS");
 		Stanza informatica2 = new Stanza("LABORATIO P.C.", "HACKER-MAN TIME");
@@ -100,6 +92,14 @@ public class Partita {
 				new String[] { "Sono l'autista", "Questo piato", "é una MERDA", "Dario Spinosa" });
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addPersonaggio(autista);
+		Name nomeBarista = new Name("Sedicina", WordType.NOME_PROPRIO);
+		nomeBarista.setPreposizioni(new String[] { "a", "con" });
+		Name aliasBarista = new Name("barista", WordType.NOME);
+		aliasBarista.setArticoli(new String[] { "l" });
+		aliasBarista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
+		Personaggio barista = new Npc(nomeAutista, new String[] { "Sono il barista Sedicina", "Tu di qua non esci finche non hai fatto un caffe" });
+		barista.setAlias(new Name[] { aliasBarista });
+		chimica1.addPersonaggio(barista);
 		/*
 		 * pizzeria.addPersonaggio(new Npc("cameriere")); fisica3.addPersonaggio(new
 		 * Npc("giacomo volpe")); chimica1.addPersonaggio(new Npc("bruno"));
@@ -171,10 +171,22 @@ public class Partita {
 		Combinations.addCombination(torta, baule, spada);
 		oggetti.add(acqua);
 		oggetti.add(caffe);
-		strada2.addOggetto(acqua);
-		strada2.addOggetto(caffe);
+		chimica1.addOggetto(acqua);
+		chimica1.addOggetto(caffe);
 
-		stanzaCorrente = strada1;
+
+		Evento preparaCaffe = new Evento(
+				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
+						+ "\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?" +
+						"\nSedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
+		Name NameCaffe = new Name("macchinetta", WordType.NOME);
+		NameCaffe.setArticoli(new String[] { "la", "una" });
+		NameCaffe.setPreposizioni(new String[] { "nella"});
+		GenericObject macchinaCaffe = new Caffe(NameCaffe, "Una macchina per fare il cazzo di caffe");
+		macchinaCaffe.setPrendibile(false);
+		preparaCaffe.addEnigma(macchinaCaffe);
+		chimica1.setGestoreEvento(new GestoreEventoCaffe(preparaCaffe, chimica1));
+
 		stanzaCorrente = strada1;
 	}
 
