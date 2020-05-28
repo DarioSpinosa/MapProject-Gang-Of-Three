@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import Entita.Characters.Npc;
 import Entita.Characters.Personaggio;
 import Entita.Characters.Protagonista;
-import General.Combinations;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.GestoreAlias;
@@ -39,8 +38,8 @@ public class Partita {
 		Stanza strada1 = new Stanza("Via Amendola, primo settore",
 				"Scendi dal bus. L'atmosfera e' strana, sembra che il tempo si sia fermato. \n"
 						+ "Non vedi nessuno in giro, ne' in macchina ne' a piedi. \n"
-						+ "Il bus ha preso una buca, forse e' meglio andare a vedere cosa e' successo ");
-		Stanza strada2 = new Stanza("Via Amendola, secondo settore", "Prosegui su via Amendola. \n "
+						+ "Il bus ha preso una buca,forse e' meglio parlare con l'autista ");
+		Stanza strada2 = new Stanza("Via Amendola, secondo settore", "Prosegui su via Amendola. \n"
 				+ "Alla tua destra c'e' l'Executive Center, dietro di te il bus ancora fumante. ");
 		Stanza strada3 = new Stanza("Via Amendola, terzo settore", "Sei a meta' di via Amendola. \n"
 				+ "Alla tua sinistra c'e' un cartellone pubblicitario, a destra una pizzeria ");
@@ -83,7 +82,8 @@ public class Partita {
 		aliasAutista.setArticoli(new String[] { "l" });
 		aliasAutista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
 		Personaggio autista = new Npc(nomeAutista,
-				new String[] { "Sono l'autista", "Questo piato", "é una MERDA", "Dario Spinosa" });
+				new String[] { "Autista: Maledizione! Abbiamo preso in pieno una voragine!\nMi dispiace ma dovrai proseguire a piedi",
+						"Autista: C'e' poco traffico... strano." });
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addPersonaggio(autista);
 		Name nomeBarista = new Name("Sedicina", WordType.NOME_PROPRIO);
@@ -137,36 +137,10 @@ public class Partita {
 		GenericObject acqua = new GenericObject(nomeAcqua, "Un bicchiere d'acqua", ObjectType.EVENT);
 		GenericObject caffe = new GenericObject(NomeCaffe, "E' del caffe in polvere, magari se lo sniffi muori",
 				ObjectType.EVENT);
-
-		Name nomeBottoneRosso = new Name("bottone", WordType.NOME);
-		GenericObject bottoneRosso = new GenericObject(nomeBottoneRosso, "un bottone rosso!", ObjectType.NORMAL);
-		bottoneRosso.setAggettivi(new String[] { "rosso" });
-		Name nomeBottoneBlu = new Name("bottone", WordType.NOME);
-		GenericObject bottoneBlu = new GenericObject(nomeBottoneBlu, "un bottone blu!", ObjectType.NORMAL);
-		bottoneBlu.setAggettivi(new String[] { "blu" });
-		Name nomeBottoneVerde = new Name("bottone", WordType.NOME);
-		GenericObject bottoneVerde = new GenericObject(nomeBottoneVerde, "un bottone verde!", ObjectType.NORMAL);
-		bottoneVerde.setAggettivi(new String[] { "verde" });
 		Name leva = new Name("leva", WordType.NOME);
 		GenericObject levaPannello = new GenericObject(leva, "una leva", ObjectType.NORMAL);
 		levaPannello.setAggettivi(new String[] { "rossa", "gialla", "verde", "blu", "nera" });
 
-		oggetti.add(bottoneVerde);
-		strada1.addOggetto(bottoneVerde);
-		oggetti.add(bottoneRosso);
-		strada1.addOggetto(bottoneRosso);
-		oggetti.add(bottoneBlu);
-		strada1.addOggetto(bottoneBlu);
-		oggetti.add(birra);
-		strada1.addOggetto(birra);
-		oggetti.add(pizza);
-		strada1.addOggetto(pizza);
-		oggetti.add(spada);
-		strada1.addOggetto(spada);
-		oggetti.add(baule);
-		strada1.addOggetto(baule);
-		oggetti.add(torta);
-		Combinations.addCombination(torta, baule, spada);
 		oggetti.add(acqua);
 		chimica1.addOggetto(acqua);
 		oggetti.add(caffe);
@@ -175,7 +149,7 @@ public class Partita {
 
 		Evento preparaCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
-						+ "\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?" +
+						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?" +
 						"\nSedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
 		Name NameCaffe = new Name("macchinetta", WordType.NOME);
 		NameCaffe.setArticoli(new String[] { "la", "una" });

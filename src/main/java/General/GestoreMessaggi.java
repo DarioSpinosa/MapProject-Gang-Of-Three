@@ -91,7 +91,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void stampaDescrizioneOggetto(GenericObject oggetto){
-        interfaccia.stampaMessaggio(oggetto.getDescrizione());
+        interfaccia.stampaMessaggio("-" + oggetto.getDescrizione());
     }
 
     @Override
