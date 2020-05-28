@@ -20,10 +20,6 @@ public abstract class GestoreMessaggiEssentials {
         interfaccia.stampaMessaggio("-----------------------------------------------");
     }
 
-    public void stampaVita(int healPoints){
-        interfaccia.setHealthLabel(healPoints);
-    }
-
     public void stampaInventario(GenericObject oggetto){
     	if(oggetto.getAggettivi() == null) {
     		interfaccia.stampaMessaggio("- " + oggetto);
@@ -32,6 +28,7 @@ public abstract class GestoreMessaggiEssentials {
     	}
     }
 
+    public abstract void messaggioInizioGioco(String nome, String descrizione);
     public abstract void messaggioIntornoATe();
     public abstract void stampaMessaggio(String messaggio);
     public abstract void messaggioStanzaInesistente();

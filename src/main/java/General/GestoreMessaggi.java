@@ -14,6 +14,13 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     public GestoreMessaggi(AdventureGUI interfaccia){
         super(interfaccia);
     }
+    
+    @Override
+    public void messaggioInizioGioco(String nome, String descrizione){
+        interfaccia.stampaMessaggio("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n" +
+        		"CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" +
+        		"\nLUOGO: " + nome + "\n\n" + descrizione);
+    }
 
     @Override
     public void stampaMessaggio(String messaggio){

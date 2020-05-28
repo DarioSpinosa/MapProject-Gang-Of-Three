@@ -31,7 +31,6 @@ public class AdventureGUI extends javax.swing.JFrame {
 
     private void init(){
         Partita partita = new Partita();
-        setHealthLabel(partita.getProtagonista().getHealthPoints());
         azioni = new GestoreAzioni(partita, stampante);
         azioni.setListaOggetti(partita.getOggetti());
         ArrayList<String> prepositions = new ArrayList<>();
@@ -52,18 +51,13 @@ public class AdventureGUI extends javax.swing.JFrame {
         articles.add("un");
         articles.add("una");
         parser = new ParserIta(articles, prepositions);
-        stampaMessaggio("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n" +
-        		"CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" +
-        		"\nLUOGO: " + partita.getStanzaCorrente().getNome().toUpperCase()
-        		+ "\n\n" + partita.getStanzaCorrente().getDescrizione());
+        stampante.messaggioInizioGioco(azioni.getStanzaCorrente().getNome(), azioni.getStanzaCorrente().getDescrizione());
+        Thread time = new TimeThread(10, 0, jlMinute, jlSecond);
+        time.start();
     }
 
     public void stampaMessaggio(String messaggio){
         jtConsole.append(messaggio + "\n");
-    }
-
-    public void setHealthLabel(int health){
-        healthValueLabel.setText(" " + health);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,8 +76,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbEst = new javax.swing.JButton();
         jtComandi = new javax.swing.JTextField();
         jlComandi = new javax.swing.JLabel();
-        healthLabel = new javax.swing.JLabel();
-        healthValueLabel = new javax.swing.JLabel();
+        jlMinute = new javax.swing.JLabel();
+        jlSecond = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dino Game");
@@ -99,8 +93,7 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbOvest.setText("OVEST");
         jbOvest.setPreferredSize(new java.awt.Dimension(70, 20));
         jbOvest.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbOvestActionPerformed(evt);
             }
         });
@@ -108,8 +101,7 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbNord.setText("NORD");
         jbNord.setPreferredSize(new java.awt.Dimension(70, 20));
         jbNord.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNordActionPerformed(evt);
             }
         });
@@ -117,8 +109,7 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbSud.setText("SUD");
         jbSud.setPreferredSize(new java.awt.Dimension(70, 20));
         jbSud.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSudActionPerformed(evt);
             }
         });
@@ -126,22 +117,18 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbEst.setText("EST");
         jbEst.setPreferredSize(new java.awt.Dimension(70, 20));
         jbEst.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEstActionPerformed(evt);
             }
         });
 
         jtComandi.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtComandiKeyPressed(evt);
             }
         });
 
         jlComandi.setText("Comandi");
-
-        healthLabel.setText("Vita: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,11 +153,11 @@ public class AdventureGUI extends javax.swing.JFrame {
                             .addComponent(jtComandi)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlComandi, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(healthLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(healthValueLabel)))
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jlSecond))
+                                    .addComponent(jlComandi, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlMinute))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                     .addComponent(jlConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,11 +182,11 @@ public class AdventureGUI extends javax.swing.JFrame {
                                     .addComponent(jbEst, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtComandi, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(healthLabel)
-                                    .addComponent(healthValueLabel)))
+                                .addComponent(jlMinute)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlSecond))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(18, 19, Short.MAX_VALUE)
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(jbNord, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(64, 64, 64))))
                     .addGroup(layout.createSequentialGroup()
@@ -277,8 +264,6 @@ public class AdventureGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel healthLabel;
-    private javax.swing.JLabel healthValueLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbEst;
     private javax.swing.JButton jbNord;
@@ -286,6 +271,8 @@ public class AdventureGUI extends javax.swing.JFrame {
     private javax.swing.JButton jbSud;
     private javax.swing.JLabel jlComandi;
     private javax.swing.JLabel jlConsole;
+    private javax.swing.JLabel jlMinute;
+    private javax.swing.JLabel jlSecond;
     private javax.swing.JTextField jtComandi;
     private javax.swing.JTextArea jtConsole;
     // End of variables declaration//GEN-END:variables

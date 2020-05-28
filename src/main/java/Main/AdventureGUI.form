@@ -46,12 +46,12 @@
                           <Component id="jtComandi" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlComandi" min="-2" pref="151" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="healthLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="healthValueLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Component id="jlSecond" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jlComandi" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Component id="jlMinute" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -84,13 +84,12 @@
                                   <Component id="jtComandi" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="healthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="healthValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jlMinute" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jlSecond" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Component id="jbNord" min="-2" pref="38" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                           </Group>
@@ -185,12 +184,9 @@
         <Property name="text" type="java.lang.String" value="Comandi"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="healthLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vita: "/>
-      </Properties>
+    <Component class="javax.swing.JLabel" name="jlMinute">
     </Component>
-    <Component class="javax.swing.JLabel" name="healthValueLabel">
+    <Component class="javax.swing.JLabel" name="jlSecond">
     </Component>
   </SubComponents>
 </Form>

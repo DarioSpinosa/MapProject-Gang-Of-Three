@@ -79,10 +79,6 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		comandi.add(combina);
 		Command parla = new Command(CommandType.PARLA, "parla");
 		comandi.add(parla);
-		Command mangia = new Command(CommandType.MANGIA, "mangia");
-		comandi.add(mangia);
-		Command bevi = new Command(CommandType.BEVI, "bevi");
-		comandi.add(bevi);
 		Command metti = new Command(CommandType.METTI, "metti");
 		metti.setAlias(new String[] { "versa" });
 		comandi.add(metti);
@@ -298,29 +294,6 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			}
 			break;
-		case MANGIA:
-			if (primo != null && secondo == null) {
-				if (protagonista.isInInventario(primo)) {
-					mangiaOggettoCura(primo);
-				} else {
-					stampa.messaggioOggettoNonPresenteInventario();
-				}
-			} else {
-				stampa.messaggioNonCompreso();
-			}
-			break;
-		case BEVI:
-			if (primo != null && secondo == null) {
-				if (protagonista.isInInventario(primo)) {
-					beviOggettoCura(primo);
-				} else {
-					stampa.messaggioOggettoNonPresenteInventario();
-				}
-			} else {
-				stampa.messaggioNonCompreso();
-			}
-			break;
-
 		case METTI:
 			if (partita.getStanzaCorrente().getGestoreEvento() instanceof GestoreEventoCaffe) {
 
@@ -527,63 +500,12 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	private void usaOggetto(GenericObject oggetto) {
 		switch (oggetto.getCategory()) {
 		case EATABLE:
-			mangiaOggettoCura(oggetto);
 			break;
 		case DRINKABLE:
-			beviOggettoCura(oggetto);
 			break;
 		default:
 			stampa.messaggioNonCompreso();
 			break;
 		}
 	}
-
-	private void mangiaOggettoCura(GenericObject oggetto) {
-		int healthPoints = partita.getProtagonista().getHealthPoints();
-		switch (oggetto.getNome()) {
-		case "torta":
-			cura(oggetto, healthPoints, 1);
-			break;
-		case "pizza":
-			cura(oggetto, healthPoints, 2);
-			break;
-		default:
-			stampa.messaggioNonCompreso();
-			break;
-		}
-	}
-
-	private void beviOggettoCura(GenericObject oggetto) {
-		int healthPoints = partita.getProtagonista().getHealthPoints();
-		switch (oggetto.getNome()) {
-		case "birra":
-			cura(oggetto, healthPoints, 1);
-			break;
-		default:
-			stampa.messaggioNonCompreso();
-		}
-	}
-
-	private void cura(GenericObject oggetto, int healthPoints, int heal) {
-		if (healthPoints == 3) {
-			stampa.messaggioVitaMassima();
-		} else if ((healthPoints + heal) >= 3) {
-			partita.getProtagonista().setHealth(3);
-			healthPoints = 3;
-			stampa.stampaVita(healthPoints);
-			stampa.messaggioVitaCurataMassimo(oggetto);
-			if (oggetto.isConsumabile()) {
-				((Protagonista) partita.getProtagonista()).removeOggetto(oggetto);
-			}
-		} else {
-			((Protagonista) partita.getProtagonista()).heal(heal);
-			healthPoints = healthPoints + heal;
-			stampa.stampaVita(healthPoints);
-			stampa.messaggioVitaCurataDi(oggetto, heal);
-			if (oggetto.isConsumabile()) {
-				((Protagonista) partita.getProtagonista()).removeOggetto(oggetto);
-			}
-		}
-	}
-
 }

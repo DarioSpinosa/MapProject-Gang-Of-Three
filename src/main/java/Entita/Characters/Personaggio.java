@@ -13,7 +13,7 @@ public abstract class Personaggio {
 
     protected Name nome;
     protected GestoreAlias alias;
-    protected int healthPoints;
+    protected int healthPoints; // TODO: rimuovere healthPoints, non servono più
 
     public Personaggio(Name nome, int healthPoints) {
         this.nome = nome;

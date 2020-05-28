@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import Entita.Partita;
 import Entita.Characters.Personaggio;
+import Entita.Stanza;
 import Parser.ParserOutput;
 
 /**
@@ -35,6 +36,10 @@ public abstract class GestoreAzioniEssentials {
 
     public void setListaOggetti(ArrayList<GenericObject> oggetti){
         this.oggetti = oggetti;
+    }
+    
+    public Stanza getStanzaCorrente(){
+        return partita.getStanzaCorrente();
     }
 
     public void setListaComandi(ArrayList<Command> comandi){
