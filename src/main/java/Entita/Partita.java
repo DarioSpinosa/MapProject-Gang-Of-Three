@@ -44,47 +44,38 @@ public class Partita {
 				+ "Alla tua destra c'e' l'Executive Center, dietro di te il bus ancora fumante. ");
 		Stanza strada3 = new Stanza("Via Amendola, terzo settore", "Sei a meta' di via Amendola. \n"
 				+ "Alla tua sinistra c'e' un cartellone pubblicitario, a destra una pizzeria ");
-		Stanza strada4 = new Stanza("Strada Est", "");
-		Stanza strada5 = new Stanza("Strada Ovest", "");
-		Stanza strada6 = new Stanza("Strada Nord 1", "");
-		Stanza strada7 = new Stanza("Strada Nord 2", "");
-		Stanza strada8 = new Stanza("Strada Nord 3", "");
-		Stanza rotonda = new Stanza("Rotonda", "");
+		Stanza strada4 = new Stanza("Strada Nord 1", "");
+		Stanza strada5 = new Stanza("Strada Nord 2", "");
+		Stanza strada6 = new Stanza("Strada Nord 3", "");
+		Stanza incrocio = new Stanza("Incrocio", "");
 		Stanza esecutivo = new Stanza("Executive Center, Uffici",
 				"Ti sei intrufolato in uno degli uffici dell'Executive Center \n"
 						+ "C'e' un imponente server al centro della stanza ma sembra spento.");
 		Stanza pizzeria = new Stanza("Pizzeria", "Iamme ia famm na pizz");
-		Stanza vicoloCieco = new Stanza("Vicolo cieco", "Ehy fra, hai portato la bamba?");
-		Stanza parcheggio = new Stanza("Parcheggio", "NON C'E' MAI UN CAZZO DI POSTO, FANCULO USO QUELLO DEL DISABILE");
+		Stanza stradaChiusa = new Stanza("Strada Chiusa", "Ehy fra, hai portato la bamba?");
 		Stanza fisica1 = new Stanza("Atrio di Fisica", "");
 		Stanza fisica2 = new Stanza("Sala raggi cosmici", "");
 		Stanza fisica3 = new Stanza("Ufficio", "Sala del trono di Volpe");
 		Stanza chimica1 = new Stanza("Bar di Chimica", "Il buon vecchio bar della facoltà di chimica");
-		Stanza chimica2 = new Stanza("Sala Pozioni", "Insegnante Severus Piton");
 		Stanza informatica1 = new Stanza("Atrio DIB", "GUARDA! C'E' PASQUALE LOPS");
-		Stanza informatica2 = new Stanza("LABORATIO P.C.", "HACKER-MAN TIME");
 		fisica2.setAccessibile(false);
 
 		strada1.setSopra(strada2).setDestra(esecutivo);
 		esecutivo.setSinistra(strada1);
 		strada2.setDestra(pizzeria).setSopra(strada3).setSotto(strada1);
 		pizzeria.setSinistra(strada2);
-		strada3.setSotto(strada2).setSopra(rotonda);
-		rotonda.setSotto(strada3).setSinistra(strada4).setDestra(strada5).setSopra(strada6);
-		strada4.setDestra(rotonda).setSinistra(vicoloCieco);
-		vicoloCieco.setDestra(strada4);
-		strada5.setSinistra(rotonda).setDestra(parcheggio);
-		parcheggio.setSinistra(strada5);
-		strada6.setSotto(rotonda).setSopra(strada7);
-		strada7.setSotto(strada6).setSinistra(fisica1).setDestra(chimica1).setSopra(strada8);
-		fisica1.setSinistra(fisica2).setDestra(strada7);
+		strada3.setSotto(strada2).setSopra(incrocio);
+		incrocio.setSotto(strada3).setSinistra(stradaChiusa).setSopra(strada4);
+		stradaChiusa.setDestra(incrocio);
+		strada4.setSotto(incrocio).setSopra(strada5).setDestra(chimica1);
+		strada5.setSotto(strada4).setSinistra(fisica1).setSopra(strada6);
+		fisica1.setSinistra(fisica2).setDestra(strada5);
 		fisica2.setSopra(fisica3).setDestra(fisica1);
 		fisica3.setSotto(fisica2);
-		chimica1.setSinistra(strada7).setDestra(chimica2);
-		chimica2.setSinistra(chimica1);
-		strada8.setSotto(strada7).setDestra(informatica1);
-		informatica1.setSinistra(strada8).setDestra(informatica2);
-		informatica2.setSinistra(informatica1);
+		chimica1.setSinistra(strada4);
+		strada6.setSotto(strada5).setDestra(informatica1);
+		informatica1.setSinistra(strada6);
+
 
 		Name nomeAutista = new Name("mimmo", WordType.NOME_PROPRIO);
 		nomeAutista.setPreposizioni(new String[] { "a", "con" });
