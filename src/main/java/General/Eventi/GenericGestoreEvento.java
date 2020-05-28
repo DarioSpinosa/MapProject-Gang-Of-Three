@@ -41,14 +41,6 @@ public abstract class GenericGestoreEvento {
 			stanza.addOggetto(enigma);
 			objs.add(enigma);
 
-			if(stanza.getSopra() != null)
-				stanza.getSopra().setAccessibile(false);
-			if(stanza.getSotto() != null)
-				stanza.getSotto() .setAccessibile(false);
-			if(stanza.getSinistra() != null)
-				stanza.getSinistra().setAccessibile(false);
-			if(stanza.getDestra() != null)
-				stanza.getDestra().setAccessibile(false);
 		}
 
 		return temp;

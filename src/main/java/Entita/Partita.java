@@ -18,7 +18,9 @@ import General.Name;
 import General.ObjectType;
 import General.Eventi.Evento;
 import General.Eventi.GestoreEventoCaffe;
+import General.Eventi.GestoreEventoPannello;
 import General.Eventi.Enigmi.Caffe;
+import General.Eventi.Enigmi.Pannello;
 import Parser.WordType;
 
 public class Partita {
@@ -61,6 +63,7 @@ public class Partita {
 		Stanza chimica2 = new Stanza("Sala Pozioni", "Insegnante Severus Piton");
 		Stanza informatica1 = new Stanza("Atrio DIB", "GUARDA! C'E' PASQUALE LOPS");
 		Stanza informatica2 = new Stanza("LABORATIO P.C.", "HACKER-MAN TIME");
+		fisica2.setAccessibile(false);
 
 		strada1.setSopra(strada2).setDestra(esecutivo);
 		esecutivo.setSinistra(strada1);
@@ -124,7 +127,8 @@ public class Partita {
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
 		nomeBaule.setPreposizioni(new String[] { "nel", "in", "da", "dal" });
-		GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule", ObjectType.CONTAINER);
+		GenericObject baule =
+				new GenericObjectContainer(nomeBaule, "un baule", ObjectType.CONTAINER);
 		baule.setAggettivi(new String[] { "antico" });
 		baule.setPrendibile(false);
 		((GenericObjectContainer) (baule)).addToContainer(torta);
@@ -152,6 +156,9 @@ public class Partita {
 		Name nomeBottoneVerde = new Name("bottone", WordType.NOME);
 		GenericObject bottoneVerde = new GenericObject(nomeBottoneVerde, "un bottone verde!", ObjectType.NORMAL);
 		bottoneVerde.setAggettivi(new String[] { "verde" });
+		Name leva = new Name("leva", WordType.NOME);
+		GenericObject levaPannello = new GenericObject(leva, "una leva", ObjectType.NORMAL);
+		levaPannello.setAggettivi(new String[] { "rossa", "gialla", "verde", "blu", "nera" });
 
 		oggetti.add(bottoneVerde);
 		strada1.addOggetto(bottoneVerde);
@@ -170,10 +177,10 @@ public class Partita {
 		oggetti.add(torta);
 		Combinations.addCombination(torta, baule, spada);
 		oggetti.add(acqua);
-		oggetti.add(caffe);
 		chimica1.addOggetto(acqua);
+		oggetti.add(caffe);
 		chimica1.addOggetto(caffe);
-
+		oggetti.add(levaPannello);
 
 		Evento preparaCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
@@ -186,6 +193,15 @@ public class Partita {
 		macchinaCaffe.setPrendibile(false);
 		preparaCaffe.addEnigma(macchinaCaffe);
 		chimica1.setGestoreEvento(new GestoreEventoCaffe(preparaCaffe, chimica1));
+		Evento eventoPannello = new Evento(
+				"\nLa porta successiva e' bloccata da qualche meccanismo\n");
+		Name NamePannello = new Name("pannello", WordType.NOME);
+		NamePannello.setArticoli(new String[] { "il",});
+		NamePannello.setPreposizioni(new String[] { "del"});
+		GenericObject pannello = new Pannello(NamePannello, "Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
+		pannello.setPrendibile(false);
+		eventoPannello.addEnigma(pannello);
+		fisica1.setGestoreEvento(new GestoreEventoPannello(eventoPannello, fisica1));
 
 		stanzaCorrente = strada1;
 	}

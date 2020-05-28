@@ -9,7 +9,7 @@ import General.GenericObject;
 import General.Name;
 import General.ObjectType;
 
-public class Pannello extends GenericObject implements Enigma {
+public class Pannello extends GenericObject implements Enigma{
 	/*
 	 * E' un pannello per il controllo della corrente elettrica. Leggi la targhetta:
 	 * "Per accendere il generatore principale, selezionare il voltaggio con le 5
@@ -25,6 +25,7 @@ public class Pannello extends GenericObject implements Enigma {
 	private boolean thirdToggle = false;
 	private boolean fourthToggle = false;
 	private boolean fifthToggle = false;
+	private boolean completato = false;
 	private int voltage = 0;
 
 	public void switchFirstToggle() {
@@ -81,18 +82,17 @@ public class Pannello extends GenericObject implements Enigma {
 		voltage += voltageValue;
 	}
 
-	public boolean switchOn() {
+	public String switchOn() {
 		if (voltage != 110) {
-			System.out.println("Target = 110V. Corrente: " + voltage + "V");
-			return false;
+			return("Target = 110V. Corrente: " + voltage + "V");
 		}
-		System.out.println("BEEEEEEP!");
-		System.out.println("Una lucina verde si e' accesa!");
-		return true;
+
+		completato = true;
+		return("BEEEEEEP!\n\"Una lucina verde si e' accesa!");
 	}
 
 	@Override
 	public boolean getCompletato() {
-		return false;
+		return completato;
 	}
 }
