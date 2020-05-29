@@ -52,8 +52,8 @@ public class Npc extends Personaggio {
 		return scelta;
 	}
 
-	public void setDialogo(String dialogo, int i) {
-		dialoghi[i] = dialogo;
+	public void setDialogo(String[] dialoghi) {
+		this.dialoghi = dialoghi;
 	}
 
 	@Override
