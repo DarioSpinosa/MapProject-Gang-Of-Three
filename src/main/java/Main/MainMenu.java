@@ -37,7 +37,7 @@ public class MainMenu extends javax.swing.JFrame {
         creditsButton = new javax.swing.JButton();
         titleLabel1 = new javax.swing.JLabel();
         titleLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        titleLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UniVSDino");
@@ -70,8 +70,8 @@ public class MainMenu extends javax.swing.JFrame {
         titleLabel2.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         titleLabel2.setText("VS");
 
-        jLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 36)); // NOI18N
-        jLabel1.setText("DINOSAURS");
+        titleLabel3.setFont(new java.awt.Font("Perpetua Titling MT", 1, 36)); // NOI18N
+        titleLabel3.setText("DINOSAURS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +83,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(titleLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(titleLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -103,7 +103,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(titleLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(titleLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -169,9 +169,9 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton creditsButton;
     private javax.swing.JButton howToPlayButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton newGameButton;
     private javax.swing.JLabel titleLabel1;
     private javax.swing.JLabel titleLabel2;
+    private javax.swing.JLabel titleLabel3;
     // End of variables declaration//GEN-END:variables
 }
