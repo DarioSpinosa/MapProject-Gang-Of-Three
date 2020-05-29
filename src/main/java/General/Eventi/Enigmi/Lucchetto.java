@@ -5,11 +5,10 @@
 */
 package General.Eventi.Enigmi;
 
-import General.GenericObject;
 import General.Name;
 import General.ObjectType;
 
-public class Lucchetto extends GenericObject implements Enigma {
+public class Lucchetto extends Enigma {
 	/*
 	 * "C'e' un lucchetto. Se utilizzo il grimaldello, aprirlo sara' un gioco da
 	 * ragazzi. Devo solo decidere la forza da applicare sul tensore e provare a
@@ -21,6 +20,7 @@ public class Lucchetto extends GenericObject implements Enigma {
 	}
 
 	private int picked = 0;
+	private boolean completato = false;
 
 	public void lowTension() {
 		setTension(1);
@@ -52,6 +52,6 @@ public class Lucchetto extends GenericObject implements Enigma {
 
 	@Override
 	public boolean getCompletato() {
-		return false;
+		return completato;
 	}
 }

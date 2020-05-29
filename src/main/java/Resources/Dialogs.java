@@ -4,10 +4,14 @@ public class Dialogs {
 	public static String[] BUSDRIVER = {
 			"Maledizione! Abbiamo preso in pieno una voragine! Mi dispiace ma dovrai proseguire a piedi.",
 			"C'e' poco traffico... strano." };
-	public static String[] BAKER = {
+	public static String[] BAKER_A= {"Non hai ancora portato il pacco che ti ho chiesto?\nSbrigati!",
+			"Non vedo l'ora di ascoltare la mia amata musica napoletana... \nSTAVI ORIGLIANDO?! "};
+	public static String[] BAKER_B= {
 			"Grazie di avermelo portato, e' il mio CD preferito! Ma aspetta, attento ad uscire!",
 			"Ho visto dei dinosauri in citta'. Secondo alcune persone, sono stati creati al dipartimento di Fisica.",
 			"Maledetti fisici! Per ora i dinosauri sono andati a mangiare i cinghiali al CEP. Abbiamo poco tempo, devi scappare!" };
+	public static String[] BAKER_C = {"Pizzaiolo: Seguimi dentro\nIl pizzaiolo prende il pacco ed entra dentro la pizzeria"};
+	public static String[] BAKER_D = {"Ti ho gia detto che non ti faccio entrare"};
 	public static String[] CANNAVACCIUOLO_A = { "Finalmente arriva qualcuno, devi essere dello staff vero? \r\n"
 			+ "AH! Per farti perdonare, fammi un bel caffe' e ti daro' un regalo" };
 	public static String[] CANNAVACCIUOLO_B = { "Era un caffe' tradizionale. A Napoli e' importante la tradizione.",

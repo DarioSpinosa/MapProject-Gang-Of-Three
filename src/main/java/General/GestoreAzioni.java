@@ -13,7 +13,9 @@ import Entita.Partita;
 import Entita.Stanza;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonista;
+import General.Eventi.GenericGestoreEvento;
 import General.Eventi.GestoreEventoCaffe;
+import General.Eventi.GestoreEventoPacco;
 import General.Eventi.GestoreEventoPannello;
 import General.Eventi.Enigmi.Caffe;
 import General.Eventi.Enigmi.Pannello;
@@ -83,8 +85,11 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		metti.setAlias(new String[] { "versa" });
 		comandi.add(metti);
 		Command abbassa = new Command(CommandType.ABBASSA, "abbassa");
-		metti.setAlias(new String[] {});
+		abbassa.setAlias(new String[] {});
 		comandi.add(abbassa);
+		Command dai = new Command(CommandType.DAI, "dai");
+		dai.setAlias(new String[] {"consegna"});
+		comandi.add(dai);
 	}
 
 	@Override
@@ -94,6 +99,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		ArrayList<GenericObject> oggettiStanza = stanzaCorrente.getOggetti().getContainer();
 		GenericObject primo = action.getPrimoOggetto();
 		GenericObject secondo = action.getSecondoOggetto();
+		GenericGestoreEvento gestore = partita.getStanzaCorrente().getGestoreEvento();
 		switch (action.getComando().getCommandType()) {
 		case NORD:
 			movimentoNord();
@@ -170,6 +176,11 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			}
 
+			break;
+		case DAI:
+			if(gestore instanceof GestoreEventoPacco) {
+				gestore.terminaEvento(protagonista, oggetti);
+			}
 			break;
 		case LASCIA:
 			if (primo != null && secondo == null) {
@@ -260,30 +271,26 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case PARLA:
 			if (action.getPersonaggio() != null
-					&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
-					&& action.getPersonaggio() instanceof Npc) {
+			&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
+			&& action.getPersonaggio() instanceof Npc) {
 				Npc npc = (Npc) partita.getStanzaCorrente().getPersonaggio(action.getPersonaggio());
-				stampa.stampaMessaggio("\n" + npc.getDialogo());
+				stampa.stampaMessaggio("\n" + npc.getNome().getName() + ": " + npc.getDialogo());
+
 			} else {
 				stampa.messaggioNonCompreso();
 			}
 			break;
 		case USA:
-			if (partita.getStanzaCorrente().getGestoreEvento() instanceof GestoreEventoCaffe &&
+			if (gestore != null && gestore instanceof GestoreEventoCaffe &&
 					primo.getNome().equals("macchinetta")) {
 				stampa.stampaMessaggio(((Caffe) (primo)).switchOn());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && ((Caffe) primo).getCompletato()) {
-					protagonista.getInventario().addToContainer(((Caffe) (primo)).getCoffee());
-					partita.getOggetti().add(((Caffe) (primo)).getCoffee());
-					((GestoreEventoCaffe) partita.getStanzaCorrente().getGestoreEvento()).terminaEvento(oggetti);
-				}
-			}
-			else if (partita.getStanzaCorrente().getGestoreEvento() instanceof GestoreEventoPannello &&
+				gestore.terminaEvento(protagonista, oggetti);
+
+			}else if (gestore != null && gestore instanceof GestoreEventoPannello &&
 					primo.getNome().equals("pannello")) {
 				stampa.stampaMessaggio(((Pannello) (primo)).switchOn());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && ((Pannello) primo).getCompletato()) {
-					((GestoreEventoPannello) partita.getStanzaCorrente().getGestoreEvento()).terminaEvento(oggetti);
-				}
+				gestore.terminaEvento(protagonista, oggetti);
+
 			}else if (primo != null && secondo == null) {
 				if (protagonista.isInInventario(primo)) {
 					usaOggetto(primo);
@@ -295,8 +302,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case METTI:
-			if (partita.getStanzaCorrente().getGestoreEvento() instanceof GestoreEventoCaffe) {
-
+			if (gestore instanceof GestoreEventoCaffe && primo != null && secondo != null) {
 				if(primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")) {
 					stampa.stampaMessaggio(((Caffe) (secondo)).addCoffee());
 					protagonista.getInventario().removeFromContainer(primo);
@@ -310,28 +316,32 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			break;
 		case ABBASSA:
-			if (partita.getStanzaCorrente().getGestoreEvento() instanceof GestoreEventoPannello &&
-					primo.getNome().equals("leva") && secondo.getNome().equals("pannello")) {
+			if (gestore instanceof GestoreEventoPannello && primo != null
+					&& primo.getNome().equals("leva") && action.getPrimoAggettivo() != null) {
 				switch(action.getPrimoAggettivo()) {
 				case "rossa":
-					((Pannello)secondo).switchFirstToggle();
+					((Pannello)gestore.getEvento().getEnigma()).switchFirstToggle();
 					break;
 				case "gialla":
-					((Pannello)secondo).switchSecondToggle();
+					((Pannello)gestore.getEvento().getEnigma()).switchSecondToggle();
 					break;
 				case "verde":
-					((Pannello)secondo).switchThirdToggle();
+					((Pannello)gestore.getEvento().getEnigma()).switchThirdToggle();
 					break;
 				case "blu":
-					((Pannello)secondo).switchFourthToggle();
+					((Pannello)gestore.getEvento().getEnigma()).switchFourthToggle();
 					break;
 				case "nera":
-					((Pannello)secondo).switchFifthToggle();
+					((Pannello)gestore.getEvento().getEnigma()).switchFifthToggle();
 					break;
 				}
 			} else
-				stampa.messaggioOggettoNonPresenteInventario();
+				stampa.messaggioNonCompreso();
 			break;
+		case MANGIA:
+			break;
+		case BEVI:
+
 		}
 
 	}
@@ -375,8 +385,10 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
 				if (partita.getStanzaCorrente().getGestoreEvento() != null)
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
-			}else
+			}else {
 				stampa.messaggioStanzaChiusa();
+
+			}
 		} else
 			stampa.messaggioStanzaInesistente();
 

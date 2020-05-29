@@ -9,8 +9,9 @@ import General.GenericObject;
 import General.Name;
 import General.ObjectType;
 import Parser.WordType;
+import Resources.Descriptions;
 
-public class Caffe extends GenericObject implements Enigma{
+public class Caffe extends Enigma{
 	/*
 	 * E' una macchina per il caffe' usata in tantissimi bar. Devo solo riempirla di
 	 * caffe' e acqua, poi premere il tasto di accesione"
@@ -66,10 +67,10 @@ public class Caffe extends GenericObject implements Enigma{
 	}
 
 	public GenericObject getCoffee() {
-		Name NomeCaffeCaldo = new Name("tazza_di_caffe", WordType.NOME);
+		Name NomeCaffeCaldo = new Name("espresso", WordType.NOME);
 		NomeCaffeCaldo.setArticoli(new String[] { "un" });
-		NomeCaffeCaldo.setPreposizioni(new String[] { "quello" });
-		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, "una tazza di caffe caldo", ObjectType.EVENT);
+		NomeCaffeCaldo.setPreposizioni(new String[] { "quel" });
+		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
 		return TazzaDiCaffe;
 	}
 }

@@ -14,7 +14,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     public GestoreMessaggi(AdventureGUI interfaccia){
         super(interfaccia);
     }
-    
+
     @Override
     public void messaggioInizioGioco(String nome, String descrizione){
         interfaccia.stampaMessaggio("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n" +
@@ -32,13 +32,13 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
         int rand = (int)(Math.random() * 3);
         switch(rand) {
         case 0 :
-        	 interfaccia.stampaMessaggio("A meno che tu non sia un fantasma, non puoi attraversare quella parete");
+        	 interfaccia.stampaMessaggio("!!!A meno che tu non sia un fantasma, non puoi attraversare quella parete!!!");
         	 break;
         case 1:
-        	 interfaccia.stampaMessaggio("Se continui di questo passo ti verrà un trauma cranico");
+        	 interfaccia.stampaMessaggio("!!!Se continui di questo passo ti verra'  un trauma cranico!!!");
         	 break;
         case 2:
-        	 interfaccia.stampaMessaggio("Se colpisci il muro ancora una volta la gente pensarà che tu sia pazzo");
+        	 interfaccia.stampaMessaggio("!!!Se colpisci il muro ancora una volta la gente pensara'  che tu sia pazzo!!!");
 
         }
     }
@@ -48,10 +48,10 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
     	int rand = (int)(Math.random() * 2);
         switch(rand) {
         case 0 :
-        	 interfaccia.stampaMessaggio("La porta non si apre, non posso proseguire");
+        	 interfaccia.stampaMessaggio("!!!La porta non si apre, non posso proseguire!!!");
         	 break;
         case 1:
-        	 interfaccia.stampaMessaggio("Questa porta e' chiusa, forse dovrei fare altro prima di andare avanti");
+        	 interfaccia.stampaMessaggio("!!!Questa porta e' chiusa, forse dovrei fare altro prima di andare avanti!!!");
         }
 	}
 
@@ -93,7 +93,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void messaggioOggettoNonPresente(){
-        interfaccia.stampaMessaggio("Oggetto non presente né nella stanza né nell'inventario");
+        interfaccia.stampaMessaggio("Oggetto non presente nÃ© nella stanza nÃ© nell'inventario");
     }
 
     @Override
@@ -133,12 +133,12 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void messaggioOggettoNonReperibile(){
-        interfaccia.stampaMessaggio("L'oggetto non contiene ciò che cerchi");
+        interfaccia.stampaMessaggio("L'oggetto non contiene ciÃ² che cerchi");
     }
 
     @Override
     public void messaggioOggettoChiuso(GenericObject oggetto){
-        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è chiuso");
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " Ã¨ chiuso");
     }
 
     @Override
@@ -148,7 +148,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void messaggioCombinazioneNonDisponibile(GenericObject oggetto1, GenericObject oggetto2){
-        interfaccia.stampaMessaggio("Non è possibile combinare " + oggetto1 + " con " + oggetto2);
+        interfaccia.stampaMessaggio("Non Ã¨ possibile combinare " + oggetto1 + " con " + oggetto2);
     }
 
     @Override
@@ -158,7 +158,7 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void messaggioOggettoSpecificoNonInInventario(GenericObject oggetto){
-        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " non è presente nel tuo inventario");
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " non Ã¨ presente nel tuo inventario");
     }
 
     @Override
@@ -168,17 +168,17 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials{
 
     @Override
     public void messaggioOggettoGiaAperto(GenericObject oggetto){
-        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già aperto");
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " Ã¨ giÃ  aperto");
     }
 
     @Override
     public void messaggioOggettoGiaChiuso(GenericObject oggetto){
-        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " è già chiuso");
+        interfaccia.stampaMessaggio("L'oggetto " + oggetto + " Ã¨ giÃ  chiuso");
     }
 
     @Override
     public void messaggioVitaMassima(){
-        interfaccia.stampaMessaggio("Sei già al massimo della vita, conserva le tue cure, nabbo!");
+        interfaccia.stampaMessaggio("Sei giÃ  al massimo della vita, conserva le tue cure, nabbo!");
     }
 
     @Override
