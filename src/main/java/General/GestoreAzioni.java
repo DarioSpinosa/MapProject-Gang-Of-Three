@@ -20,6 +20,7 @@ import General.Eventi.GestoreEventoPannello;
 import General.Eventi.Enigmi.Caffe;
 import General.Eventi.Enigmi.Pannello;
 import Parser.ParserOutput;
+import Resources.Dialogs;
 
 /**
  *
@@ -178,9 +179,13 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 			break;
 		case DAI:
-			if(gestore instanceof GestoreEventoPacco) {
+			if(gestore instanceof GestoreEventoPacco && protagonista.getInventario().contains(gestore.getEvento().getEnigma())
+					&& primo != null && primo.equals(gestore.getEvento().getEnigma())) {
 				gestore.terminaEvento(protagonista, oggetti);
+				stampa.stampaMessaggio(Dialogs.BAKER_C);
 			}
+			else
+				stampa.stampaMessaggio(Dialogs.BAKER_D);
 			break;
 		case LASCIA:
 			if (primo != null && secondo == null) {

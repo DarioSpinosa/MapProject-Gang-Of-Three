@@ -11,7 +11,6 @@ import Entita.Characters.Npc;
 import Entita.Characters.Personaggio;
 import Entita.Characters.Protagonista;
 import General.GenericObject;
-import General.GenericObjectContainer;
 import General.Name;
 import General.ObjectType;
 import General.Eventi.Evento;
@@ -134,7 +133,7 @@ public class Partita {
 		Name nomePacco = new Name("pacco", WordType.NOME);
 		nomePacco.setArticoli(new String[] { "il" });
 		GenericObject pacco =
-				new GenericObjectContainer(nomePacco, Descriptions.PACK, ObjectType.NORMAL);
+				new GenericObject(nomePacco, Descriptions.PACK, ObjectType.CONTAINER);
 		pacco.setAggettivi(new String[] {"jamazon"});
 
 		Name nomeCd = new Name("cd", WordType.NOME);
