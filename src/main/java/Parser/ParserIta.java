@@ -129,7 +129,7 @@ public class ParserIta extends ParserEssentials {
                     setLastWordType(WordType.NOME);
                     break;
                 }
-                } else if (personaggio.getNome().getName().equals(token)){
+                } else if (personaggio.getNome().getName().equalsIgnoreCase(token)){
                     if(lastWordType == WordType.COMANDO || lastWordType == WordType.COMANDO_PARLA){
                         confirmed = true;
                         output.setPersonaggio(personaggio);

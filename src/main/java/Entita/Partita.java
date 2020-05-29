@@ -100,8 +100,8 @@ public class Partita {
 				new Name("Almerino", WordType.NOME_PROPRIO);
 		nomePizzaiolo.setPreposizioni(new String[] { "a", "con" });
 		Name aliasPizzaiolo = new Name("pizzaiolo", WordType.NOME);
-		aliasBarista.setArticoli(new String[] { "il" });
-		aliasBarista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
+		aliasPizzaiolo.setArticoli(new String[] { "il" });
+		aliasPizzaiolo.setPreposizioni(new String[] { "con", "a", "all", "ad" });
 		Personaggio pizzaiolo = new Npc(nomePizzaiolo, Dialogs.BAKER_A);
 		pizzaiolo.setAlias(new Name[] { aliasPizzaiolo });
 		pizzeria1.addPersonaggio(pizzaiolo);
@@ -137,10 +137,10 @@ public class Partita {
 		pacco.setAggettivi(new String[] {"jamazon"});
 
 		Name nomeCd = new Name("cd", WordType.NOME);
-		nomePacco.setArticoli(new String[] { "il", "un" });
+		nomeCd.setArticoli(new String[] { "il", "un" });
 		GenericObject cd =
 				new GenericObject(nomeCd, Descriptions.CD, ObjectType.NORMAL);
-		pacco.setAggettivi(new String[] {"musicale", "napoletano"});
+		cd.setAggettivi(new String[] {"musicale", "napoletano"});
 
 		oggetti.add(leva);
 		oggetti.add(acqua);

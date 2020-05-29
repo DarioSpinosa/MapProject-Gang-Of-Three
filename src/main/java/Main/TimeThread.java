@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 public class TimeThread extends Thread {
     private int minutes;
     private int seconds;
-    private JLabel minute;
-    private JLabel second;
+    private final JLabel minute;
+    private final JLabel second;
     
     public TimeThread(int minutes, int seconds, JLabel minute, JLabel second){
         this.minutes = minutes;

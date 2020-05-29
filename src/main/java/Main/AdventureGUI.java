@@ -2,6 +2,7 @@ package Main;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import Resources.InterfaceText;
 import Entita.Partita;
 import General.GestoreAzioni;
 import General.GestoreAzioniEssentials;
@@ -10,6 +11,8 @@ import General.GestoreMessaggiEssentials;
 import Parser.ParserEssentials;
 import Parser.ParserIta;
 import Parser.ParserOutput;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 /**
  *
  * @author RESTA
@@ -52,8 +55,20 @@ public class AdventureGUI extends javax.swing.JFrame {
         articles.add("una");
         parser = new ParserIta(articles, prepositions);
         stampante.messaggioInizioGioco(azioni.getStanzaCorrente().getNome(), azioni.getStanzaCorrente().getDescrizione());
-        Thread time = new TimeThread(10, 0, jlMinute, jlSecond);
-        time.start();
+        Thread game = new GameThread(this, 0, 10);
+        game.start();
+    }
+    
+    public JLabel getMinute(){
+        return jlMinute;
+    }
+    
+    public JLabel getSecond(){
+        return jlSecond;
+    }
+    
+    public JTextArea getConsole(){
+        return jtConsole;
     }
 
     public void stampaMessaggio(String messaggio){
@@ -80,7 +95,7 @@ public class AdventureGUI extends javax.swing.JFrame {
         jlSecond = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Dino Game");
+        setTitle("UniVSDino");
 
         jtConsole.setEditable(false);
         jtConsole.setColumns(20);
@@ -128,7 +143,11 @@ public class AdventureGUI extends javax.swing.JFrame {
             }
         });
 
-        jlComandi.setText("Comandi");
+        jlComandi.setText(InterfaceText.commands);
+
+        jlMinute.setFont(new java.awt.Font("Jokerman", 1, 18)); // NOI18N
+
+        jlSecond.setFont(new java.awt.Font("Jokerman", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
