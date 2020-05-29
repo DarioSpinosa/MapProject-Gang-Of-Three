@@ -75,15 +75,14 @@ public class Partita {
 		strada6.setSotto(strada5).setDestra(informatica1);
 		informatica1.setSinistra(strada6);
 
-
 		Name nomeAutista = new Name("mimmo", WordType.NOME_PROPRIO);
 		nomeAutista.setPreposizioni(new String[] { "a", "con" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
 		aliasAutista.setArticoli(new String[] { "l" });
 		aliasAutista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
-		Personaggio autista = new Npc(nomeAutista,
-				new String[] { "Autista: Maledizione! Abbiamo preso in pieno una voragine!\nMi dispiace ma dovrai proseguire a piedi",
-						"Autista: C'e' poco traffico... strano." });
+		Personaggio autista = new Npc(nomeAutista, new String[] {
+				"Autista: Maledizione! Abbiamo preso in pieno una voragine!\nMi dispiace ma dovrai proseguire a piedi",
+				"Autista: C'e' poco traffico... strano." });
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addPersonaggio(autista);
 		Name nomeBarista = new Name("Sedicina", WordType.NOME_PROPRIO);
@@ -91,7 +90,8 @@ public class Partita {
 		Name aliasBarista = new Name("barista", WordType.NOME);
 		aliasBarista.setArticoli(new String[] { "l" });
 		aliasBarista.setPreposizioni(new String[] { "con", "a", "all", "ad" });
-		Personaggio barista = new Npc(nomeAutista, new String[] { "Sono il barista Sedicina", "Tu di qua non esci finche non hai fatto un caffe" });
+		Personaggio barista = new Npc(nomeAutista,
+				new String[] { "Sono il barista Sedicina", "Tu di qua non esci finche non hai fatto un caffe" });
 		barista.setAlias(new Name[] { aliasBarista });
 		chimica1.addPersonaggio(barista);
 		/*
@@ -99,6 +99,20 @@ public class Partita {
 		 * Npc("giacomo volpe")); chimica1.addPersonaggio(new Npc("bruno"));
 		 * informatica1.addPersonaggio(new Npc("antonino"));
 		 */
+
+		Name nomeCD = new Name("CD", WordType.NOME);
+		nomeCD.setArticoli(new String[] { "il", "un" });
+		nomeCD.setPreposizioni(new String[] { "quel" });
+		GenericObject CD = new GenericObject(nomeCD, "un CD di musica neomelodica", ObjectType.NORMAL,
+				new GestoreAlias(new Name[] {}));
+
+		Name nomePacco = new Name("pacco", WordType.NOME);
+		nomePacco.setArticoli(new String[] { "il", "un" });
+		nomePacco.setPreposizioni(new String[] { "nel", "in", "da", "dal" });
+		GenericObject pacco = new GenericObjectContainer(nomePacco, "un pacco jamazon", ObjectType.CONTAINER);
+		pacco.setAggettivi(new String[] { "jamazon" });
+		pacco.setPrendibile(true);
+		((GenericObjectContainer) (pacco)).addToContainer(CD);
 
 		Name nomeTorta = new Name("torta", WordType.NOME);
 		nomeTorta.setArticoli(new String[] { "la", "una" });
@@ -118,8 +132,7 @@ public class Partita {
 		Name nomeBaule = new Name("baule", WordType.NOME);
 		nomeBaule.setArticoli(new String[] { "il", "un" });
 		nomeBaule.setPreposizioni(new String[] { "nel", "in", "da", "dal" });
-		GenericObject baule =
-				new GenericObjectContainer(nomeBaule, "un baule", ObjectType.CONTAINER);
+		GenericObject baule = new GenericObjectContainer(nomeBaule, "un baule", ObjectType.CONTAINER);
 		baule.setAggettivi(new String[] { "antico" });
 		baule.setPrendibile(false);
 		((GenericObjectContainer) (baule)).addToContainer(torta);
@@ -149,21 +162,21 @@ public class Partita {
 
 		Evento preparaCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
-						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?" +
-						"\nSedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
+						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?"
+						+ "\nSedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
 		Name NameCaffe = new Name("macchinetta", WordType.NOME);
 		NameCaffe.setArticoli(new String[] { "la", "una" });
-		NameCaffe.setPreposizioni(new String[] { "nella"});
+		NameCaffe.setPreposizioni(new String[] { "nella" });
 		GenericObject macchinaCaffe = new Caffe(NameCaffe, "Una macchina per fare il cazzo di caffe");
 		macchinaCaffe.setPrendibile(false);
 		preparaCaffe.addEnigma(macchinaCaffe);
 		chimica1.setGestoreEvento(new GestoreEventoCaffe(preparaCaffe, chimica1));
-		Evento eventoPannello = new Evento(
-				"\nLa porta successiva e' bloccata da qualche meccanismo\n");
+		Evento eventoPannello = new Evento("\nLa porta successiva e' bloccata da qualche meccanismo\n");
 		Name NamePannello = new Name("pannello", WordType.NOME);
-		NamePannello.setArticoli(new String[] { "il",});
-		NamePannello.setPreposizioni(new String[] { "del"});
-		GenericObject pannello = new Pannello(NamePannello, "Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
+		NamePannello.setArticoli(new String[] { "il", });
+		NamePannello.setPreposizioni(new String[] { "del" });
+		GenericObject pannello = new Pannello(NamePannello,
+				"Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
 		pannello.setPrendibile(false);
 		eventoPannello.addEnigma(pannello);
 		fisica1.setGestoreEvento(new GestoreEventoPannello(eventoPannello, fisica1));
