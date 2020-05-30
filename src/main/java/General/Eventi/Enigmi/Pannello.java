@@ -5,10 +5,11 @@
 */
 package General.Eventi.Enigmi;
 
+import General.GenericObject;
 import General.Name;
 import General.ObjectType;
 
-public class Pannello extends Enigma{
+public class Pannello extends GenericObject implements Enigma{
 	/*
 	 * E' un pannello per il controllo della corrente elettrica. Leggi la targhetta:
 	 * "Per accendere il generatore principale, selezionare il voltaggio con le 5

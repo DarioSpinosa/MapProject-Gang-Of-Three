@@ -20,6 +20,8 @@ import General.Eventi.Evento;
 import General.Eventi.GestoreEventoCaffe;
 import General.Eventi.GestoreEventoPacco;
 import General.Eventi.GestoreEventoPannello;
+import General.Eventi.GestoreEventoPortaDib;
+import General.Eventi.GestoreEventoPortaFis;
 import General.Eventi.GestoreEventoRivista;
 import General.Eventi.Enigmi.Caffe;
 import General.Eventi.Enigmi.Pannello;
@@ -76,6 +78,7 @@ public class Partita {
 		strada6.setSotto(strada5).setDestra(informatica1);
 		informatica1.setSinistra(strada6);
 		fisica1.setAccessibile(false);
+		informatica1.setAccessibile(false);
 
 		// NPC
 
@@ -227,9 +230,15 @@ public class Partita {
 		nomePropulsore.setArticoli(new String[] { "il", "un" });
 		GenericObject propulsore = new GenericObject(nomePropulsore, Descriptions.ENGINE, ObjectType.NORMAL);
 
-		Name nomeChiavi = new Name("chiavi", WordType.NOME);
-		nomeChiavi.setArticoli(new String[] { "le" });
-		GenericObject chiaviDib = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
+		Name nomeChiaviDib = new Name("chiavi", WordType.NOME);
+		nomeChiaviDib.setArticoli(new String[] { "le" });
+		GenericObject chiaviDib = new GenericObject(nomeChiaviDib, Descriptions.KEYS, ObjectType.NORMAL);
+		chiaviDib.setAggettivi(new String[] {"dib"});
+
+		Name nomeChiaviFis = new Name("chiavi", WordType.NOME);
+		nomeChiaviFis.setArticoli(new String[] { "le" });
+		GenericObject chiaviFis = new GenericObject(nomeChiaviFis, Descriptions.KEYS, ObjectType.NORMAL);
+		chiaviFis.setAggettivi(new String[] {"fisica"});
 
 		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
 		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
@@ -273,6 +282,7 @@ public class Partita {
 		oggetti.add(macchinaCaffe);
 		oggetti.add(pannello);
 		oggetti.add(taglierino);
+		oggetti.add(chiaviFis);
 		executive.addOggetto(viti);
 		strada1.addOggetto(taglierino);
 		chimica1.addOggetto(acqua);
@@ -307,11 +317,19 @@ public class Partita {
 				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...");
 		consegnaRivista.addEnigma(rivista);
 		informatica1.setGestoreEvento(new GestoreEventoRivista(consegnaRivista, informatica1));
-		informatica1.getGestoreEvento().setRicompensa(chiaviDib);//TODO CAMBIARE
+		informatica1.getGestoreEvento().setRicompensa(chiaviFis);
 
 		Evento apriMacchina = new Evento("");
 		apriMacchina.addEnigma(lucchetto);
 		stradaChiusa.setGestoreEvento(new GestoreEventoRivista(apriMacchina, stradaChiusa));
+
+		Evento portaFisica = new Evento("La porta del dipartimento di fisica e' chiusa a chiave, devo trovare un altro modo");
+		portaFisica.addEnigma(chiaviFis);
+		strada5.setGestoreEvento(new GestoreEventoPortaFis(portaFisica, strada5));
+
+		Evento portaDib = new Evento("La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo");
+		portaDib.addEnigma(chiaviDib);
+		strada6.setGestoreEvento(new  GestoreEventoPortaDib(portaDib, strada6));
 
 		stanzaCorrente = strada1;
 	}

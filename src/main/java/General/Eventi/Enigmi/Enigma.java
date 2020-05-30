@@ -1,14 +1,7 @@
 package General.Eventi.Enigmi;
 
-import General.GenericObject;
-import General.Name;
-import General.ObjectType;
+public interface Enigma {
 
-public abstract class Enigma extends GenericObject{
-
-	public Enigma(Name nome, String descrizione, ObjectType id) {
-		super(nome, descrizione, id);
-	}
-
-	public abstract boolean getCompletato();
+	public boolean getCompletato();
+	public String switchOn();
 }
