@@ -47,6 +47,17 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials {
 	}
 
 	@Override
+	public void messaggioLevaGiaAbbassata() {
+		interfaccia.stampaMessaggio("La leva e' gia abbassata");
+	}
+
+	@Override
+	public void messaggioLevaGiaAlzata() {
+		interfaccia.stampaMessaggio("La leva e' gia alzata");
+	}
+
+
+	@Override
 	public void messaggioStanzaChiusa() {
 		int rand = (int) (Math.random() * 2);
 		switch (rand) {

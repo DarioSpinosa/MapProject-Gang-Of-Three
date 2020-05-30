@@ -150,6 +150,11 @@ public class Partita {
 		GenericObject macchinaCaffe = new Caffe(nomeMacchinetta, Descriptions.COFFEEMAKER);
 		macchinaCaffe.setPrendibile(false);
 
+		Name nomeLucchetto = new Name("lucchetto", WordType.NOME);
+		nomeLucchetto.setArticoli(new String[] { "il", "un" });
+		GenericObject lucchetto = new Caffe(nomeLucchetto, Descriptions.COFFEEMAKER);
+		lucchetto.setPrendibile(false);
+
 		Name nomeAcqua = new Name("acqua", WordType.NOME);
 		nomeAcqua.setArticoli(new String[] { "l" });
 		nomeAcqua.setPreposizioni(new String[] { "quella" });
@@ -181,13 +186,15 @@ public class Partita {
 
 		Name nomePacco = new Name("pacco", WordType.NOME);
 		nomePacco.setArticoli(new String[] { "il" });
-		GenericObject pacco = new GenericObject(nomePacco, Descriptions.PACK, ObjectType.NORMAL);
+		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK, ObjectType.NORMAL);
 		pacco.setAggettivi(new String[] { "jamazon" });
 
 		Name nomeCd = new Name("cd", WordType.NOME);
 		nomeCd.setArticoli(new String[] { "il", "un" });
 		GenericObject cd = new GenericObject(nomeCd, Descriptions.CD, ObjectType.NORMAL);
 		cd.setAggettivi(new String[] { "musicale", "napoletano" });
+		((GenericObjectContainer)pacco).addToContainer(cd);
+		((GenericObjectContainer)pacco).setBloccato(true);
 
 		Name nomeRivista = new Name("rivista", WordType.NOME);
 		nomeRivista.setArticoli(new String[] { "la" });
@@ -221,6 +228,11 @@ public class Partita {
 		nomeChiavi.setArticoli(new String[] { "le" });
 		GenericObject chiavi = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
 
+		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
+		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
+		nomeTaglierino.setPreposizioni(new String[] { "con" });
+		GenericObject taglierino = new GenericObject(nomeTaglierino, Descriptions.KNIFE, ObjectType.NORMAL);
+
 		Name nomeAuto = new Name("automobile", WordType.NOME);
 		nomeAuto.setArticoli(new String[] { "l" });
 		Name aliasAuto1 = new Name("berlina", WordType.NOME);
@@ -232,26 +244,21 @@ public class Partita {
 		Name aliasAuto4 = new Name("bagagliaio", WordType.NOME);
 		aliasAuto4.setArticoli(new String[] { "il" });
 		GestoreAlias aliasMacchina = new GestoreAlias(new Name[] { aliasAuto1, aliasAuto2, aliasAuto3, aliasAuto4 });
-		GenericObjectContainer automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED,
+		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED,
 				ObjectType.CONTAINER, aliasMacchina);
-		automobile.addToContainer(rivista);
+		((GenericObjectContainer)automobile).addToContainer(rivista);
 		automobile.setPrendibile(false);
+		((GenericObjectContainer)automobile).setBloccato(true);
 
 		oggetti.add(leva);
 		oggetti.add(acqua);
-		chimica1.addOggetto(acqua);
 		oggetti.add(caffe);
-		pizzeria2.addOggetto(caffe);
 		oggetti.add(caffeCaldo);
 		oggetti.add(cartellone);
-		strada3.addOggetto(cartellone);
 		oggetti.add(pacco);
-		strada3.addOggetto(pacco);
 		oggetti.add(poster);
-		fisica1.addOggetto(poster);
 		oggetti.add(rivista);
 		oggetti.add(automobile);
-		stradaChiusa.addOggetto(automobile);
 		oggetti.add(cd);
 		oggetti.add(grimaldello1);
 		oggetti.add(forcina);
@@ -261,13 +268,20 @@ public class Partita {
 		oggetti.add(propulsore);
 		oggetti.add(chiavi);
 		oggetti.add(macchinaCaffe);
-		chimica1.addOggetto(macchinaCaffe);
 		oggetti.add(pannello);
+		oggetti.add(taglierino);
+		strada1.addOggetto(taglierino);
+		chimica1.addOggetto(acqua);
+		strada3.addOggetto(cartellone);
+		strada3.addOggetto(pacco);
+		fisica1.addOggetto(poster);
+		stradaChiusa.addOggetto(automobile);
+		chimica1.addOggetto(macchinaCaffe);
 		fisica1.addOggetto(pannello);
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
-		// Eventi
+		//EVENTI
 		Evento eventoCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
 						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?"
@@ -282,14 +296,19 @@ public class Partita {
 
 		Evento consegnaPacco = new Evento("\nLa pizzeria ha una barricata di legno che ti impedisce l'accesso\n"
 				+ "Senti una voce: Ehi tu! Sono il pizzaiolo, portami il contenuto di quel pacco Jamazon e ti faro' entrare");
-		consegnaPacco.addEnigma(pacco);
+		consegnaPacco.addEnigma(cd);
 		pizzeria1.setGestoreEvento(new GestoreEventoPacco(consegnaPacco, pizzeria1));
+		pizzeria1.getGestoreEvento().setRicompensa(caffe);
 
 		Evento consegnaRivista = new Evento(
 				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...");
 		consegnaRivista.addEnigma(rivista);
 		informatica1.setGestoreEvento(new GestoreEventoRivista(consegnaRivista, informatica1));
 		informatica1.getGestoreEvento().setRicompensa(chiavi);
+
+		Evento apriMacchina = new Evento("");
+		apriMacchina.addEnigma(lucchetto);
+		stradaChiusa.setGestoreEvento(new GestoreEventoRivista(apriMacchina, stradaChiusa));
 
 		stanzaCorrente = strada1;
 	}

@@ -19,5 +19,7 @@ public class Descriptions {
 	public static final String CAR_CLOSED = "E' una berlina di quelle costose, ha lo sticker del dipartimento di fisica sul parabrezza. \n Il bagagliaio e' quasi aperto, ma e' protetto da un lucchetto";
 	public static final String CAR_OPENED = "Apri il bagagliaio della berlina... trovi uno strano componenete e una rivista zozza!";
 	public static final String ENGINE = "E' il propulsore ionico per la macchina a raggi cosmici, portalo a Volpe, presto!";
+	public static final String KNIFE = "E' un taglierino affilato, potrebbe servirti più in la";
+
 
 }

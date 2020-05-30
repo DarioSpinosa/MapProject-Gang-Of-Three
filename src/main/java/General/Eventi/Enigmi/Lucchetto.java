@@ -23,11 +23,11 @@ public class Lucchetto extends Enigma {
 	private boolean completato = false;
 
 	public void lowTension() {
-		setTension(1);
+		setTension(2);
 	}
 
 	public void highTension() {
-		setTension(2);
+		setTension(3);
 	}
 
 	private void setTension(int tension) {
@@ -35,12 +35,12 @@ public class Lucchetto extends Enigma {
 	}
 
 	public boolean switchOn() {
-		if (picked > 5) {
+		if (picked > 10) {
 			picked = 0;
 			System.out.println("Il tensore si e' spezzato!");
 			return false;
 		}
-		if (picked < 5) {
+		if (picked < 10) {
 			System.out.println("La tensione non e' sufficiente!");
 			return false;
 		}

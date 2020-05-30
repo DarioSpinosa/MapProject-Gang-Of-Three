@@ -19,6 +19,7 @@ public class GestoreEventoPacco extends GenericGestoreEvento {
 			stanza.getDestra().addPersonaggio(stanza.getPersonaggi().get(0));
 			stanza.getPersonaggi().remove(0);
 			p.removeOggetto(missione.getEnigma());
+			p.getInventario().addToContainer(ricompensa);
 
 		}
 	}

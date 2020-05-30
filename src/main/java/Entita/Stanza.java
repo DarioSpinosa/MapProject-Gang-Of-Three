@@ -118,6 +118,15 @@ public class Stanza {
 		return oggetti.get(i);
 	}
 
+	public GenericObject getOggetto(String s) {
+		for(GenericObject oggetto: oggetti.getContainer()) {
+			if(oggetto.getNome().equals(s))
+				return oggetto;
+		}
+
+		return null;
+	}
+
 	public GenericObjectContainer getOggetti() {
 		return oggetti;
 	}

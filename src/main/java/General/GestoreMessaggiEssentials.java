@@ -98,4 +98,8 @@ public abstract class GestoreMessaggiEssentials {
 	public abstract void messaggioOggettoNonPrendibile(GenericObject oggetto);
 
 	public abstract void messaggioOggettoConDescrizione(GenericObject oggetto);
+
+	public abstract void messaggioLevaGiaAbbassata();
+
+	public abstract void messaggioLevaGiaAlzata();
 }

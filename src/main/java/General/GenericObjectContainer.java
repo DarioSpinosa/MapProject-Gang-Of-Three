@@ -12,6 +12,7 @@ public class GenericObjectContainer extends GenericObject {
 	private ArrayList<GenericObject> container = new ArrayList<>();
 	private int maxSize;
 	private boolean opened = false;
+	private boolean bloccato = false;
 
 	public GenericObjectContainer(Name nome, String descrizione, ObjectType id) {
 		super(nome, descrizione, id);
@@ -24,6 +25,14 @@ public class GenericObjectContainer extends GenericObject {
 	public GenericObjectContainer(Name nome, String descrizione, ObjectType id, int maxSize) {
 		super(nome, descrizione, id);
 		this.maxSize = maxSize;
+	}
+
+	public boolean getBloccato() {
+		return bloccato;
+	}
+
+	public void setBloccato(boolean b) {
+		bloccato = b;
 	}
 
 	public int getMaxSize() {
@@ -64,7 +73,7 @@ public class GenericObjectContainer extends GenericObject {
 	public void close() {
 		opened = false;
 	}
-        
+
     public GenericObject getOggetto(GenericObject oggetto) {
     	for(GenericObject obj : container) {
     		if(obj.equals(oggetto)) {
@@ -73,7 +82,7 @@ public class GenericObjectContainer extends GenericObject {
     	}
     	return null;
     }
-        
+
         public void removeOggetto(GenericObject oggetto){
             container.remove(oggetto);
         }

@@ -75,7 +75,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		lascia.setAlias(new String[] { "poggia", "posa" });
 		comandi.add(lascia);
 		Command apri = new Command(CommandType.APRI, "apri");
-		apri.setAlias(new String[] { "alza" });
+		apri.setAlias(new String[] {});
 		comandi.add(apri);
 		Command chiudi = new Command(CommandType.CHIUDI, "chiudi");
 		comandi.add(chiudi);
@@ -89,6 +89,9 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		Command abbassa = new Command(CommandType.ABBASSA, "abbassa");
 		abbassa.setAlias(new String[] {});
 		comandi.add(abbassa);
+		Command alza = new Command(CommandType.ALZA, "alza");
+		alza.setAlias(new String[] {});
+		comandi.add(alza);
 		Command dai = new Command(CommandType.DAI, "dai");
 		dai.setAlias(new String[] { "consegna" });
 		comandi.add(dai);
@@ -262,7 +265,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case COMBINA:
 			if (primo != null && secondo != null
-					&& (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))) {
+			&& (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))) {
 				if (protagonista.isInInventario(primo) && protagonista.isInInventario(secondo)) {
 					GenericObject oggettoCombinato = Combinations.testCombination(primo, secondo);
 					if (oggettoCombinato != null) {
@@ -287,8 +290,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case PARLA:
 			if (action.getPersonaggio() != null
-					&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
-					&& action.getPersonaggio() instanceof Npc) {
+			&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
+			&& action.getPersonaggio() instanceof Npc) {
 				Npc npc = (Npc) partita.getStanzaCorrente().getPersonaggio(action.getPersonaggio());
 				stampa.stampaMessaggio("\n" + npc.getNome().getName() + ": " + npc.getDialogo());
 
@@ -335,28 +338,78 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					&& action.getPrimoAggettivo() != null) {
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
-					pannello.switchFirstToggle();
+					if(!pannello.getArray(0))
+						pannello.switchFirstToggle();
+					else
+						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "gialla":
-					pannello.switchSecondToggle();
+					if(!pannello.getArray(1))
+						pannello.switchSecondToggle();
+					else
+						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "verde":
-					pannello.switchThirdToggle();
+					if(!pannello.getArray(2))
+						pannello.switchThirdToggle();
+					else
+						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "blu":
-					pannello.switchFourthToggle();
+					if(!pannello.getArray(3))
+						pannello.switchFourthToggle();
+					else
+						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "nera":
-					pannello.switchFifthToggle();
+					if(!pannello.getArray(4))
+						pannello.switchFifthToggle();
+					else
+						stampa.messaggioLevaGiaAbbassata();
 				}
 				stampa.stampaMessaggio(pannello.showVoltage());
 			} else
 				stampa.messaggioNonCompreso();
 			break;
-		case MANGIA:
-			break;
-		case BEVI:
 
+		case ALZA:
+			Pannello pannello2 = ((Pannello) gestore.getEvento().getEnigma());
+			if (gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
+					&& action.getPrimoAggettivo() != null) {
+				switch (action.getPrimoAggettivo()) {
+				case "rossa":
+					if(pannello2.getArray(0))
+						pannello2.switchFirstToggle();
+					else
+						stampa.messaggioLevaGiaAlzata();
+					break;
+				case "gialla":
+					if(pannello2.getArray(1))
+						pannello2.switchSecondToggle();
+					else
+						stampa.messaggioLevaGiaAlzata();
+					break;
+				case "verde":
+					if(pannello2.getArray(2))
+						pannello2.switchThirdToggle();
+					else
+						stampa.messaggioLevaGiaAlzata();
+					break;
+				case "blu":
+					if(pannello2.getArray(3))
+						pannello2.switchFourthToggle();
+					else
+						stampa.messaggioLevaGiaAlzata();
+					break;
+				case "nera":
+					if(pannello2.getArray(4))
+						pannello2.switchFifthToggle();
+					else
+						stampa.messaggioLevaGiaAlzata();
+				}
+				stampa.stampaMessaggio(pannello2.showVoltage());
+			} else
+				stampa.messaggioNonCompreso();
 		}
 
 	}
@@ -479,28 +532,35 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (oggetto1 instanceof GenericObjectContainer) {
 				if (partita.getStanzaCorrente().getOggetti().getContainer().contains(oggetto1)) {
 					if (aprire) {
-						if (!((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).isOpened()) {
-							((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).open();
-							stampa.stampaAperto(oggetto1);
-						} else {
-							stampa.messaggioOggettoGiaAperto(oggetto1);
-						}
+						if(!((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).getBloccato()) {
+							if (!((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).isOpened()) {
+								((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).open();
+								stampa.stampaAperto(oggetto1);
+							} else {
+								stampa.messaggioOggettoGiaAperto(oggetto1);
+							}
+						}else
+							stampa.stampaMessaggio("Oggetto chiuso, ti serve qualcosa per aprirlo");
+
 					} else {
 						if (((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).isOpened()) {
 							((GenericObjectContainer) partita.getStanzaCorrente().getOggetto(oggetto1)).close();
 							stampa.stampaChiuso(oggetto1);
-						} else {
+						} else
 							stampa.messaggioOggettoGiaChiuso(oggetto1);
-						}
+
 					}
 				} else if (protagonista.isInInventario(oggetto1)) {
 					if (aprire) {
-						if (!((GenericObjectContainer) protagonista.getOggetto(oggetto1)).isOpened()) {
-							((GenericObjectContainer) protagonista.getOggetto(oggetto1)).open();
-							stampa.stampaAperto(oggetto1);
-						} else {
-							stampa.messaggioOggettoGiaAperto(oggetto1);
-						}
+						if(!((GenericObjectContainer) protagonista.getOggetto(oggetto1)).getBloccato()) {
+							if (!((GenericObjectContainer) protagonista.getOggetto(oggetto1)).isOpened()) {
+								((GenericObjectContainer) protagonista.getOggetto(oggetto1)).open();
+								stampa.stampaAperto(oggetto1);
+							} else
+								stampa.messaggioOggettoGiaAperto(oggetto1);
+
+						}else
+							stampa.stampaMessaggio("Oggetto chiuso, ti serve qualcosa per aprirlo");
 					} else {
 						if (((GenericObjectContainer) protagonista.getOggetto(oggetto1)).isOpened()) {
 							((GenericObjectContainer) protagonista.getOggetto(oggetto1)).close();
@@ -512,9 +572,6 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				} else {
 					stampa.messaggioOggettoNonPresente();
 				}
-				for (GenericObject oggetto : ((GenericObjectContainer) oggetto1).getContainer()) { // TODO da rimuovere
-					stampa.stampaInventario(oggetto);
-				}
 			} else {
 				if (aprire) {
 					stampa.messaggioOggettoNonApribile();
@@ -522,8 +579,22 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					stampa.messaggioOggettoNonChiudibile();
 				}
 			}
-		} else {
-			stampa.messaggioNonCompreso();
+		}else if(oggetto1 != null && oggetto2 != null) {
+			if (oggetto1 instanceof GenericObjectContainer) {
+				if ((partita.getStanzaCorrente().getOggetti().getContainer().contains(oggetto1) || protagonista.isInInventario(oggetto1))
+						&& oggetto1.getNome().equals("pacco")) {
+					if(oggetto2.getNome().equals("taglierino")) {
+						protagonista.removeOggetto(oggetto2);
+						((GenericObjectContainer)oggetto1).setBloccato(false);
+						stampa.stampaMessaggio("Hai aperto il pacco, dentro c'è un cd");
+						((GenericObjectContainer)oggetto1).open();
+					}
+					else
+						stampa.stampaMessaggio("Non riesco ad aprirlo con questo oggetto");
+				}
+			} else {
+				stampa.messaggioNonCompreso();
+			}
 		}
 	}
 
