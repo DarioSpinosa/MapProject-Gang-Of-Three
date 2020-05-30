@@ -17,7 +17,6 @@ public class GestoreEventoPannello extends GenericGestoreEvento{
 	public void terminaEvento(Protagonista p, ArrayList<GenericObject> objs) {
 
 		if(((Pannello)(missione.getEnigma())).getCompletato()){
-			setCompletato();
 			stanza.getSinistra().setAccessibile(true);
 		}
 	}

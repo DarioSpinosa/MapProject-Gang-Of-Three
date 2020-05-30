@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Entita.Characters.Npc;
 import Entita.Characters.Personaggio;
 import Entita.Characters.Protagonista;
+import General.Combinations;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.GestoreAlias;
@@ -39,7 +40,7 @@ public class Partita {
 
 	public Partita() {
 		protagonista = new Protagonista(new Name("Pippo", WordType.NOME_PROPRIO));
-
+		//Mappa
 		Stanza strada1 = new Stanza("Via Amendola, primo settore", Places.SOUTH1);
 		Stanza strada2 = new Stanza("Via Amendola, secondo settore", Places.SOUTH2);
 		Stanza strada3 = new Stanza("Via Amendola, terzo settore", Places.SOUTH3);
@@ -74,7 +75,7 @@ public class Partita {
 		chimica1.setSinistra(strada4);
 		strada6.setSotto(strada5).setDestra(informatica1);
 		informatica1.setSinistra(strada6);
-
+		//NPC
 		Name nomeAutista = new Name("Mimmo", WordType.NOME_PROPRIO);
 		nomeAutista.setPreposizioni(new String[] { "a", "con" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
@@ -110,6 +111,19 @@ public class Partita {
 		Personaggio bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
 		informatica1.addPersonaggio(bidello);
+		//Oggetti
+		Name NamePannello = new Name("pannello", WordType.NOME);
+		NamePannello.setArticoli(new String[] { "il", });
+		NamePannello.setPreposizioni(new String[] { "del" });
+		GenericObject pannello = new Pannello(NamePannello,
+				"Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
+		pannello.setPrendibile(false);
+
+		Name nomeMacchinetta = new Name("macchinetta", WordType.NOME);
+		nomeMacchinetta.setArticoli(new String[] { "la", "una" });
+		nomeMacchinetta.setPreposizioni(new String[] { "nella" });
+		GenericObject macchinaCaffe = new Caffe(nomeMacchinetta, Descriptions.COFFEEMAKER);
+		macchinaCaffe.setPrendibile(false);
 
 		Name nomeAcqua = new Name("acqua", WordType.NOME);
 		nomeAcqua.setArticoli(new String[] { "l" });
@@ -149,6 +163,30 @@ public class Partita {
 		nomeRivista.setArticoli(new String[] { "la" });
 		GenericObject rivista = new GenericObject(nomeRivista, Descriptions.MAGAZINE, ObjectType.NORMAL);
 
+		Name nomeGrimaldello1 = new Name("grimaldello_rotto", WordType.NOME);
+		nomeGrimaldello1.setArticoli(new String[] { "il", "un" });
+		GenericObject grimaldello1 = new GenericObject(nomeGrimaldello1, Descriptions.PICK, ObjectType.NORMAL);
+
+		Name nomeForcina = new Name("forcina", WordType.NOME);
+		nomeForcina.setArticoli(new String[] { "la", "una" });
+		GenericObject forcina = new GenericObject(nomeForcina, Descriptions.BOBBYPIN, ObjectType.NORMAL);
+
+		Name nomeGrimaldello2 = new Name("grimaldello", WordType.NOME);
+		nomeGrimaldello2.setArticoli(new String[] { "il", "un" });
+		GenericObject grimaldello2 = new GenericObject(nomeGrimaldello2, Descriptions.LOCKPICK, ObjectType.NORMAL);
+
+		Name nomeComponente = new Name("pezzo_elettronico", WordType.NOME);
+		nomeComponente.setArticoli(new String[] { "il", "un" });
+		GenericObject componente = new GenericObject(nomeComponente, Descriptions.COMPONENT, ObjectType.NORMAL);
+
+		Name nomeViti = new Name("viti", WordType.NOME);
+		nomeViti.setArticoli(new String[] { "le" });
+		GenericObject viti = new GenericObject(nomeViti, Descriptions.SCREWS, ObjectType.NORMAL);
+
+		Name nomePropulsore = new Name("propulsore_ionico", WordType.NOME);
+		nomePropulsore.setArticoli(new String[] { "il", "un" });
+		GenericObject propulsore = new GenericObject(nomePropulsore, Descriptions.ENGINE, ObjectType.NORMAL);
+
 		Name nomeAuto = new Name("automobile", WordType.NOME);
 		nomeAuto.setArticoli(new String[] { "l" });
 		Name aliasAuto1 = new Name("berlina", WordType.NOME);
@@ -179,26 +217,25 @@ public class Partita {
 		oggetti.add(rivista);
 		oggetti.add(automobile);
 		stradaChiusa.addOggetto(automobile);
+		oggetti.add(cd);
+		oggetti.add(grimaldello1);
+		oggetti.add(forcina);
+		oggetti.add(grimaldello2);
+		oggetti.add(viti);
+		oggetti.add(componente);
+		oggetti.add(propulsore);
+		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
+		Combinations.addCombination(componente, viti, propulsore);
 
-		Evento preparaCaffe = new Evento(
+		//Eventi
+		Evento eventoCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
 						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?"
 						+ "\nBarista Sedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
-		Name NameCaffe = new Name("macchinetta", WordType.NOME);
-		NameCaffe.setArticoli(new String[] { "la", "una" });
-		NameCaffe.setPreposizioni(new String[] { "nella" });
-		GenericObject macchinaCaffe = new Caffe(NameCaffe, Descriptions.COFFEEMAKER);
-		macchinaCaffe.setPrendibile(false);
-		preparaCaffe.addEnigma(macchinaCaffe);
-		chimica1.setGestoreEvento(new GestoreEventoCaffe(preparaCaffe, chimica1));
+		eventoCaffe.addEnigma(macchinaCaffe);
+		chimica1.setGestoreEvento(new GestoreEventoCaffe(eventoCaffe, chimica1));
 
 		Evento eventoPannello = new Evento("\nLa porta successiva e' bloccata da qualche meccanismo\n");
-		Name NamePannello = new Name("pannello", WordType.NOME);
-		NamePannello.setArticoli(new String[] { "il", });
-		NamePannello.setPreposizioni(new String[] { "del" });
-		GenericObject pannello = new Pannello(NamePannello,
-				"Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
-		pannello.setPrendibile(false);
 		eventoPannello.addEnigma(pannello);
 		fisica1.setGestoreEvento(new GestoreEventoPannello(eventoPannello, fisica1));
 

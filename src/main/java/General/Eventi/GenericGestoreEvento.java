@@ -11,7 +11,6 @@ public abstract class GenericGestoreEvento {
 
 	protected Evento missione;
 	protected Stanza stanza;
-	protected boolean completato = false;
 	protected boolean iniziato = false;
 
 	public GenericGestoreEvento() {
@@ -20,14 +19,6 @@ public abstract class GenericGestoreEvento {
 	public GenericGestoreEvento(Evento m, Stanza stanza) {
 		missione = m;
 		this.stanza = stanza;
-	}
-
-	public void setCompletato() {
-		completato = true;
-	}
-
-	public boolean getCompletato() {
-		return completato;
 	}
 
 	public String iniziaEvento(ArrayList<GenericObject> objs) {

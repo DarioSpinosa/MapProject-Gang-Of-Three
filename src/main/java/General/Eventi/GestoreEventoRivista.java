@@ -20,10 +20,11 @@ public class GestoreEventoRivista extends GenericGestoreEvento {
 
 	@Override
 	public void terminaEvento(Protagonista p, ArrayList<GenericObject> objs) {
-		Name nomeChiavi = new Name("chiavi", WordType.NOME);
-		nomeChiavi.setArticoli(new String[] { "le" });
-		GenericObject chiavi = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
 		if (p.getInventario().contains(missione.getEnigma())) {
+			Name nomeChiavi = new Name("chiavi", WordType.NOME);
+			nomeChiavi.setArticoli(new String[] { "le" });
+			GenericObject chiavi = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
+			objs.add(chiavi);
 			((Npc) stanza.getPersonaggi().get(0)).setDialogo(Dialogs.JANITOR_B);
 			p.removeOggetto(missione.getEnigma());
 			p.addOggetto(chiavi);

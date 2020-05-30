@@ -5,11 +5,8 @@
 */
 package General.Eventi.Enigmi;
 
-import General.GenericObject;
 import General.Name;
 import General.ObjectType;
-import Parser.WordType;
-import Resources.Descriptions;
 
 public class Caffe extends Enigma{
 	/*
@@ -66,11 +63,4 @@ public class Caffe extends Enigma{
 		return powerSwitch;
 	}
 
-	public GenericObject getCoffee() {
-		Name NomeCaffeCaldo = new Name("espresso", WordType.NOME);
-		NomeCaffeCaldo.setArticoli(new String[] { "un" });
-		NomeCaffeCaldo.setPreposizioni(new String[] { "quel" });
-		GenericObject TazzaDiCaffe  = new GenericObject(NomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
-		return TazzaDiCaffe;
-	}
 }

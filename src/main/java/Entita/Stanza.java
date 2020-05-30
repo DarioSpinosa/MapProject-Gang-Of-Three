@@ -30,7 +30,7 @@ public class Stanza {
 	private Stanza destra = null;
 	private Stanza sinistra = null;
 	private boolean accessibile = true;
-	private GenericGestoreEvento evento;
+	private GenericGestoreEvento evento = null;
 	private GenericObjectContainer oggetti = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "", ObjectType.CONTAINER);
 	private ArrayList<Personaggio> characters = new ArrayList<>();
 
@@ -119,15 +119,10 @@ public class Stanza {
 	}
 
     public GenericGestoreEvento getGestoreEvento() {
-
-    	GenericGestoreEvento returned = null;
-    	if(evento != null && evento.getCompletato() == false)
-    		returned = evento;
-
-    	  return returned;
+    	return evento;
     }
 
-	public GenericObject getOggetto(GenericObject oggetto) {
+    public GenericObject getOggetto(GenericObject oggetto) {
 		for (GenericObject obj : oggetti.getContainer()) {
 			if (obj.equals(oggetto)) {
 				return obj;
