@@ -32,7 +32,7 @@ public class Partita {
 
 	private Stanza stanzaCorrente;
 	private Personaggio protagonista;
-	private ArrayList<GenericObject> oggetti = new ArrayList<>();
+	private final ArrayList<GenericObject> oggetti = new ArrayList<>();
 
 	public ArrayList<GenericObject> getOggetti() {
 		return oggetti;
@@ -230,7 +230,7 @@ public class Partita {
 
 		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
 		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
-		nomeTaglierino.setPreposizioni(new String[] { "con" });
+		nomeTaglierino.setPreposizioni(new String[] { "con", "col" });
 		GenericObject taglierino = new GenericObject(nomeTaglierino, Descriptions.KNIFE, ObjectType.NORMAL);
 
 		Name nomeAuto = new Name("automobile", WordType.NOME);

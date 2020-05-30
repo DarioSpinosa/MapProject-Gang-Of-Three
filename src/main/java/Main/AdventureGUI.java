@@ -26,8 +26,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private GestoreAzioniEssentials azioni;
 	private final GestoreMessaggiEssentials stampante = new GestoreMessaggi(this);
 	private ParserEssentials parser;
-	private int gameMinutes = 10;
-	private int gameSeconds = 58;
+	private final int gameMinutes = 10;
+	private final int gameSeconds = 58;
 
 	/**
 	 * Creates new form AdventureGUI
@@ -52,6 +52,7 @@ public class AdventureGUI extends javax.swing.JFrame {
 		prepositions.add("all");
 		prepositions.add("a");
 		prepositions.add("ad");
+                prepositions.add("col");
 		ArrayList<String> articles = new ArrayList<>();
 		articles.add("la");
 		articles.add("l");
@@ -64,6 +65,10 @@ public class AdventureGUI extends javax.swing.JFrame {
 		Thread game = new GameThread(this, gameMinutes, gameSeconds);
 		game.start();
 	}
+        
+        public boolean isGameCompleted(){
+            return azioni.getCompleted();
+        }
 
 	public JLabel getMinute() {
 		return jlMinute;

@@ -16,6 +16,7 @@ public class TimeThread extends Thread {
     private int seconds;
     private final JLabel minute;
     private final JLabel second;
+    private boolean stopped = false;
     
     public TimeThread(int minutes, int seconds, JLabel minute, JLabel second){
         this.minutes = minutes;
@@ -28,7 +29,7 @@ public class TimeThread extends Thread {
     public void run(){
         printMinutes(minutes, minute);
         printSeconds(seconds, second);
-        while(true){
+        while(!stopped){
                 try{
                     if(minutes == 0 && seconds == -1){
                         break;
@@ -45,6 +46,18 @@ public class TimeThread extends Thread {
                     System.out.println(ex);
                 }
         }
+    }
+    
+    public void stopCount(){
+        stopped = true;
+    }
+    
+    public int getMinutes(){
+        return minutes;
+    }
+    
+    public int getSeconds(){
+        return seconds;
     }
     
     private void printSeconds(int seconds, JLabel second){

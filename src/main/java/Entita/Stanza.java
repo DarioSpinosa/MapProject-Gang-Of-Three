@@ -164,4 +164,12 @@ public class Stanza {
 		return oggetti.getContainer().indexOf(oggetto);
 	}
 
+        public boolean isInRoom(GenericObject oggetto){
+            for(GenericObject obj : oggetti.getContainer()){
+                if(oggetto.equals(obj)){
+                    return true;
+                }
+            }
+            return false;
+        }
 }

@@ -58,4 +58,12 @@ public class Protagonista extends Personaggio{
         }
         return null;
     }
+    
+    public int getInventoryMaxSize(){
+        return inventario.getMaxSize();
+    }
+    
+    public int getActualInventorySize(){
+        return inventario.getContainer().size();
+    }
 }

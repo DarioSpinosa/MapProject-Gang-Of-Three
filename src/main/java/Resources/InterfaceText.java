@@ -17,4 +17,8 @@ public class InterfaceText {
     public static String newGameButton = "Nuova Partita";
     public static String howToPlayButton = "Come Giocare";
     public static String creditsButton = "Riconoscimenti";
+    public static String victoryMessage = "Sei riuscito a salvare la Terra, grande!";
+    public static String timeLabel1 = "Congratulazioni, hai completato il gioco in ";
+    public static String timeLabel2 = " minuti e ";
+    public static String timeLabel3 = " secondi";
 }

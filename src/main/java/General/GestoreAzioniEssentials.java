@@ -17,7 +17,8 @@ import Parser.ParserOutput;
  */
 public abstract class GestoreAzioniEssentials {
     protected Partita partita;
-    protected ArrayList<Command> comandi = new ArrayList<Command>();
+    protected boolean gameCompleted = false;
+    protected ArrayList<Command> comandi = new ArrayList<>();
     protected ArrayList<GenericObject> oggetti;
     protected GestoreMessaggiEssentials stampa;
 
@@ -40,6 +41,10 @@ public abstract class GestoreAzioniEssentials {
     
     public Stanza getStanzaCorrente(){
         return partita.getStanzaCorrente();
+    }
+    
+    public boolean getCompleted(){
+        return gameCompleted;
     }
 
     public void setListaComandi(ArrayList<Command> comandi){

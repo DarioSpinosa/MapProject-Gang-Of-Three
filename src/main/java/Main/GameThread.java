@@ -11,13 +11,11 @@ package Main;
  */
 public class GameThread extends Thread {
 	private final AdventureGUI interfaccia;
-	private final GameOverDialog gameOver;
 	private final int minutes;
 	private final int seconds;
 
 	public GameThread(AdventureGUI interfaccia, int minutes, int seconds) {
 		this.interfaccia = interfaccia;
-		gameOver = new GameOverDialog(interfaccia, true);
 		this.minutes = minutes;
 		this.seconds = seconds;
 	}
@@ -30,12 +28,24 @@ public class GameThread extends Thread {
 	}
 
 	private void gameCheck(Thread time) {
-		while (time.isAlive()) {
+		while (time.isAlive() && !interfaccia.isGameCompleted()) {
 		}
-		gameOver.setVisible(true);
+                if(!time.isAlive()){
+                    GameOverDialog gameOver = new GameOverDialog(interfaccia, true);
+                    gameOver.setVisible(true);
 
-		while (gameOver.isActive()) {
-		}
+                    while (gameOver.isActive()) {
+                    }
+                    
+                } else if(interfaccia.isGameCompleted()){
+                    ((TimeThread)time).stopCount();
+                    VictoryDialog victory = new VictoryDialog(interfaccia, true);
+                    victory.setTimeLabel(((TimeThread)time).getMinutes(), ((TimeThread)time).getSeconds());
+                    victory.setVisible(true);
+                    
+                    while(victory.isActive()){                        
+                    }
+                }
 
 		interfaccia.dispose();
 	}
