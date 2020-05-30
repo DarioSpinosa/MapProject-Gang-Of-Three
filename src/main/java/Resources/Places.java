@@ -23,7 +23,7 @@ public class Places {
 	public static String CHEMISTRY = "Ecco il bar di Chimica, luogo dove ti sei sparato innumerevoli caffettini\r\n"
 			+ "Al tavolino trovi Antonino Cannavacciuolo seduto mentre legge il giornale";
 	public static String PHYSICS_NOCURR = "Entri nell'androne del dipartimento. Stile decisamente anni 70. \r\n"
-			+ "Non c'e' corrente! C'e' un pannello per ripristinarla";
+			+ "Non c'e' corrente!";
 	public static String PHYSICS = "E' tornata la corrente.";
 	public static String DIB = "Sei al DIB, il palazzone di vetro!\r\n" + "In portineria, c'e' il bidello.";
 }

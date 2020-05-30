@@ -5,6 +5,10 @@
  */
 package General;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -295,6 +299,15 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (action.getPersonaggio() != null
 			&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
 			&& action.getPersonaggio() instanceof Npc) {
+				if(action.getPersonaggio().getNome().getName().equals("Morgan")) {
+					Desktop d = Desktop.getDesktop();
+					try {
+						d.browse(new URI("https://www.youtube.com/watch?v=otbUSPQiet8"));
+					} catch (IOException | URISyntaxException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				Npc npc = (Npc) partita.getStanzaCorrente().getPersonaggio(action.getPersonaggio());
 				stampa.stampaMessaggio("\n" + npc.getNome().getName() + ": " + npc.getDialogo());
 
@@ -312,12 +325,11 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.stampaMessaggio(((Pannello) (primo)).switchOn());
 				gestore.terminaEvento(protagonista);
 
-			} else if (primo != null && secondo == null) {
-				if (protagonista.isInInventario(primo)) {
-					usaOggetto(primo);
-				} else {
-					stampa.messaggioOggettoNonPresenteInventario();
-				}
+			} else if (primo != null && primo.getNome().equals("grimaldello") && stanzaCorrente.getOggetto("automobile") != null) {
+				protagonista.removeOggetto(primo);
+				((GenericObjectContainer)stanzaCorrente.getOggetto("automobile")).setBloccato(false);
+				((GenericObjectContainer)stanzaCorrente.getOggetto("automobile")).open();
+				stampa.stampaMessaggio("La serratura si e' aperta");
 			} else {
 				stampa.messaggioNonCompreso();
 			}
@@ -337,7 +349,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case ABBASSA:
 			Pannello pannello = ((Pannello) gestore.getEvento().getEnigma());
-			if (gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
+			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
 					&& action.getPrimoAggettivo() != null) {
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
@@ -377,7 +389,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 		case ALZA:
 			Pannello pannello2 = ((Pannello) gestore.getEvento().getEnigma());
-			if (gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
+			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
 					&& action.getPrimoAggettivo() != null) {
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
@@ -424,7 +436,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
 				if (partita.getStanzaCorrente().getGestoreEvento() != null
-						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+						&& !partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
@@ -440,7 +452,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
 				if (partita.getStanzaCorrente().getGestoreEvento() != null
-						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+						&& !partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
@@ -456,7 +468,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
 				if (partita.getStanzaCorrente().getGestoreEvento() != null
-						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+						&& !partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else {
 				stampa.messaggioStanzaChiusa();
@@ -474,7 +486,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
 				if (partita.getStanzaCorrente().getGestoreEvento() != null
-						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+						&& !partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();

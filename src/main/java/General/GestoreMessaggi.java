@@ -32,17 +32,18 @@ public final class GestoreMessaggi extends GestoreMessaggiEssentials {
 
 	@Override
 	public void messaggioStanzaInesistente() {
-		int rand = (int) (Math.random() * 3);
+		int rand = (int) (Math.random() * 4);
 		switch (rand) {
 		case 0:
 			interfaccia.stampaMessaggio("A meno che tu non sia un fantasma, non puoi attraversare quella parete!");
 			break;
 		case 1:
-			interfaccia.stampaMessaggio("Se continui di questo passo ti verra'  un trauma cranico!");
+			interfaccia.stampaMessaggio("WHAT YOU DOING MARCELO?!");
 			break;
 		case 2:
-			interfaccia.stampaMessaggio("Se colpisci il muro ancora una volta la gente pensara'  che tu sia pazzo!");
-
+			interfaccia.stampaMessaggio("Senti una voce... \"Hey you, you are finally awake\"");
+		case 3:
+			interfaccia.stampaMessaggio("NULLPOINTEREXCEPTION!");
 		}
 	}
 

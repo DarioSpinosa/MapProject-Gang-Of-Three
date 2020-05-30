@@ -48,7 +48,7 @@ public class Partita {
 		Stanza strada5 = new Stanza("Strada Nord 2", Places.NORTH2);
 		Stanza strada6 = new Stanza("Strada Nord 3", Places.NORTH3);
 		Stanza incrocio = new Stanza("Incrocio", Places.CROSS);
-		Stanza esecutivo = new Stanza("Executive Center, Uffici", Places.EXECUTIVE);
+		Stanza executive = new Stanza("Executive Center, Uffici", Places.EXECUTIVE);
 		Stanza pizzeria1 = new Stanza("Pizzeria Esterno", Places.PIZZA_EXT);
 		Stanza pizzeria2 = new Stanza("Pizzeria Interno", Places.PIZZA_INT);
 		Stanza stradaChiusa = new Stanza("Strada Chiusa", Places.WEST);
@@ -60,8 +60,8 @@ public class Partita {
 		fisica2.setAccessibile(false);
 		pizzeria2.setAccessibile(false);
 		strada1.setSopra(strada2);
-		esecutivo.setSinistra(strada2);
-		strada2.setDestra(esecutivo).setSopra(strada3).setSotto(strada1);
+		executive.setSinistra(strada2);
+		strada2.setDestra(executive).setSopra(strada3).setSotto(strada1);
 		pizzeria1.setSinistra(strada3).setDestra(pizzeria2);
 		strada3.setSotto(strada2).setSopra(incrocio).setDestra(pizzeria1);
 		pizzeria2.setSinistra(pizzeria1);
@@ -75,6 +75,7 @@ public class Partita {
 		chimica1.setSinistra(strada4);
 		strada6.setSotto(strada5).setDestra(informatica1);
 		informatica1.setSinistra(strada6);
+		fisica1.setAccessibile(false);
 
 		// NPC
 
@@ -86,6 +87,14 @@ public class Partita {
 		Personaggio autista = new Npc(nomeAutista, Dialogs.BUSDRIVER);
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addPersonaggio(autista);
+
+		Name nomeMorgan = new Name("Morgan", WordType.NOME_PROPRIO);
+		nomeMorgan.setPreposizioni(new String[] { "a", "con" });
+		Name aliasMorgan = new Name("morgan", WordType.NOME);
+		aliasMorgan.setPreposizioni(new String[] { "a", "con" });
+		Personaggio morgan = new Npc(nomeMorgan, new String[] {"BUGO NDO' VAI?"});
+		morgan.setAlias(new Name[] { aliasMorgan });
+		incrocio.addPersonaggio(morgan);
 
 		Name nomeBarista = new Name("Cannavacciuolo", WordType.NOME_PROPRIO);
 		nomeBarista.setPreposizioni(new String[] { "a", "con" });
@@ -140,8 +149,7 @@ public class Partita {
 		Name NamePannello = new Name("pannello", WordType.NOME);
 		NamePannello.setArticoli(new String[] { "il", });
 		NamePannello.setPreposizioni(new String[] { "del" });
-		GenericObject pannello = new Pannello(NamePannello,
-				"Un pannello composto da leve da 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero");
+		GenericObject pannello = new Pannello(NamePannello,Descriptions.PANEL);
 		pannello.setPrendibile(false);
 
 		Name nomeMacchinetta = new Name("macchinetta", WordType.NOME);
@@ -164,11 +172,6 @@ public class Partita {
 		nomeCaffe.setArticoli(new String[] { "il" });
 		nomeCaffe.setPreposizioni(new String[] { "quello" });
 		GenericObject caffe = new GenericObject(nomeCaffe, Descriptions.COFFEE, ObjectType.EVENT);
-
-		Name nomeCaffeCaldo = new Name("espresso", WordType.NOME);
-		nomeCaffeCaldo.setArticoli(new String[] { "un" });
-		nomeCaffeCaldo.setPreposizioni(new String[] { "quel" });
-		GenericObject caffeCaldo = new GenericObject(nomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
 
 		Name nomeleva = new Name("leva", WordType.NOME);
 		GenericObject leva = new GenericObject(nomeleva, "", ObjectType.NORMAL);
@@ -226,7 +229,7 @@ public class Partita {
 
 		Name nomeChiavi = new Name("chiavi", WordType.NOME);
 		nomeChiavi.setArticoli(new String[] { "le" });
-		GenericObject chiavi = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
+		GenericObject chiaviDib = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
 
 		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
 		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
@@ -247,13 +250,13 @@ public class Partita {
 		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED,
 				ObjectType.CONTAINER, aliasMacchina);
 		((GenericObjectContainer)automobile).addToContainer(rivista);
+		((GenericObjectContainer)automobile).addToContainer(componente);
 		automobile.setPrendibile(false);
 		((GenericObjectContainer)automobile).setBloccato(true);
 
 		oggetti.add(leva);
 		oggetti.add(acqua);
 		oggetti.add(caffe);
-		oggetti.add(caffeCaldo);
 		oggetti.add(cartellone);
 		oggetti.add(pacco);
 		oggetti.add(poster);
@@ -266,10 +269,11 @@ public class Partita {
 		oggetti.add(viti);
 		oggetti.add(componente);
 		oggetti.add(propulsore);
-		oggetti.add(chiavi);
+		oggetti.add(chiaviDib);
 		oggetti.add(macchinaCaffe);
 		oggetti.add(pannello);
 		oggetti.add(taglierino);
+		executive.addOggetto(viti);
 		strada1.addOggetto(taglierino);
 		chimica1.addOggetto(acqua);
 		strada3.addOggetto(cartellone);
@@ -278,17 +282,16 @@ public class Partita {
 		stradaChiusa.addOggetto(automobile);
 		chimica1.addOggetto(macchinaCaffe);
 		fisica1.addOggetto(pannello);
+		chimica1.addOggetto(forcina);
+		strada6.addOggetto(grimaldello1);
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
 		//EVENTI
-		Evento eventoCaffe = new Evento(
-				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
-						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?"
-						+ "\nBarista Sedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
+		Evento eventoCaffe = new Evento(Dialogs.COFFE_EVENT);
 		eventoCaffe.addEnigma(macchinaCaffe);
 		chimica1.setGestoreEvento(new GestoreEventoCaffe(eventoCaffe, chimica1));
-		chimica1.getGestoreEvento().setRicompensa(caffeCaldo);
+		chimica1.getGestoreEvento().setRicompensa(chiaviDib);
 
 		Evento eventoPannello = new Evento("\nLa porta successiva e' bloccata da qualche meccanismo");
 		eventoPannello.addEnigma(pannello);
@@ -304,7 +307,7 @@ public class Partita {
 				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...");
 		consegnaRivista.addEnigma(rivista);
 		informatica1.setGestoreEvento(new GestoreEventoRivista(consegnaRivista, informatica1));
-		informatica1.getGestoreEvento().setRicompensa(chiavi);
+		informatica1.getGestoreEvento().setRicompensa(chiaviDib);//TODO CAMBIARE
 
 		Evento apriMacchina = new Evento("");
 		apriMacchina.addEnigma(lucchetto);

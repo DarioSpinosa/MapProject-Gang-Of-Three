@@ -54,7 +54,7 @@ public class Caffe extends Enigma{
 			return("Manca l'acqua");
 		else {
 			powerSwitch = true;
-			return("\nVrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nHai ottenuto un ottimo caffe caldo");
+			return("\nVrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nPorti il caffe a Cannavacciuolo che ti da il premio!");
 		}
 	}
 
