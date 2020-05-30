@@ -1,16 +1,14 @@
 package General.Eventi;
 
-import java.util.ArrayList;
-
 import Entita.Stanza;
 import Entita.Characters.Protagonista;
 import General.GenericObject;
-import General.Eventi.Enigmi.Enigma;
 
 public abstract class GenericGestoreEvento {
 
 	protected Evento missione;
 	protected Stanza stanza;
+	protected GenericObject ricompensa = null;
 	protected boolean iniziato = false;
 
 	public GenericGestoreEvento() {
@@ -21,20 +19,13 @@ public abstract class GenericGestoreEvento {
 		this.stanza = stanza;
 	}
 
-	public String iniziaEvento(ArrayList<GenericObject> objs) {
+	public String iniziaEvento() {
 
 		String temp = "";
 
 		if (iniziato == false) {
 			temp = missione.getDescrizione();
 			iniziato = true;
-
-			if(missione.getEnigma() != null && missione.getEnigma() instanceof Enigma ) {
-				GenericObject enigma = missione.getEnigma();
-
-				stanza.addOggetto(enigma);
-				objs.add(enigma);
-			}
 
 		}
 
@@ -45,6 +36,14 @@ public abstract class GenericGestoreEvento {
 		return missione;
 	}
 
-	public abstract void terminaEvento(Protagonista p, ArrayList<GenericObject> objs);
+	public void setRicompensa(GenericObject o ) {
+		ricompensa = o;
+	}
+
+	public boolean getIniziato() {
+		return iniziato;
+	}
+
+	public abstract void terminaEvento(Protagonista p);
 
 }

@@ -1,11 +1,8 @@
 package General.Eventi;
 
-import java.util.ArrayList;
-
 import Entita.Stanza;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonista;
-import General.GenericObject;
 import Resources.Dialogs;
 
 public class GestoreEventoPacco extends GenericGestoreEvento {
@@ -15,7 +12,7 @@ public class GestoreEventoPacco extends GenericGestoreEvento {
 	}
 
 	@Override
-	public void terminaEvento(Protagonista p, ArrayList<GenericObject> objs) {
+	public void terminaEvento(Protagonista p) {
 		if(p.getInventario().contains(missione.getEnigma())) {
 			stanza.getDestra().setAccessibile(true);
 			((Npc)stanza.getPersonaggi().get(0)).setDialogo(Dialogs.BAKER_B);

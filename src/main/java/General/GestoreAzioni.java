@@ -183,14 +183,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (gestore instanceof GestoreEventoPacco
 					&& protagonista.getInventario().contains(gestore.getEvento().getEnigma()) && primo != null
 					&& primo.equals(gestore.getEvento().getEnigma())) {
-				gestore.terminaEvento(protagonista, oggetti);
+				gestore.terminaEvento(protagonista);
 				stampa.stampaMessaggio(Dialogs.BAKER_C);
 			}
 			// else {stampa.stampaMessaggio(Dialogs.BAKER_D);}
 			if (gestore instanceof GestoreEventoRivista
 					&& protagonista.getInventario().contains(gestore.getEvento().getEnigma()) && primo != null
 					&& primo.equals(gestore.getEvento().getEnigma())) {
-				gestore.terminaEvento(protagonista, oggetti);
+				gestore.terminaEvento(protagonista);
 				stampa.stampaMessaggio(Dialogs.JANITOR_EVENT);
 			}
 			break;
@@ -295,12 +295,12 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		case USA:
 			if (gestore != null && gestore instanceof GestoreEventoCaffe && primo.getNome().equals("macchinetta")) {
 				stampa.stampaMessaggio(((Caffe) (primo)).switchOn());
-				gestore.terminaEvento(protagonista, oggetti);
+				gestore.terminaEvento(protagonista);
 
 			} else if (gestore != null && gestore instanceof GestoreEventoPannello
 					&& primo.getNome().equals("pannello")) {
 				stampa.stampaMessaggio(((Pannello) (primo)).switchOn());
-				gestore.terminaEvento(protagonista, oggetti);
+				gestore.terminaEvento(protagonista);
 
 			} else if (primo != null && secondo == null) {
 				if (protagonista.isInInventario(primo)) {
@@ -326,25 +326,26 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioNonCompreso();
 			break;
 		case ABBASSA:
+			Pannello pannello = ((Pannello) gestore.getEvento().getEnigma());
 			if (gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
 					&& action.getPrimoAggettivo() != null) {
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
-					((Pannello) gestore.getEvento().getEnigma()).switchFirstToggle();
+					pannello.switchFirstToggle();
 					break;
 				case "gialla":
-					((Pannello) gestore.getEvento().getEnigma()).switchSecondToggle();
+					pannello.switchSecondToggle();
 					break;
 				case "verde":
-					((Pannello) gestore.getEvento().getEnigma()).switchThirdToggle();
+					pannello.switchThirdToggle();
 					break;
 				case "blu":
-					((Pannello) gestore.getEvento().getEnigma()).switchFourthToggle();
+					pannello.switchFourthToggle();
 					break;
 				case "nera":
-					((Pannello) gestore.getEvento().getEnigma()).switchFifthToggle();
-					break;
+					pannello.switchFifthToggle();
 				}
+				stampa.stampaMessaggio(pannello.showVoltage());
 			} else
 				stampa.messaggioNonCompreso();
 			break;
@@ -362,8 +363,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSopra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null)
-					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
 		} else
@@ -377,8 +378,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSotto().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null)
-					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
 		} else
@@ -392,8 +393,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getDestra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null)
-					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else {
 				stampa.messaggioStanzaChiusa();
 
@@ -409,8 +410,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSinistra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null)
-					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento(oggetti));
+				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
 		} else

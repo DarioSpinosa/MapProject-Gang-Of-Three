@@ -81,11 +81,12 @@ public class Pannello extends Enigma{
 		voltage += voltageValue;
 	}
 
-	public String switchOn() {
-		if (voltage != 110) {
-			return("Target = 110V. Corrente: " + voltage + "V");
-		}
+	public String showVoltage() {
+		return("Target = 110V. Corrente: " + voltage + "V");
 
+	}
+
+	public String switchOn() {
 		completato = true;
 		return("BEEEEEEP!\n\"Una lucina verde si e' accesa!");
 	}

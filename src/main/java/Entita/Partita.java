@@ -135,6 +135,11 @@ public class Partita {
 		nomeCaffe.setPreposizioni(new String[] { "quello" });
 		GenericObject caffe = new GenericObject(nomeCaffe, Descriptions.COFFEE, ObjectType.EVENT);
 
+		Name nomeCaffeCaldo = new Name("espresso", WordType.NOME);
+		nomeCaffeCaldo.setArticoli(new String[] { "un" });
+		nomeCaffeCaldo.setPreposizioni(new String[] { "quel" });
+		GenericObject caffeCaldo  = new GenericObject(nomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
+
 		Name nomeleva = new Name("leva", WordType.NOME);
 		GenericObject leva = new GenericObject(nomeleva, "", ObjectType.NORMAL);
 		leva.setAggettivi(new String[] { "rossa", "gialla", "verde", "blu", "nera" });
@@ -187,6 +192,10 @@ public class Partita {
 		nomePropulsore.setArticoli(new String[] { "il", "un" });
 		GenericObject propulsore = new GenericObject(nomePropulsore, Descriptions.ENGINE, ObjectType.NORMAL);
 
+		Name nomeChiavi = new Name("chiavi", WordType.NOME);
+		nomeChiavi.setArticoli(new String[] { "le" });
+		GenericObject chiavi = new GenericObject(nomeChiavi, Descriptions.KEYS, ObjectType.NORMAL);
+
 		Name nomeAuto = new Name("automobile", WordType.NOME);
 		nomeAuto.setArticoli(new String[] { "l" });
 		Name aliasAuto1 = new Name("berlina", WordType.NOME);
@@ -208,6 +217,7 @@ public class Partita {
 		chimica1.addOggetto(acqua);
 		oggetti.add(caffe);
 		chimica1.addOggetto(caffe);
+		oggetti.add(caffeCaldo);
 		oggetti.add(cartellone);
 		strada3.addOggetto(cartellone);
 		oggetti.add(pacco);
@@ -224,6 +234,11 @@ public class Partita {
 		oggetti.add(viti);
 		oggetti.add(componente);
 		oggetti.add(propulsore);
+		oggetti.add(chiavi);
+		oggetti.add(macchinaCaffe);
+		chimica1.addOggetto(macchinaCaffe);
+		oggetti.add(pannello);
+		fisica1.addOggetto(pannello);
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
@@ -234,8 +249,9 @@ public class Partita {
 						+ "\nBarista Sedicina: Non ho intenzione di fare un bel nulla, preparatelo da solo coglione");
 		eventoCaffe.addEnigma(macchinaCaffe);
 		chimica1.setGestoreEvento(new GestoreEventoCaffe(eventoCaffe, chimica1));
+		chimica1.getGestoreEvento().setRicompensa(caffeCaldo);
 
-		Evento eventoPannello = new Evento("\nLa porta successiva e' bloccata da qualche meccanismo\n");
+		Evento eventoPannello = new Evento("\nLa porta successiva e' bloccata da qualche meccanismo");
 		eventoPannello.addEnigma(pannello);
 		fisica1.setGestoreEvento(new GestoreEventoPannello(eventoPannello, fisica1));
 
@@ -248,6 +264,7 @@ public class Partita {
 				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...");
 		consegnaRivista.addEnigma(rivista);
 		informatica1.setGestoreEvento(new GestoreEventoRivista(consegnaRivista, informatica1));
+		informatica1.getGestoreEvento().setRicompensa(chiavi);
 
 		stanzaCorrente = strada1;
 	}

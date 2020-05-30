@@ -24,7 +24,7 @@ public class Stanza {
 
 	// attributi
 	private final String nome;
-	private final String descrizione;
+	private String descrizione;
 	private Stanza sopra = null;
 	private Stanza sotto = null;
 	private Stanza destra = null;
@@ -41,6 +41,10 @@ public class Stanza {
 	}
 
 	// METODI SETTER
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	public Stanza setSopra(Stanza sopra) {
 		this.sopra = sopra;
 		return this;

@@ -1,11 +1,9 @@
 package General.Eventi;
 
-import java.util.ArrayList;
-
 import Entita.Stanza;
 import Entita.Characters.Protagonista;
-import General.GenericObject;
 import General.Eventi.Enigmi.Pannello;
+import Resources.Places;
 
 public class GestoreEventoPannello extends GenericGestoreEvento{
 
@@ -14,10 +12,11 @@ public class GestoreEventoPannello extends GenericGestoreEvento{
 	}
 
 	@Override
-	public void terminaEvento(Protagonista p, ArrayList<GenericObject> objs) {
+	public void terminaEvento(Protagonista p) {
 
 		if(((Pannello)(missione.getEnigma())).getCompletato()){
 			stanza.getSinistra().setAccessibile(true);
+			stanza.setDescrizione(Places.PHYSICS);
 		}
 	}
 
