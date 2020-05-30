@@ -1,6 +1,8 @@
 package Resources;
 
 public class Dialogs {
+	public static String[] BRUNO = { "Il pilota non vuole farmi salire!" };
+	public static String[] PILOT_A = { "Vuoi salire? Ti costera' solo 600 euro", "E' un prezzo ragionevole" };
 	public static String[] BUSDRIVER = {
 			"Maledizione! Abbiamo preso in pieno una voragine! Mi dispiace ma dovrai proseguire a piedi.",
 			"C'e' poco traffico... strano." };
@@ -11,7 +13,7 @@ public class Dialogs {
 			"Ho visto dei dinosauri in citta'. Secondo alcune persone, sono stati creati al dipartimento di Fisica.",
 			"Maledetti fisici!\nPer ora i dinosauri sono andati a mangiare i cinghiali al CEP.\nAbbiamo poco tempo, devi scappare!" };
 	public static String BAKER_C = "Pizzaiolo: Seguimi dentro\nIl pizzaiolo prende il pacco ed entra dentro la pizzeria";
-	public static String BAKER_D = "Non e' quello che ti ho chiesto coglione";
+	public static String BAKER_D = "Non e' quello che ti ho chiesto!";
 	public static String[] CANNAVACCIUOLO_A = { "Finalmente arriva qualcuno, devi essere dello staff vero? \r\n"
 			+ "AH! Per farti perdonare, fammi un bel caffe' e ti daro' un regalo" };
 	public static String[] CANNAVACCIUOLO_B = { "Era un caffe' tradizionale. A Napoli e' importante la tradizione.",

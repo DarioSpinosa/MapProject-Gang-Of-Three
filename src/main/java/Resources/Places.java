@@ -1,6 +1,7 @@
 package Resources;
 
 public class Places {
+	public static String HELICOPTER = "Sei arrivato sul tetto. Un elicottero commerciale e' pronto a decollare. Se vuoi salirci, devi parlare con il pilota.\r\n C'e' anche Bruno Barbieri!";
 	public static String CROSS = "Sei sullo svincolo.\r\nA NORD puoi arrivare al Campus universitario\r\n"
 			+ "A SUD puoi tornare in via Amendola\r\n" + "A OVEST puoi andare su Viale Luigi Einaudi";
 	public static String WEST = "La strada e' barricata, non si prosegue da qui.\r\nVedi una macchina lacerata dagli artigli di un dinosauro";

@@ -30,23 +30,22 @@ public class Npc extends Personaggio {
 			dialogoCorrente++;
 			break;
 		case 1:
-			scelta = dialoghi[1];
-			dialogoCorrente++;
-			break;
-		case 2:
-			if (dialoghi.length == 3) {
-				scelta = dialoghi[2];
-				dialogoCorrente = 1;
-			} else if (dialoghi.length > 3) {
-				scelta = dialoghi[2];
-				dialogoCorrente++;
-			} else {
+			if (dialoghi.length == 1) {
+				scelta = dialoghi[0];
+				dialogoCorrente = 0;
+			}
+			if (dialoghi.length == 2) {
 				scelta = dialoghi[1];
+				dialogoCorrente = 0;
+			}
+			if (dialoghi.length == 3) {
+				scelta = dialoghi[1];
+				dialogoCorrente++;
 			}
 			break;
-		case 3:
-			scelta = dialoghi[3];
-			dialogoCorrente = 1;
+		case 2:
+			scelta = dialoghi[2];
+			dialogoCorrente = 0;
 			break;
 		}
 		return scelta;

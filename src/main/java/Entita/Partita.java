@@ -40,7 +40,7 @@ public class Partita {
 
 	public Partita() {
 		protagonista = new Protagonista(new Name("Pippo", WordType.NOME_PROPRIO));
-		//Mappa
+		// Mappa
 		Stanza strada1 = new Stanza("Via Amendola, primo settore", Places.SOUTH1);
 		Stanza strada2 = new Stanza("Via Amendola, secondo settore", Places.SOUTH2);
 		Stanza strada3 = new Stanza("Via Amendola, terzo settore", Places.SOUTH3);
@@ -75,7 +75,9 @@ public class Partita {
 		chimica1.setSinistra(strada4);
 		strada6.setSotto(strada5).setDestra(informatica1);
 		informatica1.setSinistra(strada6);
-		//NPC
+
+		// NPC
+
 		Name nomeAutista = new Name("Mimmo", WordType.NOME_PROPRIO);
 		nomeAutista.setPreposizioni(new String[] { "a", "con" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
@@ -111,7 +113,30 @@ public class Partita {
 		Personaggio bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
 		informatica1.addPersonaggio(bidello);
-		//Oggetti
+
+		Name nomePilota = new Name("Pilota", WordType.NOME_PROPRIO);
+		nomePilota.setPreposizioni(new String[] { "a", "con" });
+		Name aliasPilota = new Name("pilota", WordType.NOME);
+		aliasPilota.setArticoli(new String[] { "il" });
+		aliasPilota.setPreposizioni(new String[] { "con", "a", "all", "ad" });
+		Personaggio pilota = new Npc(nomePilota, Dialogs.PILOT_A);
+		pilota.setAlias(new Name[] { aliasPilota });
+		informatica1.addPersonaggio(pilota);
+
+		Name nomeBruno = new Name("Bruno", WordType.NOME_PROPRIO);
+		nomeBruno.setPreposizioni(new String[] { "a", "con" });
+		Name aliasBruno1 = new Name("chef", WordType.NOME);
+		aliasBruno1.setArticoli(new String[] { "lo" });
+		aliasBruno1.setPreposizioni(new String[] { "con", "a", "all", "ad" });
+		Name aliasBruno2 = new Name("barbieri", WordType.NOME);
+		aliasBruno2.setArticoli(new String[] { "lo" });
+		aliasBruno2.setPreposizioni(new String[] { "con", "a", "all", "ad" });
+		Personaggio Bruno = new Npc(nomeBruno, Dialogs.BRUNO);
+		Bruno.setAlias(new Name[] { aliasBruno1, aliasBruno2 });
+		informatica1.addPersonaggio(Bruno);
+
+		// Oggetti
+
 		Name NamePannello = new Name("pannello", WordType.NOME);
 		NamePannello.setArticoli(new String[] { "il", });
 		NamePannello.setPreposizioni(new String[] { "del" });
@@ -138,7 +163,7 @@ public class Partita {
 		Name nomeCaffeCaldo = new Name("espresso", WordType.NOME);
 		nomeCaffeCaldo.setArticoli(new String[] { "un" });
 		nomeCaffeCaldo.setPreposizioni(new String[] { "quel" });
-		GenericObject caffeCaldo  = new GenericObject(nomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
+		GenericObject caffeCaldo = new GenericObject(nomeCaffeCaldo, Descriptions.ESPRESSO, ObjectType.EVENT);
 
 		Name nomeleva = new Name("leva", WordType.NOME);
 		GenericObject leva = new GenericObject(nomeleva, "", ObjectType.NORMAL);
@@ -216,7 +241,7 @@ public class Partita {
 		oggetti.add(acqua);
 		chimica1.addOggetto(acqua);
 		oggetti.add(caffe);
-		chimica1.addOggetto(caffe);
+		pizzeria2.addOggetto(caffe);
 		oggetti.add(caffeCaldo);
 		oggetti.add(cartellone);
 		strada3.addOggetto(cartellone);
@@ -242,7 +267,7 @@ public class Partita {
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
-		//Eventi
+		// Eventi
 		Evento eventoCaffe = new Evento(
 				"\nSono le 8 di mattina, dovresti preparati \nun bel caffe per iniziare questa giornata di merda"
 						+ "\n\n" + protagonista.getNome().getName() + ": Mi puo' fare un caffe caldo per favore?"

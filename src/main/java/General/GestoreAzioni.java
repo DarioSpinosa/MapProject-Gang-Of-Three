@@ -180,13 +180,17 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 			break;
 		case DAI:
-			if (gestore instanceof GestoreEventoPacco
-					&& protagonista.getInventario().contains(gestore.getEvento().getEnigma()) && primo != null
-					&& primo.equals(gestore.getEvento().getEnigma())) {
-				gestore.terminaEvento(protagonista);
-				stampa.stampaMessaggio(Dialogs.BAKER_C);
+			if (gestore instanceof GestoreEventoPacco && primo != null) {
+				if (primo.equals(gestore.getEvento().getEnigma())
+						&& protagonista.getInventario().contains(gestore.getEvento().getEnigma())) {
+					gestore.terminaEvento(protagonista);
+					stampa.stampaMessaggio(Dialogs.BAKER_C);
+				} else {
+					stampa.stampaMessaggio(Dialogs.BAKER_D);
+				}
+
 			}
-			// else {stampa.stampaMessaggio(Dialogs.BAKER_D);}
+
 			if (gestore instanceof GestoreEventoRivista
 					&& protagonista.getInventario().contains(gestore.getEvento().getEnigma()) && primo != null
 					&& primo.equals(gestore.getEvento().getEnigma())) {
@@ -363,7 +367,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSopra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSopra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+				if (partita.getStanzaCorrente().getGestoreEvento() != null
+						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
@@ -378,7 +383,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSotto().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSotto());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+				if (partita.getStanzaCorrente().getGestoreEvento() != null
+						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
@@ -393,7 +399,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getDestra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getDestra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+				if (partita.getStanzaCorrente().getGestoreEvento() != null
+						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else {
 				stampa.messaggioStanzaChiusa();
@@ -410,7 +417,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (partita.getStanzaCorrente().getSinistra().getAccessibile()) {
 				partita.setStanzaCorrente(partita.getStanzaCorrente().getSinistra());
 				stampa.stampaMessaggio("\nLuogo: " + partita.getStanzaCorrente().getNome().toUpperCase());
-				if (partita.getStanzaCorrente().getGestoreEvento() != null && partita.getStanzaCorrente().getGestoreEvento().getIniziato())
+				if (partita.getStanzaCorrente().getGestoreEvento() != null
+						&& partita.getStanzaCorrente().getGestoreEvento().getIniziato())
 					stampa.stampaMessaggio(partita.getStanzaCorrente().getGestoreEvento().iniziaEvento());
 			} else
 				stampa.messaggioStanzaChiusa();
