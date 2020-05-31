@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import Entita.Partita;
 import Entita.Stanza;
 import Entita.Characters.Npc;
@@ -193,8 +195,8 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 
 			break;
 		case DAI:
-			if(primo != null) {
-				if(oggetti.contains(primo)) {
+			if (primo != null) {
+				if (oggetti.contains(primo)) {
 					if (gestore instanceof GestoreEventoPacco) {
 						if (primo.equals(gestore.getEvento().getEnigma())) {
 							gestore.terminaEvento(protagonista);
@@ -203,35 +205,32 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 						} else
 							stampa.stampaMessaggio(Dialogs.BAKER_D);
 
-
-					}else if (gestore instanceof GestoreEventoRivista) {
-						if(primo.equals(gestore.getEvento().getEnigma())) {
+					} else if (gestore instanceof GestoreEventoRivista) {
+						if (primo.equals(gestore.getEvento().getEnigma())) {
 							gestore.terminaEvento(protagonista);
 							stampa.stampaMessaggio(Dialogs.JANITOR_EVENT);
 							oggetti.remove(primo);
-						}else
+						} else
 							stampa.stampaMessaggio(Dialogs.JANITOR_C);
-					}
-					else if (gestore instanceof GestoreEventoPropulsore) {
-						if(primo.equals(gestore.getEvento().getEnigma())) {
+					} else if (gestore instanceof GestoreEventoPropulsore) {
+						if (primo.equals(gestore.getEvento().getEnigma())) {
 							gestore.terminaEvento(protagonista);
 							stampa.stampaMessaggio(Dialogs.VOLPE_C);
 							oggetti.remove(primo);
-						}else
+						} else
 							stampa.stampaMessaggio(Dialogs.VOLPE_D);
 
-					}else if (gestore.getIniziato() && gestore instanceof GestoreEventoElicottero) {
-						if(gestore.getIniziato() && primo.equals(gestore.getEvento().getEnigma())) {
+					} else if (gestore.getIniziato() && gestore instanceof GestoreEventoElicottero) {
+						if (gestore.getIniziato() && primo.equals(gestore.getEvento().getEnigma())) {
 							stampa.stampaMessaggio(Dialogs.PILOT_C);
 							gameCompleted = true;
-						}else
+						} else
 							stampa.stampaMessaggio(Dialogs.PILOT_D);
-					}else
+					} else
 						stampa.messaggioNonCompreso();
-				}else
+				} else
 					stampa.messaggioOggettoNonPresente();
-			}
-			else
+			} else
 				stampa.messaggioNonCompreso();
 			break;
 		case LASCIA:
@@ -266,7 +265,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			if (primo != null && secondo == null) {
 				if (oggettiStanza.contains(primo) || protagonista.isInInventario(primo)) {
 					stampa.stampaDescrizioneOggetto(primo);
-					if(primo instanceof GenericObjectContainer && ((GenericObjectContainer)primo).isOpened()){
+					if (primo instanceof GenericObjectContainer && ((GenericObjectContainer) primo).isOpened()) {
 						stampa.stampaMessaggio(((GenericObjectContainer) primo).getContainer().toString());
 					}
 					trovato2 = true;
@@ -294,7 +293,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 						stampa.messaggioOggettoConDescrizione(a);
 					}
 				}
-				if(partita.getStanzaCorrente().getPersonaggi().size() != 0) {
+				if (partita.getStanzaCorrente().getPersonaggi().size() != 0) {
 					stampa.stampaMessaggio("Nella stanza ci sono:");
 					for (Personaggio p : partita.getStanzaCorrente().getPersonaggi()) {
 						stampa.stampaMessaggio(p.getNome().getName());
@@ -304,7 +303,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case COMBINA:
 			if (primo != null && secondo != null
-			&& (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))) {
+					&& (action.getPreposizione() == null || preposizioniCombina.contains(action.getPreposizione()))) {
 				if (protagonista.isInInventario(primo) && protagonista.isInInventario(secondo)) {
 					GenericObject oggettoCombinato = Combinations.testCombination(primo, secondo);
 					if (oggettoCombinato != null) {
@@ -329,9 +328,9 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 		case PARLA:
 			if (action.getPersonaggio() != null
-			&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
-			&& action.getPersonaggio() instanceof Npc) {
-				if(((Npc)action.getPersonaggio()).getDialogoCorrente().equals("Che succede?")) {
+					&& (action.getPreposizione() == null || preposizioniParla.contains(action.getPreposizione()))
+					&& action.getPersonaggio() instanceof Npc) {
+				if (((Npc) action.getPersonaggio()).getDialogoCorrente().equals("Che succede?")) {
 					Desktop d = Desktop.getDesktop();
 					try {
 						d.browse(new URI("https://www.youtube.com/watch?v=otbUSPQiet8"));
@@ -347,8 +346,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			}
 			break;
 		case USA:
-			if(primo != null && gestore != null) {
-				if(oggetti.contains(primo)) {
+			if (primo != null && gestore == null && stanzaCorrente.getNome().contains("Executive")
+					&& primo.getNome().equals("server")) {
+				JOptionPane.showMessageDialog(null,
+						"Devi scappare, sono gia' qui!\nNon ho tempo per i dettagli, abbandona la citta' al piu' presto!",
+						"Nuova Email", JOptionPane.PLAIN_MESSAGE);
+
+			} else if (primo != null && gestore != null) {
+				if (oggetti.contains(primo)) {
 					if (gestore instanceof GestoreEventoCaffe && primo.getNome().equals("macchinetta")) {
 						stampa.stampaMessaggio(((Caffe) (primo)).switchOn());
 						gestore.terminaEvento(protagonista);
@@ -362,28 +367,34 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 						stampa.stampaMessaggio("La serratura si e' aperta");
 						oggetti.remove(primo);
 
-					}else if(primo.getNome().equals("chiavi")){
-						if(gestore instanceof GestoreEventoPortaFis && (action.getPrimoAggettivo().equals("fisica"))
-								|| gestore instanceof GestoreEventoPortaDib && (action.getPrimoAggettivo().equals("dib"))) {
+					} else if (primo.getNome().equals("chiavi")) {
+						if (gestore instanceof GestoreEventoPortaFis && (action.getPrimoAggettivo().equals("fisica"))
+								|| gestore instanceof GestoreEventoPortaDib
+										&& (action.getPrimoAggettivo().equals("dib"))) {
 							gestore.terminaEvento(protagonista);
 							stampa.stampaMessaggio("La porta si e' aperta");
 							oggetti.remove(primo);
 						}
-					}else
+					} else {
 						stampa.messaggioNonCompreso();
-				}else
+					}
+				} else {
 					stampa.messaggioOggettoNonPresente();
+				}
 
-			}else
+			} else {
 				stampa.messaggioNonCompreso();
+			}
 
 			break;
 		case METTI:
 			if (gestore instanceof GestoreEventoCaffe && primo != null && secondo != null) {
-				if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta") && protagonista.isInInventario(primo)) {
+				if (primo.getNome().equals("caffe") && secondo.getNome().equals("macchinetta")
+						&& protagonista.isInInventario(primo)) {
 					stampa.stampaMessaggio(((Caffe) (secondo)).addCoffee());
 					protagonista.getInventario().removeFromContainer(primo);
-				} else if (primo.getNome().equals("acqua") && secondo.getNome().equals("macchinetta") && protagonista.isInInventario(primo)) {
+				} else if (primo.getNome().equals("acqua") && secondo.getNome().equals("macchinetta")
+						&& protagonista.isInInventario(primo)) {
 					stampa.stampaMessaggio(((Caffe) (secondo)).addWater());
 					protagonista.getInventario().removeFromContainer(primo);
 				} else
@@ -392,36 +403,36 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioComandoNonRiconosciuto();
 			break;
 		case ABBASSA:
-			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
-			&& action.getPrimoAggettivo() != null) {
+			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null
+					&& primo.getNome().equals("leva") && action.getPrimoAggettivo() != null) {
 				Pannello pannello = ((Pannello) gestore.getEvento().getEnigma());
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
-					if(!pannello.getArray(0))
+					if (!pannello.getArray(0))
 						pannello.switchFirstToggle();
 					else
 						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "gialla":
-					if(!pannello.getArray(1))
+					if (!pannello.getArray(1))
 						pannello.switchSecondToggle();
 					else
 						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "verde":
-					if(!pannello.getArray(2))
+					if (!pannello.getArray(2))
 						pannello.switchThirdToggle();
 					else
 						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "blu":
-					if(!pannello.getArray(3))
+					if (!pannello.getArray(3))
 						pannello.switchFourthToggle();
 					else
 						stampa.messaggioLevaGiaAbbassata();
 					break;
 				case "nera":
-					if(!pannello.getArray(4))
+					if (!pannello.getArray(4))
 						pannello.switchFifthToggle();
 					else
 						stampa.messaggioLevaGiaAbbassata();
@@ -432,36 +443,36 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 			break;
 
 		case ALZA:
-			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null && primo.getNome().equals("leva")
-			&& action.getPrimoAggettivo() != null) {
+			if (gestore != null && gestore instanceof GestoreEventoPannello && primo != null
+					&& primo.getNome().equals("leva") && action.getPrimoAggettivo() != null) {
 				Pannello pannello2 = ((Pannello) gestore.getEvento().getEnigma());
 				switch (action.getPrimoAggettivo()) {
 				case "rossa":
-					if(pannello2.getArray(0))
+					if (pannello2.getArray(0))
 						pannello2.switchFirstToggle();
 					else
 						stampa.messaggioLevaGiaAlzata();
 					break;
 				case "gialla":
-					if(pannello2.getArray(1))
+					if (pannello2.getArray(1))
 						pannello2.switchSecondToggle();
 					else
 						stampa.messaggioLevaGiaAlzata();
 					break;
 				case "verde":
-					if(pannello2.getArray(2))
+					if (pannello2.getArray(2))
 						pannello2.switchThirdToggle();
 					else
 						stampa.messaggioLevaGiaAlzata();
 					break;
 				case "blu":
-					if(pannello2.getArray(3))
+					if (pannello2.getArray(3))
 						pannello2.switchFourthToggle();
 					else
 						stampa.messaggioLevaGiaAlzata();
 					break;
 				case "nera":
-					if(pannello2.getArray(4))
+					if (pannello2.getArray(4))
 						pannello2.switchFifthToggle();
 					else
 						stampa.messaggioLevaGiaAlzata();
@@ -547,7 +558,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 	private void lasciaOPrendiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista,
 			boolean lasciare) {
 		if (partita.getStanzaCorrente().isInRoom(oggetto2)) {
-			GenericObjectContainer oggettoConStanza = (GenericObjectContainer)oggetto2;
+			GenericObjectContainer oggettoConStanza = (GenericObjectContainer) oggetto2;
 			if (oggettoConStanza.isOpened()) {
 				if (lasciare) {
 					protagonista.removeOggetto(oggetto1);
@@ -566,7 +577,7 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 				stampa.messaggioOggettoChiuso(oggetto2);
 			}
 		} else if (protagonista.isInInventario(oggetto2)) {
-			GenericObjectContainer oggettoConInv = (GenericObjectContainer)oggetto2;
+			GenericObjectContainer oggettoConInv = (GenericObjectContainer) oggetto2;
 			if (oggettoConInv.isOpened()) {
 				if (lasciare) {
 					protagonista.removeOggetto(oggetto1);
@@ -589,20 +600,21 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 		}
 	}
 
-	private void apriOChiudiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista, String preposizione, boolean aprire) {
+	private void apriOChiudiOggetto(GenericObject oggetto1, GenericObject oggetto2, Protagonista protagonista,
+			String preposizione, boolean aprire) {
 		if (oggetto1 != null && oggetto2 == null) {
 			if (oggetto1 instanceof GenericObjectContainer) {
-				GenericObjectContainer oggettoContenitore = (GenericObjectContainer)oggetto1;
+				GenericObjectContainer oggettoContenitore = (GenericObjectContainer) oggetto1;
 				if (partita.getStanzaCorrente().isInRoom(oggettoContenitore)) {
 					if (aprire) {
-						if(!oggettoContenitore.getBloccato()) {
+						if (!oggettoContenitore.getBloccato()) {
 							if (!oggettoContenitore.isOpened()) {
 								oggettoContenitore.open();
 								stampa.stampaAperto(oggetto1);
 							} else {
 								stampa.messaggioOggettoGiaAperto(oggetto1);
 							}
-						}else
+						} else
 							stampa.stampaMessaggio("Oggetto chiuso, ti serve qualcosa per aprirlo");
 
 					} else {
@@ -615,14 +627,14 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					}
 				} else if (protagonista.isInInventario(oggettoContenitore)) {
 					if (aprire) {
-						if(!oggettoContenitore.getBloccato()) {
+						if (!oggettoContenitore.getBloccato()) {
 							if (!oggettoContenitore.isOpened()) {
 								oggettoContenitore.open();
 								stampa.stampaAperto(oggetto1);
 							} else
 								stampa.messaggioOggettoGiaAperto(oggetto1);
 
-						}else
+						} else
 							stampa.stampaMessaggio("Oggetto chiuso, ti serve qualcosa per aprirlo");
 					} else {
 						if (oggettoContenitore.isOpened()) {
@@ -642,18 +654,19 @@ public class GestoreAzioni extends GestoreAzioniEssentials {
 					stampa.messaggioOggettoNonChiudibile();
 				}
 			}
-		}else if(oggetto1 != null && oggetto2 != null && (preposizione == null || preposizioniCombina.contains(preposizione))) {
+		} else if (oggetto1 != null && oggetto2 != null
+				&& (preposizione == null || preposizioniCombina.contains(preposizione))) {
 			if (oggetto1 instanceof GenericObjectContainer) {
-				GenericObjectContainer oggettoContenitore = (GenericObjectContainer)oggetto1;
-				if ((partita.getStanzaCorrente().isInRoom(oggettoContenitore) || protagonista.isInInventario(oggettoContenitore))
+				GenericObjectContainer oggettoContenitore = (GenericObjectContainer) oggetto1;
+				if ((partita.getStanzaCorrente().isInRoom(oggettoContenitore)
+						|| protagonista.isInInventario(oggettoContenitore))
 						&& oggettoContenitore.getNome().equals("pacco")) {
-					if(oggetto2.getNome().equals("taglierino")) {
+					if (oggetto2.getNome().equals("taglierino")) {
 						protagonista.removeOggetto(oggetto2);
 						oggettoContenitore.setBloccato(false);
 						stampa.stampaMessaggio("Hai aperto il pacco, dentro c'è un cd");
 						oggettoContenitore.open();
-					}
-					else
+					} else
 						stampa.stampaMessaggio("Non riesco ad aprirlo con questo oggetto");
 				}
 			} else {

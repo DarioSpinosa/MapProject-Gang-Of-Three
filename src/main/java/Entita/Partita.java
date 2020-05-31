@@ -163,7 +163,7 @@ public class Partita {
 		Name NamePannello = new Name("pannello", WordType.NOME);
 		NamePannello.setArticoli(new String[] { "il", });
 		NamePannello.setPreposizioni(new String[] { "del" });
-		GenericObject pannello = new Pannello(NamePannello,Descriptions.PANEL);
+		GenericObject pannello = new Pannello(NamePannello, Descriptions.PANEL);
 		pannello.setPrendibile(false);
 
 		Name nomeMacchinetta = new Name("macchinetta", WordType.NOME);
@@ -210,16 +210,17 @@ public class Partita {
 		nomeCd.setArticoli(new String[] { "il", "un" });
 		GenericObject cd = new GenericObject(nomeCd, Descriptions.CD, ObjectType.NORMAL);
 		cd.setAggettivi(new String[] { "musicale", "napoletano" });
-		((GenericObjectContainer)pacco).addToContainer(cd);
-		((GenericObjectContainer)pacco).setBloccato(true);
+		((GenericObjectContainer) pacco).addToContainer(cd);
+		((GenericObjectContainer) pacco).setBloccato(true);
 
 		Name nomeRivista = new Name("rivista", WordType.NOME);
 		nomeRivista.setArticoli(new String[] { "la" });
 		GenericObject rivista = new GenericObject(nomeRivista, Descriptions.MAGAZINE, ObjectType.NORMAL);
 
-		Name nomeGrimaldello1 = new Name("grimaldello_rotto", WordType.NOME);
+		Name nomeGrimaldello1 = new Name("grimaldello", WordType.NOME);
 		nomeGrimaldello1.setArticoli(new String[] { "il", "un" });
 		GenericObject grimaldello1 = new GenericObject(nomeGrimaldello1, Descriptions.PICK, ObjectType.NORMAL);
+		grimaldello1.setAggettivi(new String[] { "rotto" });
 
 		Name nomeForcina = new Name("forcina", WordType.NOME);
 		nomeForcina.setArticoli(new String[] { "la", "una" });
@@ -244,15 +245,15 @@ public class Partita {
 		Name nomeChiaviDib = new Name("chiavi", WordType.NOME);
 		nomeChiaviDib.setArticoli(new String[] { "le" });
 		GenericObject chiaviDib = new GenericObject(nomeChiaviDib, Descriptions.KEYS, ObjectType.NORMAL);
-		chiaviDib.setAggettivi(new String[] {"dib"});
+		chiaviDib.setAggettivi(new String[] { "dib" });
 
 		Name nomeChiaviFis = new Name("chiavi", WordType.NOME);
 		nomeChiaviFis.setArticoli(new String[] { "le" });
 		GenericObject chiaviFis = new GenericObject(nomeChiaviFis, Descriptions.KEYS, ObjectType.NORMAL);
-		chiaviFis.setAggettivi(new String[] {"fisica"});
+		chiaviFis.setAggettivi(new String[] { "fisica" });
 
 		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
-		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
+		nomeTaglierino.setArticoli(new String[] { "il", "un" });
 		nomeTaglierino.setPreposizioni(new String[] { "con", "col" });
 		GenericObject taglierino = new GenericObject(nomeTaglierino, Descriptions.KNIFE, ObjectType.NORMAL);
 
@@ -263,9 +264,14 @@ public class Partita {
 		elicottero.setPrendibile(false);
 
 		Name nomeSoldi = new Name("soldi", WordType.NOME);
-		nomeSoldi.setArticoli(new String[] { "i"});
-		nomeSoldi.setPreposizioni(new String[] { "dei"});
+		nomeSoldi.setArticoli(new String[] { "i" });
+		nomeSoldi.setPreposizioni(new String[] { "dei" });
 		GenericObject soldi = new GenericObject(nomeSoldi, Descriptions.MONEY, ObjectType.NORMAL);
+
+		Name nomeServer = new Name("server", WordType.NOME);
+		nomeServer.setArticoli(new String[] { "il" });
+		GenericObject server = new GenericObject(nomeServer, Descriptions.SERVER, ObjectType.NORMAL);
+		server.setPrendibile(false);
 
 		Name nomeAuto = new Name("automobile", WordType.NOME);
 		nomeAuto.setArticoli(new String[] { "l" });
@@ -278,12 +284,12 @@ public class Partita {
 		Name aliasAuto4 = new Name("bagagliaio", WordType.NOME);
 		aliasAuto4.setArticoli(new String[] { "il" });
 		GestoreAlias aliasMacchina = new GestoreAlias(new Name[] { aliasAuto1, aliasAuto2, aliasAuto3, aliasAuto4 });
-		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED,
-				ObjectType.CONTAINER, aliasMacchina);
-		((GenericObjectContainer)automobile).addToContainer(rivista);
-		((GenericObjectContainer)automobile).addToContainer(componente);
+		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED, ObjectType.CONTAINER,
+				aliasMacchina);
+		((GenericObjectContainer) automobile).addToContainer(rivista);
+		((GenericObjectContainer) automobile).addToContainer(componente);
 		automobile.setPrendibile(false);
-		((GenericObjectContainer)automobile).setBloccato(true);
+		((GenericObjectContainer) automobile).setBloccato(true);
 
 		oggetti.add(leva);
 		oggetti.add(acqua);
@@ -307,6 +313,8 @@ public class Partita {
 		oggetti.add(chiaviFis);
 		oggetti.add(soldi);
 		oggetti.add(elicottero);
+		oggetti.add(server);
+		executive.addOggetto(server);
 		executive.addOggetto(viti);
 		strada1.addOggetto(taglierino);
 		chimica1.addOggetto(acqua);
@@ -322,7 +330,7 @@ public class Partita {
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
-		//EVENTI
+		// EVENTI
 		Evento eventoCaffe = new Evento(Dialogs.COFFE_EVENT);
 		eventoCaffe.addEnigma(macchinaCaffe);
 		chimica1.setGestoreEvento(new GestoreEventoCaffe(eventoCaffe, chimica1));
@@ -348,29 +356,33 @@ public class Partita {
 		apriMacchina.addEnigma(lucchetto);
 		stradaChiusa.setGestoreEvento(new GestoreEventoRivista(apriMacchina, stradaChiusa));
 
-		Evento portaFisica = new Evento("La porta del dipartimento di fisica e' chiusa a chiave, devo trovare un altro modo");
+		Evento portaFisica = new Evento(
+				"La porta del dipartimento di fisica e' chiusa a chiave, devo trovare un altro modo");
 		portaFisica.addEnigma(chiaviFis);
 		strada5.setGestoreEvento(new GestoreEventoPortaFis(portaFisica, strada5));
 
-		Evento portaDib = new Evento("La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo");
+		Evento portaDib = new Evento(
+				"La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo");
 		portaDib.addEnigma(chiaviDib);
-		strada6.setGestoreEvento(new  GestoreEventoPortaDib(portaDib, strada6));
+		strada6.setGestoreEvento(new GestoreEventoPortaDib(portaDib, strada6));
 
-		Evento auto = new Evento("Vedi un auto in lontananza, il bagagliaio e' quasi aperto,\r\nma e' protetto da una serratura, ti servira qualcosa per aprirla");
+		Evento auto = new Evento(
+				"Vedi un auto in lontananza, il bagagliaio e' quasi aperto,\r\nma e' protetto da una serratura, ti servira qualcosa per aprirla");
 		auto.addEnigma(grimaldello2);
-		stradaChiusa.setGestoreEvento(new  GestoreEventoAuto(auto, stradaChiusa));
+		stradaChiusa.setGestoreEvento(new GestoreEventoAuto(auto, stradaChiusa));
 
-		Evento raggi = new Evento("Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica");
+		Evento raggi = new Evento(
+				"Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica");
 		raggi.addEnigma(propulsore);
-		fisica2.setGestoreEvento(new  GestoreEventoPropulsore(raggi, fisica2));
+		fisica2.setGestoreEvento(new GestoreEventoPropulsore(raggi, fisica2));
 
-		Evento eventoElicottero = new Evento("Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo");
+		Evento eventoElicottero = new Evento(
+				"Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo");
 		eventoElicottero.addEnigma(soldi);
 		GestoreEventoElicottero gestoreElicottero = new GestoreEventoElicottero(eventoElicottero, incrocio);
 		gestoreElicottero.setOggetto(elicottero);
 		gestoreElicottero.setPersonaggio(Bruno);
 		incrocio.setGestoreEvento(gestoreElicottero);
-
 
 		stanzaCorrente = strada1;
 	}
