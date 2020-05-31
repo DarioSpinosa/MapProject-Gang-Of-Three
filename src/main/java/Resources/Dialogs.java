@@ -29,7 +29,7 @@ public class Dialogs {
 	public static String[] VOLPE_A = { "Incredibile, c'e' ancora qualcuno li' fuori!",
 			"Per spazzare via i dinosauri, possiamo usare i raggi cosmici. Il macchinario e' incompleto, manca il propulsore ionico, per costruirlo serve un componente.",
 			"Dovrei averlo lasciato in macchina. Servono anche delle viti per montarlo, portameli al più presto." };
-	public static String[] VOLPE_B = {"Maledizione, il pilota si aspetta di essere pagato in anticipo, come possiamo fare..."};
+	public static String[] VOLPE_B = {"Maledizione, ho dimenticato i soldi per pagare il pilota nel mio ufficio, presto vammeli a prendere!"};
 	public static String VOLPE_C = "Finalmente! Ora posso completare il macchinario dei raggi cosmici, si attiverà in pochi minuti\nPRESTO, DOBBIAMO SCAPPARE, HO CHIAMATO UN ELICOTTERO\nCI STA ASPETTANDO ALL'INCROCIO";
 	public static String VOLPE_D = "NON E' IL PROPULSOREEE\nPRESTO, IL DESTINO DI TUTTA BARI E DELLA BRACE ACCESA E' NELLE TUE MANI!";
 	public static String COFFE_EVENT = "Entri nel bar e trovi Antonino Cannavacciuolo che ti fa segno di avvicinarsi";

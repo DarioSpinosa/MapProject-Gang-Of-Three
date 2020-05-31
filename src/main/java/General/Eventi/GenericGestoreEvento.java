@@ -66,7 +66,7 @@ public abstract class GenericGestoreEvento {
 		return completato;
 	}
 
-	public void setCompletato() {
+	protected void setCompletato() {
 		completato = true;
 	}
 

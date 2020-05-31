@@ -318,9 +318,9 @@ public class Partita {
 		stradaChiusa.addOggetto(automobile);
 		chimica1.addOggetto(macchinaCaffe);
 		fisica1.addOggetto(pannello);
-		chimica1.addOggetto(forcina);
+		pizzeria1.addOggetto(forcina);
 		strada6.addOggetto(grimaldello1);
-		strada2.addOggetto(soldi);
+		fisica3.addOggetto(soldi);
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
@@ -365,7 +365,6 @@ public class Partita {
 		Evento raggi = new Evento("Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica");
 		raggi.addEnigma(propulsore);
 		fisica2.setGestoreEvento(new  GestoreEventoPropulsore(raggi, fisica2));
-		fisica2.getGestoreEvento().setCompletato();
 
 		Evento eventoElicottero = new Evento("Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo");
 		eventoElicottero.addEnigma(soldi);
