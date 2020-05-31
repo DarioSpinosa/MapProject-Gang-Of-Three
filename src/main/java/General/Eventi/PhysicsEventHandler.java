@@ -11,8 +11,9 @@ public class PhysicsEventHandler extends GenericEventHandler{
 
 	@Override
 	public void endEvent(Protagonist protagonist) {
-		if(protagonist.getInventory().contains(event.getEnigma()))
+		if(protagonist.getInventory().contains(event.getEnigma())) {
 			protagonist.getInventory().removeFromContainer((event.getEnigma()));
 			eventRoom.getLeft().setAccessible(true);
+                }
 	}
 }
