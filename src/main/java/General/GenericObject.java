@@ -13,115 +13,107 @@ import java.util.Set;
 import Parser.WordType;
 
 public class GenericObject {
-	private Name nome;
-	private String descrizione = "";
-	private GestoreAlias alias = new GestoreAlias(new Name[] {});
-	private Set<String> aggettivi;
-	private boolean consumabile = true;
-	private boolean prendibile = true;
-	private final ObjectType category;
+	private Name name;
+	private String description = "";
+	private AliasHandler alias = new AliasHandler(new Name[] {});
+	private Set<String> adjectives;
+	private boolean consumable = true;
+	private boolean takeable = true;
 
-	public GenericObject(Name nome, String descrizione, ObjectType id) {
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.category = id;
+	public GenericObject(Name name, String description) {
+		this.name = name;
+		this.description = description;
 	}
 
-	public GenericObject(Name nome, String descrizione, ObjectType id, GestoreAlias alias) {
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.category = id;
+	public GenericObject(Name name, String description, AliasHandler alias) {
+		this.name = name;
+		this.description = description;
 		this.alias = alias;
 	}
 
-	public GenericObject(Name nome, String descrizione, ObjectType id, Set<String> aggettivi) {
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.category = id;
-		this.aggettivi = aggettivi;
+	public GenericObject(Name name, String description, Set<String> adjectives) {
+		this.name = name;
+		this.description = description;
+		this.adjectives = adjectives;
 	}
 
-	public String getNome() {
-		return nome.getName();
+	public String getObjectName() {
+		return name.getName();
 	}
 
-	public WordType getTipo() {
-		return nome.getType();
+	public WordType getType() {
+		return name.getType();
 	}
 
-	public ObjectType getCategory() {
-		return this.category;
-	}
-
-	public void setNome(Name nome) {
-		this.nome = nome;
+	public void setName(Name name) {
+		this.name = name;
 	}
 
 	public Name getName() {
-		return nome;
+		return name;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public boolean isConsumabile() {
-		return consumabile;
+	public boolean isConsumable() {
+		return consumable;
 	}
 
-	public boolean isPrendibile() {
-		return prendibile;
+	public boolean isTakeable() {
+		return takeable;
 	}
 
-	public void setConsumabile(boolean consumabile) {
-		this.consumabile = consumabile;
+	public void setConsumable(boolean consumable) {
+		this.consumable = consumable;
 	}
 
-	public void setPrendibile(boolean prendibile) {
-		this.prendibile = prendibile;
+	public void setTakeable(boolean takeable) {
+		this.takeable = takeable;
 	}
 
-	public GestoreAlias getGestoreAlias() {
+	public AliasHandler getAliasHandler() {
 		return alias;
 	}
 
-	public void setGestoreAlias(Set<Name> alias) {
-		this.alias = new GestoreAlias(alias);
+	public void setAliasHandler(Set<Name> alias) {
+		this.alias = new AliasHandler(alias);
 	}
 
-	public void setGestoreAlias(Name[] alias) {
-		this.alias = new GestoreAlias(alias);
+	public void setAliasHandler(Name[] alias) {
+		this.alias = new AliasHandler(alias);
 	}
 
-	public Set<String> getAggettivi() {
-		return aggettivi;
+	public Set<String> getAdjectives() {
+		return adjectives;
 	}
 
-	public void setAggettivi(Set<String> aggettivi) {
-		this.aggettivi = aggettivi;
+	public void setAdjectives(Set<String> adjectives) {
+		this.adjectives = adjectives;
 	}
 
-	public void setAggettivi(String[] aggettivi) {
-		this.aggettivi = new HashSet<>(Arrays.asList(aggettivi));
+	public void setAdjectives(String[] aggettivi) {
+		this.adjectives = new HashSet<>(Arrays.asList(aggettivi));
 	}
 
-	public boolean articoloUsabile(String articolo) {
-		return nome.getArticoli().contains(articolo);
+	public boolean isArticleUsable(String articolo) {
+		return name.getAdmittedArticles().contains(articolo);
 	}
 
-	public boolean preposizioneUsabile(String preposizione) {
-		return nome.getPreposizioni().contains(preposizione);
+	public boolean isPrepositionUsable(String preposizione) {
+		return name.getAdmittedPrepositions().contains(preposizione);
 	}
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.nome.getName());
-        hash = 59 * hash + Objects.hashCode(this.aggettivi);
+        hash = 59 * hash + Objects.hashCode(this.name.getName());
+        hash = 59 * hash + Objects.hashCode(this.adjectives);
         return hash;
     }
 
@@ -137,21 +129,17 @@ public class GenericObject {
             return false;
         }
         final GenericObject other = (GenericObject) obj;
-        if (!Objects.equals(this.nome.getName(), other.nome.getName())) {
+        if (!Objects.equals(this.name.getName(), other.name.getName())) {
             return false;
         }
-        if (!Objects.equals(this.aggettivi, other.aggettivi)) {
+        if (!Objects.equals(this.adjectives, other.adjectives)) {
             return false;
         }
         return true;
     }
 
-
-
-
-
 	@Override
 	public String toString() {
-		return this.getNome();
+		return this.getObjectName();
 	}
 }

@@ -2,6 +2,6 @@ package General.Eventi.Enigmi;
 
 public interface Enigma {
 
-	public boolean getCompletato();
+	public boolean isCompleted();
 	public String switchOn();
 }

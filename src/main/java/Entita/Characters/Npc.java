@@ -7,61 +7,56 @@ package Entita.Characters;
 
 import General.Name;
 
-public class Npc extends Personaggio {
+public class Npc extends Character {
 
-	private String[] dialoghi;
-	private int dialogoCorrente = 0;
+	private String[] dialogues;
+	private int currentDialogue = 0;
 
 	public Npc(Name nome) {
-		super(nome, 1);
+		super(nome);
 	}
 
 	public Npc(Name nome, String[] dialoghi) {
-		super(nome, 1);
-		this.dialoghi = dialoghi;
+		super(nome);
+		this.dialogues = dialoghi;
 
 	}
 
-	public String getDialogo() {
+	public String getDialogue() {
 		String scelta = null;
-		switch (dialogoCorrente) {
+		switch (currentDialogue) {
 		case 0:
-			scelta = dialoghi[0];
-			dialogoCorrente++;
+			scelta = dialogues[0];
+			currentDialogue++;
 			break;
 		case 1:
-			if (dialoghi.length == 1) {
-				scelta = dialoghi[0];
-				dialogoCorrente = 0;
+			if (dialogues.length == 1) {
+				scelta = dialogues[0];
+				currentDialogue = 0;
 			}
-			if (dialoghi.length == 2) {
-				scelta = dialoghi[1];
-				dialogoCorrente = 0;
+			if (dialogues.length == 2) {
+				scelta = dialogues[1];
+				currentDialogue = 0;
 			}
-			if (dialoghi.length == 3) {
-				scelta = dialoghi[1];
-				dialogoCorrente++;
+			if (dialogues.length == 3) {
+				scelta = dialogues[1];
+				currentDialogue++;
 			}
 			break;
 		case 2:
-			scelta = dialoghi[2];
-			dialogoCorrente = 0;
+			scelta = dialogues[2];
+			currentDialogue = 0;
 			break;
 		}
 		return scelta;
 	}
 
-	public void setDialogo(String[] dialoghi) {
-		this.dialoghi = dialoghi;
+	public void setDialogue(String[] dialoghi) {
+		this.dialogues = dialoghi;
 	}
 
-	public String getDialogoCorrente() {
-		return dialoghi[dialogoCorrente];
-	}
-
-
-	@Override
-	public void getDamage(int danno) {
+	public String getCurrentDialogue() {
+		return dialogues[currentDialogue];
 	}
 
 }

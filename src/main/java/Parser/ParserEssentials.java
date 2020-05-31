@@ -6,7 +6,7 @@
 package Parser;
 import java.util.ArrayList;
 
-import Entita.Characters.Personaggio;
+import Entita.Characters.Character;
 import General.Command;
 import General.GenericObject;
 
@@ -23,7 +23,9 @@ public abstract class ParserEssentials {
 
     public ParserEssentials() {}
 
-    public abstract ParserOutput parse(String input, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Personaggio> personaggi);
+    public abstract ParserOutput parse(String input, ArrayList<Command> commands, ArrayList<GenericObject> oggetti, ArrayList<Character> personaggi);
 
-    public boolean getAccepted() {return accepted;}
+    public boolean isAccepted() {
+        return accepted;
+    }
 }

@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GestoreAlias {
+public class AliasHandler {
 
-	private Set<Name> alias = new HashSet<Name>();
+	private Set<Name> alias = new HashSet<>();
 
-	public GestoreAlias(Set<Name> alias) {
+	public AliasHandler(Set<Name> alias) {
 		this.alias = alias;
 	}
 
-	public GestoreAlias(Name[] alias) {
+	public AliasHandler(Name[] alias) {
 		this.alias = new HashSet<>(Arrays.asList(alias));
 	}
 
@@ -20,27 +20,27 @@ public class GestoreAlias {
 		return alias;
 	}
 
-	public boolean ricercaAlias(String nome){
+	public boolean containsAlias(String nameToken){
 		for(Name name : alias){
-			if(name.getName().equals(nome)){
+			if(name.getName().equals(name)){
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Name restituisciAlias(String nome){
+	public Name getAlias(String nameToken){
 		for(Name name : alias){
-			if(name.getName().equals(nome)){
+			if(name.getName().equals(nameToken)){
 				return name;
 			}
 		}
 		return null;
 	}
 
-	public boolean confrontaAlias(String nome){
+	public boolean compareAlias(String name){
 		boolean controllo = false;
-		if(!alias.isEmpty() && ricercaAlias(nome)){
+		if(!alias.isEmpty() && containsAlias(name)){
 			controllo = true;
 		}
 		return controllo;

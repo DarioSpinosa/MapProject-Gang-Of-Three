@@ -12,8 +12,8 @@ import java.util.HashSet;
 public class Name {
     private String name;
     private WordType type;
-    private Set<String> articoliComp;
-    private Set<String> preposizioniComp;
+    private Set<String> admittedArticles;
+    private Set<String> admittedPrepositions;
     
     public Name(String name, WordType type) {
         this.name = name;
@@ -24,36 +24,40 @@ public class Name {
         this.name = name;
     }
     
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
     
     public void setType(WordType type) {
         this.type = type;
     }
     
-    public WordType getType() {return type;}
-    
-    public Set<String> getArticoli() {
-        return articoliComp;
+    public WordType getType() {
+        return type;
     }
     
-    public Set<String> getPreposizioni() {
-        return preposizioniComp;
+    public Set<String> getAdmittedArticles() {
+        return admittedArticles;
     }
     
-    public void setArticoli(Set<String> articoliComp) {
-        this.articoliComp = articoliComp;
+    public Set<String> getAdmittedPrepositions() {
+        return admittedPrepositions;
     }
     
-    public void setArticoli(String[] articoliComp) {
-        this.articoliComp = new HashSet<>(Arrays.asList(articoliComp));
+    public void setAdmittedArticles(Set<String> articoliComp) {
+        this.admittedArticles = articoliComp;
     }
     
-    public void setPreposizioni(Set<String> preposizioniComp) {
-        this.preposizioniComp = preposizioniComp;
+    public void setAdmittedArticles(String[] articoliComp) {
+        this.admittedArticles = new HashSet<>(Arrays.asList(articoliComp));
     }
     
-    public void setPreposizioni(String[] preposizioniComp) {
-        this.preposizioniComp = new HashSet<>(Arrays.asList(preposizioniComp));
+    public void setAdmittedPrepositions(Set<String> preposizioniComp) {
+        this.admittedPrepositions = preposizioniComp;
+    }
+    
+    public void setAdmittedPrepositions(String[] preposizioniComp) {
+        this.admittedPrepositions = new HashSet<>(Arrays.asList(preposizioniComp));
     }
     
     @Override

@@ -12,27 +12,27 @@ public class GenericObjectContainer extends GenericObject {
 	private ArrayList<GenericObject> container = new ArrayList<>();
 	private int maxSize;
 	private boolean opened = false;
-	private boolean bloccato = false;
+	private boolean blocked = false;
 
-	public GenericObjectContainer(Name nome, String descrizione, ObjectType id) {
-		super(nome, descrizione, id);
+	public GenericObjectContainer(Name name, String description) {
+		super(name, description);
 	}
 
-	public GenericObjectContainer(Name nome, String descrizione, ObjectType id, GestoreAlias alias) {
-		super(nome, descrizione, id, alias);
+	public GenericObjectContainer(Name name, String description, AliasHandler alias) {
+		super(name, description, alias);
 	}
 
-	public GenericObjectContainer(Name nome, String descrizione, ObjectType id, int maxSize) {
-		super(nome, descrizione, id);
+	public GenericObjectContainer(Name name, String description, int maxSize) {
+		super(name, description);
 		this.maxSize = maxSize;
 	}
 
-	public boolean getBloccato() {
-		return bloccato;
+	public boolean isBlocked() {
+		return blocked;
 	}
 
-	public void setBloccato(boolean b) {
-		bloccato = b;
+	public void setBlocked(boolean blockedValue) {
+		blocked = blockedValue;
 	}
 
 	public int getMaxSize() {
@@ -47,7 +47,7 @@ public class GenericObjectContainer extends GenericObject {
 		container.add(object);
 	}
 
-	public GenericObject get(int i) {
+	public GenericObject getFromContainer(int i) {
 		return container.get(i);
 	}
 
@@ -55,8 +55,8 @@ public class GenericObjectContainer extends GenericObject {
 		container.remove(object);
 	}
 
-	public boolean contains(GenericObject oggetto) {
-		if (container.contains(oggetto)) {
+	public boolean contains(GenericObject object) {
+		if (container.contains(object)) {
 			return true;
 		}
 		return false;
@@ -74,16 +74,16 @@ public class GenericObjectContainer extends GenericObject {
 		opened = false;
 	}
 
-    public GenericObject getOggetto(GenericObject oggetto) {
+    public GenericObject getOggetto(GenericObject object) {
     	for(GenericObject obj : container) {
-    		if(obj.equals(oggetto)) {
+    		if(obj.equals(object)) {
     			return obj;
     		}
     	}
     	return null;
     }
 
-        public void removeOggetto(GenericObject oggetto){
-            container.remove(oggetto);
+        public void removeOggetto(GenericObject object){
+            container.remove(object);
         }
 }

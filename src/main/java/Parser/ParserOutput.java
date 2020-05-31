@@ -5,97 +5,97 @@
 */
 package Parser;
 import General.GenericObject;
-import Entita.Characters.Personaggio;
+import Entita.Characters.Character;
 import General.Command;
 
 public class ParserOutput {
     
-    private Command comando;
-    private String preposizione;
-    private GenericObject primoOggetto;
-    private GenericObject secondoOggetto;
-    private Personaggio personaggio;
-    private String primoAggettivo;
-    private String secondoAggettivo;
+    private Command command;
+    private String preposition;
+    private GenericObject firstObject;
+    private GenericObject secondObject;
+    private Character character;
+    private String firstAdjective;
+    private String secondAdjective;
     
     public ParserOutput() {}
     
-    public ParserOutput(Command comando) {
-        this.comando = comando;
+    public ParserOutput(Command command) {
+        this.command = command;
     }
     
-    public ParserOutput(Command comando, GenericObject primoOggetto) {
-        this.comando = comando;
-        this.primoOggetto = primoOggetto;
+    public ParserOutput(Command command, GenericObject firstObject) {
+        this.command = command;
+        this.firstObject = firstObject;
     }
     
-    public ParserOutput(Command comando, GenericObject primoOggetto, GenericObject secondoOggetto) {
-        this.comando = comando;
-        this.primoOggetto = primoOggetto;
-        this.secondoOggetto = secondoOggetto;
+    public ParserOutput(Command command, GenericObject firstObject, GenericObject secondObject) {
+        this.command = command;
+        this.firstObject = firstObject;
+        this.secondObject = secondObject;
     }
     
-    public Command getComando() {
-        return comando;
+    public Command getCommand() {
+        return command;
     }
     
-    public GenericObject getPrimoOggetto() {
-        return primoOggetto;
+    public GenericObject getFirstObject() {
+        return firstObject;
     }
     
-    public GenericObject getSecondoOggetto() {
-        return secondoOggetto;
+    public GenericObject getSecondObject() {
+        return secondObject;
     }
     
-    public String getPreposizione(){
-        return preposizione;
+    public String getPreposition(){
+        return preposition;
     }
     
-    public Personaggio getPersonaggio(){
-        return personaggio;
+    public Character getCharacter(){
+        return character;
     }
     
-    public void setCommand(Command comando) {
-        this.comando = comando;
+    public void setCommand(Command command) {
+        this.command = command;
     }
     
-    public void setPrimoOggetto(GenericObject primoOggetto) {
-        this.primoOggetto = primoOggetto;
+    public void setFirstObject(GenericObject firstObject) {
+        this.firstObject = firstObject;
     }
     
-    public void setSecondoOggetto(GenericObject secondoOggetto) {
-        this.secondoOggetto = secondoOggetto;
+    public void setSecondObject(GenericObject secondObject) {
+        this.secondObject = secondObject;
     }
     
-    public void setPreposizione(String preposizione){
-        this.preposizione = preposizione;
+    public void setPreposition(String preposition){
+        this.preposition = preposition;
     }
     
-    public void setPersonaggio(Personaggio personaggio){
-        this.personaggio = personaggio;
+    public void setCharacter(Character character){
+        this.character = character;
     }
     
-    public void setOggetto(GenericObject oggetto) {
-        if(primoOggetto == null) {
-            primoOggetto = oggetto;
-        } else if (secondoOggetto == null) {
-            secondoOggetto = oggetto;
+    public void setObject(GenericObject object) {
+        if(firstObject == null) {
+            firstObject = object;
+        } else if (secondObject == null) {
+            secondObject = object;
         }
     }
     
-    public String getPrimoAggettivo(){
-        return primoAggettivo;
+    public String getFirstAdjective(){
+        return firstAdjective;
     }
     
-    public String getSecondoAggettivo(){
-        return secondoAggettivo;
+    public String getSecondAdjective(){
+        return secondAdjective;
     }
     
-    public void setAggettivo(String aggettivo){
-        if(primoAggettivo == null){
-            primoAggettivo = aggettivo;
-        } else if (secondoAggettivo == null){
-            secondoAggettivo = aggettivo;
+    public void setAdjective(String adjective){
+        if(firstAdjective == null){
+            firstAdjective = adjective;
+        } else if (secondAdjective == null){
+            secondAdjective = adjective;
         }
     }
 }

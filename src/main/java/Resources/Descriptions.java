@@ -20,7 +20,7 @@ public class Descriptions {
 	public static final String ENGINE = "E' il propulsore ionico per la macchina a raggi cosmici, portalo a Volpe, presto!";
 	public static final String KNIFE = "E' un taglierino affilato, potrebbe servirti più in la";
 	public static final String PANEL = "Un pannello composto da leve di 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero\nE' collegato al generatore elettrico";
-	public static final String ELI = "Un elicottero dell'aerounatica militare, sul fianco vi e' scritto \"Umbrella comporation\" ";
+	public static final String HELICOPTER = "Un elicottero dell'aerounatica militare, sul fianco vi e' scritto \"Umbrella comporation\" ";
 	public static final String MONEY = "Sono 600 euro";
 
 }

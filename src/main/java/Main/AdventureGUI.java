@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-import Entita.Partita;
-import General.GestoreAzioni;
-import General.GestoreAzioniEssentials;
-import General.GestoreMessaggi;
-import General.GestoreMessaggiEssentials;
+import Entita.Game;
+import General.ActionsHandler;
+import General.ActionsHandlerEssentials;
+import General.MessagesHandler;
+import General.MessagesHandlerEssentials;
 import Parser.ParserEssentials;
-import Parser.ParserIta;
+import Parser.ItalianParser;
 import Parser.ParserOutput;
 import Resources.InterfaceText;
 
@@ -23,8 +23,8 @@ import Resources.InterfaceText;
 @SuppressWarnings("serial")
 public class AdventureGUI extends javax.swing.JFrame {
 
-	private GestoreAzioniEssentials azioni;
-	private final GestoreMessaggiEssentials stampante = new GestoreMessaggi(this);
+	private ActionsHandlerEssentials azioni;
+	private final MessagesHandlerEssentials stampante = new MessagesHandler(this);
 	private ParserEssentials parser;
 	private final int gameMinutes = 10;
 	private final int gameSeconds = 58;
@@ -38,9 +38,9 @@ public class AdventureGUI extends javax.swing.JFrame {
 	}
 
 	private void init() {
-		Partita partita = new Partita();
-		azioni = new GestoreAzioni(partita, stampante);
-		azioni.setListaOggetti(partita.getOggetti());
+		Game partita = new Game();
+		azioni = new ActionsHandler(partita, stampante);
+		azioni.setObjectsList(partita.getObjects());
 		ArrayList<String> prepositions = new ArrayList<>();
 		prepositions.add("in");
 		prepositions.add("da");
@@ -59,9 +59,9 @@ public class AdventureGUI extends javax.swing.JFrame {
 		articles.add("il");
 		articles.add("un");
 		articles.add("una");
-		parser = new ParserIta(articles, prepositions);
-		stampante.messaggioInizioGioco(azioni.getStanzaCorrente().getNome(),
-				azioni.getStanzaCorrente().getDescrizione());
+		parser = new ItalianParser(articles, prepositions);
+		stampante.beginningOfTheGameMessage(azioni.getCurrentRoom().getName(),
+				azioni.getCurrentRoom().getDescription());
 		Thread game = new GameThread(this, gameMinutes, gameSeconds);
 		game.start();
 	}
@@ -239,30 +239,30 @@ public class AdventureGUI extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jbSudActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSudActionPerformed
-		azioni.movimentoSud();
+		azioni.moveSud();
 	}// GEN-LAST:event_jbSudActionPerformed
 
 	private void jbOvestActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbOvestActionPerformed
-		azioni.movimentoOvest();
+		azioni.moveOvest();
 	}// GEN-LAST:event_jbOvestActionPerformed
 
 	private void jbNordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbNordActionPerformed
-		azioni.movimentoNord();
+		azioni.moveNord();
 	}// GEN-LAST:event_jbNordActionPerformed
 
 	private void jbEstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbEstActionPerformed
-		azioni.movimentoEst();
+		azioni.moveEst();
 	}// GEN-LAST:event_jbEstActionPerformed
 
 	private void jtComandiKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jtComandiKeyPressed
 		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			String input = jtComandi.getText();
 			jtComandi.setText("");
-			ParserOutput azione = parser.parse(input, azioni.getComandi(), azioni.getOggetti(), azioni.getPersonaggi());
+			ParserOutput azione = parser.parse(input, azioni.getCommands(), azioni.getObjects(), azioni.getCharacters());
 			if (azione != null) {
-				azioni.elaboraAzione(azione);
+				azioni.processAction(azione);
 			} else {
-				stampante.messaggioComandoNonRiconosciuto();
+				stampante.unrecognisedCommandMessage();
 			}
 		}
 	}// GEN-LAST:event_jtComandiKeyPressed

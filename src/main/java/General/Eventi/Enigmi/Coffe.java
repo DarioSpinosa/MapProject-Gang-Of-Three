@@ -7,15 +7,14 @@ package General.Eventi.Enigmi;
 
 import General.GenericObject;
 import General.Name;
-import General.ObjectType;
 
-public class Caffe extends GenericObject implements Enigma{
+public class Coffe extends GenericObject implements Enigma{
 	/*
 	 * E' una macchina per il caffe' usata in tantissimi bar. Devo solo riempirla di
 	 * caffe' e acqua, poi premere il tasto di accesione"
 	 */
-	public Caffe(Name n, String s) {
-		super(n, s, ObjectType.EVENT);
+	public Coffe(Name name, String description) {
+		super(name, description);
 	}
 
 	private boolean coffee = false;
@@ -40,6 +39,7 @@ public class Caffe extends GenericObject implements Enigma{
 		}
 	}
 
+        @Override
 	public String switchOn() {
 
 		if (powerSwitch == true)
@@ -60,7 +60,7 @@ public class Caffe extends GenericObject implements Enigma{
 	}
 
 	@Override
-	public boolean getCompletato() {
+	public boolean isCompleted() {
 		return powerSwitch;
 	}
 

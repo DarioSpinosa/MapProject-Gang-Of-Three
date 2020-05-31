@@ -43,9 +43,9 @@ public class Command {
         alias = new HashSet<>(Arrays.asList(array));
     }
     
-    public boolean confrontaAlias(String nome){
+    public boolean confrontaAlias(String name){
         boolean controllo = false;
-        if(alias != null && alias.contains(nome)){
+        if(alias != null && alias.contains(name)){
             controllo = true;
         }
         return controllo;
