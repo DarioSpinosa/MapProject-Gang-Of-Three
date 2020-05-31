@@ -55,6 +55,11 @@ public class Npc extends Personaggio {
 		this.dialoghi = dialoghi;
 	}
 
+	public String getDialogoCorrente() {
+		return dialoghi[dialogoCorrente];
+	}
+
+
 	@Override
 	public void getDamage(int danno) {
 	}

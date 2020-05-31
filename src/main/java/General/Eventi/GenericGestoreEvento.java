@@ -1,6 +1,9 @@
 package General.Eventi;
 
+import java.util.ArrayList;
+
 import Entita.Stanza;
+import Entita.Characters.Personaggio;
 import Entita.Characters.Protagonista;
 import General.GenericObject;
 
@@ -10,6 +13,9 @@ public abstract class GenericGestoreEvento {
 	protected Stanza stanza;
 	protected GenericObject ricompensa = null;
 	protected boolean iniziato = false;
+	protected boolean completato = false;
+	protected ArrayList<GenericObject> oggetti = new ArrayList<GenericObject>();
+	protected ArrayList<Personaggio> personaggi = new ArrayList<Personaggio>();
 
 	public GenericGestoreEvento() {
 	}
@@ -27,6 +33,18 @@ public abstract class GenericGestoreEvento {
 			temp = missione.getDescrizione();
 			iniziato = true;
 
+			if(oggetti.size() != 0) {
+				for(GenericObject oggetto: oggetti) {
+					stanza.addOggetto(oggetto);
+				}
+			}
+
+			if(personaggi.size() != 0) {
+				for(Personaggio p: personaggi) {
+					stanza.addPersonaggio(p);
+				}
+			}
+
 		}
 
 		return temp;
@@ -43,6 +61,23 @@ public abstract class GenericGestoreEvento {
 	public boolean getIniziato() {
 		return iniziato;
 	}
+
+	public boolean getCompletato() {
+		return completato;
+	}
+
+	public void setCompletato() {
+		completato = true;
+	}
+
+	public void setOggetto(GenericObject oggetto) {
+		oggetti.add(oggetto);
+	}
+
+	public void setPersonaggio(Personaggio p) {
+		personaggi.add(p);
+	}
+
 
 	public abstract void terminaEvento(Protagonista p);
 

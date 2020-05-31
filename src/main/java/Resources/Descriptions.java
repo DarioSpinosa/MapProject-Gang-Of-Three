@@ -15,10 +15,13 @@ public class Descriptions {
 	public static final String MAGAZINE = "Questa si' che sara' una lettura interessante!";
 	public static final String SCREWS = "Pacchetto di viti, per montare componenti elettronici";
 	public static final String POSTER = "C'e' scritto: Raggi cosmici, la nuova frontiera della scienza";
-	public static final String CAR_CLOSED = "E' una berlina di quelle costose, ha lo sticker del dipartimento di fisica sul parabrezza. \n Il bagagliaio e' quasi aperto, ma e' protetto da una serratura";
+	public static final String CAR_CLOSED = "E' una berlina di quelle costose, ha lo sticker del dipartimento di fisica sul parabrezza.";
 	public static final String ENGINE = "E' il propulsore ionico per la macchina a raggi cosmici, portalo a Volpe, presto!";
 	public static final String KNIFE = "E' un taglierino affilato, potrebbe servirti più in la";
 	public static final String PANEL = "Un pannello composto da leve di 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero\nE' collegato al generatore elettrico";
+	public static final String ELI = "Un elicottero dell'aerounatica militare, sul fianco vi e' scritto \"Umbrella comporation\" ";
+	public static final String MONEY = "Sono 600 euro";
+
 
 
 }

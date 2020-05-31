@@ -25,5 +25,6 @@ public class Places {
 	public static String PHYSICS_NOCURR = "Entri nell'androne del dipartimento. Stile decisamente anni 70. \r\n"
 			+ "Non c'e' corrente!";
 	public static String PHYSICS = "E' tornata la corrente.";
+	public static String COSMIC_RAYS = "Un imponente macchinario, ma sembra manchi un pezzo per attivarlo";
 	public static String DIB = "Sei al DIB, il palazzone di vetro!\r\n" + "In portineria, c'e' il bidello.";
 }

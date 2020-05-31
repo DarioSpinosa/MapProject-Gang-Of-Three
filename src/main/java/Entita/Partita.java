@@ -17,11 +17,14 @@ import General.GestoreAlias;
 import General.Name;
 import General.ObjectType;
 import General.Eventi.Evento;
+import General.Eventi.GestoreEventoAuto;
 import General.Eventi.GestoreEventoCaffe;
+import General.Eventi.GestoreEventoElicottero;
 import General.Eventi.GestoreEventoPacco;
 import General.Eventi.GestoreEventoPannello;
 import General.Eventi.GestoreEventoPortaDib;
 import General.Eventi.GestoreEventoPortaFis;
+import General.Eventi.GestoreEventoPropulsore;
 import General.Eventi.GestoreEventoRivista;
 import General.Eventi.Enigmi.Caffe;
 import General.Eventi.Enigmi.Pannello;
@@ -55,12 +58,10 @@ public class Partita {
 		Stanza pizzeria2 = new Stanza("Pizzeria Interno", Places.PIZZA_INT);
 		Stanza stradaChiusa = new Stanza("Strada Chiusa", Places.WEST);
 		Stanza fisica1 = new Stanza("Atrio di Fisica", Places.PHYSICS_NOCURR);
-		Stanza fisica2 = new Stanza("Sala raggi cosmici", "");
+		Stanza fisica2 = new Stanza("Sala raggi cosmici", Places.COSMIC_RAYS);
 		Stanza fisica3 = new Stanza("Ufficio", "Sala del trono di Volpe");
 		Stanza chimica1 = new Stanza("Bar di Chimica", Places.CHEMISTRY);
 		Stanza informatica1 = new Stanza("Atrio DIB", Places.DIB);
-		fisica2.setAccessibile(false);
-		pizzeria2.setAccessibile(false);
 		strada1.setSopra(strada2);
 		executive.setSinistra(strada2);
 		strada2.setDestra(executive).setSopra(strada3).setSotto(strada1);
@@ -79,6 +80,8 @@ public class Partita {
 		informatica1.setSinistra(strada6);
 		fisica1.setAccessibile(false);
 		informatica1.setAccessibile(false);
+		fisica2.setAccessibile(false);
+		pizzeria2.setAccessibile(false);
 
 		// NPC
 
@@ -95,7 +98,7 @@ public class Partita {
 		nomeMorgan.setPreposizioni(new String[] { "a", "con" });
 		Name aliasMorgan = new Name("morgan", WordType.NOME);
 		aliasMorgan.setPreposizioni(new String[] { "a", "con" });
-		Personaggio morgan = new Npc(nomeMorgan, new String[] {"BUGO NDO' VAI?"});
+		Personaggio morgan = new Npc(nomeMorgan, Dialogs.MORGAN_A);
 		morgan.setAlias(new Name[] { aliasMorgan });
 		incrocio.addPersonaggio(morgan);
 
@@ -145,7 +148,15 @@ public class Partita {
 		aliasBruno2.setPreposizioni(new String[] { "con", "a", "all", "ad" });
 		Personaggio Bruno = new Npc(nomeBruno, Dialogs.BRUNO);
 		Bruno.setAlias(new Name[] { aliasBruno1, aliasBruno2 });
-		informatica1.addPersonaggio(Bruno);
+
+		Name nomeVolpe = new Name("Volpe", WordType.NOME_PROPRIO);
+		nomeBruno.setPreposizioni(new String[] { "a", "con" });
+		Name aliasVolpe = new Name("prof", WordType.NOME);
+		aliasVolpe.setArticoli(new String[] { "il" });
+		aliasVolpe.setPreposizioni(new String[] { "con", "a", "al", "ad" });
+		Personaggio volpe = new Npc(nomeVolpe, Dialogs.VOLPE_A);
+		volpe.setAlias(new Name[] { aliasVolpe });
+		fisica2.addPersonaggio(volpe);
 
 		// Oggetti
 
@@ -226,7 +237,7 @@ public class Partita {
 		nomeViti.setArticoli(new String[] { "le" });
 		GenericObject viti = new GenericObject(nomeViti, Descriptions.SCREWS, ObjectType.NORMAL);
 
-		Name nomePropulsore = new Name("propulsore_ionico", WordType.NOME);
+		Name nomePropulsore = new Name("propulsore", WordType.NOME);
 		nomePropulsore.setArticoli(new String[] { "il", "un" });
 		GenericObject propulsore = new GenericObject(nomePropulsore, Descriptions.ENGINE, ObjectType.NORMAL);
 
@@ -244,6 +255,17 @@ public class Partita {
 		nomeTaglierino.setArticoli(new String[] { "il" , "un" });
 		nomeTaglierino.setPreposizioni(new String[] { "con", "col" });
 		GenericObject taglierino = new GenericObject(nomeTaglierino, Descriptions.KNIFE, ObjectType.NORMAL);
+
+		Name nomeElicottero = new Name("elicottero", WordType.NOME);
+		nomeElicottero.setArticoli(new String[] { "l" });
+		nomeElicottero.setPreposizioni(new String[] { "quell" });
+		GenericObject elicottero = new GenericObject(nomeElicottero, Descriptions.ELI, ObjectType.EVENT);
+		elicottero.setPrendibile(false);
+
+		Name nomeSoldi = new Name("soldi", WordType.NOME);
+		nomeSoldi.setArticoli(new String[] { "i"});
+		nomeSoldi.setPreposizioni(new String[] { "dei"});
+		GenericObject soldi = new GenericObject(nomeSoldi, Descriptions.MONEY, ObjectType.NORMAL);
 
 		Name nomeAuto = new Name("automobile", WordType.NOME);
 		nomeAuto.setArticoli(new String[] { "l" });
@@ -283,6 +305,10 @@ public class Partita {
 		oggetti.add(pannello);
 		oggetti.add(taglierino);
 		oggetti.add(chiaviFis);
+		oggetti.add(soldi);
+		oggetti.add(elicottero);
+		strada1.addOggetto(cd);
+		strada1.addOggetto(chiaviFis);
 		executive.addOggetto(viti);
 		strada1.addOggetto(taglierino);
 		chimica1.addOggetto(acqua);
@@ -294,6 +320,7 @@ public class Partita {
 		fisica1.addOggetto(pannello);
 		chimica1.addOggetto(forcina);
 		strada6.addOggetto(grimaldello1);
+		strada2.addOggetto(soldi);
 		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		Combinations.addCombination(componente, viti, propulsore);
 
@@ -330,6 +357,23 @@ public class Partita {
 		Evento portaDib = new Evento("La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo");
 		portaDib.addEnigma(chiaviDib);
 		strada6.setGestoreEvento(new  GestoreEventoPortaDib(portaDib, strada6));
+
+		Evento auto = new Evento("Vedi un auto in lontananza, il bagagliaio e' quasi aperto,\r\nma e' protetto da una serratura, ti servira qualcosa per aprirla");
+		auto.addEnigma(grimaldello2);
+		stradaChiusa.setGestoreEvento(new  GestoreEventoAuto(auto, stradaChiusa));
+
+		Evento raggi = new Evento("Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica");
+		raggi.addEnigma(propulsore);
+		fisica2.setGestoreEvento(new  GestoreEventoPropulsore(raggi, fisica2));
+		fisica2.getGestoreEvento().setCompletato();
+
+		Evento eventoElicottero = new Evento("Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo");
+		eventoElicottero.addEnigma(soldi);
+		GestoreEventoElicottero gestoreElicottero = new GestoreEventoElicottero(eventoElicottero, incrocio);
+		gestoreElicottero.setOggetto(elicottero);
+		gestoreElicottero.setPersonaggio(Bruno);
+		incrocio.setGestoreEvento(gestoreElicottero);
+
 
 		stanzaCorrente = strada1;
 	}
