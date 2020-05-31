@@ -307,8 +307,6 @@ public class Partita {
 		oggetti.add(chiaviFis);
 		oggetti.add(soldi);
 		oggetti.add(elicottero);
-		strada1.addOggetto(cd);
-		strada1.addOggetto(chiaviFis);
 		executive.addOggetto(viti);
 		strada1.addOggetto(taglierino);
 		chimica1.addOggetto(acqua);
