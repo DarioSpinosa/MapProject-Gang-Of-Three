@@ -26,8 +26,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private ActionsHandlerEssentials actions;
 	private final MessagesHandlerEssentials printer = new MessagesHandler(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 0;
-	private final int gameSeconds = 30;
+	private final int gameMinutes = 10;
+	private final int gameSeconds = 59;
 
 	/**
 	 * Creates new form AdventureGUI
@@ -62,14 +62,15 @@ public class AdventureGUI extends javax.swing.JFrame {
 		articles.add("un");
 		articles.add("una");
 		parser = new ItalianParser(articles, prepositions);
-		printer.beginningOfTheGameMessage(actions.getCurrentRoom().getName(),actions.getCurrentRoom().getDescription());
+		printer.beginningOfTheGameMessage(actions.getCurrentRoom().getName(),
+				actions.getCurrentRoom().getDescription());
 		Thread gameState = new GameThread(this, gameMinutes, gameSeconds);
 		gameState.start();
 	}
 
-        public boolean isGameCompleted(){
-            return actions.getCompleted();
-        }
+	public boolean isGameCompleted() {
+		return actions.getCompleted();
+	}
 
 	public JLabel getMinute() {
 		return jlMinute;
@@ -259,7 +260,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			String input = jtComandi.getText();
 			jtComandi.setText("");
-			ParserOutput azione = parser.parse(input, actions.getCommands(), actions.getObjects(), actions.getCharacters());
+			ParserOutput azione = parser.parse(input, actions.getCommands(), actions.getObjects(),
+					actions.getCharacters());
 			if (azione != null) {
 				actions.processAction(azione);
 			} else {
