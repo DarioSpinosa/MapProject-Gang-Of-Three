@@ -5,6 +5,7 @@
  */
 package General;
 
+import Entita.Characters.Npc;
 import Main.AdventureGUI;
 
 /**
@@ -19,14 +20,14 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void beginningOfTheGameMessage(String name, String description) {
-		gui.stampaMessaggio("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n"
+		gui.printMessage("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n"
 						+ "CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" + "\nLUOGO: " + name
 						+ "\n\n" + description);
 	}
 
 	@Override
 	public void printMessage(String message) {
-		gui.stampaMessaggio(message);
+		gui.printMessage(message);
 	}
 
 	@Override
@@ -34,28 +35,28 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		int rand = (int) (Math.random() * 4);
 		switch (rand) {
 		case 0:
-			gui.stampaMessaggio("A meno che tu non sia un fantasma, non puoi attraversare quella parete!");
+			gui.printMessage("A meno che tu non sia un fantasma, non puoi attraversare quella parete!");
 			break;
 		case 1:
-			gui.stampaMessaggio("WHAT YOU DOING MARCELO?!");
+			gui.printMessage("WHAT YOU DOING MARCELO?!");
 			break;
 		case 2:
-			gui.stampaMessaggio("Senti una voce... \"Hey you, you are finally awake\"");
+			gui.printMessage("Senti una voce... \"Hey you, you are finally awake\"");
                         break;
 		case 3:
-			gui.stampaMessaggio("NULLPOINTEREXCEPTION!");
+			gui.printMessage("NULLPOINTEREXCEPTION!");
                         break;
 		}
 	}
 
 	@Override
 	public void alreadyLoweredLeverMessage() {
-		gui.stampaMessaggio("La leva e' gia abbassata");
+		gui.printMessage("La leva e' gia abbassata");
 	}
 
 	@Override
 	public void alreadyRaisedLeverMessage() {
-		gui.stampaMessaggio("La leva e' gia alzata");
+		gui.printMessage("La leva e' gia alzata");
 	}
 
 
@@ -64,151 +65,186 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		int rand = (int) (Math.random() * 2);
 		switch (rand) {
 		case 0:
-			gui.stampaMessaggio("La porta non si apre, non posso proseguire!");
+			gui.printMessage("La porta non si apre, non posso proseguire!");
 			break;
 		case 1:
-			gui.stampaMessaggio("Questa porta e' chiusa, forse dovrei fare altro prima di andare avanti!");
+			gui.printMessage("Questa porta e' chiusa, forse dovrei fare altro prima di andare avanti!");
 		}
 	}
 
 	@Override
 	public void unrecognisedCommandMessage() {
-		gui.stampaMessaggio("Comando non riconosciuto");
+		gui.printMessage("Comando non riconosciuto");
 	}
 
 	@Override
 	public void printRoom(String nome, String descrizione) {
-		gui.stampaMessaggio(nome);
-		gui.stampaMessaggio(descrizione);
+		gui.printMessage(nome);
+		gui.printMessage(descrizione);
 	}
 
 	@Override
 	public void objectNotInInventoryMessage() {
-		gui.stampaMessaggio("Non hai questo oggetto nel tuo inventario");
+		gui.printMessage("Non hai questo oggetto nel tuo inventario");
 	}
 
 	@Override
 	public void fullInventoryMessage() {
-		gui.stampaMessaggio("Il tuo invetario e' pieno");
+		gui.printMessage("Il tuo invetario e' pieno");
 	}
 
 	@Override
 	public void objectNotInRoomMessage() {
-		gui.stampaMessaggio("Non vedo questo oggetto da nessuna parte, hai bisogno di un oculista?");
+		gui.printMessage("Non vedo questo oggetto da nessuna parte, hai bisogno di un oculista?");
 	}
 
 	@Override
 	public void notOpenableObjectMessage() {
-		gui.stampaMessaggio("Spiegami come vorresti aprire questo oggetto");
+		gui.printMessage("Spiegami come vorresti aprire questo oggetto");
 	}
 
 	@Override
 	public void notClosableObjectMessage() {
-		gui.stampaMessaggio("Oggetto non chiudibile");
+		gui.printMessage("Oggetto non chiudibile");
 	}
 
 	@Override
 	public void objectNotFoundMessage() {
-		gui.stampaMessaggio("Oggetto non presente ne' nella stanza ne' nell'inventario");
+		gui.printMessage("Oggetto non presente ne' nella stanza ne' nell'inventario");
 	}
 
 	@Override
 	public void printObjectDescription(GenericObject object) {
-		gui.stampaMessaggio("-" + object.getDescription());
+		gui.printMessage("-" + object.getDescription());
 	}
 
 	@Override
 	public void printTakenObject(GenericObject object) {
-		gui.stampaMessaggio("Hai preso: " + object);
+		gui.printMessage("Hai preso: " + object);
 	}
 
 	@Override
 	public void printLeftObject(GenericObject object) {
-		gui.stampaMessaggio("Hai lasciato: " + object);
+		gui.printMessage("Hai lasciato: " + object);
 	}
 
 	@Override
 	public void printOpenedObject(GenericObject object) {
-		gui.stampaMessaggio("Hai aperto: " + object);
+		gui.printMessage("Hai aperto: " + object);
 	}
 
 	@Override
 	public void printClosedObject(GenericObject object) {
-		gui.stampaMessaggio("Hai chiuso: " + object);
+		gui.printMessage("Hai chiuso: " + object);
 	}
 
 	@Override
 	public void notUnderstoodMessage() {
-		gui.stampaMessaggio("Non ho capito le tue intenzioni, spiegati meglio!");
+		gui.printMessage("Non ho capito le tue intenzioni, spiegati meglio!");
 	}
 
 	@Override
 	public void printTakenObjectFrom(GenericObject firstObject, GenericObject secondObject) {
-		gui.stampaMessaggio("Hai preso:  " + firstObject + " da " + secondObject);
+		gui.printMessage("Hai preso:  " + firstObject + " da " + secondObject);
 	}
 
 	@Override
 	public void notAvaiableObjectMessage() {
-		gui.stampaMessaggio("L'oggetto non contiene cio' che cerchi");
+		gui.printMessage("L'oggetto non contiene cio' che cerchi");
 	}
 
 	@Override
 	public void closedObjectMessage(GenericObject object) {
-		gui.stampaMessaggio("L'oggetto " + object + " e' chiuso");
+		gui.printMessage("L'oggetto " + object + " e' chiuso");
 	}
 
 	@Override
 	public void printObjectLeftIn(GenericObject firstObject, GenericObject secondObject) {
-		gui.stampaMessaggio("Hai lasciato l'oggetto " + firstObject + " in " + secondObject);
+		gui.printMessage("Hai lasciato l'oggetto " + firstObject + " in " + secondObject);
 	}
 
 	@Override
 	public void unavaiableCombinationMessage(GenericObject firstObject, GenericObject secondObject) {
-		gui.stampaMessaggio("Non e' possibile combinare " + firstObject + " con " + secondObject);
+		gui.printMessage("Non e' possibile combinare " + firstObject + " con " + secondObject);
 	}
 
 	@Override
 	public void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
-		gui.stampaMessaggio("Hai combinato " + firstObject + " con " + secondObject + " e ottenuto: " + resultantObject);
+		gui.printMessage("Hai combinato " + firstObject + " con " + secondObject + " e ottenuto: " + resultantObject);
 	}
 
 	@Override
 	public void specificObjectNotInInventoryMessage(GenericObject object) {
-		gui.stampaMessaggio("L'oggetto " + object + " non e' presente nel tuo inventario");
+		gui.printMessage("L'oggetto " + object + " non e' presente nel tuo inventario");
 	}
 
 	@Override
 	public void objectsNotFoundMessage() {
-		gui.stampaMessaggio("Oggetti non presenti nel tuo inventario");
+		gui.printMessage("Oggetti non presenti nel tuo inventario");
 	}
 
 	@Override
 	public void alreadyOpenedObjectMessage(GenericObject object) {
-		gui.stampaMessaggio("L'oggetto " + object + " e' gia'  aperto");
+		gui.printMessage("L'oggetto " + object + " e' gia'  aperto");
 	}
 
 	@Override
 	public void alreadyClosedObjectMessage(GenericObject object) {
-		gui.stampaMessaggio("L'oggetto " + object + " e' gia'  chiuso");
+		gui.printMessage("L'oggetto " + object + " e' gia'  chiuso");
 	}
 
 	@Override
 	public void aroundYouMessage() {
-		gui.stampaMessaggio("\nIntorno a te vedi: ");
+		gui.printMessage("\nIntorno a te vedi: ");
 	}
 
 	@Override
 	public void aroundYouNpc() {
-		gui.stampaMessaggio("Nella stanza ci sono:");
+		gui.printMessage("Nella stanza ci sono:");
 	}
 
 	@Override
 	public void notTakeableObjectMessage(GenericObject object) {
-		gui.stampaMessaggio("Non puoi prendere " + object + "!");
+		gui.printMessage("Non puoi prendere " + object + "!");
 	}
 
 	@Override
 	public void objectWithDescriptionMessage(GenericObject object) {
-		gui.stampaMessaggio("-" + object.getObjectName() + ": " + object.getDescription());
+		gui.printMessage("-" + object.getObjectName() + ": " + object.getDescription());
 	}
+        
+        @Override
+        public void blockedObjectMessage(){
+            gui.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
+        }
+        
+        @Override
+        public void cannotGiveObjectMessage(){
+            gui.printMessage("Non puoi dare questo oggetto a nessuno");
+        }
+        
+        @Override
+        public void wrongOpeningToolMessage(){
+            gui.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
+        }
+        
+        @Override
+        public void printPlaceName(String name){
+            gui.printMessage("\nLuogo:" + name);
+        }
+        
+        @Override
+        public void printEventDescription(String description){
+            gui.printMessage("\n" + description);
+        }
+        
+        @Override
+        public void objectCannotBeOpenedWithItemMessage(){
+            gui.printMessage("Non sembra sia possibile aprirlo con questo oggetto");
+        }
+        
+        @Override
+        public void printNpcDialogue(Npc npc, String dialogue){
+            gui.printMessage("\n" + npc + ": " + dialogue);
+        }
 }

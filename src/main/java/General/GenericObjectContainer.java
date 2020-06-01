@@ -5,9 +5,10 @@
 */
 package General;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GenericObjectContainer extends GenericObject {
+public class GenericObjectContainer extends GenericObject implements Serializable {
 
 	private ArrayList<GenericObject> container = new ArrayList<>();
 	private int maxSize;

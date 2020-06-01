@@ -13,13 +13,14 @@ import General.GenericObjectContainer;
 import General.Name;
 import General.Eventi.GenericEventHandler;
 import Parser.WordType;
+import java.io.Serializable;
 
 /**
  *
  * @author DarioSpinosa
  */
 
-public class Room {
+public class Room implements Serializable{
 
 	// attributi
 	private final String name;

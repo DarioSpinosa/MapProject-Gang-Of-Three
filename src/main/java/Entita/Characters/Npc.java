@@ -6,8 +6,9 @@
 package Entita.Characters;
 
 import General.Name;
+import java.io.Serializable;
 
-public class Npc extends Character {
+public class Npc extends Character implements Serializable {
 
 	private String[] dialogues;
 	private int currentDialogue = 0;

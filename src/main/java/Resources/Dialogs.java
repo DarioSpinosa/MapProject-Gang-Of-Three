@@ -32,7 +32,6 @@ public class Dialogs {
 	public static String[] VOLPE_B = {"Maledizione, ho dimenticato i soldi per pagare il pilota nel mio ufficio, presto vammeli a prendere!"};
 	public static String VOLPE_C = "Finalmente! Ora posso completare il macchinario dei raggi cosmici, si attiverà in pochi minuti\nPRESTO, DOBBIAMO SCAPPARE, HO CHIAMATO UN ELICOTTERO\nCI STA ASPETTANDO ALL'INCROCIO";
 	public static String VOLPE_D = "NON E' IL PROPULSOREEE\nPRESTO, IL DESTINO DI TUTTA BARI E DELLA BRACE ACCESA E' NELLE TUE MANI!";
-	public static String COFFE_EVENT = "Entri nel bar e trovi Antonino Cannavacciuolo che ti fa segno di avvicinarsi";
 	public static String[] MORGAN_A = {"Le brutte intenzioni, la maleducazione...\nLa tua brutta figura di ieri sera \nLa tua ingratitutine, la tua arroganza\nFai cio che vuoi mettendo i piedi in testa",
 			"Certo il disordine e' una forma d'arte\nma tu sai solo coltivare invidia" , "ringrazia il cielo se sei su questo palco\nrispetta chi ti ci ha portato dentro\nE questo sono io..."};
 	public static String[] MORGAN_B = {"Che succede?", "Bugo?\nBugo 'ndo vai?"};

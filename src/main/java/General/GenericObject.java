@@ -11,8 +11,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import Parser.WordType;
+import java.io.Serializable;
 
-public class GenericObject {
+public class GenericObject implements Serializable {
 	private Name name;
 	private String description = "";
 	private AliasHandler alias = new AliasHandler(new Name[] {});

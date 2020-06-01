@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import Entita.Room;
 import Entita.Characters.Character;
 import General.GenericObject;
+import java.io.Serializable;
 
-public class Event {
+public class Event implements Serializable {
 
 	private final String description;
 	private GenericObject enigma;

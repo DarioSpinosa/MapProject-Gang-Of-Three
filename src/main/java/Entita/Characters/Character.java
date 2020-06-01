@@ -8,8 +8,9 @@ import java.util.Set;
 
 import General.AliasHandler;
 import General.Name;
+import java.io.Serializable;
 
-public abstract class Character {
+public abstract class Character implements Serializable{
 
     protected Name name;
     protected AliasHandler alias;
@@ -40,6 +41,11 @@ public abstract class Character {
 
     public boolean isPrepositionUsable(String preposizione){
         return name.getAdmittedPrepositions().contains(preposizione);
+    }
+    
+    @Override
+    public String toString(){
+        return name.getName();
     }
     
 }

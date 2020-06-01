@@ -23,11 +23,11 @@ import Resources.InterfaceText;
 @SuppressWarnings("serial")
 public class AdventureGUI extends javax.swing.JFrame {
 
-	private ActionsHandlerEssentials azioni;
-	private final MessagesHandlerEssentials stampante = new MessagesHandler(this);
+	private ActionsHandlerEssentials actions;
+	private final MessagesHandlerEssentials printer = new MessagesHandler(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 20;
-	private final int gameSeconds = 00;
+	private final int gameMinutes = 0;
+	private final int gameSeconds = 30;
 
 	/**
 	 * Creates new form AdventureGUI
@@ -38,9 +38,9 @@ public class AdventureGUI extends javax.swing.JFrame {
 	}
 
 	private void init() {
-		Game partita = new Game();
-		azioni = new ActionsHandler(partita, stampante);
-		azioni.setObjectsList(partita.getObjects());
+		Game game = new Game();
+		actions = new ActionsHandler(game, printer);
+		actions.setObjectsList(game.getObjects());
 		ArrayList<String> prepositions = new ArrayList<>();
 		prepositions.add("in");
 		prepositions.add("da");
@@ -62,14 +62,13 @@ public class AdventureGUI extends javax.swing.JFrame {
 		articles.add("un");
 		articles.add("una");
 		parser = new ItalianParser(articles, prepositions);
-		stampante.beginningOfTheGameMessage(azioni.getCurrentRoom().getName(),
-				azioni.getCurrentRoom().getDescription());
-		Thread game = new GameThread(this, gameMinutes, gameSeconds);
-		game.start();
+		printer.beginningOfTheGameMessage(actions.getCurrentRoom().getName(),actions.getCurrentRoom().getDescription());
+		Thread gameState = new GameThread(this, gameMinutes, gameSeconds);
+		gameState.start();
 	}
 
         public boolean isGameCompleted(){
-            return azioni.getCompleted();
+            return actions.getCompleted();
         }
 
 	public JLabel getMinute() {
@@ -84,8 +83,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 		return jtConsole;
 	}
 
-	public void stampaMessaggio(String messaggio) {
-		jtConsole.append(messaggio + "\n");
+	public void printMessage(String message) {
+		jtConsole.append(message + "\n");
 	}
 
 	/**
@@ -241,30 +240,30 @@ public class AdventureGUI extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jbSudActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSudActionPerformed
-		azioni.moveSud();
+		actions.moveSud();
 	}// GEN-LAST:event_jbSudActionPerformed
 
 	private void jbOvestActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbOvestActionPerformed
-		azioni.moveOvest();
+		actions.moveOvest();
 	}// GEN-LAST:event_jbOvestActionPerformed
 
 	private void jbNordActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbNordActionPerformed
-		azioni.moveNord();
+		actions.moveNord();
 	}// GEN-LAST:event_jbNordActionPerformed
 
 	private void jbEstActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbEstActionPerformed
-		azioni.moveEst();
+		actions.moveEst();
 	}// GEN-LAST:event_jbEstActionPerformed
 
 	private void jtComandiKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jtComandiKeyPressed
 		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 			String input = jtComandi.getText();
 			jtComandi.setText("");
-			ParserOutput azione = parser.parse(input, azioni.getCommands(), azioni.getObjects(), azioni.getCharacters());
+			ParserOutput azione = parser.parse(input, actions.getCommands(), actions.getObjects(), actions.getCharacters());
 			if (azione != null) {
-				azioni.processAction(azione);
+				actions.processAction(azione);
 			} else {
-				stampante.unrecognisedCommandMessage();
+				printer.unrecognisedCommandMessage();
 			}
 		}
 	}// GEN-LAST:event_jtComandiKeyPressed
