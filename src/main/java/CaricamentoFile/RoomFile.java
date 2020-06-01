@@ -6,23 +6,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 import Entita.Room;
 
-public class RoomsFile {
+public class RoomFile {
 
-	public static void saveRooms(ArrayList<Room> rooms) throws FileNotFoundException, IOException {
+	public static void saveRoom(Room room) throws FileNotFoundException, IOException {
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stanze.dat"));
-		out.writeObject(rooms);
+		out.writeObject(room);
 		out.close();
 	}
 
-	public static ArrayList<Room> loadRooms() throws FileNotFoundException, IOException, ClassNotFoundException {
-		ArrayList<Room> rooms;
+	public static Room loadRoom() throws FileNotFoundException, IOException, ClassNotFoundException {
+		Room room;
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream("stanze.dat"));
-		rooms = (ArrayList<Room>) in.readObject();
+		room = (Room) in.readObject();
 		in.close();
-		return rooms;
+		return room;
 	}
 }

@@ -6,7 +6,7 @@
 package Entita;
 
 import CaricamentoFile.ObjectsFile;
-import CaricamentoFile.RoomsFile;
+import CaricamentoFile.RoomFile;
 import java.util.ArrayList;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
@@ -23,7 +23,6 @@ public class Game {
 	private Room currentRoom;
 	private Character protagonist;
 	private ArrayList<GenericObject> gameObjects = new ArrayList<>();
-        private ArrayList<Room> gameRooms = new ArrayList<>();
 
 	public ArrayList<GenericObject> getObjects() {
 		return gameObjects;
@@ -38,11 +37,10 @@ public class Game {
             }
             
             try {
-                gameRooms = RoomsFile.loadRooms();
+                currentRoom = RoomFile.loadRoom();
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
-		currentRoom = gameRooms.get(0);
 	}
 
 	public String getProtagonistName() {

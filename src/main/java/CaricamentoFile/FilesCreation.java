@@ -369,23 +369,6 @@ public class FilesCreation {
 		eventoElicottero.addEventCharacter(Bruno);
 		incrocio.setEventHandler( new HelicopterEventHandler(eventoElicottero, fisica2));
                 
-                ArrayList<Room> rooms = new ArrayList<>();
-                rooms.add(strada1);
-                rooms.add(strada2);
-                rooms.add(strada3);
-                rooms.add(strada4);
-                rooms.add(strada5);
-                rooms.add(strada6);
-                rooms.add(incrocio);
-                rooms.add(executive);
-                rooms.add(pizzeria1);
-                rooms.add(pizzeria2);
-                rooms.add(stradaChiusa);
-                rooms.add(fisica1);
-                rooms.add(fisica2);
-                rooms.add(fisica3);
-                rooms.add(chimica1);
-                rooms.add(informatica1);
         try {
             ObjectsFile.saveObjects(gameObjects);
         } catch (IOException ex) {
@@ -393,7 +376,7 @@ public class FilesCreation {
         }
         
         try {
-            RoomsFile.saveRooms(rooms);
+            RoomFile.saveRoom(strada1);
         } catch (IOException ex) {
             Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
         }
