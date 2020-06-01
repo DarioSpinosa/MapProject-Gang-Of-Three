@@ -5,15 +5,21 @@
  */
 package CaricamentoFile;
 
-import Entita.Characters.Npc;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import Entita.Room;
+import Entita.Characters.Npc;
 import General.AliasHandler;
 import General.Combinations;
+import General.GenericObject;
+import General.GenericObjectContainer;
+import General.Name;
 import General.Eventi.CarEventHandler;
 import General.Eventi.CoffeEventHandler;
 import General.Eventi.DibDoorEventHandler;
-import General.Eventi.Enigmi.Coffe;
-import General.Eventi.Enigmi.Panel;
 import General.Eventi.Event;
 import General.Eventi.HelicopterEventHandler;
 import General.Eventi.MagazineEventHandler;
@@ -21,32 +27,27 @@ import General.Eventi.PackageEventHandler;
 import General.Eventi.PanelEventHandler;
 import General.Eventi.PhysicsEventHandler;
 import General.Eventi.PropulsorEventHandler;
-import General.GenericObject;
-import General.GenericObjectContainer;
-import General.Name;
+import General.Eventi.Enigmi.Coffe;
+import General.Eventi.Enigmi.Panel;
 import Parser.WordType;
 import Resources.Descriptions;
 import Resources.Dialogs;
 import Resources.Events;
 import Resources.Names;
 import Resources.Places;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Elio
  */
 public class FilesCreation {
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        ArrayList<GenericObject> gameObjects = new ArrayList<>();
-        Room strada1 = new Room(Places.AMENDOLA1_NAME, Places.AMENDOLA1_DESCRIPTION);
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		// TODO code application logic here
+		ArrayList<GenericObject> gameObjects = new ArrayList<>();
+		Room strada1 = new Room(Places.AMENDOLA1_NAME, Places.AMENDOLA1_DESCRIPTION);
 		Room strada2 = new Room(Places.AMENDOLA2_NAME, Places.AMENDOLA2_DESCRIPTION);
 		Room strada3 = new Room(Places.AMENDOLA3_NAME, Places.AMENDOLA3_DESCRIPTION);
 		Room strada4 = new Room(Places.STREET1_NAME, Places.STREET1_DESCRIPTION);
@@ -88,7 +89,7 @@ public class FilesCreation {
 		Name nomeAutista = new Name(Names.DRIVER_NAME, WordType.NOME_PROPRIO);
 		nomeAutista.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
-		aliasAutista.setAdmittedArticles(new String[] { "l"});
+		aliasAutista.setAdmittedArticles(new String[] { "l" });
 		aliasAutista.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
 		Entita.Characters.Character autista = new Npc(nomeAutista, Dialogs.BUSDRIVER);
 		autista.setAlias(new Name[] { aliasAutista });
@@ -105,7 +106,7 @@ public class FilesCreation {
 		Name nomeBarista = new Name(Names.CANNAVACCIUOLO_NAME, WordType.NOME_PROPRIO);
 		nomeBarista.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasBarista = new Name("antonino", WordType.NOME);
-		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "ad"});
+		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "ad" });
 		Entita.Characters.Character barista = new Npc(nomeBarista, Dialogs.CANNAVACCIUOLO_A);
 		barista.setAlias(new Name[] { aliasBarista });
 		chimica1.addCharacter(barista);
@@ -120,10 +121,10 @@ public class FilesCreation {
 		pizzeria1.addCharacter(pizzaiolo);
 
 		Name nomeBidello = new Name("Bidello", WordType.NOME_PROPRIO);
-		nomeBidello.setAdmittedPrepositions(new String[] { "al", "col" , "con"});
+		nomeBidello.setAdmittedPrepositions(new String[] { "al", "col", "con" });
 		Name aliasBidello = new Name("bidello", WordType.NOME);
 		aliasBidello.setAdmittedArticles(new String[] { "il" });
-		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al"});
+		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al" });
 		Entita.Characters.Character bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
 		informatica1.addCharacter(bidello);
@@ -132,7 +133,7 @@ public class FilesCreation {
 		nomePilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
 		Name aliasPilota = new Name("pilota", WordType.NOME);
 		aliasPilota.setAdmittedArticles(new String[] { "il" });
-		aliasPilota.setAdmittedPrepositions(new String[] { "al", "con", "col"});
+		aliasPilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
 		Entita.Characters.Character pilota = new Npc(nomePilota, Dialogs.PILOT_A);
 		pilota.setAlias(new Name[] { aliasPilota });
 		informatica1.addCharacter(pilota);
@@ -141,10 +142,10 @@ public class FilesCreation {
 		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasBruno1 = new Name("chef", WordType.NOME);
 		aliasBruno1.setAdmittedArticles(new String[] { "lo" });
-		aliasBruno1.setAdmittedPrepositions(new String[] { "allo", "con"});
+		aliasBruno1.setAdmittedPrepositions(new String[] { "allo", "con" });
 		Name aliasBruno2 = new Name("barbieri", WordType.NOME);
 		aliasBruno2.setAdmittedArticles(new String[] { "lo" });
-		aliasBruno2.setAdmittedPrepositions(new String[] { "a", "con"});
+		aliasBruno2.setAdmittedPrepositions(new String[] { "a", "con" });
 		Entita.Characters.Character Bruno = new Npc(nomeBruno, Dialogs.BRUNO);
 		Bruno.setAlias(new Name[] { aliasBruno1, aliasBruno2 });
 
@@ -152,7 +153,7 @@ public class FilesCreation {
 		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasVolpe = new Name("prof", WordType.NOME);
 		aliasVolpe.setAdmittedArticles(new String[] { "il" });
-		aliasVolpe.setAdmittedPrepositions(new String[] {"col", "con", "al"});
+		aliasVolpe.setAdmittedPrepositions(new String[] { "col", "con", "al" });
 		Entita.Characters.Character volpe = new Npc(nomeVolpe, Dialogs.VOLPE_A);
 		volpe.setAlias(new Name[] { aliasVolpe });
 		fisica2.addCharacter(volpe);
@@ -167,7 +168,7 @@ public class FilesCreation {
 
 		Name nomeMacchinetta = new Name(Names.COFFE_MACHINE, WordType.NOME);
 		nomeMacchinetta.setAdmittedArticles(new String[] { "la", "una" });
-		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella" , "dentro"});
+		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella", "dentro" });
 		GenericObject macchinaCaffe = new Coffe(nomeMacchinetta, Descriptions.COFFEEMAKER);
 		macchinaCaffe.setTakeable(false);
 
@@ -197,6 +198,7 @@ public class FilesCreation {
 
 		Name nomePacco = new Name(Names.PACKAGE, WordType.NOME);
 		nomePacco.setAdmittedArticles(new String[] { "il" });
+		nomePacco.setAdmittedPrepositions(new String[] { "nel", "nello", "in", "dentro" });
 		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK);
 		pacco.setAdjectives(new String[] { "jamazon" });
 
@@ -367,19 +369,19 @@ public class FilesCreation {
 		eventoElicottero.setEnigma(soldi);
 		eventoElicottero.addEventObject(elicottero);
 		eventoElicottero.addEventCharacter(Bruno);
-		incrocio.setEventHandler( new HelicopterEventHandler(eventoElicottero, fisica2));
-                
-        try {
-            ObjectsFile.saveObjects(gameObjects);
-        } catch (IOException ex) {
-            Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            RoomFile.saveRoom(strada1);
-        } catch (IOException ex) {
-            Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+		incrocio.setEventHandler(new HelicopterEventHandler(eventoElicottero, fisica2));
+
+		try {
+			ObjectsFile.saveObjects(gameObjects);
+		} catch (IOException ex) {
+			Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+		try {
+			RoomFile.saveRoom(strada1);
+		} catch (IOException ex) {
+			Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 }

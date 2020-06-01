@@ -250,7 +250,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.objectNotInInventoryMessage();
 
 			} else if (firstObject != null && secondObject != null && secondObject instanceof GenericObjectContainer
-					&& dropPrepositions.contains(action.getPreposition())) {
+					&& (dropPrepositions.contains(action.getPreposition()) || action.getPreposition() == null)) {
 				if (protagonist.isInInventory(firstObject))
 					lasciaOPrendiOggetto(firstObject, (GenericObjectContainer) secondObject, protagonist, true);
 				else
@@ -590,50 +590,28 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 	private void lasciaOPrendiOggetto(GenericObject firstObject, GenericObjectContainer secondObject,
 			Protagonist protagonist, boolean drop) {
-		if (game.getCurrentRoom().isInRoom(secondObject)) {
-
-			if (secondObject.isOpened()) {
-
-				if (drop) {
-					protagonist.removeObject(firstObject);
-					secondObject.addToContainer(firstObject);
-					printer.printObjectLeftIn(firstObject, secondObject);
-				} else {
-					if (secondObject.contains(firstObject)) {
-						secondObject.removeFromContainer(firstObject);
-						protagonist.addObject(firstObject);
-						printer.printTakenObjectFrom(firstObject, secondObject);
-					} else
-						printer.notAvaiableObjectMessage();
-				}
-
-			} else
-				printer.closedObjectMessage(secondObject);
-
-		} else if (protagonist.isInInventory(secondObject)) {
-			GenericObjectContainer containerObjectInventory = secondObject;
-
-			if (containerObjectInventory.isOpened()) {
-
-				if (drop) {
-					protagonist.removeObject(firstObject);
-					containerObjectInventory.addToContainer(firstObject);
-					printer.printObjectLeftIn(firstObject, secondObject);
-				} else {
-					if (containerObjectInventory.contains(firstObject)) {
-						containerObjectInventory.removeFromContainer(firstObject);
-						protagonist.addObject(firstObject);
-						printer.printTakenObjectFrom(firstObject, secondObject);
-					} else
-						printer.notAvaiableObjectMessage();
-				}
-
-			} else
-				printer.closedObjectMessage(secondObject);
-
-		} else
+		if (!(game.getCurrentRoom().isInRoom(secondObject)) && !(protagonist.isInInventory(secondObject))) {
 			printer.objectNotFoundMessage();
+			return;
+		}
+		if (!secondObject.isOpened()) {
+			printer.closedObjectMessage(secondObject);
+			return;
+		}
 
+		if (drop) {
+			protagonist.removeObject(firstObject);
+			secondObject.addToContainer(firstObject);
+			printer.printObjectLeftIn(firstObject, secondObject);
+		} else {
+			if (secondObject.contains(firstObject)) {
+				secondObject.removeFromContainer(firstObject);
+				protagonist.addObject(firstObject);
+				printer.printTakenObjectFrom(firstObject, secondObject);
+			} else {
+				printer.notAvaiableObjectMessage();
+			}
+		}
 	}
 
 	private void apriOChiudiOggetto(GenericObject firstObject, GenericObject secondObject, Protagonist protagonist,
