@@ -194,7 +194,12 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void aroundYouMessage() {
-		gui.stampaMessaggio("Intorno a te vedi: ");
+		gui.stampaMessaggio("\nIntorno a te vedi: ");
+	}
+
+	@Override
+	public void aroundYouNpc() {
+		gui.stampaMessaggio("Nella stanza ci sono:");
 	}
 
 	@Override
@@ -204,6 +209,6 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void objectWithDescriptionMessage(GenericObject object) {
-		gui.stampaMessaggio(object.getObjectName() + ": " + object.getDescription());
+		gui.stampaMessaggio("-" + object.getObjectName() + ": " + object.getDescription());
 	}
 }

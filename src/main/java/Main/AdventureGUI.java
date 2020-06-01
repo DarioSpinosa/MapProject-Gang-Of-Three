@@ -11,8 +11,8 @@ import General.ActionsHandler;
 import General.ActionsHandlerEssentials;
 import General.MessagesHandler;
 import General.MessagesHandlerEssentials;
-import Parser.ParserEssentials;
 import Parser.ItalianParser;
+import Parser.ParserEssentials;
 import Parser.ParserOutput;
 import Resources.InterfaceText;
 
@@ -26,8 +26,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private ActionsHandlerEssentials azioni;
 	private final MessagesHandlerEssentials stampante = new MessagesHandler(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 10;
-	private final int gameSeconds = 58;
+	private final int gameMinutes = 20;
+	private final int gameSeconds = 00;
 
 	/**
 	 * Creates new form AdventureGUI
@@ -50,9 +50,11 @@ public class AdventureGUI extends javax.swing.JFrame {
 		prepositions.add("nel");
 		prepositions.add("e");
 		prepositions.add("all");
+		prepositions.add("allo");
 		prepositions.add("a");
 		prepositions.add("ad");
-                prepositions.add("col");
+		prepositions.add("al");
+		prepositions.add("col");
 		ArrayList<String> articles = new ArrayList<>();
 		articles.add("la");
 		articles.add("l");
@@ -65,7 +67,7 @@ public class AdventureGUI extends javax.swing.JFrame {
 		Thread game = new GameThread(this, gameMinutes, gameSeconds);
 		game.start();
 	}
-        
+
         public boolean isGameCompleted(){
             return azioni.getCompleted();
         }

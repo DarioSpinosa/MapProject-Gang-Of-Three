@@ -22,5 +22,6 @@ public class Descriptions {
 	public static final String PANEL = "Un pannello composto da leve di 5 colori diversi\nRosso,Giallo,Verde,Blu e Nero\nE' collegato al generatore elettrico";
 	public static final String HELICOPTER = "Un elicottero dell'aerounatica militare, sul fianco vi e' scritto \"Umbrella comporation\" ";
 	public static final String MONEY = "Sono 600 euro";
+	public static final String COMMON = "E' una chiave che apre tutte le porte del dipartimento di fisica";
 
 }

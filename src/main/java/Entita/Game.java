@@ -7,24 +7,24 @@ package Entita;
 
 import java.util.ArrayList;
 
-import Entita.Characters.Npc;
 import Entita.Characters.Character;
+import Entita.Characters.Npc;
 import Entita.Characters.Protagonist;
+import General.AliasHandler;
 import General.Combinations;
 import General.GenericObject;
 import General.GenericObjectContainer;
-import General.AliasHandler;
 import General.Name;
-import General.Eventi.Event;
 import General.Eventi.CarEventHandler;
 import General.Eventi.CoffeEventHandler;
+import General.Eventi.DibDoorEventHandler;
+import General.Eventi.Event;
 import General.Eventi.HelicopterEventHandler;
+import General.Eventi.MagazineEventHandler;
 import General.Eventi.PackageEventHandler;
 import General.Eventi.PanelEventHandler;
-import General.Eventi.DibDoorEventHandler;
 import General.Eventi.PhysicsEventHandler;
 import General.Eventi.PropulsorEventHandler;
-import General.Eventi.magazineEventHandler;
 import General.Eventi.Enigmi.Coffe;
 import General.Eventi.Enigmi.Panel;
 import Parser.WordType;
@@ -58,7 +58,7 @@ public class Game {
 		Room stradaChiusa = new Room("Strada Chiusa", Places.WEST);
 		Room fisica1 = new Room("Atrio di Fisica", Places.PHYSICS_NOCURR);
 		Room fisica2 = new Room("Sala raggi cosmici", Places.COSMIC_RAYS);
-		Room fisica3 = new Room("Ufficio", "Sala del trono di Volpe");
+		Room fisica3 = new Room("Ufficio", "");
 		Room chimica1 = new Room("Bar di Chimica", Places.CHEMISTRY);
 		Room informatica1 = new Room("Atrio DIB", Places.DIB);
 		strada1.setUp(strada2);
@@ -87,7 +87,7 @@ public class Game {
 		Name nomeAutista = new Name("Mimmo", WordType.NOME_PROPRIO);
 		nomeAutista.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
-		aliasAutista.setAdmittedArticles(new String[] { "l" });
+		aliasAutista.setAdmittedArticles(new String[] { "l"});
 		aliasAutista.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
 		Character autista = new Npc(nomeAutista, Dialogs.BUSDRIVER);
 		autista.setAlias(new Name[] { aliasAutista });
@@ -104,8 +104,7 @@ public class Game {
 		Name nomeBarista = new Name("Cannavacciuolo", WordType.NOME_PROPRIO);
 		nomeBarista.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasBarista = new Name("antonino", WordType.NOME);
-		aliasBarista.setAdmittedArticles(new String[] { "il" });
-		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "ad"});
 		Character barista = new Npc(nomeBarista, Dialogs.CANNAVACCIUOLO_A);
 		barista.setAlias(new Name[] { aliasBarista });
 		chimica1.addCharacter(barista);
@@ -114,25 +113,25 @@ public class Game {
 		nomePizzaiolo.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasPizzaiolo = new Name("pizzaiolo", WordType.NOME);
 		aliasPizzaiolo.setAdmittedArticles(new String[] { "il" });
-		aliasPizzaiolo.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasPizzaiolo.setAdmittedPrepositions(new String[] { "con", "a", "ad" });
 		Character pizzaiolo = new Npc(nomePizzaiolo, Dialogs.BAKER_A);
 		pizzaiolo.setAlias(new Name[] { aliasPizzaiolo });
 		pizzeria1.addCharacter(pizzaiolo);
 
 		Name nomeBidello = new Name("Bidello", WordType.NOME_PROPRIO);
-		nomeBidello.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeBidello.setAdmittedPrepositions(new String[] { "al", "col" , "con"});
 		Name aliasBidello = new Name("bidello", WordType.NOME);
 		aliasBidello.setAdmittedArticles(new String[] { "il" });
-		aliasBidello.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al"});
 		Character bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
 		informatica1.addCharacter(bidello);
 
 		Name nomePilota = new Name("Pilota", WordType.NOME_PROPRIO);
-		nomePilota.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomePilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
 		Name aliasPilota = new Name("pilota", WordType.NOME);
 		aliasPilota.setAdmittedArticles(new String[] { "il" });
-		aliasPilota.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasPilota.setAdmittedPrepositions(new String[] { "al", "con", "col"});
 		Character pilota = new Npc(nomePilota, Dialogs.PILOT_A);
 		pilota.setAlias(new Name[] { aliasPilota });
 		informatica1.addCharacter(pilota);
@@ -141,10 +140,10 @@ public class Game {
 		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasBruno1 = new Name("chef", WordType.NOME);
 		aliasBruno1.setAdmittedArticles(new String[] { "lo" });
-		aliasBruno1.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasBruno1.setAdmittedPrepositions(new String[] { "allo", "con"});
 		Name aliasBruno2 = new Name("barbieri", WordType.NOME);
 		aliasBruno2.setAdmittedArticles(new String[] { "lo" });
-		aliasBruno2.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasBruno2.setAdmittedPrepositions(new String[] { "a", "con"});
 		Character Bruno = new Npc(nomeBruno, Dialogs.BRUNO);
 		Bruno.setAlias(new Name[] { aliasBruno1, aliasBruno2 });
 
@@ -152,7 +151,7 @@ public class Game {
 		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
 		Name aliasVolpe = new Name("prof", WordType.NOME);
 		aliasVolpe.setAdmittedArticles(new String[] { "il" });
-		aliasVolpe.setAdmittedPrepositions(new String[] { "con", "a", "al", "ad" });
+		aliasVolpe.setAdmittedPrepositions(new String[] {"col", "con", "al"});
 		Character volpe = new Npc(nomeVolpe, Dialogs.VOLPE_A);
 		volpe.setAlias(new Name[] { aliasVolpe });
 		fisica2.addCharacter(volpe);
@@ -167,14 +166,9 @@ public class Game {
 
 		Name nomeMacchinetta = new Name("macchinetta", WordType.NOME);
 		nomeMacchinetta.setAdmittedArticles(new String[] { "la", "una" });
-		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella" });
+		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella" , "dentro"});
 		GenericObject macchinaCaffe = new Coffe(nomeMacchinetta, Descriptions.COFFEEMAKER);
 		macchinaCaffe.setTakeable(false);
-
-		Name nomeLucchetto = new Name("lucchetto", WordType.NOME);
-		nomeLucchetto.setAdmittedArticles(new String[] { "il", "un" });
-		GenericObject lucchetto = new Coffe(nomeLucchetto, Descriptions.COFFEEMAKER);
-		lucchetto.setTakeable(false);
 
 		Name nomeAcqua = new Name("acqua", WordType.NOME);
 		nomeAcqua.setAdmittedArticles(new String[] { "l" });
@@ -225,11 +219,11 @@ public class Game {
 		nomeForcina.setAdmittedArticles(new String[] { "la", "una" });
 		GenericObject forcina = new GenericObject(nomeForcina, Descriptions.BOBBYPIN);
 
-		Name nomeGrimaldello2 = new Name("grimaldello", WordType.NOME);
+		Name nomeGrimaldello2 = new Name("passepartout", WordType.NOME);
 		nomeGrimaldello2.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject grimaldello2 = new GenericObject(nomeGrimaldello2, Descriptions.LOCKPICK);
 
-		Name nomeComponente = new Name("pezzo_elettronico", WordType.NOME);
+		Name nomeComponente = new Name("componente", WordType.NOME);
 		nomeComponente.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject componente = new GenericObject(nomeComponente, Descriptions.COMPONENT);
 
@@ -246,9 +240,9 @@ public class Game {
 		GenericObject chiaviDib = new GenericObject(nomeChiaviDib, Descriptions.KEYS);
 		chiaviDib.setAdjectives(new String[] { "dib" });
 
-		Name nomeChiaviFis = new Name("chiavi", WordType.NOME);
+		Name nomeChiaviFis = new Name("comunella", WordType.NOME);
 		nomeChiaviFis.setAdmittedArticles(new String[] { "le" });
-		GenericObject chiaviFis = new GenericObject(nomeChiaviFis, Descriptions.KEYS);
+		GenericObject chiaviFis = new GenericObject(nomeChiaviFis, Descriptions.COMMON);
 		chiaviFis.setAdjectives(new String[] { "fisica" });
 
 		Name nomeTaglierino = new Name("taglierino", WordType.NOME);
@@ -329,58 +323,57 @@ public class Game {
 		Combinations.addCombination(componente, viti, propulsore);
 
 		// EVENTI
-		Event eventoCaffe = new Event(Dialogs.COFFE_EVENT);
-		eventoCaffe.addEnigma(macchinaCaffe);
-		chimica1.setEventHandler(new CoffeEventHandler(eventoCaffe, chimica1));
-		chimica1.getEventHandler().setReward(chiaviDib);
+		Event eventoCaffe = new Event(Dialogs.COFFE_EVENT, chimica1);
+		eventoCaffe.setEnigma(macchinaCaffe);
+		eventoCaffe.setReward(chiaviDib);
+		chimica1.setEventHandler(new CoffeEventHandler(eventoCaffe));
 
-		Event eventoPannello = new Event("\nLa porta successiva e' bloccata da qualche meccanismo");
-		eventoPannello.addEnigma(pannello);
-		fisica1.setEventHandler(new PanelEventHandler(eventoPannello, fisica1));
+		Event eventoPannello = new Event("La porta successiva e' bloccata da qualche meccanismo", fisica1);
+		eventoPannello.setEnigma(pannello);
+		fisica1.setEventHandler(new PanelEventHandler(eventoPannello));
 
-		Event consegnaPacco = new Event("\nLa pizzeria ha una barricata di legno che ti impedisce l'accesso\n"
-				+ "Senti una voce: Ehi tu! Sono il pizzaiolo, portami il contenuto di quel pacco Jamazon e ti faro' entrare");
-		consegnaPacco.addEnigma(cd);
-		pizzeria1.setEventHandler(new PackageEventHandler(consegnaPacco, pizzeria1));
-		pizzeria1.getEventHandler().setReward(caffe);
+		Event consegnaPacco = new Event("La pizzeria ha una barricata di legno che ti impedisce l'accesso\n"
+				+ "Senti una voce: Ehi tu! Sono il pizzaiolo, portami il contenuto di quel pacco Jamazon e ti faro' entrare", pizzeria1);
+		consegnaPacco.setEnigma(cd);
+		consegnaPacco.setReward(caffe);
+		pizzeria1.setEventHandler(new PackageEventHandler(consegnaPacco));
 
 		Event consegnaRivista = new Event(
-				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...");
-		consegnaRivista.addEnigma(rivista);
-		informatica1.setEventHandler(new magazineEventHandler(consegnaRivista, informatica1));
-		informatica1.getEventHandler().setReward(chiaviFis);
+				"Il bidello ha le chiavi del dipartimento di Fisica!\r\nMa vuole qualcosa in cambio...", informatica1);
+		consegnaRivista.setEnigma(rivista);
+		consegnaRivista.setReward(chiaviFis);
+		informatica1.setEventHandler(new MagazineEventHandler(consegnaRivista));
 
-		Event apriMacchina = new Event("");
-		apriMacchina.addEnigma(lucchetto);
-		stradaChiusa.setEventHandler(new magazineEventHandler(apriMacchina, stradaChiusa));
+		Event apriMacchina = new Event("", stradaChiusa);
+		apriMacchina.setEnigma(grimaldello2);
+		stradaChiusa.setEventHandler(new MagazineEventHandler(apriMacchina));
 
 		Event portaFisica = new Event(
-				"La porta del dipartimento di fisica e' chiusa a chiave, devo trovare un altro modo");
-		portaFisica.addEnigma(chiaviFis);
-		strada5.setEventHandler(new PhysicsEventHandler(portaFisica, strada5));
+				"La porta del dipartimento di fisica e' chiusa a chiave, devo trovare un altro modo", strada5);
+		portaFisica.setEnigma(chiaviFis);
+		strada5.setEventHandler(new PhysicsEventHandler(portaFisica));
 
 		Event portaDib = new Event(
-				"La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo");
-		portaDib.addEnigma(chiaviDib);
-		strada6.setEventHandler(new DibDoorEventHandler(portaDib, strada6));
+				"La porta del dipartimento di informatica e' chiusa a chiave, devo trovare un altro modo", strada6);
+		portaDib.setEnigma(chiaviDib);
+		strada6.setEventHandler(new DibDoorEventHandler(portaDib));
 
 		Event auto = new Event(
-				"Vedi un auto in lontananza, il bagagliaio e' quasi aperto,\r\nma e' protetto da una serratura, ti servira qualcosa per aprirla");
-		auto.addEnigma(grimaldello2);
-		stradaChiusa.setEventHandler(new CarEventHandler(auto, stradaChiusa));
+				"Vedi un auto in lontananza, il bagagliaio e' quasi aperto,\r\nma e' protetto da una serratura, ti servira qualcosa per aprirla", stradaChiusa);
+		auto.setEnigma(grimaldello2);
+		stradaChiusa.setEventHandler(new CarEventHandler(auto));
 
 		Event raggi = new Event(
-				"Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica");
-		raggi.addEnigma(propulsore);
-		fisica2.setEventHandler(new PropulsorEventHandler(raggi, fisica2));
+				"Volpe: Ehy tu! Non ti avvicinare alla macchina dei raggi cosmici, e' il gioiello del dipartimento di fisica", fisica2);
+		raggi.setEnigma(propulsore);
+		fisica2.setEventHandler(new PropulsorEventHandler(raggi));
 
 		Event eventoElicottero = new Event(
-				"Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo");
-		eventoElicottero.addEnigma(soldi);
-		HelicopterEventHandler gestoreElicottero = new HelicopterEventHandler(eventoElicottero, incrocio);
-		gestoreElicottero.addEventObject(elicottero);
-		gestoreElicottero.addEventCharacter(Bruno);
-		incrocio.setEventHandler(gestoreElicottero);
+				"Il pilota e' arrivato con il suo elicottero, pero non vuole far salire nessuno\ntranne Pasquale Lops che e' gia a bordo", incrocio);
+		eventoElicottero.setEnigma(soldi);
+		eventoElicottero.addEventObject(elicottero);
+		eventoElicottero.addEventCharacter(Bruno);
+		incrocio.setEventHandler( new HelicopterEventHandler(eventoElicottero, fisica2));
 
 		currentRoom = strada1;
 	}

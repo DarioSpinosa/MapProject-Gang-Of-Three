@@ -1,23 +1,24 @@
 package General.Eventi;
 
-import Entita.Room;
 import Entita.Characters.Protagonist;
+import General.GenericObject;
 import General.GenericObjectContainer;
 
 public class CarEventHandler extends GenericEventHandler{
 
-	public CarEventHandler(Event event, Room room) {
-		super(event,room);
+	public CarEventHandler(Event event) {
+		super(event);
 	}
 
 	@Override
-	public void endEvent(Protagonist protagonist) {
-		if(protagonist.isInInventory(event.getEnigma())) {
-			setCompleted();
+	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
+		if(!completed && obj.equals(event.getEnigma()) && protagonist.isInInventory(event.getEnigma())) {
+			completed = true;
 			protagonist.removeObject(event.getEnigma());
-			((GenericObjectContainer)eventRoom.getRoomObject("automobile")).setBlocked(false);
-			((GenericObjectContainer)eventRoom.getRoomObject("automobile")).open();
+			((GenericObjectContainer)event.getEventRoom().getRoomObject("automobile")).setBlocked(false);
+			((GenericObjectContainer)event.getEventRoom().getRoomObject("automobile")).open();
 		}
+		return completed;
 	}
 
 }

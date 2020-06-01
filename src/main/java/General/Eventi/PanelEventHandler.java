@@ -1,23 +1,26 @@
 package General.Eventi;
 
-import Entita.Room;
 import Entita.Characters.Protagonist;
+import General.GenericObject;
 import General.Eventi.Enigmi.Panel;
 import Resources.Places;
 
 public class PanelEventHandler extends GenericEventHandler{
 
-	public  PanelEventHandler(Event event, Room room){
-		super(event, room);
+	public  PanelEventHandler(Event event){
+		super(event);
 	}
 
 	@Override
-	public void endEvent(Protagonist protagonist) {
+	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
 
 		if(((Panel)(event.getEnigma())).isCompleted()){
-			eventRoom.getLeft().setAccessible(true);
-			eventRoom.setDescription(Places.PHYSICS);
+			setCompleted();
+			event.getEventRoom().getLeft().setAccessible(true);
+			event.getEventRoom().setDescription(Places.PHYSICS);
 		}
+
+		return completed;
 	}
 
 }

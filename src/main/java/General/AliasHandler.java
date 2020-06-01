@@ -22,7 +22,7 @@ public class AliasHandler {
 
 	public boolean containsAlias(String nameToken){
 		for(Name name : alias){
-			if(name.getName().equals(name)){
+			if(name.getName().equals(nameToken)){
 				return true;
 			}
 		}

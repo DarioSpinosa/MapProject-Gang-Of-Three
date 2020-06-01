@@ -1,7 +1,5 @@
 package General.Eventi;
 
-import java.util.ArrayList;
-
 import Entita.Room;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
@@ -10,22 +8,36 @@ import General.GenericObject;
 public abstract class GenericEventHandler {
 
 	protected Event event;
-	protected Room eventRoom;
-	protected GenericObject reward = null;
+	protected Room otherRoomEvent = null;
 	protected boolean started = false;
 	protected boolean completed = false;
-	protected ArrayList<GenericObject> eventObjects = new ArrayList<>();
-	protected ArrayList<Character> eventCharacters = new ArrayList<>();
 
 	public GenericEventHandler() {
 	}
 
-	public GenericEventHandler(Event m, Room stanza) {
+	public GenericEventHandler(Event m) {
 		event = m;
-		this.eventRoom = stanza;
+	}
+
+	public GenericEventHandler(Event m, Room condition) {
+		event = m;
+		this.otherRoomEvent = condition;
 	}
 
 	public String startEvent() {
+
+		String temp = "";
+
+		if(otherRoomEvent != null) {
+			if(otherRoomEvent.getEventHandler().isCompleted())
+				temp = start();
+		}else
+			temp = start();
+
+		return temp;
+	}
+
+	private String start() {
 
 		String temp = "";
 
@@ -33,15 +45,15 @@ public abstract class GenericEventHandler {
 			temp = event.getDescription();
 			started = true;
 
-			if(!eventObjects.isEmpty()) {
-				for(GenericObject object: eventObjects) {
-					eventRoom.addObject(object);
+			if(!event.getEventObjects().isEmpty()) {
+				for(GenericObject object: event.getEventObjects()) {
+					event.getEventRoom().addObject(object);
 				}
 			}
 
-			if(!eventCharacters.isEmpty()) {
-				for(Character character: eventCharacters) {
-					eventRoom.addCharacter(character);
+			if(!event.getEventCharacters().isEmpty()) {
+				for(Character character: event.getEventCharacters()) {
+					event.getEventRoom().addCharacter(character);
 				}
 			}
 
@@ -52,10 +64,6 @@ public abstract class GenericEventHandler {
 
 	public Event getEvent() {
 		return event;
-	}
-
-	public void setReward(GenericObject object) {
-		reward = object;
 	}
 
 	public boolean isStarted() {
@@ -70,14 +78,6 @@ public abstract class GenericEventHandler {
 		completed = true;
 	}
 
-	public void addEventObject(GenericObject object) {
-		eventObjects.add(object);
-	}
-
-	public void addEventCharacter(Character character) {
-		eventCharacters.add(character);
-	}
-        
-	public abstract void endEvent(Protagonist protagonist);
+	public abstract boolean endEvent(Protagonist protagonist, GenericObject obj);
 
 }

@@ -1,19 +1,25 @@
 package General.Eventi;
 
-import Entita.Room;
 import Entita.Characters.Protagonist;
+import General.GenericObject;
 
 public class PhysicsEventHandler extends GenericEventHandler{
 
-	public PhysicsEventHandler(Event event, Room room){
-		super(event, room);
+	public PhysicsEventHandler(Event event){
+		super(event);
 	}
 
 	@Override
-	public void endEvent(Protagonist protagonist) {
-		if(protagonist.getInventory().contains(event.getEnigma())) {
+	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
+		GenericObject enigma = event.getEnigma();
+
+		if(!completed && obj.equals(enigma) && obj.getAdjectives().equals(enigma.getAdjectives())
+				&& protagonist.getInventory().contains(enigma)) {
+			completed = true;
 			protagonist.getInventory().removeFromContainer((event.getEnigma()));
-			eventRoom.getLeft().setAccessible(true);
-                }
+			event.getEventRoom().getLeft().setAccessible(true);
+       }
+
+		return completed;
 	}
 }

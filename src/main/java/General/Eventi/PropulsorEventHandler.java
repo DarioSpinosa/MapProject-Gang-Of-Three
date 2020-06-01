@@ -1,30 +1,33 @@
 package General.Eventi;
 
-import Entita.Room;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonist;
+import General.GenericObject;
 import Resources.Dialogs;
 
 public class PropulsorEventHandler extends GenericEventHandler{
 
-	public PropulsorEventHandler(Event event, Room room) {
-		super(event,room);
+	public PropulsorEventHandler(Event event) {
+		super(event);
 	}
 
 	@Override
-	public void endEvent(Protagonist protagonist) {
-		if(protagonist.getInventory().contains(event.getEnigma())) {
-			setCompleted();
-			((Npc)eventRoom.getCharacters().get(0)).setDialogue(Dialogs.VOLPE_B);
-			eventRoom.getRight().getRight().getDown().getDown().addCharacter(eventRoom.getCharacters().get(0));
-			eventRoom.getCharacters().remove(0);
-			((Npc)eventRoom.getRight().getRight().getUp().getRight().getCharacters().get(1)).setDialogue(Dialogs.PILOT_B);
-			eventRoom.getRight().getRight().getDown().getDown().addCharacter(eventRoom.getRight().getRight().getUp().getRight().getCharacters().get(1));
-			eventRoom.getRight().getRight().getUp().getRight().getCharacters().remove(1);
+	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
+		if(!completed && obj.equals(event.getEnigma()) && protagonist.getInventory().contains(event.getEnigma())) {
+			completed = true;
+			((Npc)event.getEventRoom().getCharacters().get(0)).setDialogue(Dialogs.VOLPE_B);
+			event.getEventRoom().getRight().getRight().getDown().getDown().addCharacter(event.getEventRoom().getCharacters().get(0));
+			event.getEventRoom().getCharacters().remove(0);
+			((Npc)event.getEventRoom().getRight().getRight().getUp().getRight().getCharacters().get(1)).setDialogue(Dialogs.PILOT_B);
+			event.getEventRoom().getRight().getRight().getDown().getDown().addCharacter(event.getEventRoom().getRight().getRight().getUp().getRight().getCharacters().get(1));
+			event.getEventRoom().getRight().getRight().getUp().getRight().getCharacters().remove(1);
+			((Npc)event.getEventRoom().getRight().getRight().getDown().getDown().getCharacters().get(0)).setDialogue(Dialogs.MORGAN_B);
 			protagonist.removeObject(event.getEnigma());
-			protagonist.getInventory().addToContainer(reward);
+			protagonist.getInventory().addToContainer(event.getReward());
 
 		}
+
+		return completed;
 
 	}
 

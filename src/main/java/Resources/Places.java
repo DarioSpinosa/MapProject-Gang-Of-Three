@@ -11,8 +11,7 @@ public class Places {
 			+ "Dall'ingresso dell'Executive Center vedi una striscia di sangue.";
 	public static String SOUTH3 = "Sei a meta' di via Amendola. Alla tua sinistra c'e' un cartellone pubblicitario, a destra una pizzeria";
 	public static String EXECUTIVE = "Ti sei intrufolato in uno degli uffici dell'Executive Center";
-	public static String PIZZA_EXT = "La pizzeria ha una barricata di legno che ti impedisce l'accesso\r\n"
-			+ "Senti una voce \"Ehi tu! Portami il contenuto di quel pacco Jamazon e ti faro' entrare\"";
+	public static String PIZZA_EXT = "E' l'esterno della pizzeria \"Da Gianluca\"";
 	public static String PIZZA_INT = "Sei entrato in un'ampia sala di una pizzeria.\r\nNon c'e' nessuno, se non il pizzaiolo";
 
 	public static String NORTH1 = "Dopo una lunga camminata, sei arrivato al campus!\r\n"

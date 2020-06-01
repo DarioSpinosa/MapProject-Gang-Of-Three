@@ -95,4 +95,6 @@ public abstract class MessagesHandlerEssentials {
 	public abstract void alreadyLoweredLeverMessage();
 
 	public abstract void alreadyRaisedLeverMessage();
+
+	public abstract void aroundYouNpc();
 }
