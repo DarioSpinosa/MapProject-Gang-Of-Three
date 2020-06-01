@@ -5,6 +5,7 @@
  */
 package General;
 
+import Entita.Characters.Npc;
 import Main.AdventureGUI;
 
 /**
@@ -19,14 +20,14 @@ public abstract class MessagesHandlerEssentials {
 	}
 
 	public void printLine() {
-		gui.stampaMessaggio("-----------------------------------------------");
+		gui.printMessage("-----------------------------------------------");
 	}
 
 	public void printInventory(GenericObject object) {
 		if (object.getAdjectives() == null) {
-			gui.stampaMessaggio("- " + object);
+			gui.printMessage("- " + object);
 		} else {
-			gui.stampaMessaggio("- " + object + " " + object.getAdjectives().toArray()[0]);
+			gui.printMessage("- " + object + " " + object.getAdjectives().toArray()[0]);
 		}
 	}
 
@@ -97,4 +98,18 @@ public abstract class MessagesHandlerEssentials {
 	public abstract void alreadyRaisedLeverMessage();
 
 	public abstract void aroundYouNpc();
+        
+        public abstract void blockedObjectMessage();
+        
+        public abstract void cannotGiveObjectMessage();
+        
+        public abstract void wrongOpeningToolMessage();
+        
+        public abstract void printPlaceName(String name);
+        
+        public abstract void printEventDescription(String description);
+        
+        public abstract void objectCannotBeOpenedWithItemMessage();
+        
+        public abstract void printNpcDialogue(Npc npc, String dialogue);
 }

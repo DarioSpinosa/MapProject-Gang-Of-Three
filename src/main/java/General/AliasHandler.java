@@ -1,10 +1,11 @@
 package General;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AliasHandler {
+public class AliasHandler implements Serializable {
 
 	private Set<Name> alias = new HashSet<>();
 

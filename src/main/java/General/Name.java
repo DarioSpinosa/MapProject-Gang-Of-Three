@@ -5,11 +5,12 @@
 */
 package General;
 import Parser.WordType;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Name {
+public class Name implements Serializable {
     private String name;
     private WordType type;
     private Set<String> admittedArticles;

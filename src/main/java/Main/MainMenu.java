@@ -125,9 +125,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_creditsButtonActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        AdventureGUI avventura = new AdventureGUI();
+        AdventureGUI adventure = new AdventureGUI();
         this.dispose();
-        avventura.setVisible(true);
+        adventure.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     /**

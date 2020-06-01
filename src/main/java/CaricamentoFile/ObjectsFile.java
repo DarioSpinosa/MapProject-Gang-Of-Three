@@ -10,20 +10,19 @@ import java.util.ArrayList;
 
 import General.GenericObject;
 
-public class CaricaOggetti {
+public class ObjectsFile {
 
-	public static void salvaOggetto(ArrayList<GenericObject> oggetti) throws FileNotFoundException, IOException {
+	public static void saveObjects(ArrayList<GenericObject> objects) throws FileNotFoundException, IOException {
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("oggetti.dat"));
-		out.writeObject(oggetti);
+		out.writeObject(objects);
 		out.close();
 	}
 
-	public static ArrayList<GenericObject> caricaOggetti()
-			throws FileNotFoundException, IOException, ClassNotFoundException {
-		ArrayList<GenericObject> oggetti;
+	public static ArrayList<GenericObject> loadObjects() throws FileNotFoundException, IOException, ClassNotFoundException {
+		ArrayList<GenericObject> objects;
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream("oggetti.dat"));
-		oggetti = (ArrayList<GenericObject>) in.readObject();
+		objects = (ArrayList<GenericObject>) in.readObject();
 		in.close();
-		return oggetti;
+		return objects;
 	}
 }

@@ -235,7 +235,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					}else
 						printer.notUnderstoodMessage();
 				}else
-					printer.printMessage("Non puoi dare questo oggetto a nessuno");
+					printer.cannotGiveObjectMessage();
 			} else
 				printer.notUnderstoodMessage();
 			break;
@@ -351,7 +351,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					}
 				}
 				Npc npc = (Npc) game.getCurrentRoom().getCharacter(action.getCharacter());
-				printer.printMessage("\n" + npc.getName().getName() + ": " + npc.getDialogue());
+				printer.printNpcDialogue(npc, npc.getDialogue());
 
 			} else
 				printer.notUnderstoodMessage();
@@ -382,16 +382,16 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				} else if (eventHandler instanceof CarEventHandler) {
 
 					if(eventHandler.endEvent(protagonist, firstObject))
-						printer.printMessage("La serratura si e' aperta");
+						printer.printOpenedObject(firstObject);
 					else
-						printer.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
+						printer.wrongOpeningToolMessage();
 
 				} else if (eventHandler instanceof PhysicsEventHandler || eventHandler instanceof DibDoorEventHandler){
 
 					if(eventHandler.endEvent(protagonist, firstObject))
-						printer.printMessage("La porta si e' aperta");
+						printer.printOpenedObject(firstObject);
 					else
-						printer.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
+						printer.wrongOpeningToolMessage();
 				}
 
 			}else
@@ -520,11 +520,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getUp() != null) {
 			if (game.getCurrentRoom().getUp().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getUp());
-				printer.printMessage("\nLuogo: " + game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage("Descrizione: " + game.getCurrentRoom().getDescription());
+				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
+				printer.printMessage(game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printMessage("\n" + game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -537,11 +537,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getDown() != null) {
 			if (game.getCurrentRoom().getDown().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getDown());
-				printer.printMessage("\nLuogo: " + game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage("Descrizione: " + game.getCurrentRoom().getDescription());
+				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
+				printer.printMessage(game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printMessage("\n" + game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 
 			} else
 				printer.closedRoomMessage();
@@ -555,11 +555,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getRight() != null) {
 			if (game.getCurrentRoom().getRight().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getRight());
-				printer.printMessage("\nLuogo: " + game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage("Descrizione: " + game.getCurrentRoom().getDescription());
+				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
+				printer.printMessage(game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printMessage("\n" + game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else {
 				printer.closedRoomMessage();
 
@@ -574,11 +574,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getLeft() != null) {
 			if (game.getCurrentRoom().getLeft().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getLeft());
-				printer.printMessage("\nLuogo: " + game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage("Descrizione: " + game.getCurrentRoom().getDescription());
+				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
+				printer.printMessage(game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printMessage("\n" + game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -654,7 +654,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 								printer.alreadyOpenedObjectMessage(firstObject);
 
 						} else
-							printer.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
+							printer.blockedObjectMessage();
 
 					} else {
 
@@ -677,7 +677,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 							} else
 								printer.alreadyOpenedObjectMessage(firstObject);
 						} else
-							printer.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
+							printer.blockedObjectMessage();
 
 					} else {
 
@@ -710,10 +710,10 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					if (secondObject.getObjectName().equals("taglierino")) {
 						protagonist.removeObject(secondObject);
 						containerObject.setBlocked(false);
-						printer.printMessage("Hai aperto il pacco, dentro c'è un cd");
+						printer.printOpenedObject(firstObject);
 						containerObject.open();
 					} else
-						printer.printMessage("Non riesco ad aprirlo con questo oggetto");
+						printer.objectCannotBeOpenedWithItemMessage();
 				}else
 					printer.objectNotFoundMessage();
 			}else
