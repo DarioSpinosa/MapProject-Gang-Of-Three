@@ -25,9 +25,8 @@ public class Dialogs {
 			"Ti posso dare le chiavi. Cosa mi dai in cambio?" };
 	public final static String[] JANITOR_B = { "...\n*E' immerso nella lettura*" };
 	public final static String JANITOR_C =  "Quella cosa non mi interessa";
-	public final static String JANITOR_EVENT = "Tu si che sai fare affari! Eccoti le chiavi\nIl bidello si prende la rivista e ti da' le chiavi";
-	public final static String[] VOLPE_A = { "Incredibile, c'e' ancora qualcuno li' fuori!",
-			"Per spazzare via i dinosauri, possiamo usare i raggi cosmici. Il macchinario e' incompleto, manca il propulsore ionico, per costruirlo serve un componente.",
+	public final static String JANITOR_D = "Tu si che sai fare affari! Eccoti le chiavi\nIl bidello si prende la rivista e ti da' le chiavi";
+	public final static String[] VOLPE_A = {"Per spazzare via i dinosauri, possiamo usare i raggi cosmici. Il macchinario e' incompleto, manca il propulsore ionico, per costruirlo serve un componente.",
 			"Dovrei averlo lasciato in macchina. Servono anche delle viti per montarlo, portameli al più presto." };
 	public final static String[] VOLPE_B = {"Maledizione, ho dimenticato i soldi per pagare il pilota nel mio ufficio, presto vammeli a prendere!"};
 	public final static String VOLPE_C = "Finalmente! Ora posso completare il macchinario dei raggi cosmici, si attiverà in pochi minuti\nPRESTO, DOBBIAMO SCAPPARE, HO CHIAMATO UN ELICOTTERO\nCI STA ASPETTANDO ALL'INCROCIO";

@@ -78,8 +78,8 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 	}
 
 	@Override
-	public void printRoom(String nome, String descrizione) {
-		gui.printMessage(nome);
+	public void printRoom(String name, String descrizione) {
+		 gui.printMessage(("\nLuogo:" + name).toUpperCase());
 		gui.printMessage(descrizione);
 	}
 
@@ -115,27 +115,27 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void printObjectDescription(GenericObject object) {
-		gui.printMessage("-" + object.getDescription());
+		gui.printMessage("\n-" + object.getDescription());
 	}
 
 	@Override
 	public void printTakenObject(GenericObject object) {
-		gui.printMessage("Hai preso: " + object);
+		gui.printMessage("\nHai preso: " + object);
 	}
 
 	@Override
 	public void printLeftObject(GenericObject object) {
-		gui.printMessage("Hai lasciato: " + object);
+		gui.printMessage("\nHai lasciato: " + object);
 	}
 
 	@Override
 	public void printOpenedObject(GenericObject object) {
-		gui.printMessage("Hai aperto: " + object);
+		gui.printMessage("\nHai aperto: " + object);
 	}
 
 	@Override
 	public void printClosedObject(GenericObject object) {
-		gui.printMessage("Hai chiuso: " + object);
+		gui.printMessage("\nHai chiuso: " + object);
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void printTakenObjectFrom(GenericObject firstObject, GenericObject secondObject) {
-		gui.printMessage("Hai preso:  " + firstObject + " da " + secondObject);
+		gui.printMessage("\nHai preso:  " + firstObject + " da " + secondObject);
 	}
 
 	@Override
@@ -155,12 +155,12 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void closedObjectMessage(GenericObject object) {
-		gui.printMessage("L'oggetto " + object + " e' chiuso");
+		gui.printMessage("\nL'oggetto " + object + " e' chiuso");
 	}
 
 	@Override
 	public void printObjectLeftIn(GenericObject firstObject, GenericObject secondObject) {
-		gui.printMessage("Hai lasciato l'oggetto " + firstObject + " in " + secondObject);
+		gui.printMessage("\nHai lasciato l'oggetto " + firstObject + " in " + secondObject);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
-		gui.printMessage("Hai combinato " + firstObject + " con " + secondObject + " e ottenuto: " + resultantObject);
+		gui.printMessage("\nHai combinato " + firstObject + " con " + secondObject + " e ottenuto: " + resultantObject);
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void aroundYouNpc() {
-		gui.printMessage("Nella stanza ci sono:");
+		gui.printMessage("\nNella stanza ci sono:");
 	}
 
 	@Override
@@ -212,39 +212,40 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 	public void objectWithDescriptionMessage(GenericObject object) {
 		gui.printMessage("-" + object.getObjectName() + ": " + object.getDescription());
 	}
-        
+
         @Override
         public void blockedObjectMessage(){
             gui.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
         }
-        
+
         @Override
         public void cannotGiveObjectMessage(){
             gui.printMessage("Non puoi dare questo oggetto a nessuno");
         }
-        
+
         @Override
         public void wrongOpeningToolMessage(){
             gui.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
         }
-        
-        @Override
-        public void printPlaceName(String name){
-            gui.printMessage("\nLuogo:" + name);
-        }
-        
+
         @Override
         public void printEventDescription(String description){
             gui.printMessage("\n" + description);
         }
-        
+
         @Override
         public void objectCannotBeOpenedWithItemMessage(){
             gui.printMessage("Non sembra sia possibile aprirlo con questo oggetto");
         }
-        
+
         @Override
         public void printNpcDialogue(Npc npc, String dialogue){
             gui.printMessage("\n" + npc + ": " + dialogue);
         }
+
+		@Override
+		public void printObjectInside(GenericObjectContainer container) {
+			for(GenericObject obj: container.getContainer())
+				gui.printMessage(obj.getName().getName());
+		}
 }

@@ -13,7 +13,7 @@ public class PackageEventHandler extends GenericEventHandler {
 
 	@Override
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
-		if(!completed && obj.equals(event.getEnigma()) && protagonist.getInventory().contains(event.getEnigma())) {
+		if(!completed && obj.equals(event.getEnigma())) {
 			completed = true;
 			event.getEventRoom().getRight().setAccessible(true);
 			((Npc)event.getEventRoom().getCharacters().get(0)).setDialogue(Dialogs.BAKER_B);

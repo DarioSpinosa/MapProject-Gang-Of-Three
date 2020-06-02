@@ -1,8 +1,10 @@
 package Main;
 
-import CaricamentoFile.FilesCreation;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -16,10 +18,6 @@ import Parser.ItalianParser;
 import Parser.ParserEssentials;
 import Parser.ParserOutput;
 import Resources.InterfaceText;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +29,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private ActionsHandlerEssentials actions;
 	private final MessagesHandlerEssentials printer = new MessagesHandler(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 10;
-	private final int gameSeconds = 59;
+	private final int gameMinutes = 25223232;
+	private final int gameSeconds = 0;
 
 	/**
 	 * Creates new form AdventureGUI
@@ -130,7 +128,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbOvest.setText("OVEST");
         jbOvest.setPreferredSize(new java.awt.Dimension(70, 20));
         jbOvest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbOvestActionPerformed(evt);
             }
         });
@@ -138,7 +137,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbNord.setText("NORD");
         jbNord.setPreferredSize(new java.awt.Dimension(70, 20));
         jbNord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNordActionPerformed(evt);
             }
         });
@@ -146,7 +146,8 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbSud.setText("SUD");
         jbSud.setPreferredSize(new java.awt.Dimension(70, 20));
         jbSud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSudActionPerformed(evt);
             }
         });
@@ -154,13 +155,15 @@ public class AdventureGUI extends javax.swing.JFrame {
         jbEst.setText("EST");
         jbEst.setPreferredSize(new java.awt.Dimension(70, 20));
         jbEst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEstActionPerformed(evt);
             }
         });
 
         jtComandi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            @Override
+			public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtComandiKeyPressed(evt);
             }
         });

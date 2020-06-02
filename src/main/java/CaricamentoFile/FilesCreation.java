@@ -14,11 +14,9 @@ import Entita.Room;
 import Entita.Characters.Npc;
 import General.AliasHandler;
 import General.Combinations;
-import General.Combinations.Node;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.Name;
-import General.Eventi.CarEventHandler;
 import General.Eventi.CoffeEventHandler;
 import General.Eventi.DibDoorEventHandler;
 import General.Eventi.Event;
@@ -42,7 +40,7 @@ import Resources.Places;
  * @author Elio
  */
 public class FilesCreation {
-	
+
 	public static void doStuff() {
 		// TODO code application logic here
 		ArrayList<GenericObject> gameObjects = new ArrayList<>();
@@ -59,9 +57,9 @@ public class FilesCreation {
 		Room stradaChiusa = new Room(Places.BLOCKED_STREET_NAME, Places.BLOCKED_STREET_DESCRIPTION);
 		Room fisica1 = new Room(Places.PHYSICS_LOBBY_NAME, Places.PHYSICS_NOCURR);
 		Room fisica2 = new Room(Places.COSMIC_RAYS_ROOM_NAME, Places.COSMIC_RAYS_ROOM_DESCRIPTION);
-		Room fisica3 = new Room(Places.OFFICE_NAME, "");
-		Room chimica1 = new Room(Places.CHEMISTRY_BAR_NAME, Places.CHEMISTRY_BAR_DESCRIPTION);
-		Room informatica1 = new Room(Places.DIB_LOBBY_NAME, Places.DIB_LOBBY_DESCRIPTION);
+		Room fisica3 = new Room(Places.OFFICE_NAME, Places.VOLPE_OFFICE);
+		Room chimica = new Room(Places.CHEMISTRY_BAR_NAME, Places.CHEMISTRY_BAR_DESCRIPTION);
+		Room informatica = new Room(Places.DIB_LOBBY_NAME, Places.DIB_LOBBY_DESCRIPTION);
 		strada1.setUp(strada2);
 		executive.setLeft(strada2);
 		strada2.setRight(executive).setUp(strada3).setDown(strada1);
@@ -70,16 +68,16 @@ public class FilesCreation {
 		pizzeria2.setLeft(pizzeria1);
 		incrocio.setDown(strada3).setLeft(stradaChiusa).setUp(strada4);
 		stradaChiusa.setRight(incrocio);
-		strada4.setDown(incrocio).setUp(strada5).setRight(chimica1);
+		strada4.setDown(incrocio).setUp(strada5).setRight(chimica);
 		strada5.setDown(strada4).setLeft(fisica1).setUp(strada6);
 		fisica1.setLeft(fisica2).setRight(strada5);
 		fisica2.setUp(fisica3).setRight(fisica1);
 		fisica3.setDown(fisica2);
-		chimica1.setLeft(strada4);
-		strada6.setDown(strada5).setRight(informatica1);
-		informatica1.setLeft(strada6);
+		chimica.setLeft(strada4);
+		strada6.setDown(strada5).setRight(informatica);
+		informatica.setLeft(strada6);
 		fisica1.setAccessible(false);
-		informatica1.setAccessible(false);
+		informatica.setAccessible(false);
 		fisica2.setAccessible(false);
 		pizzeria2.setAccessible(false);
 
@@ -108,7 +106,7 @@ public class FilesCreation {
 		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "ad" });
 		Entita.Characters.Character barista = new Npc(nomeBarista, Dialogs.CANNAVACCIUOLO_A);
 		barista.setAlias(new Name[] { aliasBarista });
-		chimica1.addCharacter(barista);
+		chimica.addCharacter(barista);
 
 		Name nomePizzaiolo = new Name("Almerino", WordType.NOME_PROPRIO);
 		nomePizzaiolo.setAdmittedPrepositions(new String[] { "a", "con" });
@@ -126,7 +124,7 @@ public class FilesCreation {
 		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al" });
 		Entita.Characters.Character bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
-		informatica1.addCharacter(bidello);
+		informatica.addCharacter(bidello);
 
 		Name nomePilota = new Name("Pilota", WordType.NOME_PROPRIO);
 		nomePilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
@@ -135,7 +133,7 @@ public class FilesCreation {
 		aliasPilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
 		Entita.Characters.Character pilota = new Npc(nomePilota, Dialogs.PILOT_A);
 		pilota.setAlias(new Name[] { aliasPilota });
-		informatica1.addCharacter(pilota);
+		informatica.addCharacter(pilota);
 
 		Name nomeBruno = new Name("Bruno", WordType.NOME_PROPRIO);
 		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
@@ -311,14 +309,14 @@ public class FilesCreation {
 		executive.addObject(server);
 		executive.addObject(viti);
 		strada1.addObject(taglierino);
-		chimica1.addObject(acqua);
+		chimica.addObject(acqua);
 		strada3.addObject(cartellone);
 		strada3.addObject(pacco);
 		fisica1.addObject(poster);
 		stradaChiusa.addObject(automobile);
-		chimica1.addObject(macchinaCaffe);
+		chimica.addObject(macchinaCaffe);
 		fisica1.addObject(pannello);
-		pizzeria1.addObject(forcina);
+		pizzeria2.addObject(forcina);
 		strada6.addObject(grimaldello1);
 		fisica3.addObject(soldi);
                 Combinations combinations = new Combinations();
@@ -326,10 +324,10 @@ public class FilesCreation {
 		combinations.addCombination(componente, viti, propulsore);
 
 		// EVENTI
-		Event eventoCaffe = new Event(Events.COFFE_EVENT, chimica1);
+		Event eventoCaffe = new Event(Events.COFFE_EVENT, chimica);
 		eventoCaffe.setEnigma(macchinaCaffe);
 		eventoCaffe.setReward(chiaviDib);
-		chimica1.setEventHandler(new CoffeEventHandler(eventoCaffe));
+		chimica.setEventHandler(new CoffeEventHandler(eventoCaffe));
 
 		Event eventoPannello = new Event(Events.PANEL_DOOR, fisica1);
 		eventoPannello.setEnigma(pannello);
@@ -340,14 +338,10 @@ public class FilesCreation {
 		consegnaPacco.setReward(caffe);
 		pizzeria1.setEventHandler(new PackageEventHandler(consegnaPacco));
 
-		Event consegnaRivista = new Event(Events.MAGAZINE, informatica1);
+		Event consegnaRivista = new Event(Events.MAGAZINE, informatica);
 		consegnaRivista.setEnigma(rivista);
 		consegnaRivista.setReward(chiaviFis);
-		informatica1.setEventHandler(new MagazineEventHandler(consegnaRivista));
-
-		Event apriMacchina = new Event("", stradaChiusa);
-		apriMacchina.setEnigma(grimaldello2);
-		stradaChiusa.setEventHandler(new MagazineEventHandler(apriMacchina));
+		informatica.setEventHandler(new MagazineEventHandler(consegnaRivista));
 
 		Event portaFisica = new Event(Events.PHYSICS_DOOR, strada5);
 		portaFisica.setEnigma(chiaviFis);
@@ -356,10 +350,6 @@ public class FilesCreation {
 		Event portaDib = new Event(Events.DIB_DOOR, strada6);
 		portaDib.setEnigma(chiaviDib);
 		strada6.setEventHandler(new DibDoorEventHandler(portaDib));
-
-		Event auto = new Event(Events.CAR, stradaChiusa);
-		auto.setEnigma(grimaldello2);
-		stradaChiusa.setEventHandler(new CarEventHandler(auto));
 
 		Event raggi = new Event(Events.COSMIC_RAYS, fisica2);
 		raggi.setEnigma(propulsore);
@@ -382,7 +372,7 @@ public class FilesCreation {
 		} catch (IOException ex) {
 			Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}
-                
+
                 try {
 			CombinationsFile.saveCombinations(combinations.getCombinationsList());
 		} catch (IOException ex) {

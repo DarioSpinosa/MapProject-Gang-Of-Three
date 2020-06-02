@@ -1,10 +1,11 @@
 package General.Eventi;
 
+import java.io.Serializable;
+
 import Entita.Room;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
-import java.io.Serializable;
 
 public abstract class GenericEventHandler implements Serializable {
 

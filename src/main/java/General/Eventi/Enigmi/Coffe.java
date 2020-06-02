@@ -24,18 +24,18 @@ public class Coffe extends GenericObject implements Enigma{
 	public String addCoffee() {
 		if (coffee == false) {
 			coffee = true;
-		return("Hai aggiunto il caffe'.");
+		return("Hai aggiunto il caffe'.\n");
 		} else {
-			return("Il caffe' e' pieno");
+			return("Il caffe' e' pieno\n");
 		}
 	}
 
 	public String addWater() {
 		if (water == false) {
 			water = true;
-			return("Hai aggiunto l'acqua.");
+			return("Hai aggiunto l'acqua.\n");
 		} else {
-			return("L'acqua e' piena");
+			return("L'acqua e' piena\n");
 		}
 	}
 
@@ -43,19 +43,19 @@ public class Coffe extends GenericObject implements Enigma{
 	public String switchOn() {
 
 		if (powerSwitch == true)
-			return("Hai gia' fatto un caffe'. Adesso basta.");
+			return("Hai gia' fatto un caffe'. Adesso basta.\n");
 
 		else if (coffee == false && water == false)
-			return("Manca l'acqua e il caffe'!");
+			return("Manca l'acqua e il caffe'!\n");
 
 		else if (coffee == false)
-			return("Manca il caffe'!");
+			return("Manca il caffe'!\n");
 
 		else if (water == false)
-			return("Manca l'acqua");
+			return("Manca l'acqua\n");
 		else {
 			powerSwitch = true;
-			return("\nVrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nPorti il caffe a Cannavacciuolo che ti da il premio!");
+			return("\nVrrrrrrrrrr...\nVRRRRRRRRRRRRRRRRRRRRR\nIl caffe' e' pronto!\nPorti il caffe a Cannavacciuolo che ti da il premio!\n");
 		}
 	}
 

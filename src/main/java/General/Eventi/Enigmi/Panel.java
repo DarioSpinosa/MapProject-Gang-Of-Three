@@ -100,18 +100,19 @@ public class Panel extends GenericObject implements Enigma{
 	}
 
 	public String showVoltage() {
-		return("Target = 110V. Corrente: " + voltage + "V");
+		return("Target = 110V. Corrente: " + voltage + "V\n");
 
 	}
 
+	@Override
 	public String switchOn() {
 
 		if(voltage == 110) {
 			completed = true;
-			return("BEEEEEEP!\n\"Una lucina verde si e' accesa!");
+			return("BEEEEEEP!\n\"Una lucina verde si e' accesa!\n");
 		}
 		else
-			return("Il marchingegno non si muove");
+			return("Il marchingegno non si muove\n");
 	}
 
 	@Override

@@ -35,6 +35,8 @@ public abstract class MessagesHandlerEssentials {
 
 	public abstract void aroundYouMessage();
 
+	public abstract void printObjectInside(GenericObjectContainer container);
+
 	public abstract void printMessage(String messaggio);
 
 	public abstract void inexistentRoomMessage();
@@ -98,18 +100,16 @@ public abstract class MessagesHandlerEssentials {
 	public abstract void alreadyRaisedLeverMessage();
 
 	public abstract void aroundYouNpc();
-        
-        public abstract void blockedObjectMessage();
-        
-        public abstract void cannotGiveObjectMessage();
-        
-        public abstract void wrongOpeningToolMessage();
-        
-        public abstract void printPlaceName(String name);
-        
-        public abstract void printEventDescription(String description);
-        
-        public abstract void objectCannotBeOpenedWithItemMessage();
-        
-        public abstract void printNpcDialogue(Npc npc, String dialogue);
+
+	public abstract void blockedObjectMessage();
+
+	public abstract void cannotGiveObjectMessage();
+
+	public abstract void wrongOpeningToolMessage();
+
+	public abstract void printEventDescription(String description);
+
+	public abstract void objectCannotBeOpenedWithItemMessage();
+
+	public abstract void printNpcDialogue(Npc npc, String dialogue);
 }

@@ -20,7 +20,6 @@ import Entita.Room;
 import Entita.Characters.Character;
 import Entita.Characters.Npc;
 import Entita.Characters.Protagonist;
-import General.Eventi.CarEventHandler;
 import General.Eventi.CoffeEventHandler;
 import General.Eventi.DibDoorEventHandler;
 import General.Eventi.GenericEventHandler;
@@ -202,35 +201,41 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 					if (!eventHandler.isCompleted()) {
 
-						if (eventHandler instanceof PackageEventHandler) {
+						if(protagonist.isInInventory(firstObject)) {
 
-							if (eventHandler.endEvent(protagonist, firstObject))
-								printer.printMessage(Dialogs.BAKER_C);
-							else
-								printer.printMessage(Dialogs.BAKER_D);
 
-						} else if (eventHandler instanceof MagazineEventHandler) {
+							if (eventHandler instanceof PackageEventHandler) {
 
-							if (eventHandler.endEvent(protagonist, firstObject))
-								printer.printMessage(Dialogs.JANITOR_EVENT);
-							else
-								printer.printMessage(Dialogs.JANITOR_C);
-						} else if (eventHandler instanceof PropulsorEventHandler) {
+								if (eventHandler.endEvent(protagonist,  protagonist.getObject(firstObject)))
+									printer.printMessage("\n" + Dialogs.BAKER_C);
+								else
+									printer.printMessage("\n" + Dialogs.BAKER_D);
 
-							if (eventHandler.endEvent(protagonist, firstObject))
-								printer.printMessage(Dialogs.VOLPE_C);
-							else
-								printer.printMessage(Dialogs.VOLPE_D);
+							} else if (eventHandler instanceof MagazineEventHandler) {
 
-						} else if (eventHandler.isStarted() && eventHandler instanceof HelicopterEventHandler) {
+								if (eventHandler.endEvent(protagonist,  protagonist.getObject(firstObject)))
+									printer.printMessage("\n" + Dialogs.JANITOR_D);
+								else
+									printer.printMessage("\n" + Dialogs.JANITOR_C);
 
-							if (eventHandler.endEvent(protagonist, firstObject)) {
-								printer.printMessage(Dialogs.PILOT_C);
-								gameCompleted = true;
-							} else
-								printer.printMessage(Dialogs.PILOT_D);
-						}
+							} else if (eventHandler instanceof PropulsorEventHandler) {
 
+								if (eventHandler.endEvent(protagonist,  protagonist.getObject(firstObject)))
+									printer.printMessage("\n" + Dialogs.VOLPE_C);
+								else
+									printer.printMessage("\n" + Dialogs.VOLPE_D);
+
+							} else if (eventHandler.isStarted() && eventHandler instanceof HelicopterEventHandler) {
+								System.out.println(protagonist.isInInventory(firstObject));
+								if (eventHandler.endEvent(protagonist,  protagonist.getObject(firstObject))) {
+									printer.printMessage("\n" + Dialogs.PILOT_C);
+									gameCompleted = true;
+								} else
+									printer.printMessage("\n" + Dialogs.PILOT_D);
+							}
+
+						}else
+							printer.printMessage("Oggetto non presente nell'inventario");
 					} else
 						printer.notUnderstoodMessage();
 				} else
@@ -273,7 +278,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.printObjectDescription(firstObject);
 					if (firstObject instanceof GenericObjectContainer
 							&& ((GenericObjectContainer) firstObject).isOpened()) {
-						printer.printMessage(((GenericObjectContainer) firstObject).getContainer().toString());
+						printer.printObjectInside(((GenericObjectContainer) firstObject));
 					}
 					lookFound = true;
 				} else {
@@ -312,7 +317,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case COMBINA:
 			if (firstObject != null && secondObject != null
-					&& (action.getPreposition() == null || combinePrepositions.contains(action.getPreposition()))) {
+			&& (action.getPreposition() == null || combinePrepositions.contains(action.getPreposition()))) {
 
 				if (protagonist.isInInventory(firstObject) && protagonist.isInInventory(secondObject)) {
 					GenericObject oggettoCombinato = game.getCombinations().getResultantObject(firstObject, secondObject);
@@ -339,10 +344,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			break;
 		case PARLA:
 			if (action.getCharacter() != null
-					&& (action.getPreposition() == null || talkPrepositions.contains(action.getPreposition()))
-					&& action.getCharacter() instanceof Npc) {
+			&& (action.getPreposition() == null || talkPrepositions.contains(action.getPreposition()))
+			&& action.getCharacter() instanceof Npc) {
 
-				if (((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
+				if (((Npc) action.getCharacter()).getName().getName().equals("Morgan") &&
+						((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
 					Desktop desktop = Desktop.getDesktop();
 					try {
 						desktop.browse(new URI("https://www.youtube.com/watch?v=otbUSPQiet8"));
@@ -381,20 +387,14 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.printMessage(((Panel) game.getCurrentRoom().getRoomObject(firstObject)).switchOn());
 					eventHandler.endEvent(protagonist, game.getCurrentRoom().getRoomObject(firstObject));
 
-				} else if (eventHandler instanceof CarEventHandler) {
+				} else if (protagonist.isInInventory(firstObject) && (eventHandler instanceof PhysicsEventHandler || eventHandler instanceof DibDoorEventHandler)) {
 
-					if (eventHandler.endEvent(protagonist, firstObject))
+					if (eventHandler.endEvent(protagonist, protagonist.getObject(firstObject)))
 						printer.printOpenedObject(firstObject);
 					else
 						printer.wrongOpeningToolMessage();
-
-				} else if (eventHandler instanceof PhysicsEventHandler || eventHandler instanceof DibDoorEventHandler) {
-
-					if (eventHandler.endEvent(protagonist, firstObject))
-						printer.printOpenedObject(firstObject);
-					else
-						printer.wrongOpeningToolMessage();
-				}
+				}else
+					printer.printMessage("Non hai l'oggetto o non e' presente nella stanza");
 
 			} else
 				printer.notUnderstoodMessage();
@@ -422,7 +422,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ABBASSA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-					&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
+			&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
 
 				Panel lowerPanel = ((Panel) eventHandler.getEvent().getEnigma());
 
@@ -470,7 +470,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ALZA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-					&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
+			&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
 
 				Panel raisePanel = ((Panel) eventHandler.getEvent().getEnigma());
 
@@ -522,11 +522,15 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getUp() != null) {
 			if (game.getCurrentRoom().getUp().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getUp());
-				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage(game.getCurrentRoom().getDescription());
+				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
+						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
+							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					}
+					else
+						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -539,12 +543,15 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getDown() != null) {
 			if (game.getCurrentRoom().getDown().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getDown());
-				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage(game.getCurrentRoom().getDescription());
+				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
-
+					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
+						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
+							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					}
+					else
+						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -557,11 +564,15 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getRight() != null) {
 			if (game.getCurrentRoom().getRight().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getRight());
-				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage(game.getCurrentRoom().getDescription());
+				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
+						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
+							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					}
+					else
+						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else {
 				printer.closedRoomMessage();
 
@@ -576,8 +587,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		if (game.getCurrentRoom().getLeft() != null) {
 			if (game.getCurrentRoom().getLeft().getAccessible()) {
 				game.setCurrentRoom(game.getCurrentRoom().getLeft());
-				printer.printPlaceName(game.getCurrentRoom().getName().toUpperCase());
-				printer.printMessage(game.getCurrentRoom().getDescription());
+				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
 					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
@@ -625,10 +635,12 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			}
 		} else if (firstObject != null && secondObject != null
 				&& (preposition == null || combinePrepositions.contains(preposition))) {
+
 			if (!(firstObject instanceof GenericObjectContainer)) {
 				printer.notOpenableObjectMessage();
 				return;
 			}
+
 			GenericObjectContainer containerObject = (GenericObjectContainer) firstObject;
 			if ((game.getCurrentRoom().isInRoom(containerObject) || protagonist.isInInventory(containerObject))
 					&& containerObject.getObjectName().equals("pacco")) {
@@ -637,16 +649,31 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.objectCannotBeOpenedWithItemMessage();
 					return;
 				}
+
 				protagonist.removeObject(secondObject);
 				containerObject.setBlocked(false);
 				printer.printOpenedObject(firstObject);
 				containerObject.open();
+
+			}else if ((game.getCurrentRoom().isInRoom(containerObject)) && containerObject.getObjectName().equals("automobile")) {
+
+				if (!secondObject.getObjectName().equals("passpartout")) {
+					printer.objectCannotBeOpenedWithItemMessage();
+					return;
+				}
+
+				protagonist.removeObject(secondObject);
+				containerObject.setBlocked(false);
+				printer.printOpenedObject(firstObject);
+				containerObject.open();
+
 			} else {
 				printer.objectNotFoundMessage();
 			}
 		} else {
 			printer.notUnderstoodMessage();
 		}
+
 	}
 
 	private void aperturaContainer(GenericObject firstObject, Protagonist protagonist) {
