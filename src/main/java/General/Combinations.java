@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public final class Combinations implements Serializable {
 	
-	public static class Node implements Serializable {
+	public class Node implements Serializable {
 		private final GenericObject firstObject;
 		private final GenericObject secondObject;
 		private final GenericObject resultantObject;
