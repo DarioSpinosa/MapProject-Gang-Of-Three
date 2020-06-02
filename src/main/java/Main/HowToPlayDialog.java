@@ -32,12 +32,12 @@ public class HowToPlayDialog extends javax.swing.JDialog {
         howToPlayTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(InterfaceText.howToPlayButton);
+        setTitle(InterfaceText.HOW_TO_PLAY_BUTTON);
 
         howToPlayTextArea.setEditable(false);
         howToPlayTextArea.setColumns(20);
         howToPlayTextArea.setRows(5);
-        howToPlayTextArea.setText(InterfaceText.howToPlay);
+        howToPlayTextArea.setText(InterfaceText.HOW_TO_PLAY);
         jScrollPane1.setViewportView(howToPlayTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

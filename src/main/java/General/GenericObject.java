@@ -17,7 +17,7 @@ public class GenericObject implements Serializable {
 	private Name name;
 	private String description = "";
 	private AliasHandler alias = new AliasHandler(new Name[] {});
-	private Set<String> adjectives;
+	private Set<String> adjectives = new HashSet<>();
 	private boolean consumable = true;
 	private boolean takeable = true;
 

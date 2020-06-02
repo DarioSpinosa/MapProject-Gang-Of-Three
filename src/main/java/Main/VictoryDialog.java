@@ -22,7 +22,7 @@ public class VictoryDialog extends javax.swing.JDialog {
     }
 
     public void setTimeLabel(int minutes, int seconds){
-        timeTextLabel.setText(InterfaceText.timeLabel1 + minutes + InterfaceText.timeLabel2 + seconds + InterfaceText.timeLabel3);
+        timeTextLabel.setText(InterfaceText.FIRST_TIME_LABEL + minutes + InterfaceText.SECOND_TIME_LABEL + seconds + InterfaceText.THIRD_TIME_LABEL);
     }
 
     /**
@@ -43,14 +43,11 @@ public class VictoryDialog extends javax.swing.JDialog {
         victoryLabel.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
         victoryLabel.setText("VICTORY");
 
-        victoryTextLabel.setText(InterfaceText.victoryMessage);
-
-        timeTextLabel.setText("jLabel1");
+        victoryTextLabel.setText(InterfaceText.VICTORY_MESSAGE);
 
         menuButton.setText("MENU");
         menuButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuButtonActionPerformed(evt);
             }
         });
@@ -83,7 +80,7 @@ public class VictoryDialog extends javax.swing.JDialog {
                 .addComponent(victoryTextLabel)
                 .addGap(18, 18, 18)
                 .addComponent(timeTextLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(menuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );

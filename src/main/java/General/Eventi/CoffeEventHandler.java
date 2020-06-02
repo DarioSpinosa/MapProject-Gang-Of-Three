@@ -6,7 +6,7 @@ import General.GenericObject;
 import General.Eventi.Enigmi.Coffe;
 import Resources.Dialogs;
 
-public class CoffeEventHandler extends GenericEventHandler{
+public class CoffeEventHandler extends GenericEventHandler {
 
 	public CoffeEventHandler(Event event){
 		super(event);

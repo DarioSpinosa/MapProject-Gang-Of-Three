@@ -3,7 +3,7 @@ package General.Eventi;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
 
-public class DibDoorEventHandler extends GenericEventHandler{
+public class DibDoorEventHandler extends GenericEventHandler {
 
 	public DibDoorEventHandler(Event event){
 		super(event);

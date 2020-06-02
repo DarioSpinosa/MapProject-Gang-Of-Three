@@ -9,41 +9,54 @@ package General;
  *
  * @author Elio
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public final class Combinations {
+public final class Combinations implements Serializable {
 	
-	private static class Node	{
+	public static class Node implements Serializable {
 		private final GenericObject firstObject;
 		private final GenericObject secondObject;
 		private final GenericObject resultantObject;
 		
-		public Node(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
+		private Node(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
 			this.firstObject = firstObject;
 			this.secondObject = secondObject;
 			this.resultantObject = resultantObject;
 		}
 		
-		public GenericObject getFirstObject() {
+		private GenericObject getFirstObject() {
 			return firstObject;
 		}
 		
-		public GenericObject getSecondObject() {
+		private GenericObject getSecondObject() {
 			return secondObject;
 		}
 		
-		public GenericObject getResultantObject() {
+		private GenericObject getResultantObject() {
 			return resultantObject;
 		}
 	}
 	
-	private static ArrayList<Node> combinationsList = new ArrayList<>();
+	private ArrayList<Node> combinationsList = new ArrayList<>();
 	
-	public static void addCombination(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
+        public Combinations(){
+            
+        }
+        
+        public ArrayList<Node> getCombinationsList(){
+            return combinationsList;
+        }
+        
+        public void setCombinations(ArrayList<Node> combinationsList){
+            this.combinationsList = combinationsList;
+        }
+        
+	public void addCombination(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
 		combinationsList.add(new Node(firstObject,secondObject,resultantObject));
 	}
 	
-	public static GenericObject getCombination(GenericObject firstObject, GenericObject secondObject) {
+	public GenericObject getResultantObject(GenericObject firstObject, GenericObject secondObject) {
 		GenericObject finalObject = null;
 		for(Node node : combinationsList) {
 			if((firstObject.equals(node.getFirstObject()) && secondObject.equals(node.getSecondObject())) || 

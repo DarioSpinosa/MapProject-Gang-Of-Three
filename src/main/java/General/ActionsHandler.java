@@ -315,7 +315,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					&& (action.getPreposition() == null || combinePrepositions.contains(action.getPreposition()))) {
 
 				if (protagonist.isInInventory(firstObject) && protagonist.isInInventory(secondObject)) {
-					GenericObject oggettoCombinato = Combinations.getCombination(firstObject, secondObject);
+					GenericObject oggettoCombinato = game.getCombinations().getResultantObject(firstObject, secondObject);
 
 					if (oggettoCombinato != null) {
 						protagonist.removeObject(firstObject);
@@ -373,13 +373,13 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 				if (eventHandler instanceof CoffeEventHandler
 						&& firstObject.equals(eventHandler.getEvent().getEnigma())) {
-					printer.printMessage(((Coffe) (firstObject)).switchOn());
-					eventHandler.endEvent(protagonist, firstObject);
+					printer.printMessage(((Coffe) (game.getCurrentRoom().getRoomObject(firstObject))).switchOn());
+					eventHandler.endEvent(protagonist, game.getCurrentRoom().getRoomObject(firstObject));
 
 				} else if (eventHandler instanceof PanelEventHandler
 						&& firstObject.equals(eventHandler.getEvent().getEnigma())) {
-					printer.printMessage(((Panel) (firstObject)).switchOn());
-					eventHandler.endEvent(protagonist, firstObject);
+					printer.printMessage(((Panel) game.getCurrentRoom().getRoomObject(firstObject)).switchOn());
+					eventHandler.endEvent(protagonist, game.getCurrentRoom().getRoomObject(firstObject));
 
 				} else if (eventHandler instanceof CarEventHandler) {
 
@@ -406,13 +406,13 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 				if (firstObject.getObjectName().equals("caffe") && secondObject.getObjectName().equals("macchinetta")
 						&& protagonist.isInInventory(firstObject)) {
-					printer.printMessage(((Coffe) (secondObject)).addCoffee());
+					printer.printMessage(((Coffe) (game.getCurrentRoom().getRoomObject(secondObject))).addCoffee());
 					protagonist.getInventory().removeFromContainer(firstObject);
 
 				} else if (firstObject.getObjectName().equals("acqua")
 						&& secondObject.getObjectName().equals("macchinetta")
 						&& protagonist.isInInventory(firstObject)) {
-					printer.printMessage(((Coffe) (secondObject)).addWater());
+					printer.printMessage(((Coffe) (game.getCurrentRoom().getRoomObject(secondObject))).addWater());
 					protagonist.getInventory().removeFromContainer(firstObject);
 				} else
 					printer.notUnderstoodMessage();

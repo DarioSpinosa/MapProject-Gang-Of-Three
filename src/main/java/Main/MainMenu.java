@@ -5,6 +5,7 @@
  */
 package Main;
 import Resources.InterfaceText;
+import java.io.IOException;
 
 /**
  *
@@ -13,7 +14,7 @@ import Resources.InterfaceText;
 public class MainMenu extends javax.swing.JFrame {
     private final HowToPlayDialog howToPlay = new HowToPlayDialog(this, true);
     private final CreditsDialog credits = new CreditsDialog(this, true);
-
+    private final FileErrorDialog error = new FileErrorDialog(this, true);
     /**
      * Creates new form mainMenu
      */
@@ -34,31 +35,27 @@ public class MainMenu extends javax.swing.JFrame {
         creditsButton = new javax.swing.JButton();
         titleLabel1 = new javax.swing.JLabel();
         titleLabel2 = new javax.swing.JLabel();
-        titleLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("UniVSDino");
+        setTitle("UnibaCrisis");
 
-        newGameButton.setText(InterfaceText.newGameButton);
+        newGameButton.setText(InterfaceText.NEW_GAME_BUTTON);
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameButtonActionPerformed(evt);
             }
         });
 
-        howToPlayButton.setText(InterfaceText.howToPlayButton);
+        howToPlayButton.setText(InterfaceText.HOW_TO_PLAY_BUTTON);
         howToPlayButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 howToPlayButtonActionPerformed(evt);
             }
         });
 
-        creditsButton.setText(InterfaceText.creditsButton);
+        creditsButton.setText(InterfaceText.CREDITS_BUTTON);
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditsButtonActionPerformed(evt);
             }
         });
@@ -67,44 +64,41 @@ public class MainMenu extends javax.swing.JFrame {
         titleLabel1.setText("UNIBA");
         titleLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        titleLabel2.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
-        titleLabel2.setText("VS");
-
-        titleLabel3.setFont(new java.awt.Font("Perpetua Titling MT", 1, 36)); // NOI18N
-        titleLabel3.setText("DINOSAURS");
+        titleLabel2.setFont(new java.awt.Font("Perpetua Titling MT", 3, 36)); // NOI18N
+        titleLabel2.setForeground(new java.awt.Color(255, 0, 51));
+        titleLabel2.setText("CRISIS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(titleLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(titleLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(creditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(howToPlayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(151, 151, 151))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(titleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(creditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(howToPlayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(151, 151, 151))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(titleLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(titleLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
+                        .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(titleLabel2)
+                        .addGap(47, 47, 47)))
                 .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(howToPlayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,9 +119,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_creditsButtonActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        AdventureGUI adventure = new AdventureGUI();
-        this.dispose();
-        adventure.setVisible(true);
+        try{
+            AdventureGUI adventure = new AdventureGUI();
+            this.dispose();
+            adventure.setVisible(true);
+        }catch(IOException | ClassNotFoundException ex){
+            System.err.println(ex.getMessage());
+                error.setVisible(true);
+            }
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     /**
@@ -173,6 +172,5 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton newGameButton;
     private javax.swing.JLabel titleLabel1;
     private javax.swing.JLabel titleLabel2;
-    private javax.swing.JLabel titleLabel3;
     // End of variables declaration//GEN-END:variables
 }

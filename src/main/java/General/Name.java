@@ -13,8 +13,8 @@ import java.util.HashSet;
 public class Name implements Serializable {
     private String name;
     private WordType type;
-    private Set<String> admittedArticles;
-    private Set<String> admittedPrepositions;
+    private Set<String> admittedArticles = new HashSet<>();
+    private Set<String> admittedPrepositions = new HashSet<>();
     
     public Name(String name, WordType type) {
         this.name = name;

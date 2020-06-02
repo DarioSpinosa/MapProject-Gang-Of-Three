@@ -14,6 +14,7 @@ import Entita.Room;
 import Entita.Characters.Npc;
 import General.AliasHandler;
 import General.Combinations;
+import General.Combinations.Node;
 import General.GenericObject;
 import General.GenericObjectContainer;
 import General.Name;
@@ -41,10 +42,8 @@ import Resources.Places;
  * @author Elio
  */
 public class FilesCreation {
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
+	
+	public static void doStuff() {
 		// TODO code application logic here
 		ArrayList<GenericObject> gameObjects = new ArrayList<>();
 		Room strada1 = new Room(Places.AMENDOLA1_NAME, Places.AMENDOLA1_DESCRIPTION);
@@ -322,8 +321,9 @@ public class FilesCreation {
 		pizzeria1.addObject(forcina);
 		strada6.addObject(grimaldello1);
 		fisica3.addObject(soldi);
-		Combinations.addCombination(grimaldello1, forcina, grimaldello2);
-		Combinations.addCombination(componente, viti, propulsore);
+                Combinations combinations = new Combinations();
+		combinations.addCombination(grimaldello1, forcina, grimaldello2);
+		combinations.addCombination(componente, viti, propulsore);
 
 		// EVENTI
 		Event eventoCaffe = new Event(Events.COFFE_EVENT, chimica1);
@@ -379,6 +379,12 @@ public class FilesCreation {
 
 		try {
 			RoomFile.saveRoom(strada1);
+		} catch (IOException ex) {
+			Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
+		}
+                
+                try {
+			CombinationsFile.saveCombinations(combinations.getCombinationsList());
 		} catch (IOException ex) {
 			Logger.getLogger(FilesCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}

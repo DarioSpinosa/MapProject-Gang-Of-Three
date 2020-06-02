@@ -24,7 +24,7 @@ public abstract class MessagesHandlerEssentials {
 	}
 
 	public void printInventory(GenericObject object) {
-		if (object.getAdjectives() == null) {
+		if (object.getAdjectives().isEmpty()) {
 			gui.printMessage("- " + object);
 		} else {
 			gui.printMessage("- " + object + " " + object.getAdjectives().toArray()[0]);

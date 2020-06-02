@@ -4,7 +4,7 @@ import Entita.Room;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
 
-public class HelicopterEventHandler extends GenericEventHandler{
+public class HelicopterEventHandler extends GenericEventHandler {
 
 	public  HelicopterEventHandler(Event event, Room condition){
 		super(event, condition);

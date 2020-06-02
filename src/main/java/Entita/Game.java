@@ -5,11 +5,13 @@
 */
 package Entita;
 
+import CaricamentoFile.CombinationsFile;
 import CaricamentoFile.ObjectsFile;
 import CaricamentoFile.RoomFile;
 import java.util.ArrayList;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
+import General.Combinations;
 import General.GenericObject;
 import General.Name;
 import Parser.WordType;
@@ -22,26 +24,23 @@ public class Game {
 
 	private Room currentRoom;
 	private Character protagonist;
+        private Combinations combinations = new Combinations();
 	private ArrayList<GenericObject> gameObjects = new ArrayList<>();
 
 	public ArrayList<GenericObject> getObjects() {
 		return gameObjects;
 	}
 
-	public Game() {
-		protagonist = new Protagonist(new Name(Names.PROTAGONIST_NAME, WordType.NOME_PROPRIO));
-            try {
-                gameObjects = ObjectsFile.loadObjects();
-            } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
-                currentRoom = RoomFile.loadRoom();
-            } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
+	public Game() throws IOException, ClassNotFoundException {
+            protagonist = new Protagonist(new Name(Names.PROTAGONIST_NAME, WordType.NOME_PROPRIO));
+            gameObjects = ObjectsFile.loadObjects();
+            currentRoom = RoomFile.loadRoom();
+            combinations.setCombinations(CombinationsFile.loadCombinations());
 	}
+        
+        public Combinations getCombinations(){
+            return combinations;
+        }
 
 	public String getProtagonistName() {
 		return protagonist.getName().getName();

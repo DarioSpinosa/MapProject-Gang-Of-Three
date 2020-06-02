@@ -37,12 +37,11 @@ public class GameOverDialog extends javax.swing.JDialog {
         gameOverLabel.setFont(new java.awt.Font("Arial Black", 3, 36)); // NOI18N
         gameOverLabel.setText(" GAME OVER");
 
-        gameOverMessageLabel.setText(InterfaceText.gameOverMessage);
+        gameOverMessageLabel.setText(InterfaceText.GAME_OVER_MESSAGE);
 
         menuButton.setText("MENU");
         menuButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuButtonActionPerformed(evt);
             }
         });

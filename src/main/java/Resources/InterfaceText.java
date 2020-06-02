@@ -10,15 +10,18 @@ package Resources;
  * @author Elio
  */
 public class InterfaceText {
-    public static String commands = "Comandi";
-    public static String howToPlay = "giochi al giocone";
-    public static String credits = "che super team";
-    public static String gameOverMessage = "Non sei stato abbastanza veloce, i dinosauri hanno conquistato la Terra";
-    public static String newGameButton = "Nuova Partita";
-    public static String howToPlayButton = "Come Giocare";
-    public static String creditsButton = "Riconoscimenti";
-    public static String victoryMessage = "Sei riuscito a salvare la Terra, grande!";
-    public static String timeLabel1 = "Congratulazioni, hai completato il gioco in ";
-    public static String timeLabel2 = " minuti e ";
-    public static String timeLabel3 = " secondi";
+    public final static String COMMANDS = "Comandi";
+    public final static String HOW_TO_PLAY = "giochi al giocone";
+    public final static String CREDITS = "che super team";
+    public final static String GAME_OVER_MESSAGE = "Non sei stato abbastanza veloce, i dinosauri hanno conquistato la Terra";
+    public final static String NEW_GAME_BUTTON = "Nuova Partita";
+    public final static String HOW_TO_PLAY_BUTTON = "Come Giocare";
+    public final static String CREDITS_BUTTON = "Riconoscimenti";
+    public final static String VICTORY_MESSAGE = "Sei riuscito a salvare la Terra, grande!";
+    public final static String FIRST_TIME_LABEL = "Congratulazioni, hai completato il gioco in ";
+    public final static String SECOND_TIME_LABEL = " minuti e ";
+    public final static String THIRD_TIME_LABEL = " secondi";
+    public final static String FILE_ERROR_LABEL = "Non è stato possibile caricare i file, si desidera ricrearli?";
+    public final static String FILE_ERROR_BUTTON_YES = "Si";
+    public final static String FILE_ERROR_BUTTON_CANCEL = "Annulla";
 }

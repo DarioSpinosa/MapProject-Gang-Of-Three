@@ -33,12 +33,12 @@ public class CreditsDialog extends javax.swing.JDialog {
         creditsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(InterfaceText.creditsButton);
+        setTitle(InterfaceText.CREDITS_BUTTON);
 
         creditsTextArea.setEditable(false);
         creditsTextArea.setColumns(20);
         creditsTextArea.setRows(5);
-        creditsTextArea.setText(InterfaceText.credits);
+        creditsTextArea.setText(InterfaceText.CREDITS);
         jScrollPane1.setViewportView(creditsTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

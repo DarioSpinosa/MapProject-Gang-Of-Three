@@ -4,7 +4,7 @@ import Entita.Characters.Protagonist;
 import General.GenericObject;
 import General.GenericObjectContainer;
 
-public class CarEventHandler extends GenericEventHandler{
+public class CarEventHandler extends GenericEventHandler {
 
 	public CarEventHandler(Event event) {
 		super(event);
