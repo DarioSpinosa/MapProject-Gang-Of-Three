@@ -230,7 +230,8 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
         @Override
         public void printEventDescription(String description){
-            gui.printMessage("\n" + description);
+        	if(!description.equals(""))
+                gui.printMessage("\n" + description);
         }
 
         @Override

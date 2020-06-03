@@ -40,7 +40,15 @@ public class GameThread extends Thread {
                 } else if(gui.isGameCompleted()){
                     ((TimeThread)time).stopCount();
                     VictoryDialog victory = new VictoryDialog(gui, true);
-                    victory.setTimeLabel(minutes - ((TimeThread)time).getMinutes(), seconds - ((TimeThread)time).getSeconds());
+                    int remainingMinutes = ((TimeThread)time).getMinutes();
+                    int remainingSeconds = ((TimeThread)time).getSeconds();
+                    int finalMinutes = minutes  - remainingMinutes;
+                    int finalSeconds = seconds - remainingSeconds;
+                    if(finalSeconds < 0) {
+                    	finalSeconds = 60 + finalSeconds;
+                    	finalMinutes = finalMinutes - 1;
+                    }
+                    victory.setTimeLabel(finalMinutes, finalSeconds);
                     victory.setVisible(true);
                     
                     while(victory.isActive()){                        

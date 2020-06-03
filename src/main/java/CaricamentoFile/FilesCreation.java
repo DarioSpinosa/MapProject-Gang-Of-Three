@@ -41,7 +41,7 @@ import Resources.Places;
  */
 public class FilesCreation {
 
-	public static void doStuff() {
+	public static void saveFiles() {
 		// TODO code application logic here
 		ArrayList<GenericObject> gameObjects = new ArrayList<>();
 		Room strada1 = new Room(Places.AMENDOLA1_NAME, Places.AMENDOLA1_DESCRIPTION);
@@ -195,7 +195,7 @@ public class FilesCreation {
 
 		Name nomePacco = new Name(Names.PACKAGE, WordType.NOME);
 		nomePacco.setAdmittedArticles(new String[] { "il" });
-		nomePacco.setAdmittedPrepositions(new String[] { "nel", "nello", "in", "dentro" });
+		nomePacco.setAdmittedPrepositions(new String[] { "nel", "in", "dentro", "dal", "da" });
 		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK);
 		pacco.setAdjectives(new String[] { "jamazon" });
 
@@ -319,7 +319,7 @@ public class FilesCreation {
 		pizzeria2.addObject(forcina);
 		strada6.addObject(grimaldello1);
 		fisica3.addObject(soldi);
-                Combinations combinations = new Combinations();
+        Combinations combinations = new Combinations();
 		combinations.addCombination(grimaldello1, forcina, grimaldello2);
 		combinations.addCombination(componente, viti, propulsore);
 
