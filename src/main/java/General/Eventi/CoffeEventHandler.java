@@ -15,7 +15,7 @@ public class CoffeEventHandler extends GenericEventHandler {
 	@Override
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
 
-		if(((Coffe)event.getEnigma()).isCompleted()){
+		if(!completed && ((Coffe)event.getEnigma()).isCompleted()){
 			setCompleted();
 			((Npc)event.getEventRoom().getCharacters().get(0)).setDialogue(Dialogs.CANNAVACCIUOLO_B);
 			protagonist.getInventory().addToContainer(event.getReward());

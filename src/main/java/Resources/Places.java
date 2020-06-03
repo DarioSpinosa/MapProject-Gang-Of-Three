@@ -4,9 +4,9 @@ public class Places {
 	public final static String AMENDOLA1_NAME = "Via Amendola, primo settore";
 	public final static String AMENDOLA2_NAME = "Via Amendola, secondo settore";
 	public final static String AMENDOLA3_NAME = "Via Amendola, terzo settore";
-	public final static String STREET1_NAME = "Strada Nord, prima parte";
-	public final static String STREET2_NAME = "Strada Nord, seconda parte";
-	public final static String STREET3_NAME = "Strada Nord, terza parte";
+	public final static String STREET1_NAME = "Strada Campus, prima parte";
+	public final static String STREET2_NAME = "Strada Campus, seconda parte";
+	public final static String STREET3_NAME = "Strada Campus, terza parte";
 	public final static String CROSS_NAME = "Incrocio";
 	public final static String EXECUTIVE_NAME = "Executive Center, uffici";
 	public final static String PIZZA_EXT_NAME = "Pizzeria esterno";

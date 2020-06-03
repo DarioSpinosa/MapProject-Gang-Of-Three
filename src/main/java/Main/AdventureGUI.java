@@ -47,13 +47,13 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private void init() throws IOException, ClassNotFoundException {
 		Game game = new Game();
 		Prepositions prepositions = new Prepositions();
-		prepositions.addPreposition("in", CommandType.LASCIA);
+		prepositions.addPreposition("in", new CommandType[] {CommandType.LASCIA, CommandType.METTI} );
 		prepositions.addPreposition("dentro", CommandType.LASCIA);
 		prepositions.addPreposition("da", CommandType.PRENDI);
-		prepositions.addPreposition("con", new CommandType[] {CommandType.COMBINA, CommandType.APRI});
+		prepositions.addPreposition("con", new CommandType[] {CommandType.COMBINA, CommandType.APRI, CommandType.PARLA});
 		prepositions.addPreposition("dal", CommandType.PRENDI);
 		prepositions.addPreposition("dalla", CommandType.PRENDI);
-		prepositions.addPreposition("nel", CommandType.LASCIA);
+		prepositions.addPreposition("nel",new CommandType[] { CommandType.LASCIA, CommandType.PRENDI});
 		prepositions.addPreposition("e", CommandType.COMBINA);
 		prepositions.addPreposition("all", CommandType.PARLA);
 		prepositions.addPreposition("allo", CommandType.PARLA);
@@ -61,14 +61,19 @@ public class AdventureGUI extends javax.swing.JFrame {
 		prepositions.addPreposition("ad", CommandType.PARLA);
 		prepositions.addPreposition("al", CommandType.PARLA);
 		prepositions.addPreposition("col", CommandType.PARLA);
+		prepositions.addPreposition("nella", CommandType.METTI);
 		actions = new ActionsHandler(game, printer, prepositions);
 		actions.setObjectsList(game.getObjects());
 		ArrayList<String> articles = new ArrayList<>();
 		articles.add("la");
+		articles.add("le");
+		articles.add("i");
+		articles.add("gli");
 		articles.add("l");
 		articles.add("il");
 		articles.add("un");
 		articles.add("una");
+		articles.add("uno");
 		parser = new ItalianParser(articles, prepositions);
 		printer.beginningOfTheGameMessage(actions.getCurrentRoom().getName(),
 		actions.getCurrentRoom().getDescription());

@@ -21,8 +21,8 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 	@Override
 	public void beginningOfTheGameMessage(String name, String description) {
 		gui.printMessage("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n"
-						+ "CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" + "\nLUOGO: " + name
-						+ "\n\n" + description);
+						+ "CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" + "\nLuogo: " + name
+						+ "\n" + description);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void printRoom(String name, String descrizione) {
-		 gui.printMessage(("\nLuogo:" + name).toUpperCase());
+		gui.printMessage(("\nLuogo: " + name));
 		gui.printMessage(descrizione);
 	}
 
@@ -248,5 +248,11 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		public void printObjectInside(GenericObjectContainer container) {
 			for(GenericObject obj: container.getContainer())
 				gui.printMessage(obj.getName().getName());
+		}
+
+		@Override
+		public void printUsedObject(String name) {
+			gui.printMessage("Hai usato " + name);
+
 		}
 }

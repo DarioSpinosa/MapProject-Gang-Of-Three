@@ -3,9 +3,9 @@ package General.Eventi;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
 
-public class PhysicsEventHandler extends GenericEventHandler{
+public class PhysicsDoorEventHandler extends GenericEventHandler{
 
-	public PhysicsEventHandler(Event event){
+	public PhysicsDoorEventHandler(Event event){
 		super(event);
 	}
 
@@ -13,8 +13,8 @@ public class PhysicsEventHandler extends GenericEventHandler{
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
 		GenericObject enigma = event.getEnigma();
 
-		if(!completed && obj.equals(enigma) && obj.getAdjectives().equals(enigma.getAdjectives())
-				&& protagonist.getInventory().contains(enigma)) {
+		if(!completed && obj.equals(enigma) && protagonist.getInventory().getContainer().size() != 0
+				&&protagonist.getInventory().contains(enigma)) {
 			completed = true;
 			protagonist.getInventory().removeFromContainer((event.getEnigma()));
 			event.getEventRoom().getLeft().setAccessible(true);

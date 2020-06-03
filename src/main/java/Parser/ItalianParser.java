@@ -23,7 +23,7 @@ public class ItalianParser extends ParserEssentials {
     private boolean isCommand(String token, ParserOutput output, ArrayList<Command> commands) {
         boolean confirmed = false;
         for(Command command : commands) {
-            if(command.getName().equals(token)|| command.confrontaAlias(token)) {
+            if(command.getName().equalsIgnoreCase(token)|| command.confrontaAlias(token)) {
                 confirmed = true;
                 output.setCommand(command);
                 if(command.getCommandType() == CommandType.PARLA){
@@ -55,7 +55,7 @@ public class ItalianParser extends ParserEssentials {
     private boolean isArticle(String token) {
         boolean confirmed = false;
         for(String article : articles) {
-            if(article.equals(token)) {
+            if(article.equalsIgnoreCase(token)) {
                 confirmed = true;
                 setLastWordType(WordType.ARTICOLO);
                 lastArticle = token;
@@ -68,7 +68,7 @@ public class ItalianParser extends ParserEssentials {
     private boolean isObject(String token, ParserOutput output, ArrayList<GenericObject> objects) {
         boolean confirmed = false;
         for(GenericObject object : objects) {
-            if(object.getObjectName().equals(token)) {
+            if(object.getObjectName().equalsIgnoreCase(token)) {
                 if( (lastWordType == WordType.COMANDO) || (lastWordType == WordType.NOME)){
                     confirmed = true;
                     setLastObject(output, object, objects);
@@ -151,15 +151,15 @@ public class ItalianParser extends ParserEssentials {
         numberOfObjects++;
         adjectives.clear();
         for(GenericObject obj : objects){
-            if(obj.getObjectName().equals(object.getObjectName()) && obj.getAdjectives()!=null && !obj.getAdjectives().isEmpty()) {
+            if(obj.getObjectName().equalsIgnoreCase(object.getObjectName()) && obj.getAdjectives()!=null && !obj.getAdjectives().isEmpty()) {
                 adjectives.addAll(obj.getAdjectives());
             }
         }
     }
-    
+
     private GenericObject searchForObjectBasedOnAdjective(String token, ArrayList<GenericObject> objects){
         for(GenericObject object : objects){
-            if(object.getObjectName().equals(lastObject.getObjectName()) && object.getAdjectives().contains(token)){
+            if(object.getObjectName().equalsIgnoreCase(lastObject.getObjectName()) && object.getAdjectives().contains(token)){
                 return object;
             }
         }
@@ -248,7 +248,7 @@ public class ItalianParser extends ParserEssentials {
         if(accepted && output.getFirstObject() != null && output.getFirstAdjective() == null && output.getFirstObject().getAdjectives() != null) {
         	int tmpNumberOfObjects = 0;
         	for(GenericObject oggetto : objects) {
-        		if(oggetto.getObjectName().equals(output.getFirstObject().getObjectName())) {
+        		if(oggetto.getObjectName().equalsIgnoreCase(output.getFirstObject().getObjectName())) {
         			tmpNumberOfObjects++;
         			if(tmpNumberOfObjects > 1) {
         				accepted = false;
@@ -260,7 +260,7 @@ public class ItalianParser extends ParserEssentials {
         if(accepted && output.getSecondObject() != null && output.getSecondAdjective() == null && output.getSecondObject().getAdjectives() != null) {
         	int tmpNumberOfObjects = 0;
         	for(GenericObject oggetto : objects) {
-        		if(oggetto.getObjectName().equals(output.getSecondObject().getObjectName())){
+        		if(oggetto.getObjectName().equalsIgnoreCase(output.getSecondObject().getObjectName())){
         			tmpNumberOfObjects++;
         			if(tmpNumberOfObjects > 1) {
         				accepted = false;

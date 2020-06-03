@@ -5,10 +5,12 @@
 */
 package Entita;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import CaricamentoFile.CombinationsFile;
 import CaricamentoFile.ObjectsFile;
 import CaricamentoFile.RoomFile;
-import java.util.ArrayList;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
 import General.Combinations;
@@ -16,15 +18,12 @@ import General.GenericObject;
 import General.Name;
 import Parser.WordType;
 import Resources.Names;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game {
 
 	private Room currentRoom;
 	private Character protagonist;
-        private Combinations combinations = new Combinations();
+    private Combinations combinations = new Combinations();
 	private ArrayList<GenericObject> gameObjects = new ArrayList<>();
 
 	public ArrayList<GenericObject> getObjects() {
@@ -37,7 +36,7 @@ public class Game {
             currentRoom = RoomFile.loadRoom();
             combinations.setCombinations(CombinationsFile.loadCombinations());
 	}
-        
+
         public Combinations getCombinations(){
             return combinations;
         }

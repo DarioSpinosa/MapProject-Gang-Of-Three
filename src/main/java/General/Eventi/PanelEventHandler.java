@@ -14,7 +14,7 @@ public class PanelEventHandler extends GenericEventHandler{
 	@Override
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
 
-		if(((Panel)(event.getEnigma())).isCompleted()){
+		if(!completed && ((Panel)(event.getEnigma())).isCompleted()){
 			setCompleted();
 			event.getEventRoom().getLeft().setAccessible(true);
 			event.getEventRoom().setDescription(Places.PHYSICS);

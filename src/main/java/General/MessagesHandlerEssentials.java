@@ -47,6 +47,8 @@ public abstract class MessagesHandlerEssentials {
 
 	public abstract void printRoom(String name, String description);
 
+	public abstract void printUsedObject(String name);
+
 	public abstract void objectNotInInventoryMessage();
 
 	public abstract void fullInventoryMessage();

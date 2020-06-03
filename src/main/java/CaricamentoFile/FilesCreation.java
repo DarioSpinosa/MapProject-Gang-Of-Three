@@ -24,7 +24,7 @@ import General.Eventi.HelicopterEventHandler;
 import General.Eventi.MagazineEventHandler;
 import General.Eventi.PackageEventHandler;
 import General.Eventi.PanelEventHandler;
-import General.Eventi.PhysicsEventHandler;
+import General.Eventi.PhysicsDoorEventHandler;
 import General.Eventi.PropulsorEventHandler;
 import General.Eventi.Enigmi.Coffe;
 import General.Eventi.Enigmi.Panel;
@@ -84,49 +84,51 @@ public class FilesCreation {
 		// NPC
 
 		Name nomeAutista = new Name(Names.DRIVER_NAME, WordType.NOME_PROPRIO);
-		nomeAutista.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeAutista.setAdmittedPrepositions(new String[] { "a", "con", "e" });
 		Name aliasAutista = new Name("autista", WordType.NOME);
 		aliasAutista.setAdmittedArticles(new String[] { "l" });
-		aliasAutista.setAdmittedPrepositions(new String[] { "con", "a", "all", "ad" });
+		aliasAutista.setAdmittedPrepositions(new String[] { "a", "con", "all" });
 		Entita.Characters.Character autista = new Npc(nomeAutista, Dialogs.BUSDRIVER);
 		autista.setAlias(new Name[] { aliasAutista });
 		strada1.addCharacter(autista);
 
 		Name nomeMorgan = new Name(Names.MORGAN_NAME, WordType.NOME_PROPRIO);
-		nomeMorgan.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeMorgan.setAdmittedPrepositions(new String[] { "a", "con"});
 		Name aliasMorgan = new Name("morgan", WordType.NOME);
-		aliasMorgan.setAdmittedPrepositions(new String[] { "a", "con" });
+		aliasMorgan.setAdmittedPrepositions(new String[] { "a", "con"});
 		Entita.Characters.Character morgan = new Npc(nomeMorgan, Dialogs.MORGAN_A);
 		morgan.setAlias(new Name[] { aliasMorgan });
 		incrocio.addCharacter(morgan);
 
 		Name nomeBarista = new Name(Names.CANNAVACCIUOLO_NAME, WordType.NOME_PROPRIO);
-		nomeBarista.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeBarista.setAdmittedPrepositions(new String[] { "a", "con"});
 		Name aliasBarista = new Name("antonino", WordType.NOME);
-		aliasBarista.setAdmittedPrepositions(new String[] { "con", "a", "ad" });
+		aliasBarista.setAdmittedPrepositions(new String[] { "ad", "con" });
 		Entita.Characters.Character barista = new Npc(nomeBarista, Dialogs.CANNAVACCIUOLO_A);
 		barista.setAlias(new Name[] { aliasBarista });
 		chimica.addCharacter(barista);
 
 		Name nomePizzaiolo = new Name("Almerino", WordType.NOME_PROPRIO);
-		nomePizzaiolo.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomePizzaiolo.setAdmittedPrepositions(new String[] { "ad", "con" });
 		Name aliasPizzaiolo = new Name("pizzaiolo", WordType.NOME);
 		aliasPizzaiolo.setAdmittedArticles(new String[] { "il" });
-		aliasPizzaiolo.setAdmittedPrepositions(new String[] { "con", "a", "ad" });
+		aliasPizzaiolo.setAdmittedPrepositions(new String[] { "con", "al", "col"});
 		Entita.Characters.Character pizzaiolo = new Npc(nomePizzaiolo, Dialogs.BAKER_A);
 		pizzaiolo.setAlias(new Name[] { aliasPizzaiolo });
 		pizzeria1.addCharacter(pizzaiolo);
 
 		Name nomeBidello = new Name("Bidello", WordType.NOME_PROPRIO);
-		nomeBidello.setAdmittedPrepositions(new String[] { "al", "col", "con" });
+		nomeBidello.setAdmittedArticles(new String[] { "il" });
+		nomeBidello.setAdmittedPrepositions(new String[] { "al", "col", "con"});
 		Name aliasBidello = new Name("bidello", WordType.NOME);
 		aliasBidello.setAdmittedArticles(new String[] { "il" });
-		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al" });
+		aliasBidello.setAdmittedPrepositions(new String[] { "con", "al", "col" });
 		Entita.Characters.Character bidello = new Npc(nomeBidello, Dialogs.JANITOR_A);
 		bidello.setAlias(new Name[] { aliasBidello });
 		informatica.addCharacter(bidello);
 
 		Name nomePilota = new Name("Pilota", WordType.NOME_PROPRIO);
+		nomePilota.setAdmittedArticles(new String[] { "il" });
 		nomePilota.setAdmittedPrepositions(new String[] { "al", "con", "col" });
 		Name aliasPilota = new Name("pilota", WordType.NOME);
 		aliasPilota.setAdmittedArticles(new String[] { "il" });
@@ -136,18 +138,17 @@ public class FilesCreation {
 		informatica.addCharacter(pilota);
 
 		Name nomeBruno = new Name("Bruno", WordType.NOME_PROPRIO);
-		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con"});
 		Name aliasBruno1 = new Name("chef", WordType.NOME);
 		aliasBruno1.setAdmittedArticles(new String[] { "lo" });
-		aliasBruno1.setAdmittedPrepositions(new String[] { "allo", "con" });
+		aliasBruno1.setAdmittedPrepositions(new String[] { "allo", "con"});
 		Name aliasBruno2 = new Name("barbieri", WordType.NOME);
-		aliasBruno2.setAdmittedArticles(new String[] { "lo" });
 		aliasBruno2.setAdmittedPrepositions(new String[] { "a", "con" });
 		Entita.Characters.Character Bruno = new Npc(nomeBruno, Dialogs.BRUNO);
 		Bruno.setAlias(new Name[] { aliasBruno1, aliasBruno2 });
 
 		Name nomeVolpe = new Name("Volpe", WordType.NOME_PROPRIO);
-		nomeBruno.setAdmittedPrepositions(new String[] { "a", "con" });
+		nomeVolpe.setAdmittedPrepositions(new String[] { "a", "con"});
 		Name aliasVolpe = new Name("prof", WordType.NOME);
 		aliasVolpe.setAdmittedArticles(new String[] { "il" });
 		aliasVolpe.setAdmittedPrepositions(new String[] { "col", "con", "al" });
@@ -165,89 +166,105 @@ public class FilesCreation {
 
 		Name nomeMacchinetta = new Name(Names.COFFE_MACHINE, WordType.NOME);
 		nomeMacchinetta.setAdmittedArticles(new String[] { "la", "una" });
-		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella", "dentro" });
+		nomeMacchinetta.setAdmittedPrepositions(new String[] { "nella", "dentro", "in"});
 		GenericObject macchinaCaffe = new Coffe(nomeMacchinetta, Descriptions.COFFEEMAKER);
 		macchinaCaffe.setTakeable(false);
 
 		Name nomeAcqua = new Name(Names.WATER, WordType.NOME);
 		nomeAcqua.setAdmittedArticles(new String[] { "l" });
-		nomeAcqua.setAdmittedPrepositions(new String[] { "quella" });
+		nomeAcqua.setAdmittedPrepositions(new String[] {"con", "e"});
 		GenericObject acqua = new GenericObject(nomeAcqua, Descriptions.WATER);
 
+		Name nomePorta = new Name(Names.DOOR, WordType.NOME);
+		nomePorta.setAdmittedArticles(new String[] { "la" });
+		GenericObject porta = new GenericObject(nomePorta, "");
+
 		Name nomeCaffe = new Name(Names.COFFE, WordType.NOME);
+		nomeCaffe.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeCaffe.setAdmittedArticles(new String[] { "il" });
-		nomeCaffe.setAdmittedPrepositions(new String[] { "quello" });
 		GenericObject caffe = new GenericObject(nomeCaffe, Descriptions.COFFEE);
 
 		Name nomeleva = new Name(Names.LEVER, WordType.NOME);
+		nomeleva.setAdmittedArticles(new String[] { "la" });
+		nomeleva.setAdmittedPrepositions(new String[] { "quella"});
 		GenericObject leva = new GenericObject(nomeleva, "");
 		leva.setAdjectives(new String[] { "rossa", "gialla", "verde", "blu", "nera" });
 
 		Name nomeCartellone = new Name(Names.SIGN, WordType.NOME);
-		nomeCartellone.setAdmittedArticles(new String[] { "il" });
+		nomeCartellone.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject cartellone = new GenericObject(nomeCartellone, Descriptions.ADVERT);
 		cartellone.setTakeable(false);
 
 		Name nomePoster = new Name(Names.POSTER, WordType.NOME);
-		nomePoster.setAdmittedArticles(new String[] { "il" });
+		nomePoster.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject poster = new GenericObject(nomePoster, Descriptions.POSTER);
 		poster.setTakeable(false);
 
 		Name nomePacco = new Name(Names.PACKAGE, WordType.NOME);
 		nomePacco.setAdmittedArticles(new String[] { "il" });
-		nomePacco.setAdmittedPrepositions(new String[] { "nel", "in", "dentro", "dal", "da" });
+		nomePacco.setAdmittedPrepositions(new String[] { "nel", "in", "dentro", "dal", "da", "con", "e" });
 		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK);
 		pacco.setAdjectives(new String[] { "jamazon" });
 
 		Name nomeCd = new Name(Names.CD, WordType.NOME);
 		nomeCd.setAdmittedArticles(new String[] { "il", "un" });
+		nomeCd.setAdmittedPrepositions(new String[] {"con", "e"});
 		GenericObject cd = new GenericObject(nomeCd, Descriptions.CD);
-		cd.setAdjectives(new String[] { "musicale", "napoletano" });
+		cd.setAdjectives(new String[] { "neomelodico", "napoletano" });
 		((GenericObjectContainer) pacco).addToContainer(cd);
 		((GenericObjectContainer) pacco).setBlocked(true);
 
 		Name nomeRivista = new Name(Names.MAGAZINE, WordType.NOME);
-		nomeRivista.setAdmittedArticles(new String[] { "la" });
+		nomeRivista.setAdmittedArticles(new String[] { "la", "una" });
+		nomeRivista.setAdmittedPrepositions(new String[] {"con", "e"});
 		GenericObject rivista = new GenericObject(nomeRivista, Descriptions.MAGAZINE);
 
 		Name nomeGrimaldello1 = new Name(Names.PICK, WordType.NOME);
+		nomeGrimaldello1.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeGrimaldello1.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject grimaldello1 = new GenericObject(nomeGrimaldello1, Descriptions.PICK);
 		grimaldello1.setAdjectives(new String[] { "rotto" });
 
 		Name nomeForcina = new Name(Names.BOBBYPIN, WordType.NOME);
+		nomeForcina.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeForcina.setAdmittedArticles(new String[] { "la", "una" });
 		GenericObject forcina = new GenericObject(nomeForcina, Descriptions.BOBBYPIN);
 
 		Name nomeGrimaldello2 = new Name(Names.LOCKPICK, WordType.NOME);
+		nomeGrimaldello2.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeGrimaldello2.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject grimaldello2 = new GenericObject(nomeGrimaldello2, Descriptions.LOCKPICK);
 
 		Name nomeComponente = new Name(Names.COMPONENT, WordType.NOME);
+		nomeComponente.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeComponente.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject componente = new GenericObject(nomeComponente, Descriptions.COMPONENT);
 
 		Name nomeViti = new Name(Names.SCREWS, WordType.NOME);
+		nomeViti.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeViti.setAdmittedArticles(new String[] { "le" });
 		GenericObject viti = new GenericObject(nomeViti, Descriptions.SCREWS);
 
 		Name nomePropulsore = new Name(Names.ENGINE, WordType.NOME);
+		nomePropulsore.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomePropulsore.setAdmittedArticles(new String[] { "il", "un" });
 		GenericObject propulsore = new GenericObject(nomePropulsore, Descriptions.ENGINE);
 
 		Name nomeChiaviDib = new Name(Names.KEYS, WordType.NOME);
+		nomeChiaviDib.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeChiaviDib.setAdmittedArticles(new String[] { "le" });
 		GenericObject chiaviDib = new GenericObject(nomeChiaviDib, Descriptions.KEYS);
 		chiaviDib.setAdjectives(new String[] { "dib" });
 
 		Name nomeChiaviFis = new Name(Names.COMMON, WordType.NOME);
-		nomeChiaviFis.setAdmittedArticles(new String[] { "le" });
+		nomeChiaviFis.setAdmittedArticles(new String[] { "la" });
 		GenericObject chiaviFis = new GenericObject(nomeChiaviFis, Descriptions.COMMON);
 		chiaviFis.setAdjectives(new String[] { "fisica" });
 
 		Name nomeTaglierino = new Name(Names.CUTTER, WordType.NOME);
+		nomeTaglierino.setAdmittedPrepositions(new String[] {"con", "e"});
 		nomeTaglierino.setAdmittedArticles(new String[] { "il", "un" });
-		nomeTaglierino.setAdmittedPrepositions(new String[] { "con", "col" });
+		nomeTaglierino.setAdmittedPrepositions(new String[] { "con", "e", "col" });
 		GenericObject taglierino = new GenericObject(nomeTaglierino, Descriptions.CUTTER);
 
 		Name nomeElicottero = new Name(Names.HELICOPTER, WordType.NOME);
@@ -306,6 +323,7 @@ public class FilesCreation {
 		gameObjects.add(soldi);
 		gameObjects.add(elicottero);
 		gameObjects.add(server);
+		gameObjects.add(porta);
 		executive.addObject(server);
 		executive.addObject(viti);
 		strada1.addObject(taglierino);
@@ -345,7 +363,7 @@ public class FilesCreation {
 
 		Event portaFisica = new Event(Events.PHYSICS_DOOR, strada5);
 		portaFisica.setEnigma(chiaviFis);
-		strada5.setEventHandler(new PhysicsEventHandler(portaFisica));
+		strada5.setEventHandler(new PhysicsDoorEventHandler(portaFisica));
 
 		Event portaDib = new Event(Events.DIB_DOOR, strada6);
 		portaDib.setEnigma(chiaviDib);

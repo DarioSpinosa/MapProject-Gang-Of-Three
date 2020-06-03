@@ -2,8 +2,8 @@ package Resources;
 
 public class Dialogs {
 	public final static String[] BRUNO = { "Il pilota non vuole farmi salire!" };
-	public final static String[] PILOT_A = { "Che ci fa un pilota al dib dici?\nSono solo venuto a trovare il mio vecchio amico Pasquale Lops" };
-	public final static String[] PILOT_B = { "Vuoi salire? Ti costera' solo 600 euro", "E' un prezzo ragionevole" };
+	public final static String[] PILOT_A = { "Che ci fa un pilota al dib, dici?\nSono solo venuto a trovare il mio vecchio amico Pasquale Lops" };
+	public final static String[] PILOT_B = { "Vuoi salire? Ti costera' solo 600 euro" };
 	public final static String PILOT_C = "Perfetto, tutti a bordo, andiamocene";
 	public final static String PILOT_D = "Questi non sono i soldi che ti ho chiesto";
 	public final static String[] BUSDRIVER = {

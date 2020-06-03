@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -27,12 +25,14 @@ import General.Eventi.HelicopterEventHandler;
 import General.Eventi.MagazineEventHandler;
 import General.Eventi.PackageEventHandler;
 import General.Eventi.PanelEventHandler;
-import General.Eventi.PhysicsEventHandler;
+import General.Eventi.PhysicsDoorEventHandler;
 import General.Eventi.PropulsorEventHandler;
 import General.Eventi.Enigmi.Coffe;
 import General.Eventi.Enigmi.Panel;
 import Parser.ParserOutput;
 import Resources.Dialogs;
+import Resources.Names;
+import Resources.Places;
 
 /**
  *
@@ -43,30 +43,31 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 	public ActionsHandler(Game game, MessagesHandlerEssentials printer, Prepositions prepositions) {
 		super(game, printer, prepositions);
 		Command nord = new Command(CommandType.NORD, "nord");
-		nord.setAlias(new String[] { "n", "Nord" });
+		nord.setAlias(new String[] { "n", "sopra"});
 		commands.add(nord);
 		Command ovest = new Command(CommandType.OVEST, "ovest");
-		ovest.setAlias(new String[] { "o", "Ovest" });
+		ovest.setAlias(new String[] { "o", "sinistra"});
 		commands.add(ovest);
 		Command sud = new Command(CommandType.SUD, "sud");
-		sud.setAlias(new String[] { "s", "Sud" });
+		sud.setAlias(new String[] { "s", "sotto"});
 		commands.add(sud);
 		Command est = new Command(CommandType.EST, "est");
-		est.setAlias(new String[] { "e", "Est" });
+		est.setAlias(new String[] { "e", "destra" });
 		commands.add(est);
 		Command inventario = new Command(CommandType.INVENTARIO, "inventario");
+		inventario.setAlias(new String[] {"oggetti", "zaino", "roba", "borsello"});
 		commands.add(inventario);
 		Command guarda = new Command(CommandType.GUARDA, "guarda");
-		guarda.setAlias(new String[] { "osserva", "analizza", "ispeziona" });
+		guarda.setAlias(new String[] { "osserva", "analizza", "ispeziona", "scruta", "esamina", "controlla"});
 		commands.add(guarda);
 		Command prendi = new Command(CommandType.PRENDI, "prendi");
-		prendi.setAlias(new String[] { "afferra" });
+		prendi.setAlias(new String[] { "afferra", "piglia" });
 		commands.add(prendi);
 		Command usa = new Command(CommandType.USA, "usa");
 		usa.setAlias(new String[] { "utilizza" });
 		commands.add(usa);
 		Command lascia = new Command(CommandType.LASCIA, "lascia");
-		lascia.setAlias(new String[] { "poggia", "posa" });
+		lascia.setAlias(new String[] { "poggia", "posa" , "butta"});
 		commands.add(lascia);
 		Command apri = new Command(CommandType.APRI, "apri");
 		apri.setAlias(new String[] {});
@@ -74,6 +75,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		Command chiudi = new Command(CommandType.CHIUDI, "chiudi");
 		commands.add(chiudi);
 		Command combina = new Command(CommandType.COMBINA, "combina");
+		combina.setAlias(new String[] { "unisci" });
 		commands.add(combina);
 		Command parla = new Command(CommandType.PARLA, "parla");
 		commands.add(parla);
@@ -87,7 +89,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		alza.setAlias(new String[] { "spingi" });
 		commands.add(alza);
 		Command dai = new Command(CommandType.DAI, "dai");
-		dai.setAlias(new String[] { "consegna" });
+		dai.setAlias(new String[] { "consegna", "porgi" });
 		commands.add(dai);
 	}
 
@@ -291,6 +293,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					for (GenericObject genericObject : loot)
 						printer.objectWithDescriptionMessage(genericObject);
 
+				}else {
+					printer.printMessage("\nNon ci sono oggetti...");
 				}
 
 				if (!game.getCurrentRoom().getCharacters().isEmpty()) {
@@ -298,6 +302,9 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					for (Character character : game.getCurrentRoom().getCharacters())
 						printer.printMessage(character.getName().getName());
 
+				}
+				else {
+					printer.printMessage("\nNon c'e' nessuno...");
 				}
 			}
 			break;
@@ -334,11 +341,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			&& (action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))
 			&& action.getCharacter() instanceof Npc) {
 
-				if (((Npc) action.getCharacter()).getName().getName().equals("Morgan") &&
+				if (((Npc) action.getCharacter()).getName().getName().equals(Names.MORGAN_NAME) &&
 						((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
 					Desktop desktop = Desktop.getDesktop();
 					try {
-						desktop.browse(new URI("https://www.youtube.com/watch?v=otbUSPQiet8"));
+						desktop.browse(new URI(Names.EASTER_EGG));
 					} catch (IOException | URISyntaxException e) {
 						e.printStackTrace();
 					}
@@ -356,13 +363,13 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				break;
 			}
 
-			if (eventHandler == null && currentRoom.getName().contains("Executive")
-					&& firstObject.getObjectName().equals("server")) {
+			if (currentRoom.getName().contains(Places.EXECUTIVE_NAME)
+					&& firstObject.getObjectName().equals(Names.SERVER)) {
 				JOptionPane.showMessageDialog(null,
 						"Devi scappare, sono gia' qui!\nNon ho tempo per i dettagli, abbandona la citta' al piu' presto!",
 						"Nuova Email", JOptionPane.PLAIN_MESSAGE);
 
-			} else if (eventHandler != null && !eventHandler.isCompleted()) {
+			} else if (eventHandler != null) {
 
 				if (eventHandler instanceof CoffeEventHandler
 						&& firstObject.equals(eventHandler.getEvent().getEnigma())) {
@@ -374,14 +381,14 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.printMessage(((Panel) game.getCurrentRoom().getRoomObject(firstObject)).switchOn());
 					eventHandler.endEvent(protagonist, game.getCurrentRoom().getRoomObject(firstObject));
 
-				} else if (protagonist.isInInventory(firstObject) && (eventHandler instanceof PhysicsEventHandler || eventHandler instanceof DibDoorEventHandler)) {
+				} else if (protagonist.isInInventory(firstObject) && (eventHandler instanceof PhysicsDoorEventHandler || eventHandler instanceof DibDoorEventHandler)) {
 
 					if (eventHandler.endEvent(protagonist, protagonist.getObject(firstObject)))
-						printer.printOpenedObject(firstObject);
+						printer.printUsedObject(firstObject.getName().getName());
 					else
 						printer.wrongOpeningToolMessage();
 				}else
-					printer.printMessage("Non hai l'oggetto o non e' presente nella stanza");
+					printer.objectNotFoundMessage();
 
 			} else
 				printer.notUnderstoodMessage();
@@ -391,13 +398,13 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		case METTI:
 			if (eventHandler instanceof CoffeEventHandler && firstObject != null && secondObject != null) {
 
-				if (firstObject.getObjectName().equals("caffe") && secondObject.getObjectName().equals("macchinetta")
+				if (firstObject.getObjectName().equals(Names.COFFE) && secondObject.getObjectName().equals(Names.COFFE_MACHINE)
 						&& protagonist.isInInventory(firstObject)) {
 					printer.printMessage(((Coffe) (game.getCurrentRoom().getRoomObject(secondObject))).addCoffee());
 					protagonist.getInventory().removeFromContainer(firstObject);
 
-				} else if (firstObject.getObjectName().equals("acqua")
-						&& secondObject.getObjectName().equals("macchinetta")
+				} else if (firstObject.getObjectName().equals(Names.WATER)
+						&& secondObject.getObjectName().equals(Names.COFFE_MACHINE)
 						&& protagonist.isInInventory(firstObject)) {
 					printer.printMessage(((Coffe) (game.getCurrentRoom().getRoomObject(secondObject))).addWater());
 					protagonist.getInventory().removeFromContainer(firstObject);
@@ -409,7 +416,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ABBASSA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-			&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
+			&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
 
 				Panel lowerPanel = ((Panel) eventHandler.getEvent().getEnigma());
 
@@ -457,7 +464,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ALZA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-			&& firstObject.getObjectName().equals("leva") && action.getFirstAdjective() != null) {
+			&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
 
 				Panel raisePanel = ((Panel) eventHandler.getEvent().getEnigma());
 
@@ -512,7 +519,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -528,7 +535,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
 		} else
@@ -544,7 +551,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
+					printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else {
 				printer.closedRoomMessage();
 
@@ -599,7 +606,18 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 	private void apriOChiudiOggetto(GenericObject firstObject, GenericObject secondObject, Protagonist protagonist,
 			String preposition, boolean open) {
 
-		if (firstObject != null && secondObject == null) {
+		if (firstObject.getName().getName().equals(Names.DOOR) &&
+				((secondObject.getName().getName().equals(Names.KEYS)
+				&& game.getCurrentRoom().getEventHandler() instanceof DibDoorEventHandler)
+			|| (secondObject.getName().getName().equals(Names.COMMON)
+			&& game.getCurrentRoom().getEventHandler() instanceof PhysicsDoorEventHandler))) {
+
+			if (game.getCurrentRoom().getEventHandler().endEvent(protagonist, protagonist.getObject(secondObject)))
+				printer.printOpenedObject(firstObject);
+			else
+				printer.wrongOpeningToolMessage();
+
+		}else if (firstObject != null && secondObject == null) {
 			if (open) {
 				aperturaContainer(firstObject, protagonist);
 			} else {
@@ -612,39 +630,36 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				return;
 			}
 
-			GenericObjectContainer containerObject = (GenericObjectContainer) firstObject;
-			if ((game.getCurrentRoom().isInRoom(containerObject) || protagonist.isInInventory(containerObject))
-					&& containerObject.getObjectName().equals("pacco")) {
+			if((firstObject.getName().getName().equals(Names.PACKAGE) && secondObject.getName().getName().equals(Names.CUTTER))
+					||(firstObject.getName().getName().equals(Names.CAR) && secondObject.getName().getName().equals(Names.LOCKPICK))) {
+				openContainerBlocked(firstObject, secondObject, protagonist);
 
-				if (!secondObject.getObjectName().equals("taglierino")) {
-					printer.objectCannotBeOpenedWithItemMessage();
-					return;
-				}
-
-				protagonist.removeObject(secondObject);
-				containerObject.setBlocked(false);
-				printer.printOpenedObject(firstObject);
-				containerObject.open();
-
-			}else if ((game.getCurrentRoom().isInRoom(containerObject)) && containerObject.getObjectName().equals("automobile")) {
-
-				if (!secondObject.getObjectName().equals("passpartout")) {
-					printer.objectCannotBeOpenedWithItemMessage();
-					return;
-				}
-
-				protagonist.removeObject(secondObject);
-				containerObject.setBlocked(false);
-				printer.printOpenedObject(firstObject);
-				containerObject.open();
-
-			} else {
-				printer.objectNotFoundMessage();
+			}else {
+				printer.wrongOpeningToolMessage();
 			}
+
+
 		} else {
 			printer.notUnderstoodMessage();
 		}
 
+	}
+
+	private void openContainerBlocked(GenericObject firstObject, GenericObject secondObject, Protagonist protagonist) {
+
+		GenericObjectContainer containerObject = (GenericObjectContainer) firstObject;
+		if ((game.getCurrentRoom().isInRoom(containerObject) || protagonist.isInInventory(containerObject))){
+
+			if (!protagonist.isInInventory(secondObject)) {
+				printer.objectNotFoundMessage();//TODO cambiare messaggio
+				return;
+			}
+
+			protagonist.removeObject(secondObject);
+			containerObject.setBlocked(false);
+			printer.printOpenedObject(firstObject);
+			containerObject.open();
+		}
 	}
 
 	private void aperturaContainer(GenericObject firstObject, Protagonist protagonist) {
