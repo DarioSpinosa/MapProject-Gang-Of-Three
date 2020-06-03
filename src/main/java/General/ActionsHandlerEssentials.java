@@ -21,10 +21,12 @@ public abstract class ActionsHandlerEssentials {
     protected ArrayList<Command> commands = new ArrayList<>();
     protected ArrayList<GenericObject> currentObjects;
     protected MessagesHandlerEssentials printer;
+    protected Prepositions prepositions;
 
-    public ActionsHandlerEssentials(Game game, MessagesHandlerEssentials printer){
+    public ActionsHandlerEssentials(Game game, MessagesHandlerEssentials printer, Prepositions prepositions){
         this.game = game;
         this.printer = printer;
+        this.prepositions = prepositions;
     }
 
     public ArrayList<Command> getCommands(){

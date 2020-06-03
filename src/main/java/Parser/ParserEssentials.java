@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import Entita.Characters.Character;
 import General.Command;
 import General.GenericObject;
+import General.Prepositions;
 
 public abstract class ParserEssentials {
     protected boolean accepted = false;
@@ -17,7 +18,7 @@ public abstract class ParserEssentials {
     protected String lastPreposition;
     protected GenericObject lastObject;
     protected ArrayList<String> articles;
-    protected ArrayList<String> prepositions;
+    protected Prepositions prepositions;
     protected ArrayList<String> adjectives = new ArrayList<>();
     protected int numberOfObjects = 0;
 

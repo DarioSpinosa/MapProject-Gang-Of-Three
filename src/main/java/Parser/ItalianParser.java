@@ -11,10 +11,11 @@ import General.Command;
 import General.CommandType;
 import General.GenericObject;
 import General.Name;
+import General.Prepositions;
 
 public class ItalianParser extends ParserEssentials {
 
-    public ItalianParser(ArrayList<String> articles, ArrayList<String> prepositions) {
+    public ItalianParser(ArrayList<String> articles, Prepositions prepositions) {
         this.articles = articles;
         this.prepositions = prepositions;
     }
@@ -38,7 +39,7 @@ public class ItalianParser extends ParserEssentials {
 
     private boolean isPreposition(String token, ParserOutput output) {
         boolean confirmed = false;
-        if(prepositions.contains(token)) {
+        if(prepositions.isPreposition(token)) {
             confirmed = true;
             output.setPreposition(token);
             if(lastWordType == WordType.COMANDO_PARLA){

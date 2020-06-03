@@ -86,7 +86,7 @@ public class FileErrorDialog extends javax.swing.JDialog {
 
     private void fileErrorButtonYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileErrorButtonYesActionPerformed
         // TODO add your handling code here:
-        FilesCreation.doStuff();
+        FilesCreation.saveFiles();
         this.dispose();
     }//GEN-LAST:event_fileErrorButtonYesActionPerformed
 

@@ -40,25 +40,8 @@ import Resources.Dialogs;
  */
 public class ActionsHandler extends ActionsHandlerEssentials {
 
-	private final Set<String> pickPrepositions = new HashSet<>();
-	private final Set<String> dropPrepositions = new HashSet<>();
-	private final Set<String> combinePrepositions = new HashSet<>();
-	private final Set<String> talkPrepositions = new HashSet<>();
-
-	public ActionsHandler(Game game, MessagesHandlerEssentials printer) {
-		super(game, printer);
-		pickPrepositions.add("dal");
-		pickPrepositions.add("da");
-		pickPrepositions.add("dalla");
-		dropPrepositions.add("nel");
-		dropPrepositions.add("in");
-		dropPrepositions.add("nella");
-		combinePrepositions.add("con");
-		combinePrepositions.add("e");
-		talkPrepositions.add("con");
-		talkPrepositions.add("all");
-		talkPrepositions.add("a");
-		talkPrepositions.add("ad");
+	public ActionsHandler(Game game, MessagesHandlerEssentials printer, Prepositions prepositions) {
+		super(game, printer, prepositions);
 		Command nord = new Command(CommandType.NORD, "nord");
 		nord.setAlias(new String[] { "n", "Nord" });
 		commands.add(nord);
@@ -183,7 +166,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					break;
 				}
 				if (secondObject instanceof GenericObjectContainer
-						&& pickPrepositions.contains(action.getPreposition())) {
+						&& prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
 					lasciaOPrendiOggetto(firstObject, (GenericObjectContainer) secondObject, protagonist, false);
 				} else {
 					printer.objectNotInRoomMessage();
@@ -255,7 +238,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					printer.objectNotInInventoryMessage();
 
 			} else if (firstObject != null && secondObject != null && secondObject instanceof GenericObjectContainer
-					&& (dropPrepositions.contains(action.getPreposition()) || action.getPreposition() == null)) {
+					&& (prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()) || action.getPreposition() == null)) {
 				if (protagonist.isInInventory(firstObject))
 					lasciaOPrendiOggetto(firstObject, (GenericObjectContainer) secondObject, protagonist, true);
 				else
@@ -265,10 +248,14 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 			break;
 		case APRI:
-			apriOChiudiOggetto(firstObject, secondObject, protagonist, action.getPreposition(), true);
+			if(action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())){
+				apriOChiudiOggetto(firstObject, secondObject, protagonist, action.getPreposition(), true);
+			}
 			break;
 		case CHIUDI:
-			apriOChiudiOggetto(firstObject, secondObject, protagonist, action.getPreposition(), false);
+			if(action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())){
+				apriOChiudiOggetto(firstObject, secondObject, protagonist, action.getPreposition(), false);
+			}
 			break;
 		case GUARDA:
 			boolean lookFound = false;
@@ -317,7 +304,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case COMBINA:
 			if (firstObject != null && secondObject != null
-			&& (action.getPreposition() == null || combinePrepositions.contains(action.getPreposition()))) {
+			&& (action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))) {
 
 				if (protagonist.isInInventory(firstObject) && protagonist.isInInventory(secondObject)) {
 					GenericObject oggettoCombinato = game.getCombinations().getResultantObject(firstObject, secondObject);
@@ -344,7 +331,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			break;
 		case PARLA:
 			if (action.getCharacter() != null
-			&& (action.getPreposition() == null || talkPrepositions.contains(action.getPreposition()))
+			&& (action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))
 			&& action.getCharacter() instanceof Npc) {
 
 				if (((Npc) action.getCharacter()).getName().getName().equals("Morgan") &&
@@ -525,11 +512,6 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
-						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
-							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
-					}
-					else
 						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
@@ -546,11 +528,6 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
-						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
-							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
-					}
-					else
 						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else
 				printer.closedRoomMessage();
@@ -567,11 +544,6 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printRoom(game.getCurrentRoom().getName(), game.getCurrentRoom().getDescription());
 				if (game.getCurrentRoom().getEventHandler() != null
 						&& !game.getCurrentRoom().getEventHandler().isStarted())
-					if(game.getCurrentRoom().getEventHandler() instanceof HelicopterEventHandler) {
-						if(game.getCurrentRoom().getUp().getUp().getLeft().getLeft().getEventHandler().isCompleted())
-							printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
-					}
-					else
 						printer.printEventDescription(game.getCurrentRoom().getEventHandler().startEvent());
 			} else {
 				printer.closedRoomMessage();
@@ -633,8 +605,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			} else {
 				chiusuraContainer(firstObject, protagonist);
 			}
-		} else if (firstObject != null && secondObject != null
-				&& (preposition == null || combinePrepositions.contains(preposition))) {
+		} else if (firstObject != null && secondObject != null) {
 
 			if (!(firstObject instanceof GenericObjectContainer)) {
 				printer.notOpenableObjectMessage();

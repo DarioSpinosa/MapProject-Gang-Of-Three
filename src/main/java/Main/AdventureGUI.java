@@ -12,8 +12,10 @@ import javax.swing.JTextArea;
 import Entita.Game;
 import General.ActionsHandler;
 import General.ActionsHandlerEssentials;
+import General.CommandType;
 import General.MessagesHandler;
 import General.MessagesHandlerEssentials;
+import General.Prepositions;
 import Parser.ItalianParser;
 import Parser.ParserEssentials;
 import Parser.ParserOutput;
@@ -29,7 +31,7 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private ActionsHandlerEssentials actions;
 	private final MessagesHandlerEssentials printer = new MessagesHandler(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 25223232;
+	private final int gameMinutes = 20;
 	private final int gameSeconds = 0;
 
 	/**
@@ -44,22 +46,23 @@ public class AdventureGUI extends javax.swing.JFrame {
 
 	private void init() throws IOException, ClassNotFoundException {
 		Game game = new Game();
-		actions = new ActionsHandler(game, printer);
+		Prepositions prepositions = new Prepositions();
+		prepositions.addPreposition("in", CommandType.LASCIA);
+		prepositions.addPreposition("dentro", CommandType.LASCIA);
+		prepositions.addPreposition("da", CommandType.PRENDI);
+		prepositions.addPreposition("con", new CommandType[] {CommandType.COMBINA, CommandType.APRI});
+		prepositions.addPreposition("dal", CommandType.PRENDI);
+		prepositions.addPreposition("dalla", CommandType.PRENDI);
+		prepositions.addPreposition("nel", CommandType.LASCIA);
+		prepositions.addPreposition("e", CommandType.COMBINA);
+		prepositions.addPreposition("all", CommandType.PARLA);
+		prepositions.addPreposition("allo", CommandType.PARLA);
+		prepositions.addPreposition("a", CommandType.PARLA);
+		prepositions.addPreposition("ad", CommandType.PARLA);
+		prepositions.addPreposition("al", CommandType.PARLA);
+		prepositions.addPreposition("col", CommandType.PARLA);
+		actions = new ActionsHandler(game, printer, prepositions);
 		actions.setObjectsList(game.getObjects());
-		ArrayList<String> prepositions = new ArrayList<>();
-		prepositions.add("in");
-		prepositions.add("da");
-		prepositions.add("con");
-		prepositions.add("dal");
-		prepositions.add("dalla");
-		prepositions.add("nel");
-		prepositions.add("e");
-		prepositions.add("all");
-		prepositions.add("allo");
-		prepositions.add("a");
-		prepositions.add("ad");
-		prepositions.add("al");
-		prepositions.add("col");
 		ArrayList<String> articles = new ArrayList<>();
 		articles.add("la");
 		articles.add("l");
