@@ -13,7 +13,7 @@ public class MagazineEventHandler extends GenericEventHandler {
 
 	@Override
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
-		if (!completed && obj.equals(event.getEnigma())) {
+		if (protagonist.isInInventory(obj) && obj.equals(event.getEnigma())) {
 			completed = true;
 			((Npc) event.getEventRoom().getCharacters().get(0)).setDialogue(Dialogs.JANITOR_B);
 			protagonist.removeObject(event.getEnigma());

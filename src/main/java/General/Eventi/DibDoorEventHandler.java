@@ -12,8 +12,7 @@ public class DibDoorEventHandler extends GenericEventHandler {
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
 		GenericObject enigma = event.getEnigma();
 
-		if(!completed && obj.equals(enigma) && protagonist.getInventory().getContainer().size() != 0
-				&& protagonist.getInventory().contains(enigma)) {
+		if(!completed && protagonist.isInInventory(obj) && obj.equals(enigma)) {
 			completed = true;
 			protagonist.getInventory().removeFromContainer((event.getEnigma()));
 			event.getEventRoom().getRight().setAccessible(true);

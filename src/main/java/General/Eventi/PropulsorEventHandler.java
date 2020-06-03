@@ -13,7 +13,7 @@ public class PropulsorEventHandler extends GenericEventHandler{
 
 	@Override
 	public boolean endEvent(Protagonist protagonist, GenericObject obj) {
-		if(!completed && obj.equals(event.getEnigma())) {
+		if(protagonist.isInInventory(obj) && obj.equals(event.getEnigma())) {
 			completed = true;
 			((Npc)event.getEventRoom().getCharacters().get(0)).setDialogue(Dialogs.VOLPE_B);
 			event.getEventRoom().getRight().getRight().getDown().getDown().addCharacter(event.getEventRoom().getCharacters().get(0));
