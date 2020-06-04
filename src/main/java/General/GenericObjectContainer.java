@@ -75,16 +75,16 @@ public class GenericObjectContainer extends GenericObject implements Serializabl
 		opened = false;
 	}
 
-    public GenericObject getOggetto(GenericObject object) {
-    	for(GenericObject obj : container) {
-    		if(obj.equals(object)) {
-    			return obj;
-    		}
-    	}
-    	return null;
-    }
+	public GenericObject getOggetto(GenericObject object) {
+		for (GenericObject obj : container) {
+			if (obj.equals(object)) {
+				return obj;
+			}
+		}
+		return null;
+	}
 
-        public void removeOggetto(GenericObject object){
-            container.remove(object);
-        }
+	public void removeOggetto(GenericObject object) {
+		container.remove(object);
+	}
 }

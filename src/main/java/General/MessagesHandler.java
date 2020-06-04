@@ -20,7 +20,8 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void beginningOfTheGameMessage(String name, String description) {
-		gui.printMessage("Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n"
+		gui.printMessage(
+				"Sei da solo sul bus piu' scassato del mondo.\nLa temperatura e' insopportabile e l'odore e' indescrivibile.\nRiesci a sentire ogni irregolarita' del manto stradale.\n"
 						+ "CRASH! Il bus ha urtato qualcosa! Meglio scendere al piu' presto!\n" + "\nLuogo: " + name
 						+ "\n" + description);
 	}
@@ -42,10 +43,10 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 			break;
 		case 2:
 			gui.printMessage("Senti una voce... \"Hey you, you are finally awake\"");
-                        break;
+			break;
 		case 3:
 			gui.printMessage("NULLPOINTEREXCEPTION!");
-                        break;
+			break;
 		}
 	}
 
@@ -58,7 +59,6 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 	public void alreadyRaisedLeverMessage() {
 		gui.printMessage("La leva e' gia alzata");
 	}
-
 
 	@Override
 	public void closedRoomMessage() {
@@ -169,7 +169,8 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 	}
 
 	@Override
-	public void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject) {
+	public void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject,
+			GenericObject resultantObject) {
 		gui.printMessage("\nHai combinato " + firstObject + " con " + secondObject + " e ottenuto: " + resultantObject);
 	}
 
@@ -213,46 +214,58 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		gui.printMessage("-" + object.getObjectName() + ": " + object.getDescription());
 	}
 
-        @Override
-        public void blockedObjectMessage(){
-            gui.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
-        }
+	@Override
+	public void blockedObjectMessage() {
+		gui.printMessage("Oggetto chiuso, ti serve qualcosa per aprirlo");
+	}
 
-        @Override
-        public void cannotGiveObjectMessage(){
-            gui.printMessage("Non puoi dare questo oggetto a nessuno");
-        }
+	@Override
+	public void cannotGiveObjectMessage() {
+		gui.printMessage("Non puoi dare questo oggetto a nessuno");
+	}
 
-        @Override
-        public void wrongOpeningToolMessage(){
-            gui.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
-        }
+	@Override
+	public void wrongOpeningToolMessage() {
+		gui.printMessage("Stai utilizzando l'oggetto errato o non hai l'oggetto giusto nell'inventario");
+	}
 
-        @Override
-        public void printEventDescription(String description){
-        	if(!description.equals(""))
-                gui.printMessage("\n" + description);
-        }
+	@Override
+	public void printEventDescription(String description) {
+		if (!description.equals(""))
+			gui.printMessage("\n" + description);
+	}
 
-        @Override
-        public void objectCannotBeOpenedWithItemMessage(){
-            gui.printMessage("Non sembra sia possibile aprirlo con questo oggetto");
-        }
+	@Override
+	public void objectCannotBeOpenedWithItemMessage() {
+		gui.printMessage("Non sembra sia possibile aprirlo con questo oggetto");
+	}
 
-        @Override
-        public void printNpcDialogue(Npc npc, String dialogue){
-            gui.printMessage("\n" + npc + ": " + dialogue);
-        }
+	@Override
+	public void printNpcDialogue(Npc npc, String dialogue) {
+		gui.printMessage("\n" + npc + ": " + dialogue);
+	}
 
-		@Override
-		public void printObjectInside(GenericObjectContainer container) {
-			for(GenericObject obj: container.getContainer())
-				gui.printMessage(obj.getName().getName());
-		}
+	@Override
+	public void printObjectInside(GenericObjectContainer container) {
+		for (GenericObject obj : container.getContainer())
+			gui.printMessage(obj.getName().getName());
+	}
 
-		@Override
-		public void printUsedObject(String name) {
-			gui.printMessage("Hai usato " + name);
+	@Override
+	public void printUsedObject(String name) {
+		gui.printMessage("Hai usato " + name);
 
-		}
+	}
+
+	@Override
+	public void noObjectsHere() {
+		gui.printMessage("\nNon ci sono oggetti...");
+
+	}
+
+	@Override
+	public void nobodyHere() {
+		gui.printMessage("\nNon c'e' nessuno...");
+
+	}
 }

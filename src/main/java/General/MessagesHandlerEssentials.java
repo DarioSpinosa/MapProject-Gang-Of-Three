@@ -83,7 +83,8 @@ public abstract class MessagesHandlerEssentials {
 
 	public abstract void unavaiableCombinationMessage(GenericObject firstObject, GenericObject secondObject);
 
-	public abstract void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject, GenericObject resultantObject);
+	public abstract void successfulCombinationMessage(GenericObject firstObject, GenericObject secondObject,
+			GenericObject resultantObject);
 
 	public abstract void specificObjectNotInInventoryMessage(GenericObject object);
 
@@ -114,4 +115,8 @@ public abstract class MessagesHandlerEssentials {
 	public abstract void objectCannotBeOpenedWithItemMessage();
 
 	public abstract void printNpcDialogue(Npc npc, String dialogue);
+
+	public abstract void noObjectsHere();
+
+	public abstract void nobodyHere();
 }
