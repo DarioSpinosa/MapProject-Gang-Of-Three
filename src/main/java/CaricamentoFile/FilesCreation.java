@@ -377,7 +377,7 @@ public class FilesCreation {
 		eventoElicottero.setEnigma(soldi);
 		eventoElicottero.addEventObject(elicottero);
 		eventoElicottero.addEventCharacter(Bruno);
-		incrocio.setEventHandler(new HelicopterEventHandler(eventoElicottero, fisica2));
+		incrocio.setEventHandler(new HelicopterEventHandler(eventoElicottero, fisica2.getEventHandler()));
 
 		try {
 			ObjectsFile.saveObjects(gameObjects);

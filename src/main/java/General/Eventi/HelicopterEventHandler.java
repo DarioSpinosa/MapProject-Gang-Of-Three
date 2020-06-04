@@ -1,12 +1,11 @@
 package General.Eventi;
 
-import Entita.Room;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
 
 public class HelicopterEventHandler extends GenericEventHandler {
 
-	public  HelicopterEventHandler(Event event, Room condition){
+	public  HelicopterEventHandler(Event event, GenericEventHandler condition){
 		super(event, condition);
 	}
 

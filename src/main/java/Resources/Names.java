@@ -10,7 +10,6 @@ package Resources;
  * @author Elio
  */
 public class Names {
-	public final static String EASTER_EGG = "https://www.youtube.com/watch?v=otbUSPQiet8";
     public final static String PANEL = "Pannello";
     public final static String DOOR = "Porta";
     public final static String COFFE_MACHINE = "Macchinetta";

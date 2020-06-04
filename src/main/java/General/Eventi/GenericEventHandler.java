@@ -2,7 +2,6 @@ package General.Eventi;
 
 import java.io.Serializable;
 
-import Entita.Room;
 import Entita.Characters.Character;
 import Entita.Characters.Protagonist;
 import General.GenericObject;
@@ -10,7 +9,7 @@ import General.GenericObject;
 public abstract class GenericEventHandler implements Serializable {
 
 	protected Event event;
-	protected Room otherRoomEvent = null;
+	protected GenericEventHandler otherRoomEvent = null;
 	protected boolean started = false;
 	protected boolean completed = false;
 
@@ -21,7 +20,7 @@ public abstract class GenericEventHandler implements Serializable {
 		event = m;
 	}
 
-	public GenericEventHandler(Event m, Room condition) {
+	public GenericEventHandler(Event m, GenericEventHandler condition) {
 		event = m;
 		this.otherRoomEvent = condition;
 	}
@@ -31,7 +30,7 @@ public abstract class GenericEventHandler implements Serializable {
 		String temp = "";
 
 		if(otherRoomEvent != null) {
-			if(otherRoomEvent.getEventHandler().isCompleted())
+			if(otherRoomEvent.isCompleted())
 				temp = start();
 		}else
 			temp = start();

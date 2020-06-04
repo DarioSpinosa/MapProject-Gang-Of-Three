@@ -31,6 +31,7 @@ import General.Eventi.Enigmi.Coffe;
 import General.Eventi.Enigmi.Panel;
 import Parser.ParserOutput;
 import Resources.Dialogs;
+import Resources.Events;
 import Resources.Names;
 import Resources.Places;
 
@@ -335,15 +336,25 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			&& (action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))
 			&& action.getCharacter() instanceof Npc) {
 
-				if (((Npc) action.getCharacter()).getName().getName().equals(Names.MORGAN_NAME) &&
-						((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
-					Desktop desktop = Desktop.getDesktop();
-					try {
-						desktop.browse(new URI(Names.EASTER_EGG));
-					} catch (IOException | URISyntaxException e) {
-						e.printStackTrace();
+				if (((Npc) action.getCharacter()).getName().getName().equals(Names.MORGAN_NAME)){
+					if(((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
+						Desktop desktop = Desktop.getDesktop();
+						try {
+							desktop.browse(new URI(Events.EASTER_EGG));
+						} catch (IOException | URISyntaxException e) {
+							e.printStackTrace();
+						}
+					}
+					else if(((Npc) action.getCharacter()).getCurrentDialogue().equals("Bugo?\nBugo 'ndo vai?")) {
+						Desktop desktop = Desktop.getDesktop();
+						try {
+							desktop.browse(new URI(Events.EASTER_EGG_2));
+						} catch (IOException | URISyntaxException e) {
+							e.printStackTrace();
+						}
 					}
 				}
+
 				Npc npc = (Npc) game.getCurrentRoom().getCharacter(action.getCharacter());
 				printer.printNpcDialogue(npc, npc.getDialogue());
 
