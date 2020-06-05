@@ -247,6 +247,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void printObjectInside(GenericObjectContainer container) {
+            gui.printMessage("\nRiesci a vedere cosa contiene, in particolare vedi:");
 		for (GenericObject obj : container.getContainer())
 			gui.printMessage(obj.getName().getName());
 	}
@@ -268,4 +269,9 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		gui.printMessage("\nNon c'e' nessuno...");
 
 	}
+        
+        @Override
+        public void objectContainerIsFull(GenericObject object){
+            gui.printMessage("\nL'oggetto " + object + " non puo' contenere altri oggetti");
+        }
 }

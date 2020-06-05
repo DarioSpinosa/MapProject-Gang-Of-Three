@@ -22,6 +22,11 @@ public class GenericObjectContainer extends GenericObject implements Serializabl
 	public GenericObjectContainer(Name name, String description, AliasHandler alias) {
 		super(name, description, alias);
 	}
+        
+        public GenericObjectContainer(Name name, String description, AliasHandler alias, int maxSize) {
+		super(name, description, alias);
+                this.maxSize = maxSize;
+	}
 
 	public GenericObjectContainer(Name name, String description, int maxSize) {
 		super(name, description);

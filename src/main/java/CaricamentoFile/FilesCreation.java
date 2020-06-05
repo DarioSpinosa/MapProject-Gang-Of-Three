@@ -203,7 +203,7 @@ public class FilesCreation {
 		Name nomePacco = new Name(Names.PACKAGE, WordType.NOME);
 		nomePacco.setAdmittedArticles(new String[] { "il" });
 		nomePacco.setAdmittedPrepositions(new String[] { "nel", "in", "dentro", "dal", "da", "con", "e" });
-		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK);
+		GenericObject pacco = new GenericObjectContainer(nomePacco, Descriptions.PACK, 1);
 		pacco.setAdjectives(new String[] { "jamazon" });
 
 		Name nomeCd = new Name(Names.CD, WordType.NOME);
@@ -294,7 +294,7 @@ public class FilesCreation {
 		Name aliasAuto4 = new Name("bagagliaio", WordType.NOME);
 		aliasAuto4.setAdmittedArticles(new String[] { "il" });
 		AliasHandler aliasMacchina = new AliasHandler(new Name[] { aliasAuto1, aliasAuto2, aliasAuto3, aliasAuto4 });
-		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED, aliasMacchina);
+		GenericObject automobile = new GenericObjectContainer(nomeAuto, Descriptions.CAR_CLOSED, aliasMacchina, 2);
 		((GenericObjectContainer) automobile).addToContainer(rivista);
 		((GenericObjectContainer) automobile).addToContainer(componente);
 		automobile.setTakeable(false);

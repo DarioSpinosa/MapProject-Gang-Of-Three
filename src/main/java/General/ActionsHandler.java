@@ -129,7 +129,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			break;
 		case PRENDI:
 			boolean takeFound = false;
-			if (protagonist.getActualInventorySize() > 3) {
+			if (protagonist.getActualInventorySize() == protagonist.getInventoryMaxSize()) {
 				printer.fullInventoryMessage();
 				break;
 			}
@@ -187,7 +187,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 					if (!eventHandler.isCompleted()) {
 
-						if (eventHandler instanceof PackageEventHandler) {
+						if (eventHandler instanceof PackageEventHandler && (action.getCharacter()==null || action.getCharacter().getName().getName().equals("Almerino") )) {
 
 							if (eventHandler.endEvent(protagonist, firstObject))
 								printer.printMessage("\n" + Dialogs.BAKER_C);
@@ -237,6 +237,10 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			} else if (firstObject != null && secondObject != null && secondObject instanceof GenericObjectContainer
 					&& (prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())
 							|| action.getPreposition() == null)) {
+                            if(((GenericObjectContainer) secondObject).getContainer().size() == ((GenericObjectContainer) secondObject).getMaxSize()){
+                                printer.objectContainerIsFull(secondObject);
+                                break;
+                            }
 				if (protagonist.isInInventory(firstObject))
 					lasciaOPrendiOggetto(firstObject, (GenericObjectContainer) secondObject, protagonist, true);
 				else
@@ -264,7 +268,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				if (roomObjects.contains(firstObject) || protagonist.isInInventory(firstObject)) {
 					printer.printObjectDescription(firstObject);
 					if (firstObject instanceof GenericObjectContainer
-							&& ((GenericObjectContainer) firstObject).isOpened()) {
+							&& ((GenericObjectContainer) firstObject).isOpened() && ((GenericObjectContainer) firstObject).getContainer().size() > 0) {
 						printer.printObjectInside(((GenericObjectContainer) firstObject));
 					}
 					lookFound = true;

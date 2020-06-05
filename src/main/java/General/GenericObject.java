@@ -18,7 +18,6 @@ public class GenericObject implements Serializable {
 	private String description = "";
 	private AliasHandler alias = new AliasHandler(new Name[] {});
 	private Set<String> adjectives = new HashSet<>();
-	private boolean consumable = true;
 	private boolean takeable = true;
 
 	public GenericObject(Name name, String description) {
@@ -62,16 +61,8 @@ public class GenericObject implements Serializable {
 		this.description = description;
 	}
 
-	public boolean isConsumable() {
-		return consumable;
-	}
-
 	public boolean isTakeable() {
 		return takeable;
-	}
-
-	public void setConsumable(boolean consumable) {
-		this.consumable = consumable;
 	}
 
 	public void setTakeable(boolean takeable) {
