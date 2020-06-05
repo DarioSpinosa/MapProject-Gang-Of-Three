@@ -39,14 +39,14 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 			gui.printMessage("A meno che tu non sia un fantasma, non puoi attraversare quella parete!");
 			break;
 		case 1:
-			gui.printMessage("WHAT YOU DOING MARCELO?!");
+			gui.printMessage("Smettila di sbattere contro il muro o le altre persone penseranno che tu sia pazzo");
 			break;
 		case 2:
-			gui.printMessage("Senti una voce... \"Hey you, you are finally awake\"");
+			gui.printMessage("Senti una voce... \"Hey, questo e' un muro!");
 			break;
 		case 3:
-			gui.printMessage("NULLPOINTEREXCEPTION!");
-			break;
+			gui.printMessage("Non c'e' nessun passaggio illusorio qui, vai via!");
+
 		}
 	}
 
@@ -90,7 +90,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void fullInventoryMessage() {
-		gui.printMessage("Il tuo invetario e' pieno");
+		gui.printMessage("Il tuo inventario e' pieno");
 	}
 
 	@Override
@@ -140,7 +140,15 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void notUnderstoodMessage() {
-		gui.printMessage("Non ho capito le tue intenzioni, spiegati meglio!");
+
+		int rand = (int) (Math.random() * 2);
+		switch (rand) {
+		case 0:
+			gui.printMessage("Non ho capito le tue intenzioni, spiegati meglio!");
+			break;
+		case 1:
+			gui.printMessage("Le parole del professor Volpe rimbombano:\nC'e' luogo e tempo per ogni cosa, ma non ora!");
+		}
 	}
 
 	@Override
@@ -247,7 +255,7 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 
 	@Override
 	public void printObjectInside(GenericObjectContainer container) {
-            gui.printMessage("\nRiesci a vedere cosa contiene, in particolare vedi:");
+		gui.printMessage("\nRiesci a vedere cosa contiene, in particolare vedi:");
 		for (GenericObject obj : container.getContainer())
 			gui.printMessage(obj.getName().getName());
 	}
@@ -269,9 +277,15 @@ public final class MessagesHandler extends MessagesHandlerEssentials {
 		gui.printMessage("\nNon c'e' nessuno...");
 
 	}
-        
-        @Override
-        public void objectContainerIsFull(GenericObject object){
-            gui.printMessage("\nL'oggetto " + object + " non puo' contenere altri oggetti");
-        }
+
+	@Override
+	public void objectContainerIsFull(GenericObject object){
+		gui.printMessage("\nL'oggetto " + object + " non puo' contenere altri oggetti");
+	}
+
+	@Override
+	public void printNotInInventory(GenericObject secondObject) {
+		gui.printMessage(secondObject.getName().getName() + "non e' presente nel tuo inventario");
+
+	}
 }

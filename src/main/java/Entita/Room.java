@@ -1,10 +1,11 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Entita;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Entita.Characters.Character;
@@ -13,7 +14,6 @@ import General.GenericObjectContainer;
 import General.Name;
 import General.Eventi.GenericEventHandler;
 import Parser.WordType;
-import java.io.Serializable;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Room implements Serializable{
 	private Room right = null;
 	private Room left = null;
 	private boolean accessible = true;
-	private GenericEventHandler roomEvent = null;
+	private ArrayList<GenericEventHandler> roomEvent = new ArrayList<>();
 	private final GenericObjectContainer roomObjects = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "");
 	private final ArrayList<Character> characters = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class Room implements Serializable{
 	}
 
 	public void setEventHandler(GenericEventHandler e) {
-		roomEvent = e;
+		roomEvent.add(e);
 	}
 
 	// METODI GETTER
@@ -114,10 +114,6 @@ public class Room implements Serializable{
 		return characters.get(characters.indexOf(personaggio));
 	}
 
-	public GenericObject getRoomObjects(int i) {
-		return roomObjects.getFromContainer(i);
-	}
-
 	public GenericObject getRoomObject(String s) {
 		for(GenericObject oggetto: roomObjects.getContainer()) {
 			if(oggetto.getObjectName().equals(s))
@@ -131,11 +127,23 @@ public class Room implements Serializable{
 		return roomObjects;
 	}
 
-    public GenericEventHandler getEventHandler() {
-    	return roomEvent;
-    }
+	public GenericEventHandler getEventHandler() {
 
-    public GenericObject getRoomObject(GenericObject oggetto) {
+		int i = 0;
+		GenericEventHandler handler = null;
+
+		if(roomEvent.size() != 0) {
+			do {
+				if(!roomEvent.get(i).isCompleted())
+					handler = roomEvent.get(i);
+			i++;
+			}while(handler != null && i < roomEvent.size());
+		}
+
+		return handler;
+	}
+
+	public GenericObject getRoomObject(GenericObject oggetto) {
 		for (GenericObject obj : roomObjects.getContainer()) {
 			if (obj.equals(oggetto)) {
 				return obj;
@@ -160,16 +168,13 @@ public class Room implements Serializable{
 		roomObjects.removeFromContainer(o);
 	}
 
-	public int findIndex(GenericObject oggetto) {
-		return roomObjects.getContainer().indexOf(oggetto);
-	}
 
-        public boolean isInRoom(GenericObject oggetto){
-            for(GenericObject obj : roomObjects.getContainer()){
-                if(oggetto.equals(obj)){
-                    return true;
-                }
-            }
-            return false;
-        }
+	public boolean isInRoom(GenericObject oggetto){
+		for(GenericObject obj : roomObjects.getContainer()){
+			if(oggetto.equals(obj)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

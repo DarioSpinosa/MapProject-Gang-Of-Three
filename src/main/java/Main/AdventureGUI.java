@@ -277,7 +277,7 @@ public class AdventureGUI extends javax.swing.JFrame {
 			if (azione != null) {
 				actions.processAction(azione);
 			} else {
-				printer.unrecognisedCommandMessage();
+				printer.notUnderstoodMessage();
 			}
 		}
 	}// GEN-LAST:event_jtComandiKeyPressed

@@ -20,6 +20,7 @@ import General.Name;
 import General.Eventi.CoffeEventHandler;
 import General.Eventi.DibDoorEventHandler;
 import General.Eventi.Event;
+import General.Eventi.GenericEventHandler;
 import General.Eventi.HelicopterEventHandler;
 import General.Eventi.MagazineEventHandler;
 import General.Eventi.PackageEventHandler;
@@ -371,13 +372,14 @@ public class FilesCreation {
 
 		Event raggi = new Event(Events.COSMIC_RAYS, fisica2);
 		raggi.setEnigma(propulsore);
-		fisica2.setEventHandler(new PropulsorEventHandler(raggi));
+		GenericEventHandler fisicaEvent = new PropulsorEventHandler(raggi);
+		fisica2.setEventHandler(fisicaEvent);
 
 		Event eventoElicottero = new Event(Events.PILOT, incrocio);
 		eventoElicottero.setEnigma(soldi);
 		eventoElicottero.addEventObject(elicottero);
 		eventoElicottero.addEventCharacter(Bruno);
-		incrocio.setEventHandler(new HelicopterEventHandler(eventoElicottero, fisica2.getEventHandler()));
+		incrocio.setEventHandler(new HelicopterEventHandler(eventoElicottero, fisicaEvent));
 
 		try {
 			ObjectsFile.saveObjects(gameObjects);

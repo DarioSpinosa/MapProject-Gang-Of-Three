@@ -119,6 +119,8 @@ public abstract class MessagesHandlerEssentials {
 	public abstract void noObjectsHere();
 
 	public abstract void nobodyHere();
-        
-        public abstract void objectContainerIsFull(GenericObject object);
+
+	public abstract void objectContainerIsFull(GenericObject object);
+
+	public abstract void printNotInInventory(GenericObject secondObject);
 }
