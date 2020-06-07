@@ -150,7 +150,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				break;
 			}
 
-			if(firstObject != null && secondObject == null)
+			if (firstObject != null && secondObject == null)
 				takeItem(firstObject, protagonist);
 
 			else if (firstObject != null && secondObject != null) {
@@ -160,8 +160,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					break;
 				}
 
-				if (secondObject instanceof GenericObjectContainer
-						&& prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
+				if (secondObject instanceof GenericObjectContainer && prepositions
+						.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
 					dropOrTakeItem(firstObject, (GenericObjectContainer) secondObject, protagonist, false);
 
 				} else {
@@ -196,7 +196,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case LASCIA:
 
-			if(firstObject == null && secondObject == null) {
+			if (firstObject == null && secondObject == null) {
 				printer.notUnderstoodMessage();
 				break;
 			}
@@ -214,7 +214,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					&& (prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())
 							|| action.getPreposition() == null)) {
 
-				if(((GenericObjectContainer) secondObject).getContainer().size() == ((GenericObjectContainer) secondObject).getMaxSize()){
+				if (((GenericObjectContainer) secondObject).getContainer()
+						.size() == ((GenericObjectContainer) secondObject).getMaxSize()) {
 					printer.objectContainerIsFull(secondObject);
 					break;
 				}
@@ -229,18 +230,20 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			break;
 
 		case APRI:
-			if(action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())){
+			if (action.getPreposition() == null
+					|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
 				openOrCloseitem(firstObject, secondObject, protagonist, action.getPreposition(), true);
 			}
 			break;
 		case CHIUDI:
-			if(action.getPreposition() == null || prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())){
+			if (action.getPreposition() == null
+					|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
 				openOrCloseitem(firstObject, secondObject, protagonist, action.getPreposition(), false);
 			}
 			break;
 		case GUARDA:
 
-			if(firstObject != null && secondObject == null)
+			if (firstObject != null && secondObject == null)
 				lookItem(firstObject, protagonist, roomObjects);
 			else if (firstObject == null && secondObject == null)
 				lookRoom();
@@ -248,7 +251,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case COMBINA:
 			if (firstObject != null && secondObject != null && (action.getPreposition() == null
-			|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))) {
+					|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))) {
 
 				if (protagonist.isInInventory(firstObject) && protagonist.isInInventory(secondObject)) {
 					GenericObject oggettoCombinato = game.getCombinations().getResultantObject(firstObject,
@@ -276,8 +279,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			break;
 		case PARLA:
 			if (action.getCharacter() != null && (action.getPreposition() == null
-			|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))
-			&& action.getCharacter() instanceof Npc) {
+					|| prepositions.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))
+					&& action.getCharacter() instanceof Npc) {
 
 				easterEggs(action);
 
@@ -296,11 +299,11 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 			if (currentRoom.getName().contains(Places.EXECUTIVE_NAME)
 					&& firstObject.getObjectName().equals(Names.SERVER)) {
-				JOptionPane.showMessageDialog(null, Descriptions.EMAIL,
-						Descriptions.NEW_EMAIL, JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, Descriptions.EMAIL, Descriptions.NEW_EMAIL,
+						JOptionPane.PLAIN_MESSAGE);
 
 			} else if (eventHandler != null)
-				useEventItem( firstObject, protagonist, eventHandler);
+				useEventItem(firstObject, protagonist, eventHandler);
 			else
 				printer.notUnderstoodMessage();
 
@@ -315,8 +318,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ABBASSA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-			&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
-				pullLever(eventHandler,  action);
+					&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
+				pullLever(eventHandler, action);
 			} else
 				printer.notUnderstoodMessage();
 
@@ -324,8 +327,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 		case ALZA:
 			if (eventHandler != null && eventHandler instanceof PanelEventHandler && firstObject != null
-			&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
-				pushLever( eventHandler, action);
+					&& firstObject.getObjectName().equals(Names.LEVER) && action.getFirstAdjective() != null) {
+				pushLever(eventHandler, action);
 			} else
 				printer.notUnderstoodMessage();
 		}
@@ -484,28 +487,27 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 
 	}
 
-
 	private void useEventItem(GenericObject firstObject, Protagonist protagonist, GenericEventHandler eventHandler) {
 
 		if (eventHandler instanceof CoffeeEventHandler) {
-			if(firstObject.equals(eventHandler.getEvent().getEnigma())) {
+			if (firstObject.equals(eventHandler.getEvent().getEnigma())) {
 				if (protagonist.getActualInventorySize() == protagonist.getInventoryMaxSize()) {
 					printer.cantUseCoffeMachine();
-				}else {
+				} else {
 					printer.printMessage(((Coffee) (game.getCurrentRoom().getRoomObject(firstObject))).switchOn());
 					eventHandler.endEvent(protagonist, firstObject);
 				}
 			}
 
 		} else if (eventHandler instanceof PanelEventHandler) {
-			if(firstObject.equals(eventHandler.getEvent().getEnigma())) {
+			if (firstObject.equals(eventHandler.getEvent().getEnigma())) {
 				printer.printMessage(((Panel) game.getCurrentRoom().getRoomObject(firstObject)).switchOn());
 				eventHandler.endEvent(protagonist, firstObject);
 			}
 
 		} else if (eventHandler instanceof PhysicsDoorEventHandler || eventHandler instanceof DibDoorEventHandler) {
 
-			if(eventHandler.isCompleted()) {
+			if (eventHandler.isCompleted()) {
 				printer.notUnderstoodMessage();
 				return;
 			}
@@ -514,21 +516,20 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printUsedObject(firstObject.getName().getName());
 			else
 				printer.wrongOpeningToolMessage();
-		}else
+		} else
 			printer.notUnderstoodMessage();
 	}
 
 	private void easterEggs(ParserOutput action) {
-		if (((Npc) action.getCharacter()).getName().getName().equals(Names.MORGAN_NAME)){
-			if(((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
+		if (((Npc) action.getCharacter()).getName().getName().equals(Names.MORGAN_NAME)) {
+			if (((Npc) action.getCharacter()).getCurrentDialogue().equals("Che succede?")) {
 				Desktop desktop = Desktop.getDesktop();
 				try {
 					desktop.browse(new URI(Events.EASTER_EGG));
 				} catch (IOException | URISyntaxException e) {
 					e.printStackTrace();
 				}
-			}
-			else if(((Npc) action.getCharacter()).getCurrentDialogue().equals("Bugo?\nBugo 'ndo vai?")) {
+			} else if (((Npc) action.getCharacter()).getCurrentDialogue().equals("Bugo?\nBugo 'ndo vai?")) {
 				Desktop desktop = Desktop.getDesktop();
 				try {
 					desktop.browse(new URI(Events.EASTER_EGG_2));
@@ -538,14 +539,14 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			}
 		}
 	}
+
 	private void lookItem(GenericObject firstObject, Protagonist protagonist, ArrayList<GenericObject> roomObjects) {
 
 		boolean lookFound = false;
 
 		if (roomObjects.contains(firstObject) || protagonist.isInInventory(firstObject)) {
 			printer.printObjectDescription(firstObject);
-			if (firstObject instanceof GenericObjectContainer
-					&& ((GenericObjectContainer) firstObject).isOpened()) {
+			if (firstObject instanceof GenericObjectContainer && ((GenericObjectContainer) firstObject).isOpened()) {
 				printer.printObjectInside(((GenericObjectContainer) firstObject));
 			}
 			lookFound = true;
@@ -575,7 +576,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			for (GenericObject genericObject : loot)
 				printer.objectWithDescriptionMessage(genericObject);
 
-		}else {
+		} else {
 			printer.nobodyHere();
 		}
 
@@ -584,8 +585,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			for (Character character : game.getCurrentRoom().getCharacters())
 				printer.printMessage(character.getName().getName());
 
-		}
-		else {
+		} else {
 			printer.noObjectsHere();
 		}
 	}
@@ -618,8 +618,9 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 		}
 
 	}
-	private void dropOrTakeItem(GenericObject firstObject, GenericObjectContainer secondObject,
-			Protagonist protagonist, boolean drop) {
+
+	private void dropOrTakeItem(GenericObject firstObject, GenericObjectContainer secondObject, Protagonist protagonist,
+			boolean drop) {
 		if (!(game.getCurrentRoom().isInRoom(secondObject)) && !(protagonist.isInInventory(secondObject))) {
 			printer.objectNotFoundMessage();
 			return;
@@ -684,7 +685,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				&& (game.getCurrentRoom().getEventHandler() instanceof DibDoorEventHandler
 						|| game.getCurrentRoom().getEventHandler() instanceof PhysicsDoorEventHandler)) {
 
-			if(game.getCurrentRoom().getEventHandler().isCompleted()){
+			if (game.getCurrentRoom().getEventHandler().isCompleted()) {
 				printer.notUnderstoodMessage();
 				return;
 			}
@@ -751,8 +752,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 			protagonist.getInventory().removeFromContainer(firstObject);
 
 		} else if (firstObject.getObjectName().equals(Names.WATER)
-				&& secondObject.getObjectName().equals(Names.COFFE_MACHINE)
-				&& protagonist.isInInventory(firstObject)) {
+				&& secondObject.getObjectName().equals(Names.COFFE_MACHINE) && protagonist.isInInventory(firstObject)) {
 			printer.printMessage(((Coffee) (game.getCurrentRoom().getRoomObject(secondObject))).addWater());
 			protagonist.getInventory().removeFromContainer(firstObject);
 		} else

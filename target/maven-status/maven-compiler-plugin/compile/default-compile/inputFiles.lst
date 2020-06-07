@@ -1,51 +1,53 @@
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\CoffeEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\Descriptions.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\AliasHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\GameOverDialog.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Parser\WordType.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\PackageEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\MainMenu.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Name.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\VictoryDialog.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\Places.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\AdventureGUI.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\Enigmi\Coffe.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\Enigmi\Panel.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Parser\ItalianParser.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\HelicopterEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\PhysicsEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\PropulsorEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Parser\ParserEssentials.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Combinations.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Entita\Characters\Protagonist.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\TimeThread.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\PanelEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\InterfaceText.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\MessagesHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\MessagesHandlerEssentials.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\CommandType.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\Event.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Entita\Room.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\CarEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\Dialogs.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\DibDoorEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\CaricamentoFile\ObjectsFile.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\Enigmi\Enigma.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\CaricamentoFile\FilesCreation.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\ActionsHandlerEssentials.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\MagazineEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\CaricamentoFile\RoomsFile.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\ActionsHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\GenericObject.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\GameThread.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\Events.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\HowToPlayDialog.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Command.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Entita\Characters\Character.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Parser\ParserOutput.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Main\CreditsDialog.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\Eventi\GenericEventHandler.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Entita\Game.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\General\GenericObjectContainer.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Entita\Characters\Npc.java
-C:\Users\Elio\Desktop\Uni stuff\map\gitProject\MapProject-Gang-Of-Three\src\main\java\Resources\Names.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\PackageEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\Events.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\VictoryDialog.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\characters\Protagonist.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Combinations.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\ActionsHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\GameOverDialog.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\Dialogs.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\Names.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\ActionsHandlerEssentials.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\HowToPlayDialog.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\Event.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Command.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\DibDoorEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\TimeThread.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\PhysicsDoorEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\ItalianMessages.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\FileErrorDialog.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Alias.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\parser\WordType.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\Places.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\characters\Character.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\GenericObjectContainer.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\GenericEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\CreditsDialog.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\CoffeeEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\loadingFile\FilesCreation.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Name.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\parser\ItalianParser.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\GameThread.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\loadingFile\CombinationsFile.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\MainMenu.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\MagazineEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\HelicopterEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\MessagesEssentials.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\main\AdventureGUI.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\enigmas\Enigma.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Game.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\enigmas\Coffee.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\PropulsorEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Room.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\handlers\events\PanelEventHandler.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\loadingFile\RoomFile.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\parser\ParserEssentials.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\loadingFile\ObjectsFile.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\Prepositions.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\characters\Npc.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\enigmas\Panel.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\GenericObject.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\parser\ParserOutput.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\InterfaceText.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\entities\CommandType.java
+C:\Users\RESTA\MapProject-Gang-Of-Three\src\main\java\resources\Descriptions.java
