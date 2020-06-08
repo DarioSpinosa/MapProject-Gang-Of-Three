@@ -9,8 +9,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import entities.Combinations.Node;
-
-
+/**
+ * Responsabilità: creazione e caricamento del file relativo alle combinazioni
+ *
+ */
 public class CombinationsFile {
 
 	public static void saveCombinations(ArrayList<Node> combinations) throws FileNotFoundException, IOException {

@@ -9,6 +9,10 @@ import entities.GenericObject;
 import entities.GenericObjectContainer;
 import entities.Name;
 import parser.WordType;
+/**
+ *<Entity> Responsabilità: rappresenta un protagonista, contiene informazioni relative al nome e
+ *al suo inventario.
+ */
 
 public class Protagonist extends Character {
 

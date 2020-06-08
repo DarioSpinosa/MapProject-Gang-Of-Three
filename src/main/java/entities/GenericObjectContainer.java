@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * <Entity> Responsabilità: Rappresenta un generico oggetto contenitore. Contiene le informazioni del container
- * relative alla sua dimensione massima, se e' bloccato e necessita di un oggetto per essere aperto
+ * relative alla sua dimensione massima, se attualmente è aperto o chiuso e
+ * se e' bloccato e necessita di un oggetto per essere aperto
  *
  */
 public class GenericObjectContainer extends GenericObject implements Serializable {

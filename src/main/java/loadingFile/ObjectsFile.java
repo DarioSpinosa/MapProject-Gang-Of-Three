@@ -9,7 +9,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import entities.GenericObject;
-
+/**
+ * Responsabilità: creazione e caricamento  del file relativo agli oggetti
+ *
+ */
 public class ObjectsFile {
 
 	public static void saveObjects(ArrayList<GenericObject> objects) throws FileNotFoundException, IOException {

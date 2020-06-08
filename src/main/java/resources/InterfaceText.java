@@ -1,13 +1,13 @@
-/*
+﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package resources;
 
+
 /**
- *
- * @author Elio
+ *Responsabilità: raccoglie i vari messaggi generali delle interfacce di gioco.
  */
 public class InterfaceText {
 	public final static String COMMANDS = "Comandi";

@@ -38,12 +38,11 @@ import resources.Places;
 
 /**
  *
- * @author Elio
+ * Responsabilità: Inizializzazione di tutte le entità facente parti del gioco e creazione dei vari file
  */
 public class FilesCreation {
 
 	public static void saveFiles() {
-		// TODO code application logic here
 		ArrayList<GenericObject> gameObjects = new ArrayList<>();
 		Room strada1 = new Room(Places.AMENDOLA1_NAME, Places.AMENDOLA1_DESCRIPTION);
 		Room strada2 = new Room(Places.AMENDOLA2_NAME, Places.AMENDOLA2_DESCRIPTION);

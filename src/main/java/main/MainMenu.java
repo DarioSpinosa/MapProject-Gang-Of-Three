@@ -8,10 +8,7 @@ import java.io.IOException;
 
 import resources.InterfaceText;
 
-/**
- *
- * @author Elio
- */
+
 public class MainMenu extends javax.swing.JFrame {
     private final HowToPlayDialog howToPlay = new HowToPlayDialog(this, true);
     private final CreditsDialog credits = new CreditsDialog(this, true);
@@ -42,21 +39,24 @@ public class MainMenu extends javax.swing.JFrame {
 
         newGameButton.setText(InterfaceText.NEW_GAME_BUTTON);
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameButtonActionPerformed(evt);
             }
         });
 
         howToPlayButton.setText(InterfaceText.HOW_TO_PLAY_BUTTON);
         howToPlayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 howToPlayButtonActionPerformed(evt);
             }
         });
 
         creditsButton.setText(InterfaceText.CREDITS_BUTTON);
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditsButtonActionPerformed(evt);
             }
         });

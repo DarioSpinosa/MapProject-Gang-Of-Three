@@ -6,8 +6,9 @@
 package main;
 
 /**
- *
- * @author Elio
+ *Responsabilità: Verifica constantemente il valore di un'istanaza di timeThread durante l'esecuzione del gioco
+ *e controlla se il giocatore ha completato il gioco. In entrambi i casi crea una dialog per segnalare
+ *la vittoria o la sconfitta
  */
 public class GameThread extends Thread {
 	private final AdventureGUI gui;
@@ -36,7 +37,7 @@ public class GameThread extends Thread {
 
                     while (gameOver.isActive()) {
                     }
-                    
+
                 } else if(gui.isGameCompleted()){
                     ((TimeThread)time).stopCount();
                     VictoryDialog victory = new VictoryDialog(gui, true);
@@ -50,8 +51,8 @@ public class GameThread extends Thread {
                     }
                     victory.setTimeLabel(finalMinutes, finalSeconds);
                     victory.setVisible(true);
-                    
-                    while(victory.isActive()){                        
+
+                    while(victory.isActive()){
                     }
                 }
 

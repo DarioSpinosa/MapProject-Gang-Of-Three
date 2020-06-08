@@ -11,9 +11,11 @@ import entities.characters.Npc;
 import main.AdventureGUI;
 
 /**
- *
- * @author Elio
+ *<Boundary> Responsabilità: rappresentare i molteplici messaggi utilizzabili in un software.
+ *Rende molto semplice l'aggiunta o cancellazione di vari messaggi, l'astrazione permette di implementare
+ *nuove classi che definiscano i messaggi in modi o lingue differenti.
  */
+
 public abstract class MessagesEssentials {
 	protected AdventureGUI gui;
 

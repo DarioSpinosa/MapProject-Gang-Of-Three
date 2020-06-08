@@ -8,7 +8,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import entities.Room;
-
+/**
+ * Responsabilità: creazione e caricamento  del file relativo alla stanza iniziale di gioco
+ *
+ */
 public class RoomFile {
 
 	public static void saveRoom(Room room) throws FileNotFoundException, IOException {

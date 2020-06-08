@@ -8,7 +8,11 @@ package entities.characters;
 import java.io.Serializable;
 
 import entities.Name;
-
+/**
+ * <Entity> Responsabilità: rappresenta un Npc (Not playable character) all'interno del gioco. Contiene le
+ * informazioni relative ai suoi dialoghi.
+ *
+ */
 public class Npc extends Character implements Serializable {
 
 	private String[] dialogues;

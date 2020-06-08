@@ -21,10 +21,7 @@ import parser.ParserEssentials;
 import parser.ParserOutput;
 import resources.InterfaceText;
 
-/**
- *
- * @author RESTA
- */
+
 @SuppressWarnings("serial")
 public class AdventureGUI extends javax.swing.JFrame {
 

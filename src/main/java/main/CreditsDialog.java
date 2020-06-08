@@ -6,10 +6,7 @@
 package main;
 import resources.InterfaceText;
 
-/**
- *
- * @author Elio
- */
+
 @SuppressWarnings("serial")
 public class CreditsDialog extends javax.swing.JDialog {
 

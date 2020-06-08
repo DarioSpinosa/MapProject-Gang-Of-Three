@@ -12,7 +12,11 @@ import entities.GenericObject;
 import entities.Name;
 import entities.Prepositions;
 import entities.characters.Character;
-
+/**
+ *<Boundary> Responsabilità: Analizza la frase presa in input dall'utente e ne verifica la correttezza
+ * nella lingua italiana.
+ *
+ */
 public class ItalianParser extends ParserEssentials {
 
     public ItalianParser(ArrayList<String> articles, Prepositions prepositions) {

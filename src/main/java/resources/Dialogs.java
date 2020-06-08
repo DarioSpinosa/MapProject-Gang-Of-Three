@@ -1,4 +1,9 @@
 package resources;
+/**
+ *
+ * Responsabilità: raccoglie i dialoghi dei personaggi del gioco.
+ *
+ */
 
 public class Dialogs {
 	public final static String[] BRUNO = { "Il pilota non vuole farmi salire!" };

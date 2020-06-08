@@ -8,8 +8,7 @@ package main;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Elio
+ * Responsabilità: gestisce un timer finalizzato a fornire un limite di tempo.
  */
 public class TimeThread extends Thread {
     private int minutes;
@@ -17,14 +16,14 @@ public class TimeThread extends Thread {
     private final JLabel minute;
     private final JLabel second;
     private boolean stopped = false;
-    
+
     public TimeThread(int minutes, int seconds, JLabel minute, JLabel second){
         this.minutes = minutes;
         this.seconds = seconds;
         this.minute = minute;
         this.second = second;
     }
-    
+
     @Override
     public void run(){
         printMinutes(minutes, minute);
@@ -47,19 +46,19 @@ public class TimeThread extends Thread {
                 }
         }
     }
-    
+
     public void stopCount(){
         stopped = true;
     }
-    
+
     public int getMinutes(){
         return minutes;
     }
-    
+
     public int getSeconds(){
         return seconds;
     }
-    
+
     private void printSeconds(int seconds, JLabel second){
         if(seconds > 9){
             second.setText("" + seconds);
@@ -67,7 +66,7 @@ public class TimeThread extends Thread {
             second.setText("0" + seconds);
         }
     }
-    
+
     private void printMinutes(int minutes, JLabel minute){
         if(minutes > 9){
             minute.setText(minutes + " : ");

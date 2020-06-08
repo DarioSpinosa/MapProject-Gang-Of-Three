@@ -13,10 +13,10 @@ import entities.Prepositions;
 import entities.Room;
 import entities.characters.Character;
 import parser.ParserOutput;
-
 /**
+ * <Control> Responsabilità: gestisce i comandi del gioco, ricevuti in input dal giocatore, conosce
+ * le varie informazioni relative allo stato della partita e ai suoi componenti
  *
- * @author Elio
  */
 public abstract class ActionsHandlerEssentials {
     protected Game game;
@@ -43,11 +43,11 @@ public abstract class ActionsHandlerEssentials {
     public void setObjectsList(ArrayList<GenericObject> currentObjects){
         this.currentObjects = currentObjects;
     }
-    
+
     public Room getCurrentRoom(){
         return game.getCurrentRoom();
     }
-    
+
     public boolean getCompleted(){
         return gameCompleted;
     }
@@ -56,6 +56,12 @@ public abstract class ActionsHandlerEssentials {
         return game.getCurrentRoom().getCharacters();
     }
 
+    /**
+     *Metodo essenziale di ActionsHandlerEssentials, la cui implementazione deve
+     *controllare e applicare il comando del giocatore
+     *
+     * @param action	 oggetto di tipo ParserOutput contenente le informazioni rilevanti
+     */
     public abstract void processAction(ParserOutput action);
     public abstract void moveNord();
     public abstract void moveSud();

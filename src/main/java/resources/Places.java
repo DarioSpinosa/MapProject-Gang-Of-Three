@@ -1,5 +1,8 @@
 package resources;
-
+/**
+ * Responsabilità: raccoglie i nomi e le descrizioni dei luoghi del gioco.
+ *
+ */
 public class Places {
 	public final static String AMENDOLA1_NAME = "Via Amendola, primo settore";
 	public final static String AMENDOLA2_NAME = "Via Amendola, secondo settore";

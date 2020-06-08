@@ -7,7 +7,7 @@ package resources;
 
 /**
  *
- * @author Elio
+ * Responsabilità: raccoglie i nomi dei vari oggetti del gioco.
  */
 public class Names {
     public final static String PANEL = "Pannello";

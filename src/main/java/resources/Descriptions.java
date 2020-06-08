@@ -1,5 +1,8 @@
 package resources;
-
+/**
+ * Responsabilità: raccoglie le descrizioni dei vari oggetti all'interno del gioco
+ *
+ */
 public class Descriptions {
 	public static final String SERVER = "E' un server. C'e' un messaggio non letto.";
 	public static final String KEYS = "Le chiavi di tutti i dipartimenti";

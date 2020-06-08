@@ -42,8 +42,10 @@ import resources.Names;
 import resources.Places;
 
 /**
- *
- * @author Elio
+ * <Control> Responsabilità: gestisce i comandi del gioco, ricevuti in input dal giocatore.
+ * Contiene la logica relativa ai cambiamenti che avvengono all'interno del gioco in base
+ * al comando inserito. Conosce la posizione corrente del giocatore, il suo inventario, la mappa di gioco, i
+ * personaggi, gli oggetti di gioco e lo stato della partita.
  */
 public class ActionsHandler extends ActionsHandlerEssentials {
 

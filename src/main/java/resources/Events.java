@@ -7,7 +7,7 @@ package resources;
 
 /**
  *
- * @author Elio
+ * Responsabilità: raccoglie le descrizioni dei vari eventi all'interno del gioco.
  */
 public class Events {
 	public final static String EASTER_EGG = "https://www.youtube.com/watch?v=CEDlCmreyFQ";

@@ -7,10 +7,6 @@ package main;
 
 import resources.InterfaceText;
 
-/**
- *
- * @author Elio
- */
 public class VictoryDialog extends javax.swing.JDialog {
 
     /**
@@ -47,7 +43,8 @@ public class VictoryDialog extends javax.swing.JDialog {
 
         menuButton.setText("MENU");
         menuButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuButtonActionPerformed(evt);
             }
         });

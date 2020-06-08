@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *<Entity> Responsabilità: Rappresenta un comando. Contiene le informazioni sul tipo di comando, sul nome
- *comando stesso e sugli eventuali alias.
+ *<Entity> Responsabilità: Rappresenta un comando. Contiene le informazioni sul suo tipo, nome
+ * e sugli eventuali alias ad esso associabili.
  *
  */
 

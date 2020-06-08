@@ -6,10 +6,6 @@
 package main;
 import resources.InterfaceText;
 
-/**
- *
- * @author Elio
- */
 public class HowToPlayDialog extends javax.swing.JDialog {
 
     /**

@@ -9,8 +9,8 @@ import loadingFile.FilesCreation;
 import resources.InterfaceText;
 
 /**
- *
- * @author Elio
+ *Responsabilità: gestisce errori relativi al caricamento dei file mediante una dialog che chiede
+ *all'utente se si desidera ricrearli.
  */
 public class FileErrorDialog extends javax.swing.JDialog {
 

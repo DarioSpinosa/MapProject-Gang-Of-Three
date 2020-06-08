@@ -4,13 +4,17 @@
 * and open the template in the editor.
 */
 package entities.characters;
+import java.io.Serializable;
 import java.util.Set;
 
 import entities.Alias;
 import entities.Name;
 
-import java.io.Serializable;
-
+/**
+ * <Entity> Rappresenta un generico personaggio, contiene informazioni relative al nome e agli alias
+ * con cui ci si puo riferire.
+ *
+ */
 public abstract class Character implements Serializable{
 
     protected Name name;
@@ -43,10 +47,10 @@ public abstract class Character implements Serializable{
     public boolean isPrepositionUsable(String preposizione){
         return name.getAdmittedPrepositions().contains(preposizione);
     }
-    
+
     @Override
     public String toString(){
         return name.getName();
     }
-    
+
 }

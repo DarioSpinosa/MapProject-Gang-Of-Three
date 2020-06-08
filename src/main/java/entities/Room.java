@@ -13,7 +13,9 @@ import handlers.events.GenericEventHandler;
 import parser.WordType;
 
 /**
- *<Entity> Rappresenta un luogo generico
+ *<Entity> Rappresenta un luogo generico, contiene informazioni relative al nome del luogo,
+ *una sua descrizione, se è connessa con altri luoghi, se è accessibile, gli eventi che possono
+ *verificarsi al suo interno, i personaggi e gli oggetti che contiene.
  *
  */
 

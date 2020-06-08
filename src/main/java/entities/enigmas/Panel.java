@@ -8,7 +8,11 @@ package entities.enigmas;
 import entities.GenericObject;
 import entities.Name;
 import resources.Events;
-
+/**
+ * <Entity> Responsabilità: rappresenta un enigma utilizzato in un evento nel gioco,
+ * i  metodi hanno il compito di verificare mediante dei valori booleani lo stato dell'enigma
+ * e restituire messaggi specifici in base alle azioni compiute.
+ */
 
 public class Panel extends GenericObject implements Enigma{
 	/*

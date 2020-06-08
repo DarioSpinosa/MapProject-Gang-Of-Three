@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * <Entity> Responsabilità: rappresenta una tabella che ha come chiave una preposizione
+ * e come campi i vari comandi che accettano tale preposizione nella struttura della frase.
+ */
 public class Prepositions {
 
 	private HashMap<String, Set<CommandType>> prepositions = new HashMap<>();

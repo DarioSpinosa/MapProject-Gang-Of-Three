@@ -11,8 +11,8 @@ import entities.characters.Npc;
 import main.AdventureGUI;
 
 /**
- *
- * @author Elio
+ *<Boundary> Responsabilità: rappresenta i messaggi utilizzabili per una corretta comunicazione con l'utente
+ *all'interno del gioco.
  */
 public final class ItalianMessages extends MessagesEssentials {
 
