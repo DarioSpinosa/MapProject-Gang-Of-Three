@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,7 +13,7 @@ public class InterfaceText {
 	public final static String COMMANDS = "Comandi";
 	public final static String HOW_TO_PLAY = "Benvenuto in UnibaCrisis!\nIl gioco ha vari comandi ma sta a te capire quali siano."
 			+ "\nGUARDA con attenzione ogni luogo ed esplora.\nUSA gli oggetti che ti sembrano interessanti.";
-	public final static String CREDITS = "Gioco realizzato da:\nFabio Resta\nElio Musacchio\nDarioSpinosa.\n\nGang of Three, 2020";
+	public final static String CREDITS = "Gioco realizzato da:\nFabio Resta\nElio Musacchio\nDario Spinosa.\n\nGang of Three, 2020";
 	public final static String GAME_OVER_MESSAGE = "Non sei stato abbastanza veloce, i dinosauri hanno conquistato la Terra (e i panzerotti)";
 	public final static String NEW_GAME_BUTTON = "Nuova Partita";
 	public final static String HOW_TO_PLAY_BUTTON = "Come Giocare";

@@ -32,8 +32,7 @@ public class Places {
 	public final static String PIZZA_EXT_DESCRIPTION = "E' l'esterno della pizzeria \"Da Gianluca\"";
 	public final static String PIZZA_INT_DESCRIPTION = "Sei entrato in un'ampia sala di una pizzeria.\r\nNon c'e' nessuno, se non il pizzaiolo";
 
-	public final static String STREET1_DESCRIPTION = "Dopo una lunga camminata, sei arrivato al campus!\r\n"
-			+ "Ci sono i dipartimenti di Fisica, Chimica ed Informatica!";
+	public final static String STREET1_DESCRIPTION = "Dopo una lunga camminata, sei arrivato al campus!\r\nCi sono i dipartimenti di Fisica, Chimica ed Informatica!\r\nAd Est vedi anche un bar";
 	public final static String STREET2_DESCRIPTION = "Alla tua sinistra, il dipartimento di Fisica";
 	public final static String STREET3_DESCRIPTION = "Alla tua destra vedi il DIB";
 	public final static String CHEMISTRY_BAR_DESCRIPTION = "Ecco il bar di Chimica, luogo dove ti sei sparato innumerevoli caffettini\r\n"

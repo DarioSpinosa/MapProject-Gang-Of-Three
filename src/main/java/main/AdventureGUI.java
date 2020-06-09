@@ -28,8 +28,8 @@ public class AdventureGUI extends javax.swing.JFrame {
 	private ActionsHandlerEssentials actions;
 	private final MessagesEssentials printer = new ItalianMessages(this);
 	private ParserEssentials parser;
-	private final int gameMinutes = 30;
-	private final int gameSeconds = 0;
+	private final int gameMinutes = 0;
+	private final int gameSeconds = 10;
 
 	/**
 	 * Creates new form AdventureGUI
