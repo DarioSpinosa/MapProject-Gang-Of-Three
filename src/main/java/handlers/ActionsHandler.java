@@ -579,7 +579,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.objectWithDescriptionMessage(genericObject);
 
 		} else {
-			printer.nobodyHere();
+			printer.noObjectsHere();
 		}
 
 		if (!game.getCurrentRoom().getCharacters().isEmpty()) {
@@ -588,7 +588,7 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 				printer.printMessage(character.getName().getName());
 
 		} else {
-			printer.noObjectsHere();
+			printer.nobodyHere();
 		}
 	}
 

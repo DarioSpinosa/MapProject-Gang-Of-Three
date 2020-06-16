@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package main;
+import java.awt.Color;
 import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import resources.InterfaceText;
 
@@ -19,6 +23,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,31 +44,36 @@ public class MainMenu extends javax.swing.JFrame {
 
         newGameButton.setText(InterfaceText.NEW_GAME_BUTTON);
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameButtonActionPerformed(evt);
             }
         });
 
         howToPlayButton.setText(InterfaceText.HOW_TO_PLAY_BUTTON);
         howToPlayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 howToPlayButtonActionPerformed(evt);
             }
         });
 
         creditsButton.setText(InterfaceText.CREDITS_BUTTON);
         creditsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditsButtonActionPerformed(evt);
             }
         });
 
         titleLabel1.setFont(new java.awt.Font("Perpetua Titling MT", 3, 36)); // NOI18N
         titleLabel1.setText("UNIBA");
+        titleLabel1.setForeground(Color.BLACK);
         titleLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         titleLabel2.setFont(new java.awt.Font("Perpetua Titling MT", 3, 36)); // NOI18N
         titleLabel2.setForeground(new java.awt.Color(255, 0, 51));
+        titleLabel2.setForeground(Color.BLACK);
         titleLabel2.setText("CRISIS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -104,6 +114,12 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(creditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(109, Short.MAX_VALUE))
         );
+
+        JLabel background;
+        ImageIcon img = new ImageIcon("unnamed.jpg");
+        background = new JLabel("", img, JLabel.CENTER);
+        background.setBounds(0, 0, 460, 500);
+        add(background);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

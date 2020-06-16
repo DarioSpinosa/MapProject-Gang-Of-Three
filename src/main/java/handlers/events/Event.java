@@ -18,7 +18,7 @@ public class Event implements Serializable {
 	private final String description;
 	private GenericObject enigma;
 	private Room eventRoom;
-	private GenericObject reward = null;
+	private GenericObject reward;
 	private ArrayList<GenericObject> eventObjects = new ArrayList<>();
 	private ArrayList<Character> eventCharacters = new ArrayList<>();
 

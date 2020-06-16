@@ -24,10 +24,10 @@ public class Room implements Serializable{
 	// attributi
 	private final String name;
 	private String description;
-	private Room up = null;
-	private Room down = null;
-	private Room right = null;
-	private Room left = null;
+	private Room up;
+	private Room down;
+	private Room right;
+	private Room left;
 	private boolean accessible = true;
 	private ArrayList<GenericEventHandler> roomEvent = new ArrayList<>();
 	private final GenericObjectContainer roomObjects = new GenericObjectContainer(new Name("Oggetti", WordType.NOME), "");
