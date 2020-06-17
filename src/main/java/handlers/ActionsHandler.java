@@ -42,10 +42,11 @@ import resources.Names;
 import resources.Places;
 
 /**
- * <Control> Responsabilità: gestisce i comandi del gioco, ricevuti in input dal giocatore.
- * Contiene la logica relativa ai cambiamenti che avvengono all'interno del gioco in base
- * al comando inserito. Conosce la posizione corrente del giocatore, il suo inventario, la mappa di gioco, i
- * personaggi, gli oggetti di gioco e lo stato della partita.
+ * <Control> Responsabilità: gestisce i comandi del gioco, ricevuti in input dal
+ * giocatore. Contiene la logica relativa ai cambiamenti che avvengono
+ * all'interno del gioco in base al comando inserito. Conosce la posizione
+ * corrente del giocatore, il suo inventario, la mappa di gioco, i personaggi,
+ * gli oggetti di gioco e lo stato della partita.
  */
 public class ActionsHandler extends ActionsHandlerEssentials {
 
@@ -162,8 +163,8 @@ public class ActionsHandler extends ActionsHandlerEssentials {
 					break;
 				}
 
-				if (secondObject instanceof GenericObjectContainer && prepositions
-						.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType())) {
+				if (secondObject instanceof GenericObjectContainer && (action.getPreposition() == null || prepositions
+						.isGoodCombination(action.getPreposition(), action.getCommand().getCommandType()))) {
 					dropOrTakeItem(firstObject, (GenericObjectContainer) secondObject, protagonist, false);
 
 				} else {
